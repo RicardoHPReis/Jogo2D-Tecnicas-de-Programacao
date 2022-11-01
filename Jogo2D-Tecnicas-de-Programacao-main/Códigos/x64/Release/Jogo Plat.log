@@ -1,0 +1,2 @@
+﻿  Jogo Plat.cpp
+C:\Users\migue\OneDrive\Documentos\FACUL\programação\VS studio\LISTAS\C++\JOGO SIMAO\Jogo Plat\Jogo Plat\Jogo Plat.cpp(1,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory

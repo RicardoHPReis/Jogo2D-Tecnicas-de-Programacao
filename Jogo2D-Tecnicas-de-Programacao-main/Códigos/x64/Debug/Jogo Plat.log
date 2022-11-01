@@ -1,0 +1,2 @@
+﻿  Jogo Plat.cpp
+LINK : fatal error LNK1104: não é possível abrir o arquivo 'sfml-graphics-d.lib'
