@@ -1,5 +1,6 @@
 #pragma once
 #include "stdafx.h"
+#include "jogo.h"
 
 class Menu
 {
@@ -7,8 +8,8 @@ class Menu
 	int posi;
 	bool pressed, theselect;
 
-	RenderWindow* janela; 
-	RectangleShape* closeJanela;
+	RenderWindow *janela; 
+	RectangleShape *play,*fases, *opcoes, *sobre, *sair;
 	Font* font;
 	Texture* image;
 	Sprite* bg;
@@ -20,6 +21,9 @@ class Menu
 	vector<Vector2f>coords;
 	vector<Text> texts;
 	vector<size_t>sizes;
+
+
+	Jogo jogo;
 
 protected:
 

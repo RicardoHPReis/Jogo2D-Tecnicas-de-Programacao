@@ -127,11 +127,13 @@ Jogo::Jogo()
 	this->inicEnemies();
 	this->inicMapa();
 	this->inicTexturas();
+	
 }
 
 Jogo::~Jogo()
 {
 	delete this->janela;
+	
 }
 
 //accesos
@@ -181,7 +183,9 @@ void Jogo::pollEvents()
 			break;
 		case Event::KeyPressed:
 			if (this->ev.key.code == Keyboard::Escape)
+
 				this->janela->close();
+
 			break;
 		}
 	}
