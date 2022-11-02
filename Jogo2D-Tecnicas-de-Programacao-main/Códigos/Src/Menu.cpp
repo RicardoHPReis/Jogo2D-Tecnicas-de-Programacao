@@ -91,16 +91,6 @@ void Menu::loop_events()
 
 				this->janela->close();
 
-				while (this->jogo.rodando())
-				{
-					//update
-
-					this->jogo.update();
-					//render
-
-					this->jogo.render();
-				}
-
 			}
 			else if (posi == 2) { //COLOCAR AS FASES
 
@@ -111,8 +101,8 @@ void Menu::loop_events()
 			else if (posi == 4) { //COLOCAR SOBRE
 
 			}
-			else if (posi == 5) { //FECHA JANELA
-				this->janela->close();
+			else if (posi == 5) { //FECHA TUDO
+				exit(1);
 			}
 		}
 
@@ -127,15 +117,6 @@ void Menu::loop_events()
 
 				this->janela->close();
 
-				while (this->jogo.rodando())
-				{
-					//update
-
-					this->jogo.update();
-					//render
-					this->jogo.render();
-				}
-				
 			}
 		}
 
@@ -175,7 +156,8 @@ void Menu::loop_events()
 			this->posi = 5;
 			this->texts[posi].setOutlineThickness(4);
 			if (Mouse::isButtonPressed(Mouse::Left)) {
-				this->janela->close();
+
+				exit(1);
 			}
 		}
 	}
@@ -221,7 +203,7 @@ Menu::~Menu()
 
 void Menu::run_menu()
 {
-	while (this->janela->isOpen()) {
+	while (janela->isOpen()) {
 		loop_events();
 		draw_all();
 	}
