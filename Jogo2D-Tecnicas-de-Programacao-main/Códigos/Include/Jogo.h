@@ -1,7 +1,10 @@
 #pragma once
 
 #include "stdafx.h"
+
+
 #include "jogador.h"
+#include "Menu.h"
 
 /*
 	
@@ -12,7 +15,8 @@
 class Jogo
 {
 private:
-	//variaveis
+
+
 	//janela
 	RenderWindow* janela;
 	VideoMode videoMode;
@@ -49,7 +53,10 @@ private:
 	//posicoes mouse
 
 	Vector2i mousePos;
-	
+
+	//menu
+
+	Menu* menuP;
 
 	//funcoes privadas
 
@@ -61,6 +68,7 @@ private:
 
 
 public:
+
 	//construtores e destrutores
 	Jogo();
 	virtual ~Jogo();

@@ -1,6 +1,5 @@
 #pragma once
 #include "stdafx.h"
-#include "jogo.h"
 
 class Menu
 {
@@ -21,9 +20,6 @@ class Menu
 	vector<Vector2f>coords;
 	vector<Text> texts;
 	vector<size_t>sizes;
-
-
-	Jogo jogo;
 
 protected:
 
