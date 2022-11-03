@@ -1,21 +1,27 @@
 #include "stdafx.h"
 #include "Jogo.h"
-#include "Menu.h"
+
 
 int main()
 {
     //init srand
     srand(static_cast<unsigned>(time(NULL)));
 
-    //começa a classe menu
+    //declara jogo
 
-    Menu* menu = new Menu();
+    Jogo jogo;
 
-    menu->run_menu();
+    //começa a classe jogo
 
-    delete menu;
+    while (jogo.rodando())
+    {
+        //update
 
-    menu = nullptr;
+        jogo.update();
+        //render
+
+        jogo.render();
+    }
 
     //fim
     return EXIT_SUCCESS;

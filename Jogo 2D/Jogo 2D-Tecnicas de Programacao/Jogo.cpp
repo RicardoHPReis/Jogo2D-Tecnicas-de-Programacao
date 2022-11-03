@@ -1,11 +1,10 @@
-
 #include "Jogo.h"
 
-// funcoes privadas
 void Jogo::inicVariaiveis()
 {
 	this->janela = nullptr;
 
+	menuP = new Menu();
 	//logica jogo
 
 
@@ -25,11 +24,11 @@ void Jogo::inicTexturas()
 	chao.setTexture(&tChao);*/
 
 	//textura fundo
-	this->tBg.loadFromFile("C:/Users/Usuario/source/repos/Jogo 2D-Tecnicas de Programacao/Texturas/Cenario/Fundo.jpg", IntRect(0.f, 0.f, this->videoMode.width, this->videoMode.height));
+	this->tBg.loadFromFile("../../Texturas/Cenario/Fundo.jpg", IntRect(0, 0, this->videoMode.width, this->videoMode.height));
 	this->tBg.setSmooth(true);
 	this->fundo.setTexture(tBg);
 
-	if (!this->tEnemy[0].loadFromFile("C:/Users/Usuario/source/repos/Jogo 2D-Tecnicas de Programacao/Texturas/Personagens/Esqueleto/Parado.png", IntRect(20.f, 0.f, 270.f, 386.f))) {
+	if (!this->tEnemy[0].loadFromFile("../../Texturas/Personagens/Esqueleto/Parado.png", IntRect(20, 0, 270, 386))) {
 		std::cout << "ERROR";
 	}
 	tEnemy[0].setSmooth(true);
@@ -38,7 +37,7 @@ void Jogo::inicTexturas()
 	for (i = 0; i < 10; i++) {
 
 		//textura inimigo
-		if (!this->tEnemy[i + 1].loadFromFile("C:/Users/Usuario/source/repos/Jogo 2D-Tecnicas de Programacao/Texturas/Personagens/Esqueleto/Parado.png", IntRect(20.f + ((i + 1) * 290.f), 0.f, 270.f, 386.f))) {
+		if (!this->tEnemy[i + 1].loadFromFile("../../Texturas/Personagens/Esqueleto/Parado.png", IntRect(20 + ((i + 1) * 290), 0, 270, 386))) {
 			std::cout << "ERROR";
 		}
 		tEnemy[i + 1].setSmooth(true);
@@ -48,6 +47,12 @@ void Jogo::inicTexturas()
 
 void Jogo::inicJanela()
 {
+	//roda o menu antes de abrir a janela do jogo
+
+	this->menuP->run_menu();
+
+	//janela do jogo
+
 	this->videoMode.height = 1080.f; //RESOLUÇOES
 	this->videoMode.width = 1920.f;
 	this->janela = new RenderWindow(this->videoMode,
@@ -61,8 +66,8 @@ void Jogo::inicMapa()
 {
 	//chao
 
-	this->chao.setPosition(0.f, this->videoMode.height - 85.f);
-	this->chao.setSize(Vector2f(this->videoMode.width, 85.f));
+	this->chao.setPosition(0, this->videoMode.height - 85);
+	this->chao.setSize(Vector2f((this->videoMode.width), 85));
 	chao.setFillColor(Color::White);
 
 
@@ -95,7 +100,7 @@ Jogo::Jogo()
 Jogo::~Jogo()
 {
 	delete this->janela;
-
+	delete this->menuP;
 }
 
 //accesos
@@ -111,7 +116,6 @@ void Jogo::spawnEnemy()
 {
 	/*
 		@return void
-
 		Spawna inimigo e diz a cor e posicao do inimigo
 	*/
 
@@ -158,7 +162,6 @@ void Jogo::updateEnemies()
 {
 	/*
 		@return void
-
 		Update inimigo tempo de spawn e
 		quando o total de inimigos é menor que o maximo
 		-mover inimigos para baixo e cima
@@ -183,7 +186,7 @@ void Jogo::update()
 
 	this->atualizaMouse();
 
-	this->player.updatePlayer();
+	this->jogador.atualizarJogador();
 
 	this->updateEnemies();
 
@@ -193,11 +196,9 @@ void Jogo::render()
 {
 	/*
 		@return void
-
 		-limpar frames antigos
 		-renderizar objetos
 		-display frame na janela
-
 		rendereizar objetos jogo
 	*/
 
@@ -207,7 +208,7 @@ void Jogo::render()
 
 	this->janela->draw(this->chao);
 	this->janela->draw(this->fundo);
-	this->janela->draw(this->player.player);
+	this->janela->draw(this->jogador.jogador);
 	this->janela->draw(this->inimigo);
 
 

@@ -1,6 +1,6 @@
-#include "Menu.h"
+#include "NovoMenu.h"
 
-void Menu::set_values()
+void NMenu::set_values()
 {
 	//inicializa todas variaveis
 
@@ -45,7 +45,7 @@ void Menu::set_values()
 	this->sair->setPosition(610, 750);
 }
 
-void Menu::loop_events()
+void NMenu::loop_events()
 {
 	Event ev;
 	while (this->janela->pollEvent(ev)) {
@@ -163,7 +163,7 @@ void Menu::loop_events()
 	}
 }
 
-void Menu::draw_all()
+void NMenu::draw_all()
 {
 	this->janela->clear();
 	this->janela->draw(*bg);
@@ -173,7 +173,8 @@ void Menu::draw_all()
 	this->janela->display();
 }
 
-Menu::Menu()
+NMenu::NMenu():
+Ente(false)
 {
 	this->janela = new RenderWindow();
 	this->play = new RectangleShape();
@@ -188,7 +189,7 @@ Menu::Menu()
 	set_values();
 }
 
-Menu::~Menu()
+NMenu::~NMenu()
 {
 	delete janela;
 	delete play;
@@ -201,7 +202,7 @@ Menu::~Menu()
 	delete bg;
 }
 
-void Menu::run_menu()
+void NMenu::run_menu()
 {
 	while (janela->isOpen()) {
 		loop_events();

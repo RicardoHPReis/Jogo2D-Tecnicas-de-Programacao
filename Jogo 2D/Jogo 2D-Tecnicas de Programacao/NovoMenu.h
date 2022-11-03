@@ -1,17 +1,17 @@
 #pragma once
 #include "stdafx.h"
+#include "Ente.h"
 
-class Menu
+class NMenu:public Ente
 {
 
 	int posi;
 	bool pressed, theselect;
-
 	RenderWindow* janela;
-	RectangleShape* play, * fases, * opcoes, * sobre, * sair;
-	Font* font;
-	Texture* image;
-	Sprite* bg;
+	RectangleShape *fundo, *play, *fases, *opcoes, *sobre, *sair;
+	Font *font;
+	Texture *image;
+	Sprite *bg;
 
 	Vector2i posMouse;
 	Vector2f cordMouse;
@@ -21,20 +21,12 @@ class Menu
 	vector<Text> texts;
 	vector<size_t>sizes;
 
-protected:
-
-	//define valores para cada objeto
-	void set_values();
-
-	//armazena eventos : clique do mouse
-	void loop_events();
-
-	//desenha tudo na tela
-	void draw_all();
-
 public:
-	Menu();
-	~Menu();
+	NMenu();
+	~NMenu();
 
 	void run_menu();
+	void set_values();
+	void loop_events();
+	void draw_all();
 };

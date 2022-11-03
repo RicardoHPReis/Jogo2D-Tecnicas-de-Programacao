@@ -1,13 +1,6 @@
 #pragma once
-
 #include "stdafx.h"
-
-
-/*
-
-		Classe Do Jogador
-
-*/
+#include "Personagem.h"
 
 class Jogador
 {
@@ -19,43 +12,42 @@ private:
 
 	//texturas player
 
-	Texture tPlayerCorre[10], tPlayerPula[10], tPlayerParado[10];
-	int frame, velTex, aux;
+	Texture txJogadorCorre[10], txJogadorPula[10], txJogadorParado[10];
+	int frame, velTex, limitadorTex;
 
 
 	//estat Player
 
 	int lado;
-	bool pulo;
+	bool jogador_pulou;
 	float gravidade, xvel, yvel, fdist, pAltura, pLargura, aT, xpos, ypos, velMax;
 	Vector2f cPos;
 	Vector2f pPos;
 
 	//objetivos jogo
 
-	//RectangleShape player;
+	RectangleShape player;
 	RectangleShape chao;
 
 	//funcoes privadas
 
-	void inicVariaiveisP();
-	void inicPlayerP();
-	void inicTexturasP();
+	void iniciarVariaiveis();
+	void iniciarJogador();
+	void iniciarTexturas();
 
 public:
 
-	RectangleShape player;
+	RectangleShape jogador;
 
 	Jogador();
 	~Jogador();
 
-	void updatePlayer();
-	void updatePlayerA();
-	void updatePlayerD();
-
-	void updatePlayerW();
+	void atualizarJogador();
+	void direcionalEsquerdo();
+	void direcionalDireito();
+	void direcionalCima();
 	void cair();
 
-	void updatePlayerTex();
+	void atualizarTextura();
 
 };

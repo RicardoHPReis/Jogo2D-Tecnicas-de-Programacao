@@ -1,18 +1,14 @@
 #pragma once
-
 #include "stdafx.h"
 #include "Jogador.h"
-
-/*
-
-	Classe do jogo
-
-*/
+#include "Menu.h"
+/*#include "FaseUm.h"
+#include "FaseDois.h"*/
+#include "Gerenciador_Grafico.h"
 
 class Jogo
 {
 private:
-	//variaveis
 	//janela
 	RenderWindow* janela;
 	VideoMode videoMode;
@@ -25,7 +21,7 @@ private:
 
 	//Player
 
-	Jogador player;
+	Jogador jogador;
 
 	//inimigo
 
@@ -50,6 +46,9 @@ private:
 
 	Vector2i mousePos;
 
+	//menu
+
+	Menu* menuP;
 
 	//funcoes privadas
 
@@ -61,6 +60,7 @@ private:
 
 
 public:
+
 	//construtores e destrutores
 	Jogo();
 	virtual ~Jogo();
@@ -79,5 +79,3 @@ public:
 
 	void render();
 };
-
-

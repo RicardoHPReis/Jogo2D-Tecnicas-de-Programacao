@@ -1,21 +1,12 @@
 #pragma once
-/*
+#include "stdafx.h"
 
-	Classe que controlará tudo a ser impresso na tela
-
-*/
 class Gerenciador_Grafico
 {
-
 private:
-
+	//Texture textura;
 
 public:
-
-	//construtoras e destrutora
 	Gerenciador_Grafico();
 	~Gerenciador_Grafico();
-
-
-
 };

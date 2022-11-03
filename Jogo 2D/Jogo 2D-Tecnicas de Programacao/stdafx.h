@@ -3,6 +3,7 @@
 #include <list>
 #include <string>
 #include <ctime>
+#include <algorithm>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
