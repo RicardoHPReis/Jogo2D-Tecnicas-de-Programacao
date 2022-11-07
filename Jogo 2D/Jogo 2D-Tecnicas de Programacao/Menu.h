@@ -1,13 +1,14 @@
 #pragma once
+#include "Ente.h"
 #include "stdafx.h"
 
-class Menu
+class Menu : public Ente
 {
+private:
+	int mouse;
+	bool clicar, selecionar;
+	bool clique;
 
-	int posi;
-	bool pressed, theselect;
-
-	RenderWindow* janela;
 	RectangleShape* play, * fases, * opcoes, * sobre, * sair;
 	Font* font;
 	Texture* image;
@@ -21,20 +22,12 @@ class Menu
 	vector<Text> texts;
 	vector<size_t>sizes;
 
-protected:
-
-	//define valores para cada objeto
-	void set_values();
-
-	//armazena eventos : clique do mouse
-	void loop_events();
-
-	//desenha tudo na tela
-	void draw_all();
-
 public:
 	Menu();
 	~Menu();
 
-	void run_menu();
+	void selecionouOpcaoTeclas(bool &clique);
+	void selecionouOpcaoMouse(bool& clique);
+	void apertou(bool& clique);
+	void rodar_menu();
 };

@@ -1,2 +1,30 @@
-﻿  NovoMenu.cpp
+﻿  Ente.cpp
+  Entidade.cpp
+  Fase.cpp
+  FaseDois.cpp
+  FaseUm.cpp
+  Gerenciador_Colisoes.cpp
+  Inimigo.cpp
+  Jogador.cpp
+C:\Users\Usuario\source\repos\Jogo 2D-Tecnicas de Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Jogador.cpp(7,28): warning C4244: '=': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\Usuario\source\repos\Jogo 2D-Tecnicas de Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Jogador.cpp(8,27): warning C4244: '=': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\Usuario\source\repos\Jogo 2D-Tecnicas de Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Jogador.cpp(14,46): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Usuario\source\repos\Jogo 2D-Tecnicas de Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Jogador.cpp(159,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Jogo.cpp
+C:\Users\Usuario\source\repos\Jogo 2D-Tecnicas de Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Jogo.cpp(74,40): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  main.cpp
+  Menu.cpp
+  Obstaculo.cpp
+  Personagem.cpp
+  Plano.cpp
+  Projetil.cpp
+  Generating Code...
   Jogo 2D-Tecnicas de Programacao.vcxproj -> C:\Users\Usuario\source\repos\Jogo 2D-Tecnicas de Programacao\Jogo 2D\Debug\Jogo 2D-Tecnicas de Programacao.exe

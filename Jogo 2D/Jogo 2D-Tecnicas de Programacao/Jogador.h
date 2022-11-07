@@ -1,23 +1,24 @@
 #pragma once
-#include "stdafx.h"
 #include "Personagem.h"
+#include "Ente.h"
+#include "stdafx.h"
 
-class Jogador
+class Jogador : protected Ente
 {
 private:
 
-	//videomode
 
+	Ente Tela;
+
+	//videomode
 	VideoMode videoModeP;
 
 	//texturas player
-
 	Texture txJogadorCorre[10], txJogadorPula[10], txJogadorParado[10];
 	int frame, velTex, limitadorTex;
 
 
 	//estat Player
-
 	int lado;
 	bool jogador_pulou;
 	float gravidade, xvel, yvel, fdist, pAltura, pLargura, aT, xpos, ypos, velMax;
@@ -25,19 +26,16 @@ private:
 	Vector2f pPos;
 
 	//objetivos jogo
-
-	RectangleShape player;
 	RectangleShape chao;
 
 	//funcoes privadas
-
 	void iniciarVariaiveis();
 	void iniciarJogador();
 	void iniciarTexturas();
 
 public:
 
-	RectangleShape jogador;
+	RectangleShape *obj;
 
 	Jogador();
 	~Jogador();
@@ -47,7 +45,5 @@ public:
 	void direcionalDireito();
 	void direcionalCima();
 	void cair();
-
 	void atualizarTextura();
-
 };

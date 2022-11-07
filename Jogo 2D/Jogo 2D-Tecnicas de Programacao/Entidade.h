@@ -1,8 +1,8 @@
 #pragma once
-#include "stdafx.h"
 #include "Ente.h"
+#include "stdafx.h"
 
-class Entidade :public Ente
+class Entidade : public Ente
 {
 protected:
 	bool seMovimenta;
@@ -11,8 +11,8 @@ protected:
 	bool tiraVida;
 
 public:
-	//Entidade();
-	Entidade(bool mov = false, Vector2f vel = { 0,0 }, float vel_max = 0, bool danoso = false, int nr_id = 0, Vector2f pos = { 0,0 }, Vector2f coord = { 0,0 }, Vector2f tam = { 0,0 });
+	Entidade();
+	//Entidade(bool mov = false, Vector2f vel = { 0,0 }, float vel_max = 0, bool danoso = false, int nr_id = 0, Vector2f pos = { 0,0 }, Vector2f coord = { 0,0 }, Vector2f tam = { 0,0 });
 	~Entidade();
 
 	void setSeMovimenta(const bool mov);

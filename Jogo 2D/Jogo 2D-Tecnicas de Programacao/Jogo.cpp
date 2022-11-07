@@ -1,27 +1,35 @@
 #include "Jogo.h"
 
-void Jogo::inicVariaiveis()
-{
-	this->janela = nullptr;
 
+Jogo::Jogo()
+{
+	this->inicializarVariaiveis();
+	this->inicializarInimigos();
+	this->inicializarMapa();
+	this->inicializarTexturas();
+}
+
+Jogo::~Jogo()
+{
+	delete this->menuP;
+}
+
+
+
+void Jogo::inicializarVariaiveis()
+{
 	menuP = new Menu();
 	//logica jogo
 
 
-	this->points = 0;
+	this->pontos = 0;
 	this->baixo = true;
 
 }
 
-void Jogo::inicTexturas()
+void Jogo::inicializarTexturas()
 {
 	int i;
-	//Textura chao
-	/*if (!this->tChao.loadFromFile("C:/Users/migue/OneDrive/Documentos/FACUL/programação/JOGO SIMAO/texturas/mapa/2.png")) {
-		std::cout << "ERROR";
-	}
-	tChao.setSmooth(true);
-	chao.setTexture(&tChao);*/
 
 	//textura fundo
 	this->tBg.loadFromFile("../../Texturas/Cenario/Fundo.jpg", IntRect(0, 0, this->videoMode.width, this->videoMode.height));
@@ -44,41 +52,31 @@ void Jogo::inicTexturas()
 	}
 
 }
-
+/*
 void Jogo::inicJanela()
 {
 	//roda o menu antes de abrir a janela do jogo
-
 	this->menuP->run_menu();
-
 	//janela do jogo
-
-	this->videoMode.height = 1080.f; //RESOLUÇOES
-	this->videoMode.width = 1920.f;
+	this->videoMode.height = 1080; //RESOLUÇOES
+	this->videoMode.width = 1920;
 	this->janela = new RenderWindow(this->videoMode,
 		"Game 1", Style::Titlebar |
 		Style::Close);
-
 	this->janela->setFramerateLimit(60); //limite FPS
-}
+}*/
 
-void Jogo::inicMapa()
+void Jogo::inicializarMapa()
 {
 	//chao
 
-	this->chao.setPosition(0, this->videoMode.height - 85);
-	this->chao.setSize(Vector2f((this->videoMode.width), 85));
+	this->chao.setPosition(0, videoMode.height - 85.f);
+	this->chao.setSize(Vector2f((videoMode.width), 85));
 	chao.setFillColor(Color::White);
-
-
-
-	//fundo
-
-	//this->fundo.setScale(Vector2f(this->videoMode.width / 1000.f, this->videoMode.height / 750.f));
 
 }
 
-void Jogo::inicEnemies()
+void Jogo::inicializarInimigos()
 {
 	this->inimigo.setPosition(10.f, 10.f);
 	this->inimigo.setSize(Vector2f(150.f, 200.f));
@@ -86,79 +84,23 @@ void Jogo::inicEnemies()
 }
 
 
-//contrutores / destrutores
-Jogo::Jogo()
-{
-	this->inicVariaiveis();
-	this->inicJanela();
-	this->inicEnemies();
-	this->inicMapa();
-	this->inicTexturas();
-
-}
-
-Jogo::~Jogo()
-{
-	delete this->janela;
-	delete this->menuP;
-}
-
-//accesos
-
 const bool Jogo::rodando() const
 {
-	return this->janela->isOpen();
+	return (Tela->getAberta());
 }
 
-//funcoes
 
-void Jogo::spawnEnemy()
+void Jogo::spawnInimigo()
 {
-	/*
-		@return void
-		Spawna inimigo e diz a cor e posicao do inimigo
-	*/
-
 	this->inimigo.setPosition(this->videoMode.width - 200.f, this->chao.getPosition().y - this->inimigo.getSize().y);
-
-	//spawn inimigo
-	//this->inimigos.push_back(this->inimigo);
-
 }
 
-void Jogo::atualizaMouse()
+/*void Jogo::atualizarMouse()
 {
-	/*
-		Atualiza as posicoes do mouse
-		*atualiza as posicoes do mouse em relacao a janela (vector2i)
-	*/
-
 	this->mousePos = Mouse::getPosition(*this->janela);
+}*/
 
-}
-
-void Jogo::pollEvents()
-{
-	//evento
-	while (this->janela->pollEvent(this->ev))
-	{
-		switch (this->ev.type)
-		{
-		case Event::Closed:
-			this->janela->close();
-			break;
-		case Event::KeyPressed:
-			if (this->ev.key.code == Keyboard::Escape)
-
-				this->janela->close();
-
-			break;
-		}
-	}
-
-}
-
-void Jogo::updateEnemies()
+void Jogo::atualizarInimigos()
 {
 	/*
 		@return void
@@ -168,8 +110,7 @@ void Jogo::updateEnemies()
 		-remover inimigos no limite da tela
 	*/
 
-	this->spawnEnemy();
-
+	this->spawnInimigo();
 	this->inimigo.setTexture(&tEnemy[velTex1]);
 
 	//muda para a proxima textura a cada 7 frames
@@ -180,37 +121,9 @@ void Jogo::updateEnemies()
 	this->frame1++;
 }
 
-void Jogo::update()
+void Jogo::atualizar()
 {
-	this->pollEvents();
-
-	this->atualizaMouse();
-
+	//this->atualizaMouse();
 	this->jogador.atualizarJogador();
-
-	this->updateEnemies();
-
-}
-
-void Jogo::render()
-{
-	/*
-		@return void
-		-limpar frames antigos
-		-renderizar objetos
-		-display frame na janela
-		rendereizar objetos jogo
-	*/
-
-	this->janela->clear();
-
-	//desenhar jogo
-
-	this->janela->draw(this->chao);
-	this->janela->draw(this->fundo);
-	this->janela->draw(this->jogador.jogador);
-	this->janela->draw(this->inimigo);
-
-
-	this->janela->display();
+	this->atualizarInimigos();
 }

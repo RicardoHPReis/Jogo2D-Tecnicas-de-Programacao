@@ -1,18 +1,22 @@
 #include "Personagem.h"
 
 Personagem::Personagem():
-Entidade(true)
+Entidade()
 {
 	vidas = 1;
 	dano = 0;
-	atacou = false;
+	lado = 0;
+	podeAtacar = false;
+	estaMorto = false;
 }
 
 Personagem::~Personagem()
 {
 	vidas = 0;
 	dano = 0;
-	atacou = false;
+	lado = 0;
+	podeAtacar = false;
+	estaMorto = false;
 }
 
 void Personagem::setVidas(const int nr_vd)
@@ -45,14 +49,22 @@ const int Personagem::getLado() const
 	return lado;
 }
 
-void Personagem::setAtacou(const bool atc)
+void Personagem::setPodeAtacar(const bool atc)
 {
-	atacou = atc;
+	podeAtacar = atc;
 }
 
-const bool Personagem::getAtacou() const
+const bool Personagem::getPodeAtacar() const
 {
-	return atacou;
+	return podeAtacar;
 }
 
+void Personagem::setEstaMorto(const bool mrt)
+{
+	estaMorto = mrt;
+}
 
+const bool Personagem::getEstaMorto() const
+{
+	return estaMorto;
+}

@@ -1,22 +1,23 @@
 #include "Entidade.h"
 
-/*Entidade::Entidade() :
+Entidade::Entidade() :
 Ente()
 {
 	seMovimenta = false;
 	velocidade = { 0,0 };
 	velocidade_max = 0;
 	tiraVida = false;
-}*/
+}
 
-Entidade::Entidade(bool mov, Vector2f vel, float vel_max, bool danoso, int nr_id,  Vector2f pos, Vector2f coord, Vector2f tam) :
-Ente(nr_id, pos, coord, tam)
+/*Entidade::Entidade(bool mov, Vector2f vel, float vel_max, bool danoso, int nr_id, Vector2f pos, Vector2f coord, Vector2f tam) :
+//Ente(nr_id, pos, coord, tam)
+Ente()
 {
 	seMovimenta = mov;
 	velocidade = vel;
 	velocidade_max = vel_max;
 	tiraVida = danoso;
-}
+}*/
 
 Entidade::~Entidade()
 {

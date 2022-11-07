@@ -1,81 +1,44 @@
 #pragma once
-#include "stdafx.h"
 #include "Jogador.h"
 #include "Menu.h"
-/*#include "FaseUm.h"
-#include "FaseDois.h"*/
+#include "FaseUm.h"
+#include "FaseDois.h"
 #include "Gerenciador_Grafico.h"
+#include "stdafx.h"
 
 class Jogo
 {
 private:
-	//janela
-	RenderWindow* janela;
-	VideoMode videoMode;
-	Event ev;
-
-
-	//texturas
-
-	Texture tChao, tEnemy[11], tBg;
-
-	//Player
-
+	Ente* Tela;
 	Jogador jogador;
-
-	//inimigo
-
-	int points;
-	int frame1, velTex1, aux1;
-
-	//direcao do inimigo
-
-	bool baixo;
-
-
-	//objetivos jogo
-
-	RectangleShape inimigo;
-
-	//mapa
-
-	RectangleShape chao;
-	Sprite fundo;
-
-	//posicoes mouse
-
-	Vector2i mousePos;
-
-	//menu
-
 	Menu* menuP;
 
-	//funcoes privadas
+	int pontos; //Inimigo
+	int frame1, velTex1, aux1; //Inimigo
+	bool baixo; //Inimigo
 
-	void inicVariaiveis();
-	void inicJanela();
-	void inicMapa();
-	void inicEnemies();
-	void inicTexturas();
+	VideoMode videoMode;
+	Texture tChao, tEnemy[11], tBg; //Texturas
+	RectangleShape inimigo; //Objetivos jogo
+	RectangleShape chao; //Mapa
+	Sprite fundo; //Mapa
+	Vector2i mousePos; //Posuções do mouse
 
+	void inicializarVariaiveis();
+	void inicializarMapa();
+	void inicializarInimigos();
+	void inicializarTexturas();
 
 public:
 
-	//construtores e destrutores
 	Jogo();
 	virtual ~Jogo();
 
-	//acessos
 	const bool rodando() const;
 
-	//funcoes
-	void spawnEnemy();
-
-	void pollEvents();
-	void atualizaMouse();
-
-	void updateEnemies();
-	void update();
-
-	void render();
+	void atualizar();
+	void spawnInimigo();
+	void atualizarInimigos();
+	//void atualizarMouse();
+	//void renderizar();
 };

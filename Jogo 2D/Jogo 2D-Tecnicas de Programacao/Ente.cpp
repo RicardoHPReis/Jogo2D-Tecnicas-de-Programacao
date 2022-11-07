@@ -1,6 +1,7 @@
 #include "Ente.h"
 
-Ente::Ente()
+Ente::Ente():
+grafico()
 {
 	id = 0;
 	posicao = { 0,0 };
@@ -9,14 +10,14 @@ Ente::Ente()
 	estaImprimindo = false;
 }
 
-Ente::Ente(int nr_id, Vector2f pos, Vector2f coord, Vector2f tam)
+/*Ente::Ente(int nr_id, Vector2f pos, Vector2f coord, Vector2f tam)
 {
 	id = nr_id;
 	posicao = pos;
 	coordenada = coord;
 	tamanho = tam;
 	estaImprimindo = false;
-}
+}*/
 
 Ente::~Ente()
 {
@@ -79,14 +80,22 @@ const bool Ente::getImprimindo() const
 }
 
 
-//virtual
-void Ente::executar()
-{
 
+void Ente::executar(RectangleShape* obj)
+{
+	this->grafico->fechar();
+	this->grafico->desenhar(obj);
 }
 
-//chamar gerenciador grafico para imprimir
-void Ente::imprimir_se()
+RenderWindow* Ente::getJanela()
 {
+	return janela;
+}
 
+bool Ente::getAberta()
+{
+	if (this->grafico->aberta() == 1)
+		return true;
+	else
+		return false;
 }

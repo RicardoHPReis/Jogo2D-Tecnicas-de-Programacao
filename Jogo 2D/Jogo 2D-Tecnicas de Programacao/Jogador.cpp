@@ -26,7 +26,7 @@ void Jogador::iniciarVariaiveis()
 	this->aT = 0.f;
 	this->pAltura = 150.f;
 	this->cPos = chao.getPosition();
-	this->pPos = jogador.getPosition();
+	this->pPos = obj->getPosition();
 	this->frame = 0;
 	this->velTex = 0;
 
@@ -34,8 +34,8 @@ void Jogador::iniciarVariaiveis()
 
 void Jogador::iniciarJogador()
 {
-	this->jogador.setSize(Vector2f(100.f, pAltura));
-	this->jogador.setPosition(50.f, 600.f - jogador.getSize().y);
+	this->obj->setSize(Vector2f(100.f, pAltura));
+	this->obj->setPosition(50.f, 600.f - obj->getSize().y);
 
 }
 
@@ -45,17 +45,17 @@ void Jogador::iniciarTexturas()
 
 	//texturas Player
 	for (i = 0; i < 10; i++) {
-		if (!this->txJogadorCorre[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Correr.png", IntRect(99.f + (i * 580.f), 30.f, 460.f, 660.f))) {
+		if (!this->txJogadorCorre[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Correr.png", IntRect(99 + (i * 580), 30, 460, 660))) {
 			std::cout << "ERROR";
 		}
 		this->txJogadorCorre[i].setSmooth(true);
 
-		if (!this->txJogadorPula[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Pular.png", IntRect(51.f + (i * 588.f), 30.f, 470.f, 626.f))) {
+		if (!this->txJogadorPula[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Pular.png", IntRect(51 + (i * 588), 30, 470, 626))) {
 			std::cout << "ERROR";
 		}
 		this->txJogadorPula[i].setSmooth(true);
 
-		if (!this->txJogadorParado[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Parado.png", IntRect(51.f + (i * 588.f), 30.f, 448.f, 626.f))) {
+		if (!this->txJogadorParado[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Parado.png", IntRect(51 + (i * 588), 30, 448, 626))) {
 			std::cout << "ERROR";
 		}
 		this->txJogadorParado[i].setSmooth(true);
@@ -69,7 +69,7 @@ Jogador::Jogador() {
 	this->iniciarTexturas();
 }
 
-Jogador::~Jogador() 
+Jogador::~Jogador()
 {
 
 }
@@ -78,19 +78,19 @@ void Jogador::atualizarJogador()
 {
 
 	//textura no frame
-	this->jogador.setTexture(&txJogadorParado[this->velTex]);
+	this->obj->setTexture(&txJogadorParado[this->velTex]);
 
 	//oega posicoes importantes
 	this->cPos = this->chao.getPosition();
-	this->jogador.setPosition(this->xpos, this->ypos);
+	this->obj->setPosition(this->xpos, this->ypos);
 
 	//define para qual lado o player esta virado
 	if (this->lado == 0) {
-		this->jogador.setScale(Vector2f(-1, 1));
+		this->obj->setScale(Vector2f(-1, 1));
 		this->lado = 2;
 	}
 	else if (this->lado == 1) {
-		this->jogador.setScale(Vector2f(1, 1));
+		this->obj->setScale(Vector2f(1, 1));
 		this->lado = 2;
 	}
 
@@ -128,7 +128,7 @@ void Jogador::atualizarJogador()
 	//limita os frames do pulo
 	if (this->limitadorTex <= 9) {
 
-		this->jogador.setTexture(&txJogadorPula[this->limitadorTex]);
+		this->obj->setTexture(&txJogadorPula[this->limitadorTex]);
 		if (this->frame % 3 == 0)
 			this->limitadorTex++;
 
@@ -136,13 +136,15 @@ void Jogador::atualizarJogador()
 
 	atualizarTextura();
 
+	this->Tela.executar(obj);
+
 }
 
 void Jogador::direcionalEsquerdo() {
 
-	this->jogador.setTexture(&txJogadorCorre[this->velTex]);
+	this->obj->setTexture(&txJogadorCorre[this->velTex]);
 	this->lado = 0;
-	if (this->xpos > this->jogador.getSize().x) { //Player nao passar dos limites da tela esquerda
+	if (this->xpos > this->obj->getSize().x) { //Player nao passar dos limites da tela esquerda
 		this->xpos -= this->xvel;
 		this->xvel += 1.f;
 	}
@@ -152,10 +154,10 @@ void Jogador::direcionalEsquerdo() {
 
 void Jogador::direcionalDireito() {
 
-	this->jogador.setTexture(&txJogadorCorre[this->velTex]);
+	this->obj->setTexture(&txJogadorCorre[this->velTex]);
 
 	this->lado = 1.f;
-	if (this->xpos < (this->videoModeP.width - this->jogador.getSize().x)) {  //Player nao passar dos limites da tela direita
+	if (this->xpos < (this->videoModeP.width - this->obj->getSize().x)) {  //Player nao passar dos limites da tela direita
 		this->xpos += xvel;
 		this->xvel += 1.f;
 	}

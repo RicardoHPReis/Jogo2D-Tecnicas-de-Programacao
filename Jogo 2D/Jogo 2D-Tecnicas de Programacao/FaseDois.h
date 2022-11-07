@@ -1,6 +1,6 @@
 #pragma once
-#include "stdafx.h"
 #include "Fase.h"
+#include "stdafx.h"
 
 class FaseDois :public Fase
 {

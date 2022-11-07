@@ -1,17 +1,17 @@
 #pragma once
-#include "stdafx.h"
 #include "Ente.h"
+#include "stdafx.h"
 
-class NMenu:public Ente
+class NMenu :public Ente
 {
 
 	int posi;
 	bool pressed, theselect;
 	RenderWindow* janela;
-	RectangleShape *fundo, *play, *fases, *opcoes, *sobre, *sair;
-	Font *font;
-	Texture *image;
-	Sprite *bg;
+	RectangleShape* fundo, * play, * fases, * opcoes, * sobre, * sair;
+	Font* font;
+	Texture* image;
+	Sprite* bg;
 
 	Vector2i posMouse;
 	Vector2f cordMouse;

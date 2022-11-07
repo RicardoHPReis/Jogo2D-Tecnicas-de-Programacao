@@ -1,7 +1,7 @@
 #include "Fase.h"
 
 Fase::Fase() :
-Ente(false)
+Ente()
 {
 
 }

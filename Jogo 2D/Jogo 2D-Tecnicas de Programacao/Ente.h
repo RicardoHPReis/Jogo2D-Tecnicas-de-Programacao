@@ -1,14 +1,6 @@
 #pragma once
-#include "stdafx.h"
 #include "Gerenciador_Grafico.h"
-
-/*
-
-	classe abstrata ente, onde precisa incluir a classe do gerenciador grafico
-	classe será chamada sempre que for preciso imprimir algo
-
-*/
-
+#include "stdafx.h"
 
 class Ente
 {
@@ -18,10 +10,12 @@ protected:
 	Vector2f coordenada;
 	Vector2f tamanho;
 	bool estaImprimindo;
+	Gerenciador_Grafico* grafico;
+	RenderWindow* janela;
 
 public:
 	Ente();
-	Ente(int nr_id = 0, Vector2f pos = { 0,0 }, Vector2f coord = { 0,0 }, Vector2f tam = { 0,0 });
+	//Ente(int nr_id = 0, Vector2f pos = { 0,0 }, Vector2f coord = { 0,0 }, Vector2f tam = { 0,0 });
 	virtual ~Ente();
 
 	void setId(const int nr_id);
@@ -39,6 +33,7 @@ public:
 	void setImprimindo(const bool imp);
 	const bool getImprimindo() const;
 
-	void imprimir_se();
-	virtual void executar() = 0;
+	virtual void executar(RectangleShape* obj);
+	RenderWindow* getJanela();
+	bool getAberta();
 };

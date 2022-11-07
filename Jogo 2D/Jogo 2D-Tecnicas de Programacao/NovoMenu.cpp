@@ -173,8 +173,8 @@ void NMenu::draw_all()
 	this->janela->display();
 }
 
-NMenu::NMenu():
-Ente(false)
+NMenu::NMenu() :
+Ente()
 {
 	this->janela = new RenderWindow();
 	this->play = new RectangleShape();

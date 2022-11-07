@@ -1,12 +1,11 @@
 #pragma once
-#include "stdafx.h"
 #include "Ente.h"
+#include "stdafx.h"
 
 class Fase : public Ente
 {
 protected:
 	float gravidade;
-	//lista<Entidade*> Não foi feito ainda
 
 public:
 	Fase();

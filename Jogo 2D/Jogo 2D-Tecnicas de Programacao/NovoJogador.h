@@ -1,6 +1,6 @@
 #pragma once
-#include "stdafx.h"
 #include "Personagem.h"
+#include "stdafx.h"
 
 class NovoJogador : public Personagem
 {
