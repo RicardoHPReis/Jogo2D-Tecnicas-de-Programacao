@@ -1,77 +1,15 @@
 #include "Jogador.h"
 
-void Jogador::iniciarVariaiveis()
+Jogador::Jogador() 
 {
-	//VideoMode
-
-	this->videoModeP.height = 1080.f; //RESOLUÇOES
-	this->videoModeP.width = 1920.f;
-
-
-	//chao
-
-	this->chao.setPosition(0.f, this->videoModeP.height - 85.f);
-	this->chao.setSize(Vector2f(this->videoModeP.width, 85.f));
-
-	//logica player
-
-	this->lado = 1;
-	this->jogador_pulou = false;
-	this->xpos = 50.f;
-	this->ypos = 50.f;
-	this->gravidade = 15.f;
-	this->velMax = 13;
-	this->xvel = 0.f;
-	this->yvel = 0.f;
-	this->aT = 0.f;
-	this->pAltura = 150.f;
-	this->cPos = chao.getPosition();
-	this->pPos = obj->getPosition();
-	this->frame = 0;
-	this->velTex = 0;
-
-}
-
-void Jogador::iniciarJogador()
-{
-	this->obj->setSize(Vector2f(100.f, pAltura));
-	this->obj->setPosition(50.f, 600.f - obj->getSize().y);
-
-}
-
-void Jogador::iniciarTexturas()
-{
-	int i;
-
-	//texturas Player
-	for (i = 0; i < 10; i++) {
-		if (!this->txJogadorCorre[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Correr.png", IntRect(99 + (i * 580), 30, 460, 660))) {
-			std::cout << "ERROR";
-		}
-		this->txJogadorCorre[i].setSmooth(true);
-
-		if (!this->txJogadorPula[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Pular.png", IntRect(51 + (i * 588), 30, 470, 626))) {
-			std::cout << "ERROR";
-		}
-		this->txJogadorPula[i].setSmooth(true);
-
-		if (!this->txJogadorParado[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Parado.png", IntRect(51 + (i * 588), 30, 448, 626))) {
-			std::cout << "ERROR";
-		}
-		this->txJogadorParado[i].setSmooth(true);
-	}
-}
-
-Jogador::Jogador() {
-
-	this->iniciarVariaiveis();
 	this->iniciarJogador();
+	this->iniciarVariaiveis();
 	this->iniciarTexturas();
 }
 
 Jogador::~Jogador()
 {
-
+	delete obj;
 }
 
 void Jogador::atualizarJogador()
@@ -201,4 +139,65 @@ void Jogador::atualizarTextura() {
 	if (this->frame % 7 == 0)
 		this->velTex++;
 	this->frame++;
+}
+
+void Jogador::iniciarVariaiveis()
+{
+	//VideoMode
+
+	this->videoModeP.height = 1080.f; //RESOLUÇOES
+	this->videoModeP.width = 1920.f;
+
+
+	//chao
+
+	this->chao.setPosition(0.f, this->videoModeP.height - 85.f);
+	this->chao.setSize(Vector2f(this->videoModeP.width, 85.f));
+
+	//logica player
+
+	this->lado = 1;
+	this->jogador_pulou = false;
+	this->xpos = 50.f;
+	this->ypos = 50.f;
+	this->gravidade = 15.f;
+	this->velMax = 13;
+	this->xvel = 0.f;
+	this->yvel = 0.f;
+	this->aT = 0.f;
+	this->pAltura = 150.f;
+	this->cPos = chao.getPosition();
+	this->pPos = obj->getPosition();
+	this->frame = 0;
+	this->velTex = 0;
+}
+
+void Jogador::iniciarJogador()
+{
+	obj = new RectangleShape;
+	this->obj->setSize(Vector2f(100.f, pAltura));
+	this->obj->setPosition(50.f, 600.f - obj->getSize().y);
+}
+
+void Jogador::iniciarTexturas()
+{
+	int i;
+
+	//texturas Player
+	for (i = 0; i < 10; i++) {
+		if (!this->txJogadorCorre[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Correr.png", IntRect(99 + (i * 580), 30, 460, 660))) {
+			std::cout << "ERROR";
+		}
+		this->txJogadorCorre[i].setSmooth(true);
+
+		if (!this->txJogadorPula[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Pular.png", IntRect(51 + (i * 588), 30, 470, 626))) {
+			std::cout << "ERROR";
+		}
+		this->txJogadorPula[i].setSmooth(true);
+
+		if (!this->txJogadorParado[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Parado.png", IntRect(51 + (i * 588), 30, 448, 626))) {
+			std::cout << "ERROR";
+		}
+		this->txJogadorParado[i].setSmooth(true);
+	}
 }

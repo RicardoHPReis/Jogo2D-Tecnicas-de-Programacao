@@ -8,6 +8,8 @@ grafico()
 	coordenada = { 0,0 };
 	tamanho = { 0,0 };
 	estaImprimindo = false;
+	janela = new RenderWindow;
+	grafico = new Gerenciador_Grafico;
 }
 
 /*Ente::Ente(int nr_id, Vector2f pos, Vector2f coord, Vector2f tam)

@@ -14,8 +14,6 @@ Jogo::~Jogo()
 	delete this->menuP;
 }
 
-
-
 void Jogo::inicializarVariaiveis()
 {
 	menuP = new Menu();

@@ -1,30 +1,39 @@
 #include "Gerenciador_Grafico.h"
 
+
+//Gerenciador_Grafico* Gerenciador_Grafico::instancia_grafico = NULL;
+
 Gerenciador_Grafico::Gerenciador_Grafico()
 {
-	this->inicJanela();
+	this->video.height = 1080; //RESOLUÇOES
+	this->video.width = 1920;
+	this->janela = new RenderWindow(this->video,
+		"Game 1", Style::Titlebar |
+		Style::Close);
+
+	this->janela->setFramerateLimit(60); //limite FPS
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico()
 {
 	delete this->janela;
+	//delete instancia_grafico;
 }
 
-
-void Gerenciador_Grafico::setTextura(const Texture tx)
+/*static Gerenciador_Grafico* getInstancia_Grafico()
 {
-	textura = tx;
-}
+	if (!instancia_grafico)
+	{
+		instancia_grafico = new Gerenciador_Grafico;
+	}
+	return instancia_grafico;
+}*/
 
-const Texture Gerenciador_Grafico::getTextura() const
-{
-	return textura;
-}
 
-/*void Gerenciador_Grafico::setJanela(const RenderWindow* window)
+void Gerenciador_Grafico::setJanela(RenderWindow* window)
 {
 	janela = window;
-}*/
+}
 
 const RenderWindow* Gerenciador_Grafico::getJanela() const
 {
@@ -50,19 +59,25 @@ const Event Gerenciador_Grafico::getEvento() const
 	return evento;
 }
 
-
-
-void Gerenciador_Grafico::inicJanela()
+/*void Gerenciador_Grafico::setTextura(const Texture tx)
 {
-	this->video.height = 1080; //RESOLUÇOES
-	this->video.width = 1920;
-	this->janela = new RenderWindow(this->video,
-		"Game 1", Style::Titlebar |
-		Style::Close);
-
-	this->janela->setFramerateLimit(60); //limite FPS
+	textura = tx;
 }
 
+const Texture Gerenciador_Grafico::getTextura() const
+{
+	return textura;
+}*/
+
+/*void setSprite(const Sprite sp)
+{
+	sprite = sp;
+}
+
+const Sprite getSprite() const
+{
+	return sprite;
+}*/
 
 void Gerenciador_Grafico::pollEvents()
 {
