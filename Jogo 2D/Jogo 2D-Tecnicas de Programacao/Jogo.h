@@ -9,7 +9,7 @@
 class Jogo
 {
 private:
-	Ente* Tela;
+	Gerenciador_Grafico *tela;
 	Jogador jogador;
 	Menu* menuP;
 

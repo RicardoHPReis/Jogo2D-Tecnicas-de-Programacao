@@ -7,37 +7,38 @@ Ente()
 {
 	this->play = new RectangleShape();
 	this->fases = new RectangleShape();
+	this->recordes = new RectangleShape();
 	this->opcoes = new RectangleShape();
 	this->sobre = new RectangleShape();
 	this->sair = new RectangleShape();
 	this->font = new Font();
-	this->image = new Texture();
-	this->bg = new Sprite();
+	this->textura = new Texture();
+	this->sprite = new Sprite();
 
 	this->clicar = this->selecionar = false;
 
 	this->font->loadFromFile("../../Fontes/Font.otf");
-	this->image->loadFromFile("../../Texturas/Cenario/Menu.png");
+	this->textura->loadFromFile("../../Texturas/Cenario/Menu.png");
 
-	this->bg->setTexture(*image);
+	this->sprite->setTexture(*textura);
 
 	this->posMouse = { 0,0 };
 	this->cordMouse = { 0,0 };
 
-	this->options = { "NOME DO JOGO","Jogar","Fases","Opcoes","Sobre","Sair" };
-	this->texts.resize(6);
-	coords = { { 610,200 } , { 610,350 }, { 610,450 }, { 610,550 }, { 610,650 }, { 610,750 } };
-	sizes = { 100,50,50,50,50,50 };
+	this->options = { "NOME DO JOGO","Jogar","Fases","Recordes","Opcoes","Sobre","Sair"};
+	this->textos.resize(7);
+	coords = { { 610,200 } , { 610,350 }, { 610,450 }, { 610,550 }, { 610,650 }, { 610,750 }, { 610,850 } };
+	sizes = { 100,50,50,50,50,50,50};
 
-	for (size_t i{}; i < texts.size(); ++i) {
-		this->texts[i].setFont(*font);
-		this->texts[i].setString(options[i]);
-		this->texts[i].setCharacterSize(sizes[i]);
-		this->texts[i].setOutlineColor(Color::Black);
-		this->texts[i].setPosition(coords[i]);
+	for (size_t i{}; i < textos.size(); ++i) {
+		this->textos[i].setFont(*font);
+		this->textos[i].setString(options[i]);
+		this->textos[i].setCharacterSize(sizes[i]);
+		this->textos[i].setOutlineColor(Color::Black);
+		this->textos[i].setPosition(coords[i]);
 	}
 
-	this->texts[1].setOutlineThickness(4);
+	this->textos[1].setOutlineThickness(4);
 	mouse = 1;
 
 	this->play->setSize(Vector2f(110, 50));
@@ -60,17 +61,17 @@ Menu::~Menu()
 	delete sobre;
 	delete sair;
 	delete font;
-	delete image;
-	delete bg;
+	delete textura;
+	delete sprite;
 }
 
 void Menu::selecionouOpcaoMouse(bool &clique)
 {
 	if (this->play->getGlobalBounds().contains(cordMouse)) {
 
-		this->texts[mouse].setOutlineThickness(0);
+		this->textos[mouse].setOutlineThickness(0);
 		this->mouse = 1;
-		this->texts[mouse].setOutlineThickness(4);
+		this->textos[mouse].setOutlineThickness(4);
 		if (Mouse::isButtonPressed(Mouse::Left)) {
 			clique = true;
 		}
@@ -78,9 +79,9 @@ void Menu::selecionouOpcaoMouse(bool &clique)
 
 	if (this->fases->getGlobalBounds().contains(cordMouse)) {
 
-		this->texts[mouse].setOutlineThickness(0);
+		this->textos[mouse].setOutlineThickness(0);
 		this->mouse = 2;
-		this->texts[mouse].setOutlineThickness(4);
+		this->textos[mouse].setOutlineThickness(4);
 		if (Mouse::isButtonPressed(Mouse::Left)) {
 			//clique = true;
 		}
@@ -88,9 +89,9 @@ void Menu::selecionouOpcaoMouse(bool &clique)
 
 	if (this->opcoes->getGlobalBounds().contains(cordMouse)) {
 
-		this->texts[mouse].setOutlineThickness(0);
+		this->textos[mouse].setOutlineThickness(0);
 		this->mouse = 3;
-		this->texts[mouse].setOutlineThickness(4);
+		this->textos[mouse].setOutlineThickness(4);
 		if (Mouse::isButtonPressed(Mouse::Left)) {
 			//clique = true;
 		}
@@ -98,9 +99,9 @@ void Menu::selecionouOpcaoMouse(bool &clique)
 
 	if (this->sobre->getGlobalBounds().contains(cordMouse)) {
 
-		this->texts[mouse].setOutlineThickness(0);
+		this->textos[mouse].setOutlineThickness(0);
 		this->mouse = 4;
-		this->texts[mouse].setOutlineThickness(4);
+		this->textos[mouse].setOutlineThickness(4);
 		if (Mouse::isButtonPressed(Mouse::Left)) {
 			//clique = true;
 		}
@@ -108,9 +109,9 @@ void Menu::selecionouOpcaoMouse(bool &clique)
 
 	if (this->sair->getGlobalBounds().contains(cordMouse)) {
 
-		this->texts[mouse].setOutlineThickness(0);
+		this->textos[mouse].setOutlineThickness(0);
 		this->mouse = 5;
-		this->texts[mouse].setOutlineThickness(4);
+		this->textos[mouse].setOutlineThickness(4);
 		if (Mouse::isButtonPressed(Mouse::Left)) {
 			clique = true;
 			exit(1);
@@ -124,8 +125,8 @@ void Menu::selecionouOpcaoTeclas(bool& clique)
 		if (mouse < 5) {
 			++mouse;
 			this->clicar = true;
-			this->texts[mouse].setOutlineThickness(4);
-			this->texts[mouse - 1].setOutlineThickness(0);
+			this->textos[mouse].setOutlineThickness(4);
+			this->textos[mouse - 1].setOutlineThickness(0);
 			this->clicar = false;
 			this->selecionar = false;
 		}
@@ -134,8 +135,8 @@ void Menu::selecionouOpcaoTeclas(bool& clique)
 		if (mouse > 1) {
 			--mouse;
 			this->clicar = true;
-			this->texts[mouse].setOutlineThickness(4);
-			this->texts[mouse + 1].setOutlineThickness(0);
+			this->textos[mouse].setOutlineThickness(4);
+			this->textos[mouse + 1].setOutlineThickness(0);
 			this->clicar = false;
 			this->selecionar = false;
 		}

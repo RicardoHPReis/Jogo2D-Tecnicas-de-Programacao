@@ -8,7 +8,6 @@ grafico()
 	coordenada = { 0,0 };
 	tamanho = { 0,0 };
 	estaImprimindo = false;
-	janela = new RenderWindow;
 	grafico = new Gerenciador_Grafico;
 }
 
@@ -81,17 +80,31 @@ const bool Ente::getImprimindo() const
 	return estaImprimindo;
 }
 
+void Ente::setTextura(Texture* tx)
+{
+	textura = tx;
+}
+
+const Texture* Ente::getTextura() const
+{
+	return textura;
+}
+
+void Ente::setSprite(Sprite* sp)
+{
+	sprite = sp;
+}
+
+const Sprite* Ente::getSprite() const
+{
+	return sprite;
+}
 
 
 void Ente::executar(RectangleShape* obj)
 {
 	this->grafico->fechar();
 	this->grafico->desenhar(obj);
-}
-
-RenderWindow* Ente::getJanela()
-{
-	return janela;
 }
 
 bool Ente::getAberta()

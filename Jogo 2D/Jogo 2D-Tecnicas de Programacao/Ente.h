@@ -5,13 +5,14 @@
 class Ente
 {
 protected:
+	Gerenciador_Grafico* grafico;
 	int id;
+	bool estaImprimindo;
 	Vector2f posicao;
 	Vector2f coordenada;
 	Vector2f tamanho;
-	bool estaImprimindo;
-	Gerenciador_Grafico* grafico;
-	RenderWindow* janela;
+	Texture* textura;
+	Sprite* sprite;
 
 public:
 	Ente();
@@ -33,7 +34,12 @@ public:
 	void setImprimindo(const bool imp);
 	const bool getImprimindo() const;
 
+	void setTextura(Texture *tx);
+	const Texture* getTextura() const;
+
+	void setSprite(Sprite *sp);
+	const Sprite* getSprite() const;
+
 	virtual void executar(RectangleShape* obj);
-	RenderWindow* getJanela();
 	bool getAberta();
 };

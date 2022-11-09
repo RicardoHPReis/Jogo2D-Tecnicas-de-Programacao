@@ -1,7 +1,8 @@
 #include "Jogo.h"
 
 
-Jogo::Jogo()
+Jogo::Jogo() :
+tela()
 {
 	this->inicializarVariaiveis();
 	this->inicializarInimigos();
@@ -84,7 +85,7 @@ void Jogo::inicializarInimigos()
 
 const bool Jogo::rodando() const
 {
-	return (Tela->getAberta());
+	return (tela->janelaEstaAberta());
 }
 
 

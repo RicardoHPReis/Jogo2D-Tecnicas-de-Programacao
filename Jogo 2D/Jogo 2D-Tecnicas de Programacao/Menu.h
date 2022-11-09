@@ -9,17 +9,15 @@ private:
 	bool clicar, selecionar;
 	bool clique;
 
-	RectangleShape* play, * fases, * opcoes, * sobre, * sair;
-	Font* font;
-	Texture* image;
-	Sprite* bg;
+	RectangleShape *play, *fases, *recordes, *opcoes, *sobre, *sair;
+	Font *font;
 
 	Vector2i posMouse;
 	Vector2f cordMouse;
 
 	vector<const char*> options;
 	vector<Vector2f>coords;
-	vector<Text> texts;
+	vector<Text> textos;
 	vector<size_t>sizes;
 
 public:

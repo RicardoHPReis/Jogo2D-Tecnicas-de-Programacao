@@ -8,6 +8,7 @@ protected:
 	bool seMovimenta;
 	Vector2f velocidade;
 	float velocidade_max;
+	float empuxo;
 	bool tiraVida;
 
 public:
@@ -23,6 +24,9 @@ public:
 
 	void setVelocidadeMaxima(const float vel_max);
 	const float getVelocidadeMaxima() const;
+
+	void setEmpuxo(const float vel_max);
+	const float getEmpuxo() const;
 
 	void setTiraVida(const bool danoso);
 	const bool getTiraVida() const;

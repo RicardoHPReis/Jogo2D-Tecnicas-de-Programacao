@@ -3,17 +3,9 @@
 #include "Ente.h"
 #include "stdafx.h"
 
-class Jogador : protected Ente
+class Jogador : public Personagem
 {
 private:
-
-
-	Ente Tela;
-
-	//videomode
-	VideoMode videoModeP;
-
-	//texturas player
 	Texture txJogadorCorre[10], txJogadorPula[10], txJogadorParado[10];
 	int frame, velTex, limitadorTex;
 
