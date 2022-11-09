@@ -5,12 +5,25 @@ Jogador::Jogador()
 	this->Tela = new Ente();
 	this->iniciarVariaiveis();
 	this->iniciarJogador();
+	this->iniciarStatus();
 	this->iniciarTexturas();
 }
 
 Jogador::~Jogador()
 {
 	delete this->Tela;
+}
+
+void Jogador::iniciarStatus()
+{
+	this->status.setVidas(5);
+	this->status.setLado(1);
+	this->status.setPodeAtacar(true);
+	this->status.setDano(1);
+	this->status.setVelocidadeMaxima(13);
+
+	this->status.setVelocidadeX(0.f);
+	this->status.setVelocidadeY(0.f);
 }
 
 void Jogador::iniciarVariaiveis()
@@ -29,18 +42,14 @@ void Jogador::iniciarVariaiveis()
 
 	//logica player
 
-	this->lado = 1;
 	this->jogador_pulou = false;
 	this->xpos = 50.f;
 	this->ypos = 50.f;
 	this->gravidade = 15.f;
-	this->velMax = 13;
-	this->xvel = 0.f;
-	this->yvel = 0.f;
 	this->aT = 0.f;
 	this->pAltura = 150.f;
 	this->cPos = chao.getPosition();
-	this->pPos = obj.getPosition();
+	this->pPos = player.getPosition();
 	this->frame = 0;
 	this->velTex = 0;
 
@@ -48,8 +57,8 @@ void Jogador::iniciarVariaiveis()
 
 void Jogador::iniciarJogador()
 {
-	this->obj.setSize(Vector2f(100.f, pAltura));
-	this->obj.setPosition(50.f, 600.f - obj.getSize().y);
+	this->player.setSize(Vector2f(100.f, pAltura));
+	this->player.setPosition(50.f, 600.f - player.getSize().y);
 
 }
 
@@ -80,25 +89,25 @@ void Jogador::atualizarJogador()
 {
 
 	//textura no frame
-	this->obj.setTexture(&txJogadorParado[this->velTex]);
+	this->player.setTexture(&txJogadorParado[this->velTex]);
 
 	//oega posicoes importantes
 	this->cPos = this->chao.getPosition();
-	this->obj.setPosition(this->xpos, this->ypos);
+	this->player.setPosition(this->xpos, this->ypos);
 
 	//define para qual lado o player esta virado
-	if (this->lado == 0) {
-		this->obj.setScale(Vector2f(-1, 1));
-		this->lado = 2;
+	if (this->status.getLado() == 0) {
+		this->player.setScale(Vector2f(-1, 1));
+		this->status.setLado(2);
 	}
-	else if (this->lado == 1) {
-		this->obj.setScale(Vector2f(1, 1));
-		this->lado = 2;
+	else if (this->status.getLado() == 1) {
+		this->player.setScale(Vector2f(1, 1));
+		this->status.setLado(2);
 	}
 
 	//defina para nao passar a velocidade maxima
-	if (this->xvel >= this->velMax)
-		this->xvel = this->velMax;
+	if (this->status.getVelocidadeX() >= this->status.getVelocidadeMaxima())
+		this->status.setVelocidadeX(this->status.getVelocidadeMaxima());
 
 	//andar para os 2 lados
 	if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left))
@@ -109,9 +118,12 @@ void Jogador::atualizarJogador()
 
 	//se nao andar a velocidade � 0 // fica parado
 	else
-		this->xvel = 0.f;
+		this->status.setVelocidadeX(0.f);
+	
+	//atacar
+	if(Mouse::isButtonPressed(Mouse::Left))
 
-	//pulo
+	//pulo 
 	if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up)) {
 		direcionalCima();
 	}
@@ -130,7 +142,7 @@ void Jogador::atualizarJogador()
 	//limita os frames do pulo
 	if (this->limitadorTex <= 9) {
 
-		this->obj.setTexture(&txJogadorPula[this->limitadorTex]);
+		this->player.setTexture(&txJogadorPula[this->limitadorTex]);
 		if (this->frame % 3 == 0)
 			this->limitadorTex++;
 
@@ -142,11 +154,11 @@ void Jogador::atualizarJogador()
 
 void Jogador::direcionalEsquerdo() {
 
-	this->obj.setTexture(&txJogadorCorre[this->velTex]);
-	this->lado = 0;
-	if (this->xpos > this->obj.getSize().x) { //Player nao passar dos limites da tela esquerda
-		this->xpos -= this->xvel;
-		this->xvel += 1.f;
+	this->player.setTexture(&txJogadorCorre[this->velTex]);
+	this->status.setLado(0);
+	if (this->xpos > this->player.getSize().x) { //Player nao passar dos limites da tela esquerda
+		this->xpos -= this->status.getVelocidadeX();
+		this->status.setVelocidadeX(this->status.getVelocidadeX() + 1.f);
 	}
 
 
@@ -154,12 +166,12 @@ void Jogador::direcionalEsquerdo() {
 
 void Jogador::direcionalDireito() {
 
-	this->obj.setTexture(&txJogadorCorre[this->velTex]);
+	this->player.setTexture(&txJogadorCorre[this->velTex]);
 
-	this->lado = 1;
-	if (this->xpos < (this->videoModeP.width - this->obj.getSize().x)) {  //Player nao passar dos limites da tela direita
-		this->xpos += xvel;
-		this->xvel += 1.f;
+	this->status.setLado(1);
+	if (this->xpos < (this->videoModeP.width - this->player.getSize().x)) {  //Player nao passar dos limites da tela direita
+		this->xpos += this->status.getVelocidadeX();
+		this->status.setVelocidadeX(this->status.getVelocidadeX() + 1.f);
 	}
 
 }
@@ -167,7 +179,7 @@ void Jogador::direcionalDireito() {
 void Jogador::direcionalCima() {
 
 	if (this->aT <= 10) {
-		this->yvel = this->gravidade;
+		this->status.setVelocidadeY(gravidade);
 		this->jogador_pulou = true;
 		if (this->aT >= 10) {
 			this->jogador_pulou = false;
@@ -180,14 +192,14 @@ void Jogador::cair() {
 
 	//Atterrisar do pulo
 	if (this->fdist <= 0.f && this->jogador_pulou == false) {
-		this->yvel = 0.f;
+		this->status.setVelocidadeY(0.f);
 		this->aT = 0.f;
 		this->jogador_pulou = false;
 		this->ypos = this->cPos.y - this->pAltura;
 	}
 	else {
-		this->yvel += -1.f;
-		this->ypos -= this->yvel;
+		this->status.setVelocidadeY(status.getVelocidadeY() - 1.f);
+		this->ypos -= this->status.getVelocidadeY();
 		this->aT += 1.f;
 	}
 
@@ -195,7 +207,7 @@ void Jogador::cair() {
 
 void Jogador::executar()
 {
-	this->Tela->executar(this->obj);
+	this->Tela->executar(this->player);
 }
 
 void Jogador::atualizarTextura() {

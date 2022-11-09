@@ -94,7 +94,7 @@ void Jogo::render()
 
 	this->Tela->executarSprite(fundo);
 
-	this->Tela->executar(this->jogador->obj);
+	this->Tela->executar(this->jogador->player);
 
 	this->Tela->executar(this->inimigo->inimigo);
 

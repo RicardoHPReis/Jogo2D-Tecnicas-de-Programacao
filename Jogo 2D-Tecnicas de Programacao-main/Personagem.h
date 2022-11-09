@@ -2,16 +2,18 @@
 #include "Entidade.h"
 #include "stdafx.h"
 
-class Personagem :public Entidade
+class Personagem : public Entidade
 {
 protected:
 	int vidas;
 	int dano;
 	int lado;
+	float vida;
 	bool podeAtacar;
 	bool estaMorto;
 
 public:
+
 	Personagem();
 	~Personagem();
 

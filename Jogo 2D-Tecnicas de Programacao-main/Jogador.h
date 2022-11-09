@@ -19,9 +19,8 @@ private:
 
 	//estat Player
 
-	int lado;
 	bool jogador_pulou;
-	float gravidade, xvel, yvel, fdist, pAltura, pLargura, aT, xpos, ypos, velMax;
+	float gravidade, fdist, pAltura, pLargura, aT, xpos, ypos;
 	Vector2f cPos;
 	Vector2f pPos;
 
@@ -31,15 +30,20 @@ private:
 
 	//funcoes privadas
 
+	void iniciarStatus();
 	void iniciarVariaiveis();
 	void iniciarJogador();
 	void iniciarTexturas();
 
 public:
 
+	//Estatisticas de Personagem
+
+	Personagem status;
+
 	Ente* Tela;
 
-	RectangleShape obj;
+	RectangleShape player;
 
 	Jogador();
 	~Jogador();

@@ -35,6 +35,9 @@ void Menu::inicVariaveis()
 
 	this->pressed = this->theselect = false;
 
+	this->delay = 0;
+	this->tempoDelay = 15;
+
 	this->font->loadFromFile("../../Fontes/Font.otf");
 	this->image->loadFromFile("../../Texturas/Cenario/Menu.png");
 
@@ -82,24 +85,26 @@ void Menu::run_menu()
 
 		//Seleciona as opcoes usando seta para cima e para baixo
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !pressed) {
-			if (posi < 5) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && delay == 0) {
+			delay++;
+			if (posi < 5 && pressed == false) {
 				++posi;
 				this->pressed = true;
 				this->texts[posi].setOutlineThickness(4);
-				this->texts[posi - 1].setOutlineThickness(0);
-				this->pressed = false;
+				this->texts[posi - 1].setOutlineThickness(0);		
 				this->theselect = false;
+				this->pressed = false;
 			}
 		}
-		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) && !pressed) {
-			if (posi > 1) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && delay == 0) {
+			delay++;
+			if (posi > 1 && pressed == false) {
 				--posi;
 				this->pressed = true;
 				this->texts[posi].setOutlineThickness(4);
 				this->texts[posi + 1].setOutlineThickness(0);
-				this->pressed = false;
 				this->theselect = false;
+				this->pressed = false;
 			}
 		}
 
@@ -184,6 +189,13 @@ void Menu::run_menu()
 				exit(1);
 			}
 		}
+
+		if (this->delay > 0) {
+			this->delay += 1;
+			if (this->delay >= this->tempoDelay)
+				this->delay = 0;
+		}
+
 		imprimir();
 	}
 }

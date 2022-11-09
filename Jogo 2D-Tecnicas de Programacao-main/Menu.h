@@ -9,7 +9,7 @@ class Menu : public Ente
 	Ente *Tela;
 
 	//
-
+	int delay, tempoDelay;
 	int posi;
 	bool pressed, theselect;
 
