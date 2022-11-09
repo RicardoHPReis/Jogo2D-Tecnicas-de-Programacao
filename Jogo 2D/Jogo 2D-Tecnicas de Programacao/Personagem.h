@@ -18,8 +18,8 @@ public:
 	Personagem();
 	~Personagem();
 
-	void setAtaque(const int nr_vd);
-	const int getAtaque() const;
+	void setAtaque(bool nr_vd);
+	bool getAtaque();
 
 	void setVidas(const int nr_vd);
 	const int getVidas() const;

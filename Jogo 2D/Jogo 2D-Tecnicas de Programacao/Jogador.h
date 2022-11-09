@@ -14,7 +14,7 @@ private:
 	//texturas player
 
 	Texture txJogadorCorre[10], txJogadorPula[10], txJogadorParado[10],txJogadorAtaque[10],txJogadorAtaquePula[10];
-	int frame, velTex, limitadorTex,delay,tempoDelay;
+	int frame, velTex, limitadorTex1 ,limitadorTex,delay,tempoDelay;
 
 
 	//estat Player

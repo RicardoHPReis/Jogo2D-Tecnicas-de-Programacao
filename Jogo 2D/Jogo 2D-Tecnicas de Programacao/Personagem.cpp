@@ -19,12 +19,12 @@ Personagem::~Personagem()
 	estaMorto = false;
 }
 
-void Personagem::setAtaque(const int nr_vd)
+void Personagem::setAtaque(bool nr_vd)
 {
-	atacou = nr_vd;
+	this->atacou = nr_vd;
 }
 
-const int Personagem::getAtaque() const
+bool Personagem::getAtaque()
 {
 	return atacou;
 }

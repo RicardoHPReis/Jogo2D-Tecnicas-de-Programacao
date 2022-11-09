@@ -18,7 +18,7 @@ Gerenciador_Grafico::~Gerenciador_Grafico()
 	this->videoMode.width = 1920;
 	this->janelaP = new RenderWindow(this->videoMode,
 		"Game 1", Style::Titlebar |
-		Style::Default);
+		Style::Fullscreen);
 
 	this->janelaP->setFramerateLimit(60); //limite FPS
 }

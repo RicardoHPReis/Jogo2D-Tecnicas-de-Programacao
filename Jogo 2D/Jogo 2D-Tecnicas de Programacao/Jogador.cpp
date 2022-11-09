@@ -46,20 +46,22 @@ void Jogador::iniciarVariaiveis()
 	this->jogador_pulou = false;
 	this->xpos = 50.f;
 	this->ypos = 50.f;
-	this->gravidade = 15.f;
+	this->gravidade = 20.f;
 	this->aT = 0.f;
-	this->pAltura = 150.f;
+	this->pAltura = 90.f;
+	this->pLargura = (pAltura / 3) * 2;
 	this->cPos = chao.getPosition();
 	this->pPos = player.getPosition();
 	this->frame = 0;
 	this->velTex = 0;
 
+	this->delay = 0;
 	this->tempoDelay = 10;
 }
 
 void Jogador::iniciarJogador()
 {
-	this->player.setSize(Vector2f(100.f, pAltura));
+	this->player.setSize(Vector2f(pLargura, pAltura));
 	this->player.setPosition(50.f, 600.f - player.getSize().y);
 
 }
@@ -132,12 +134,6 @@ void Jogador::atualizarJogador()
 	else
 		this->status.setVelocidadeX(0.f);
 	
-	//atacar
-
-	if (Mouse::isButtonPressed(Mouse::Left) && this->delay == 0) {
-		delay = 1;
-	}
-
 	//pulo 
 	if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up)) {
 		direcionalCima();
@@ -163,23 +159,21 @@ void Jogador::atualizarJogador()
 
 	}
 
-	if (this->status.getAtaque() == true && this->jogador_pulou == true) 
+	//atacar
+
+	if (Mouse::isButtonPressed(Mouse::Left) || Keyboard::isKeyPressed(Keyboard::Space)) {
+		this->status.setAtaque(true);
+	}
+
+	else {
+		this->status.setAtaque(false);
+	}
+
+	ataque();
+
+	if (this->jogador_pulou == true) 
 	{
 		ataqueAereo();
-	}
-
-	if (this->status.getAtaque() == true && this->jogador_pulou == false)
-	{
-		ataque();
-	}
-
-	if (this->delay > 0) {
-		this->status.setAtaque(true);
-		this->delay += 1;
-		if (this->delay >= this->tempoDelay) {
-			this->delay = 0;
-			this->status.setAtaque(false);
-		}
 	}
 
 	atualizarTextura();
@@ -188,12 +182,33 @@ void Jogador::atualizarJogador()
 
 void Jogador::ataque()
 {
-	this->player.setTexture(&txJogadorAtaque[this->velTex]);
+	if (this->status.getAtaque() == true)
+		this->limitadorTex1 = 0;
+
+	//limita os frames do Ataque
+
+	if (this->limitadorTex1 <= 9) {
+
+		this->player.setTexture(&txJogadorAtaque[this->limitadorTex1]);
+		if (this->frame % 3 == 0)
+			this->limitadorTex1++;
+
+	}
 }
 
 void Jogador::ataqueAereo()
 {
-	this->player.setTexture(&txJogadorAtaquePula[this->velTex]);
+	if (this->status.getAtaque() == true)
+		this->limitadorTex1 = 0;
+
+	//limita os frames do pulo
+	if (this->limitadorTex1 <= 9) {
+
+		this->player.setTexture(&txJogadorAtaquePula[this->limitadorTex1]);
+		if (this->frame % 3 == 0)
+			this->limitadorTex1++;
+
+	}
 }
 
 void Jogador::direcionalEsquerdo() {
