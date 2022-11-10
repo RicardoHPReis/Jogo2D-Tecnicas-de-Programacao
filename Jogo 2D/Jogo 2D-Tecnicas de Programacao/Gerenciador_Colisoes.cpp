@@ -57,12 +57,12 @@ void Gerenciador_Colisoes::executar()
 		colidiu = calcularColisao(, it);
 		if (colidiu.x >= -1.f && colidiu.y >= -1.f)
 	}
-	for (int j = 0; j < listaInimigos.size(); j++)
+	/*for (int j = 0; j < listaInimigos.size(); j++)
 	{
 		for (*it = listaObstaculos.begin(); *it != listaObstaculos.end(); *it++)
 		{
 			colidiu = calcularColisao(listaInimigos[j], it);
 			if (colidiu.x >= -1.f && colidiu.y >= -1.f)
 		}
-	}
+	}*/
 }
