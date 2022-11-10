@@ -18,10 +18,14 @@ private:
 
 	VideoMode videoMode;
 
+	//vidas
+
+	int vidasN;
+	vector<Sprite> vidas;
 
 	//texturas
 
-	Texture tChao, tEnemy[11], tBg;
+	Texture tChao,tBg,tVidas;
 
 	//Player
 
@@ -72,8 +76,9 @@ public:
 
 	//funcoes
 
-
 	void atualizaMenu();
+
+	void imprimeVidas();
 
 	void update();
 	void render();

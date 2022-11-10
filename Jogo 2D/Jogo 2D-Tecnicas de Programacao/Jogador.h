@@ -40,7 +40,7 @@ public:
 
 	//Estatisticas de Personagem
 
-	Personagem status;
+	Personagem* status;
 
 	Ente* Tela;
 
@@ -49,15 +49,16 @@ public:
 	Jogador();
 	~Jogador();
 
-	
+	void atualizaVidas();
 	void atualizarJogador();
 	void ataque();
 	void ataqueAereo();
 	void direcionalEsquerdo();
 	void direcionalDireito();
 	void pulo();
-	void cair();
 	void executar();
+
+	int getVidas();
 
 	void atualizarTextura();
 

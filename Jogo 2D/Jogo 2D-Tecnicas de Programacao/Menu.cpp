@@ -50,7 +50,7 @@ void Menu::inicVariaveis()
 	this->posMouse = { 0,0 };
 	this->cordMouse = { 0,0 };
 
-	this->options = { "NOME DO JOGO","Jogar","Fases","Opcoes","Sobre","Sair" };
+	this->options = { "A Floresta","Jogar","Fases","Ranking","Sobre","Sair" };
 	this->texts.resize(6);
 	coords = { { 610,200 } , { 610,350 }, { 610,450 }, { 610,550 }, { 610,650 }, { 610,750 } };
 	sizes = { 100,50,50,50,50,50 };

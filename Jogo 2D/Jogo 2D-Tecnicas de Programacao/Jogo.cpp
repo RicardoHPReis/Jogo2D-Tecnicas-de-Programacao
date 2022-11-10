@@ -30,6 +30,10 @@ void Jogo::inicVariaiveis()
 	this->points = 0;
 	this->baixo = true;
 
+	this->vidasN = 5;
+	this->vidas.resize(this->vidasN);
+	
+
 }
 
 void Jogo::inicTexturas()
@@ -40,6 +44,18 @@ void Jogo::inicTexturas()
 	this->tBg.loadFromFile("../../Texturas/Cenario/Fundo.jpg", IntRect(0, 0, this->videoMode.width, this->videoMode.height));
 	this->tBg.setSmooth(true);
 	this->fundo.setTexture(tBg);
+
+	this->tVidas.loadFromFile("../../Texturas/Cenario/Vida.png");
+	this->tVidas.setSmooth(true);
+
+	//textura vidas
+
+	for (size_t i{}; i < vidas.size(); ++i) {
+
+		this->vidas[i].setTexture(tVidas);
+		this->vidas[i].setPosition(Vector2f((30.f) + (50 * i), 10.f));
+
+	}
 
 }
 
@@ -72,6 +88,14 @@ void Jogo::atualizaMenu()
 	}
 }
 
+void Jogo::imprimeVidas()
+{
+	for (int i = 0; i < this->jogador->getVidas(); i++)
+	{
+		this->Tela->executarSprite(this->vidas[i]);
+	}
+}
+
 void Jogo::update()
 {
 	if (menuAbre == true) {
@@ -93,6 +117,8 @@ void Jogo::render()
 	this->Tela->clear();
 
 	this->Tela->executarSprite(fundo);
+
+	this->imprimeVidas();
 
 	this->Tela->executar(this->jogador->player);
 

@@ -3,6 +3,7 @@
 Jogador::Jogador()
 {
 	this->Tela = new Ente();
+	this->status = new Personagem();
 	this->iniciarVariaiveis();
 	this->iniciarJogador();
 	this->iniciarStatus();
@@ -11,20 +12,21 @@ Jogador::Jogador()
 
 Jogador::~Jogador()
 {
+	delete this->status;
 	delete this->Tela;
 }
 
 void Jogador::iniciarStatus()
 {
-	this->status.setVidas(5);
-	this->status.setLado(1);
-	this->status.setPodeAtacar(true);
-	this->status.setAtaque(false);
-	this->status.setDano(1);
-	this->status.setVelocidadeMaxima(13);
+	this->status->setVidas(5);
+	this->status->setLado(1);
+	this->status->setPodeAtacar(true);
+	this->status->setAtaque(false);
+	this->status->setDano(1);
+	this->status->setVelocidadeMaxima(13);
 
-	this->status.setVelocidadeX(0.f);
-	this->status.setVelocidadeY(0.f);
+	this->status->setVelocidadeX(0.f);
+	this->status->setVelocidadeY(0.f);
 }
 
 void Jogador::iniciarVariaiveis()
@@ -35,7 +37,6 @@ void Jogador::iniciarVariaiveis()
 
 	this->videoModeP.height = 1080; //RESOLU�OES
 	this->videoModeP.width = 1920;
-
 
 	//chao
 
@@ -109,18 +110,18 @@ void Jogador::atualizarJogador()
 	this->player.setPosition(this->xpos, this->ypos);
 
 	//define para qual lado o player esta virado
-	if (this->status.getLado() == 0) {
+	if (this->status->getLado() == 0) {
 		this->player.setScale(Vector2f(-1, 1));
-		this->status.setLado(2);
+		this->status->setLado(2);
 	}
-	else if (this->status.getLado() == 1) {
+	else if (this->status->getLado() == 1) {
 		this->player.setScale(Vector2f(1, 1));
-		this->status.setLado(2);
+		this->status->setLado(2);
 	}
 
 	//defina para nao passar a velocidade maxima
-	if (this->status.getVelocidadeX() >= this->status.getVelocidadeMaxima())
-		this->status.setVelocidadeX(this->status.getVelocidadeMaxima());
+	if (this->status->getVelocidadeX() >= this->status->getVelocidadeMaxima())
+		this->status->setVelocidadeX(this->status->getVelocidadeMaxima());
 
 	//andar para os 2 lados
 	if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left))
@@ -131,7 +132,7 @@ void Jogador::atualizarJogador()
 
 	//se nao andar a velocidade � 0 // fica parado
 	else
-		this->status.setVelocidadeX(0.f);
+		this->status->setVelocidadeX(0.f);
 	
 	//pulo 
 	if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up)) {
@@ -149,31 +150,40 @@ void Jogador::atualizarJogador()
 	
 	//atacar
 
-	if (Mouse::isButtonPressed(Mouse::Left) || Keyboard::isKeyPressed(Keyboard::Space)) {
-		this->status.setAtaque(true);
+	if ((Mouse::isButtonPressed(Mouse::Left) || Keyboard::isKeyPressed(Keyboard::Space)) && this->status->getAtaque() == false) {
+		this->status->setAtaque(true);
+		this->limitadorTex1 = 0;
 	}
 
-	else {
-		this->status.setAtaque(false);
+	if (this->status->getAtaque() == true)
+	{
+		ataque();
 	}
 
-	ataque();
-
-	if (this->jogador_pulou == true) 
+	if (this->status->getAtaque() == true && this->jogador_pulou == true)
 	{
 		ataqueAereo();
 	}
 
 	atualizarTextura();
+	atualizaVidas();
+}
 
+void Jogador::atualizaVidas() {
+
+	//se sofrer dano
+	//this->jogador->status.setVidas(this->jogador->status.getVidas()--);
+
+	//se ganhar uma vida
+	//this->jogador->status.setVidas(this->jogador->status.getVidas()++);
 }
 
 void Jogador::pulo() 
 {
 	
-	this->status.setVelocidadeY(this->forcaPulo);
+	this->status->setVelocidadeY(this->forcaPulo);
 	this->forcaPulo -= this->gravidade;
-	this->ypos -= this->status.getVelocidadeY();
+	this->ypos -= this->status->getVelocidadeY();
 
 	this->player.setTexture(&txJogadorPula[this->limitadorTex]);
 	if (this->frame % 6 == 0)
@@ -183,15 +193,13 @@ void Jogador::pulo()
 	{
 		this->forcaPulo = 25.f;
 		this->jogador_pulou = false;
-		this->status.setVelocidadeY(0.f);
+		this->status->setVelocidadeY(0.f);
 		this->limitadorTex = 0;
 	}
 }
 
 void Jogador::ataque()
 {
-	if (this->status.getAtaque() == true)
-		this->limitadorTex1 = 0;
 
 	//limita os frames do Ataque
 
@@ -202,12 +210,12 @@ void Jogador::ataque()
 			this->limitadorTex1++;
 
 	}
+	else
+		this->status->setAtaque(false);
 }
 
 void Jogador::ataqueAereo()
 {
-	if (this->status.getAtaque() == true)
-		this->limitadorTex1 = 0;
 
 	//limita os frames do pulo
 	if (this->limitadorTex1 <= 9) {
@@ -217,15 +225,17 @@ void Jogador::ataqueAereo()
 			this->limitadorTex1++;
 
 	}
+	else
+		this->status->setAtaque(false);
 }
 
 void Jogador::direcionalEsquerdo() {
 
 	this->player.setTexture(&txJogadorCorre[this->velTex]);
-	this->status.setLado(0);
+	this->status->setLado(0);
 	if (this->xpos > this->player.getSize().x) { //Player nao passar dos limites da tela esquerda
-		this->xpos -= this->status.getVelocidadeX();
-		this->status.setVelocidadeX(this->status.getVelocidadeX() + 1.f);
+		this->xpos -= this->status->getVelocidadeX();
+		this->status->setVelocidadeX(this->status->getVelocidadeX() + 1.f);
 	}
 
 
@@ -235,10 +245,10 @@ void Jogador::direcionalDireito() {
 
 	this->player.setTexture(&txJogadorCorre[this->velTex]);
 
-	this->status.setLado(1);
+	this->status->setLado(1);
 	if (this->xpos < (this->videoModeP.width - this->player.getSize().x)) {  //Player nao passar dos limites da tela direita
-		this->xpos += this->status.getVelocidadeX();
-		this->status.setVelocidadeX(this->status.getVelocidadeX() + 1.f);
+		this->xpos += this->status->getVelocidadeX();
+		this->status->setVelocidadeX(this->status->getVelocidadeX() + 1.f);
 	}
 
 }
@@ -246,6 +256,11 @@ void Jogador::direcionalDireito() {
 void Jogador::executar()
 {
 	this->Tela->executar(this->player);
+}
+
+int Jogador::getVidas()
+{
+	return this->status->getVidas();
 }
 
 void Jogador::atualizarTextura() {
@@ -257,3 +272,4 @@ void Jogador::atualizarTextura() {
 		this->velTex++;
 	this->frame++;
 }
+

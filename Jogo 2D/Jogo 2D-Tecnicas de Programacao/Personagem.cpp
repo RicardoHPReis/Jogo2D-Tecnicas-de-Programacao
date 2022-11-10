@@ -3,7 +3,6 @@
 Personagem::Personagem():
 Entidade()
 {
-	vidas = 1;
 	dano = 0;
 	lado = 0;
 	podeAtacar = false;
