@@ -1,15 +1,14 @@
 #include "Fase.h"
 
 Fase::Fase() :
-colisao()
+Ente()
 {
-	gravidade = 0;
+
 }
 
 Fase::~Fase()
 {
-	gravidade = 0;
-	delete colisao;
+
 }
 
 void Fase::setGravidade(const float grav)

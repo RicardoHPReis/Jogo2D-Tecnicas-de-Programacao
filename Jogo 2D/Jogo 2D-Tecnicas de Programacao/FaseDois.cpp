@@ -10,8 +10,3 @@ FaseDois::~FaseDois()
 {
 
 }
-
-void FaseDois::iniciarFase()
-{
-
-}

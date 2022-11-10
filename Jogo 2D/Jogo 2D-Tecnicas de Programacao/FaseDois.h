@@ -9,6 +9,4 @@ private:
 public:
 	FaseDois();
 	~FaseDois();
-
-	void iniciarFase();
 };

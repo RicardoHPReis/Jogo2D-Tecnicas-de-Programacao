@@ -1,32 +1,38 @@
-#include "Jogo.h"
+ï»¿#include "Jogo.h"
 
-
-Jogo::Jogo() :
-tela()
+//contrutores / destrutores
+Jogo::Jogo()
 {
-	this->inicializarVariaiveis();
-	this->inicializarInimigos();
-	this->inicializarMapa();
-	this->inicializarTexturas();
+
+	this->inicVariaiveis();
+	this->inicMapa();
+	this->inicTexturas();
+
+	this->inimigo = new Inimigo();
+	this->jogador = new Jogador();
+	this->Tela = new Ente();
 }
 
 Jogo::~Jogo()
 {
+	delete this->inimigo;
 	delete this->menuP;
+	delete this->jogador;
+	delete this->Tela;
 }
 
-void Jogo::inicializarVariaiveis()
+void Jogo::inicVariaiveis()
 {
-	menuP = new Menu();
+	this->menuP = new Menu();
 	//logica jogo
+	this->menuAbre = true;
 
-
-	this->pontos = 0;
+	this->points = 0;
 	this->baixo = true;
 
 }
 
-void Jogo::inicializarTexturas()
+void Jogo::inicTexturas()
 {
 	int i;
 
@@ -35,37 +41,9 @@ void Jogo::inicializarTexturas()
 	this->tBg.setSmooth(true);
 	this->fundo.setTexture(tBg);
 
-	if (!this->tEnemy[0].loadFromFile("../../Texturas/Personagens/Esqueleto/Parado.png", IntRect(20, 0, 270, 386))) {
-		std::cout << "ERROR";
-	}
-	tEnemy[0].setSmooth(true);
-
-	//texturas Player
-	for (i = 0; i < 10; i++) {
-
-		//textura inimigo
-		if (!this->tEnemy[i + 1].loadFromFile("../../Texturas/Personagens/Esqueleto/Parado.png", IntRect(20 + ((i + 1) * 290), 0, 270, 386))) {
-			std::cout << "ERROR";
-		}
-		tEnemy[i + 1].setSmooth(true);
-	}
-
 }
-/*
-void Jogo::inicJanela()
-{
-	//roda o menu antes de abrir a janela do jogo
-	this->menuP->run_menu();
-	//janela do jogo
-	this->videoMode.height = 1080; //RESOLUÇOES
-	this->videoMode.width = 1920;
-	this->janela = new RenderWindow(this->videoMode,
-		"Game 1", Style::Titlebar |
-		Style::Close);
-	this->janela->setFramerateLimit(60); //limite FPS
-}*/
 
-void Jogo::inicializarMapa()
+void Jogo::inicMapa()
 {
 	//chao
 
@@ -75,54 +53,50 @@ void Jogo::inicializarMapa()
 
 }
 
-void Jogo::inicializarInimigos()
-{
-	this->inimigo.setPosition(10.f, 10.f);
-	this->inimigo.setSize(Vector2f(150.f, 200.f));
-
-}
-
+//accesos
 
 const bool Jogo::rodando() const
 {
-	return (tela->janelaEstaAberta());
+	if ((Tela->getAberta()) == 1)
+		return 1;
+	else
+		return 0;
 }
 
+//funcoes
 
-void Jogo::spawnInimigo()
+void Jogo::atualizaMenu()
 {
-	this->inimigo.setPosition(this->videoMode.width - 200.f, this->chao.getPosition().y - this->inimigo.getSize().y);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+		this->menuAbre = true;
+	}
 }
 
-/*void Jogo::atualizarMouse()
+void Jogo::update()
 {
-	this->mousePos = Mouse::getPosition(*this->janela);
-}*/
+	if (menuAbre == true) {
+		this->menuP->run_menu();
+		menuAbre = false;
+	}
 
-void Jogo::atualizarInimigos()
-{
-	/*
-		@return void
-		Update inimigo tempo de spawn e
-		quando o total de inimigos é menor que o maximo
-		-mover inimigos para baixo e cima
-		-remover inimigos no limite da tela
-	*/
+	this->atualizaMenu();
 
-	this->spawnInimigo();
-	this->inimigo.setTexture(&tEnemy[velTex1]);
+	this->jogador->atualizarJogador();
 
-	//muda para a proxima textura a cada 7 frames
-	if (this->velTex1 == 10)
-		this->velTex1 = 0;
-	if (this->frame1 % 7 == 0)
-		this->velTex1++;
-	this->frame1++;
+	this->inimigo->atualizaInimigo();
+
+	this->render();
 }
 
-void Jogo::atualizar()
+void Jogo::render()
 {
-	//this->atualizaMouse();
-	this->jogador.atualizarJogador();
-	this->atualizarInimigos();
+	this->Tela->clear();
+
+	this->Tela->executarSprite(fundo);
+
+	this->Tela->executar(this->jogador->player);
+
+	this->Tela->executar(this->inimigo->inimigo);
+
+	this->Tela->display();
 }

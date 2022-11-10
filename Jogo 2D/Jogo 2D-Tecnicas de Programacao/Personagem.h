@@ -8,12 +8,18 @@ protected:
 	int vidas;
 	int dano;
 	int lado;
+	float vida;
 	bool podeAtacar;
 	bool estaMorto;
+	bool atacou;
 
 public:
+
 	Personagem();
 	~Personagem();
+
+	void setAtaque(bool nr_vd);
+	bool getAtaque();
 
 	void setVidas(const int nr_vd);
 	const int getVidas() const;

@@ -6,16 +6,13 @@
 class Gerenciador_Colisoes
 {
 private:
-	vector<Inimigo*> listaInimigos;
-	list<Obstaculo*> listaObstaculos;
-
-	static Gerenciador_Colisoes* instancia_colisoes;
-	Gerenciador_Colisoes();
+	vector<Inimigo*> inimigos;
+	list<Obstaculo*> obstaculos;
+	bool colidiu;
 
 public:
+	Gerenciador_Colisoes();
 	~Gerenciador_Colisoes();
-	static Gerenciador_Colisoes* getInstancia_Colisoes();
 
-	Vector2f calcularColisao(Ente* entidade, Ente* ent);
-	void executar();
+	bool colisao();
 };

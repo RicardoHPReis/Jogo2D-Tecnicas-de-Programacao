@@ -4,21 +4,30 @@
 class Gerenciador_Grafico
 {
 private:
-	RenderWindow* janela;
-	VideoMode video;
+	//Texture textura;
+	
+	VideoMode videoMode;
+	Event ev;
 
-	static Gerenciador_Grafico* instancia_grafico;
 	Gerenciador_Grafico();
 
 public:
+	
+	RenderWindow* janelaP;
+
+	void inicJanela();
+
 	~Gerenciador_Grafico();
-	static Gerenciador_Grafico* getInstancia_Grafico();
-	const RenderWindow* getJanela() const;
 
-	const bool janelaEstaAberta();
-	void desenhar(RectangleShape* figura);
-	void fechar();
-	void executarJanela();
+	void pollEvents();
+
+	void desenhar(RectangleShape* tela);
+
+	void desenharT(Text* tela);
+
+	void desenharS(Sprite* tela);
+
+	void clear();
+
+	static Gerenciador_Grafico& getInstancia();
 };
-
-Gerenciador_Grafico* Gerenciador_Grafico::instancia_grafico = NULL;

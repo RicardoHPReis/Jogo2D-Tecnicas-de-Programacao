@@ -6,7 +6,6 @@ Ente()
 	seMovimenta = false;
 	velocidade = { 0,0 };
 	velocidade_max = 0;
-	empuxo = 0;
 	tiraVida = false;
 }
 
@@ -25,7 +24,6 @@ Entidade::~Entidade()
 	seMovimenta = false;
 	velocidade = { 0,0 };
 	velocidade_max = 0;
-	empuxo = 0;
 	tiraVida = false;
 }
 
@@ -39,14 +37,24 @@ const bool Entidade::getSeMovimenta() const
 	return seMovimenta;
 }
 
-void Entidade::setVelocidade(const Vector2f vel)
+void Entidade::setVelocidadeY(const float vel)
 {
-	velocidade = vel;
+	velocidade.y = vel;
 }
 
-const Vector2f Entidade::getVelocidade() const
+void Entidade::setVelocidadeX(const float vel)
 {
-	return velocidade;
+	velocidade.x = vel;
+}
+
+const float Entidade::getVelocidadeY() const
+{
+	return velocidade.y;
+}
+
+const float Entidade::getVelocidadeX() const
+{
+	return velocidade.x;
 }
 
 void Entidade::setVelocidadeMaxima(const float vel_max)
@@ -57,16 +65,6 @@ void Entidade::setVelocidadeMaxima(const float vel_max)
 const float Entidade::getVelocidadeMaxima() const
 {
 	return velocidade_max;
-}
-
-void Entidade::setEmpuxo(const float empx)
-{
-	empuxo = empx;
-}
-
-const float Entidade::getEmpuxo() const
-{
-	return empuxo;
 }
 
 void Entidade::setTiraVida(const bool danoso)

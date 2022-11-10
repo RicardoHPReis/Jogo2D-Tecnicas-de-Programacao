@@ -1,45 +1,49 @@
-#pragma once
-#include "Gerenciador_Grafico.h"
+﻿#pragma once
 #include "stdafx.h"
+#include "Gerenciador_Grafico.h"
+
+/*
+
+	classe abstrata ente, onde precisa incluir a classe do gerenciador grafico
+	classe ser� chamada sempre que for preciso imprimir algo
+
+*/
+
 
 class Ente
 {
 protected:
-	Gerenciador_Grafico* grafico;
+
 	int id;
-	bool estaImprimindo;
-	Vector2f posicao;
-	Vector2f coordenada;
-	Vector2f tamanho;
-	Texture* textura;
-	Sprite* sprite;
+
+	VideoMode videoMode;
 
 public:
+
+	Gerenciador_Grafico* janela;
+
+	void inicEnte();
+
+	virtual void executar(RectangleShape obj);
+
+	virtual void executarTex(Text obj);
+
+	virtual void executarSprite(Sprite obj);
+
+	virtual void clear();
+
+	virtual void display();
+	
+	RenderWindow* getJanelaCoord(void);
+
+	void setId(int i);
+
+	int getAberta(void);
+
 	Ente();
-	//Ente(int nr_id = 0, Vector2f pos = { 0,0 }, Vector2f coord = { 0,0 }, Vector2f tam = { 0,0 });
-	virtual ~Ente();
 
-	void setId(const int nr_id);
-	const int getId() const;
+	Ente(int i);
 
-	void setPosicao(const Vector2f pos);
-	const Vector2f getPosicao() const;
+	~Ente();
 
-	void setCoordenada(const Vector2f coord);
-	const Vector2f getCoordenada() const;
-
-	void setTamanho(const Vector2f tam);
-	const Vector2f getTamanho() const;
-
-	void setImprimindo(const bool imp);
-	const bool getImprimindo() const;
-
-	void setTextura(Texture *tx);
-	const Texture* getTextura() const;
-
-	void setSprite(Sprite *sp);
-	const Sprite* getSprite() const;
-
-	virtual void executar(RectangleShape* obj);
-	bool getAberta();
 };

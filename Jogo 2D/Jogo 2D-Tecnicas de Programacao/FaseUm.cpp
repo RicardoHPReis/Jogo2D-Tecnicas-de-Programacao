@@ -10,8 +10,3 @@ FaseUm::~FaseUm()
 {
 
 }
-
-void FaseUm::iniciarFase()
-{
-
-}
