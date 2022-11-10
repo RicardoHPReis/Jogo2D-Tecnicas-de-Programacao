@@ -1,10 +1,11 @@
 #pragma once
-#include "Ente.h"
+#include "Gerenciador_Colisoes.h"
 #include "stdafx.h"
 
-class Fase : public Ente
+class Fase
 {
 protected:
+	Gerenciador_Colisoes* colisao;
 	float gravidade;
 
 public:
@@ -13,4 +14,6 @@ public:
 
 	void setGravidade(const float grav);
 	const float getGravidade() const;
+
+	virtual void iniciarFase() = 0;
 };

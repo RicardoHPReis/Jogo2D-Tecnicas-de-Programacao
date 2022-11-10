@@ -1,9 +1,6 @@
-﻿  Jogador.cpp
-C:\FACUL\programação\JOGO SIMAO\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Jogador.cpp(42,46): warning C4244: 'argumento': conversão de 'unsigned int' para 'T', possível perda de dados
-          with
-          [
-              T=float
-          ]
-C:\FACUL\programação\JOGO SIMAO\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Jogador.cpp(166,34): warning C4805: '==': mistura não segura de tipo 'int' e tipo 'bool' em operação
-C:\FACUL\programação\JOGO SIMAO\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Jogador.cpp(171,34): warning C4805: '==': mistura não segura de tipo 'int' e tipo 'bool' em operação
-  Jogo 2D-Tecnicas de Programacao.vcxproj -> C:\FACUL\programação\JOGO SIMAO\Jogo 2D\Debug\Jogo 2D-Tecnicas de Programacao.exe
+﻿  Gerenciador_Colisoes.cpp
+  Gerenciador_Grafico.cpp
+  Inimigo.cpp
+  Projetil.cpp
+  Generating Code...
+  Jogo 2D-Tecnicas de Programacao.vcxproj -> C:\Users\Usuario\source\repos\Jogo 2D-Tecnicas de Programacao\Jogo 2D\Debug\Jogo 2D-Tecnicas de Programacao.exe

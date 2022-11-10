@@ -9,4 +9,6 @@ private:
 public:
 	FaseUm();
 	~FaseUm();
+
+	void iniciarFase();
 };

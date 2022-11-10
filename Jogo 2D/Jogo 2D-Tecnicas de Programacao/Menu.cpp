@@ -1,66 +1,45 @@
-﻿#include "Menu.h"
+#include "Menu.h"
 #include "Ente.h"
 
-Menu::Menu()
+
+Menu::Menu():
+Ente()
 {
 	this->play = new RectangleShape();
 	this->fases = new RectangleShape();
+	this->recordes = new RectangleShape();
 	this->opcoes = new RectangleShape();
 	this->sobre = new RectangleShape();
 	this->sair = new RectangleShape();
 	this->font = new Font();
-	this->image = new Texture();
-	this->bg = new Sprite();
-	this->Tela = new Ente();
+	this->textura = new Texture();
+	this->sprite = new Sprite();
 
-	inicVariaveis();
-}
-
-Menu::~Menu()
-{
-	delete play;
-	delete fases;
-	delete opcoes;
-	delete sobre;
-	delete sair;
-	delete font;
-	delete image;
-	delete bg;
-	delete Tela;
-}
-
-void Menu::inicVariaveis()
-{
-	//inicializa todas variaveis
-
-	this->pressed = this->theselect = false;
-
-	this->delay = 0;
-	this->tempoDelay = 15;
+	this->clicar = this->selecionar = false;
 
 	this->font->loadFromFile("../../Fontes/Font.otf");
-	this->image->loadFromFile("../../Texturas/Cenario/Menu.png");
+	this->textura->loadFromFile("../../Texturas/Cenario/Menu.png");
 
-	this->bg->setTexture(*image);
+	this->sprite->setTexture(*textura);
 
 	this->posMouse = { 0,0 };
 	this->cordMouse = { 0,0 };
 
-	this->options = { "NOME DO JOGO","Jogar","Fases","Opcoes","Sobre","Sair" };
-	this->texts.resize(6);
-	coords = { { 610,200 } , { 610,350 }, { 610,450 }, { 610,550 }, { 610,650 }, { 610,750 } };
-	sizes = { 100,50,50,50,50,50 };
+	this->options = { "NOME DO JOGO","Jogar","Fases","Recordes","Opcoes","Sobre","Sair"};
+	this->textos.resize(7);
+	coords = { { 610,200 } , { 610,350 }, { 610,450 }, { 610,550 }, { 610,650 }, { 610,750 }, { 610,850 } };
+	sizes = { 100,50,50,50,50,50,50};
 
-	for (size_t i{}; i < texts.size(); ++i) {
-		this->texts[i].setFont(*font);
-		this->texts[i].setString(options[i]);
-		this->texts[i].setCharacterSize(sizes[i]);
-		this->texts[i].setOutlineColor(Color::Black);
-		this->texts[i].setPosition(coords[i]);
+	for (size_t i{}; i < textos.size(); ++i) {
+		this->textos[i].setFont(*font);
+		this->textos[i].setString(options[i]);
+		this->textos[i].setCharacterSize(sizes[i]);
+		this->textos[i].setOutlineColor(Color::Black);
+		this->textos[i].setPosition(coords[i]);
 	}
 
-	this->texts[1].setOutlineThickness(4);
-	posi = 1;
+	this->textos[1].setOutlineThickness(4);
+	mouse = 1;
 
 	this->play->setSize(Vector2f(110, 50));
 	this->play->setPosition(610, 350);
@@ -72,146 +51,135 @@ void Menu::inicVariaveis()
 	this->sobre->setPosition(610, 650);
 	this->sair->setSize(Vector2f(100, 50));
 	this->sair->setPosition(610, 750);
-
 }
 
-void Menu::run_menu()
+Menu::~Menu()
 {
-	bool clique = false;
-	while (clique == false) {
+	delete play;
+	delete fases;
+	delete opcoes;
+	delete sobre;
+	delete sair;
+	delete font;
+	delete textura;
+	delete sprite;
+}
 
-		posMouse = Mouse::getPosition(*Tela->janela->janelaP);
-		cordMouse = (Tela->getJanelaCoord())->mapPixelToCoords(posMouse);
+void Menu::selecionouOpcaoMouse(bool &clique)
+{
+	if (this->play->getGlobalBounds().contains(cordMouse)) {
 
-		//Seleciona as opcoes usando seta para cima e para baixo
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && delay == 0) {
-			delay++;
-			if (posi < 5 && pressed == false) {
-				++posi;
-				this->pressed = true;
-				this->texts[posi].setOutlineThickness(4);
-				this->texts[posi - 1].setOutlineThickness(0);		
-				this->theselect = false;
-				this->pressed = false;
-			}
+		this->textos[mouse].setOutlineThickness(0);
+		this->mouse = 1;
+		this->textos[mouse].setOutlineThickness(4);
+		if (Mouse::isButtonPressed(Mouse::Left)) {
+			clique = true;
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && delay == 0) {
-			delay++;
-			if (posi > 1 && pressed == false) {
-				--posi;
-				this->pressed = true;
-				this->texts[posi].setOutlineThickness(4);
-				this->texts[posi + 1].setOutlineThickness(0);
-				this->theselect = false;
-				this->pressed = false;
-			}
+	}
+
+	if (this->fases->getGlobalBounds().contains(cordMouse)) {
+
+		this->textos[mouse].setOutlineThickness(0);
+		this->mouse = 2;
+		this->textos[mouse].setOutlineThickness(4);
+		if (Mouse::isButtonPressed(Mouse::Left)) {
+			//clique = true;
 		}
+	}
 
-		//Abre a opcao selecionada com o enter
+	if (this->opcoes->getGlobalBounds().contains(cordMouse)) {
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && !theselect) {
-			this->theselect = true;
-
-			//realizar� as acoes de cada opcao
-
-			if (posi == 1) { //RODA JOGO
-
-				clique = true;
-			}
-			else if (posi == 2) { //COLOCAR AS FASES
-
-			}
-			else if (posi == 3) { //COLOCAR AS OPCOES
-
-			}
-			else if (posi == 4) { //COLOCAR SOBRE
-
-			}
-			else if (posi == 5) { //FECHA TUDO
-				clique = true;
-				exit(1);
-			}
+		this->textos[mouse].setOutlineThickness(0);
+		this->mouse = 3;
+		this->textos[mouse].setOutlineThickness(4);
+		if (Mouse::isButtonPressed(Mouse::Left)) {
+			//clique = true;
 		}
+	}
 
-		//Verifica se o mouse est� acima de alguma op�ao, se estiver marcara a op�ao e verificar� se foi realizado o clique com o mouse
+	if (this->sobre->getGlobalBounds().contains(cordMouse)) {
 
-		if (this->play->getGlobalBounds().contains(cordMouse)) {
-
-			this->texts[posi].setOutlineThickness(0);
-			this->posi = 1;
-			this->texts[posi].setOutlineThickness(4);
-			if (Mouse::isButtonPressed(Mouse::Left)) {
-
-				clique = true;
-
-			}
+		this->textos[mouse].setOutlineThickness(0);
+		this->mouse = 4;
+		this->textos[mouse].setOutlineThickness(4);
+		if (Mouse::isButtonPressed(Mouse::Left)) {
+			//clique = true;
 		}
+	}
 
-		if (this->fases->getGlobalBounds().contains(cordMouse)) {
+	if (this->sair->getGlobalBounds().contains(cordMouse)) {
 
-			this->texts[posi].setOutlineThickness(0);
-			this->posi = 2;
-			this->texts[posi].setOutlineThickness(4);
-			if (Mouse::isButtonPressed(Mouse::Left)) {
-
-			}
+		this->textos[mouse].setOutlineThickness(0);
+		this->mouse = 5;
+		this->textos[mouse].setOutlineThickness(4);
+		if (Mouse::isButtonPressed(Mouse::Left)) {
+			clique = true;
+			exit(1);
 		}
-
-		if (this->opcoes->getGlobalBounds().contains(cordMouse)) {
-
-			this->texts[posi].setOutlineThickness(0);
-			this->posi = 3;
-			this->texts[posi].setOutlineThickness(4);
-			if (Mouse::isButtonPressed(Mouse::Left)) {
-
-			}
-		}
-
-		if (this->sobre->getGlobalBounds().contains(cordMouse)) {
-
-			this->texts[posi].setOutlineThickness(0);
-			this->posi = 4;
-			this->texts[posi].setOutlineThickness(4);
-			if (Mouse::isButtonPressed(Mouse::Left)) {
-
-			}
-		}
-
-		if (this->sair->getGlobalBounds().contains(cordMouse)) {
-
-			this->texts[posi].setOutlineThickness(0);
-			this->posi = 5;
-			this->texts[posi].setOutlineThickness(4);
-			if (Mouse::isButtonPressed(Mouse::Left)) {
-
-				clique = true;
-				exit(1);
-			}
-		}
-
-		if (this->delay > 0) {
-			this->delay += 1;
-			if (this->delay >= this->tempoDelay)
-				this->delay = 0;
-		}
-
-		imprimir();
 	}
 }
 
-void Menu::imprimir()
+void Menu::selecionouOpcaoTeclas(bool& clique)
 {
-	this->Tela->clear();
-
-	Tela->executarSprite(*bg);
-	Tela->executarTex(texts[0]);
-	Tela->executarTex(texts[1]);
-	Tela->executarTex(texts[2]);
-	Tela->executarTex(texts[3]);
-	Tela->executarTex(texts[4]);
-	Tela->executarTex(texts[5]);
-
-	this->Tela->display();
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !clicar) {
+		if (mouse < 5) {
+			++mouse;
+			this->clicar = true;
+			this->textos[mouse].setOutlineThickness(4);
+			this->textos[mouse - 1].setOutlineThickness(0);
+			this->clicar = false;
+			this->selecionar = false;
+		}
+	}
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) && !clicar) {
+		if (mouse > 1) {
+			--mouse;
+			this->clicar = true;
+			this->textos[mouse].setOutlineThickness(4);
+			this->textos[mouse + 1].setOutlineThickness(0);
+			this->clicar = false;
+			this->selecionar = false;
+		}
+	}
 }
 
+void Menu::apertou(bool &clique)
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && !selecionar) {
+		this->selecionar = true;
+		if (mouse == 1) {					//RODA JOGO
+			clique = true;
+		}
+		else if (mouse == 2) {				//COLOCAR AS FASES
+			//clique = true;
+		}
+		else if (mouse == 3) {				//COLOCAR AS OPCOES
+			//clique = true;
+		}
+		else if (mouse == 4) {				//COLOCAR SOBRE
+			//clique = true;
+		}
+		else if (mouse == 5) {				//FECHA TUDO
+			clique = true;
+			exit(1);
+		}
+	}
+}
+
+void Menu::rodar_menu()
+{
+	while (clique == false) {
+		//posMouse = Mouse::getmousetion(Tela.getJanela());
+		cordMouse = getJanela()->mapPixelToCoords(posMouse);
+
+		selecionouOpcaoMouse(clique);
+		selecionouOpcaoTeclas(clique);
+		apertou(clique);
+
+		executar(play);
+		executar(fases);
+		executar(opcoes);
+		executar(sobre);
+		executar(sair);
+	}
+}

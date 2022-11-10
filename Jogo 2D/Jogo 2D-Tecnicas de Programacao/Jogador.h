@@ -1,63 +1,41 @@
 #pragma once
-#include "stdafx.h"
 #include "Personagem.h"
 #include "Ente.h"
+#include "stdafx.h"
 
-class Jogador : public Ente
+class Jogador : public Personagem
 {
 private:
-
-	//videomode
-
-	VideoMode videoModeP;
-
-	//texturas player
-
-	Texture txJogadorCorre[10], txJogadorPula[10], txJogadorParado[10],txJogadorAtaque[10],txJogadorAtaquePula[10];
-	int frame, velTex, limitadorTex1 ,limitadorTex,delay,tempoDelay;
+	Texture txJogadorCorre[10], txJogadorPula[10], txJogadorParado[10];
+	int frame, velTex, limitadorTex;
 
 
 	//estat Player
-
+	int lado;
 	bool jogador_pulou;
-	float gravidade, fdist, pAltura, pLargura, aT, xpos, ypos;
+	float gravidade, xvel, yvel, fdist, pAltura, pLargura, aT, xpos, ypos, velMax;
 	Vector2f cPos;
 	Vector2f pPos;
 
 	//objetivos jogo
-
 	RectangleShape chao;
 
 	//funcoes privadas
-
-	void iniciarStatus();
 	void iniciarVariaiveis();
 	void iniciarJogador();
 	void iniciarTexturas();
 
 public:
 
-	//Estatisticas de Personagem
-
-	Personagem status;
-
-	Ente* Tela;
-
-	RectangleShape player;
+	RectangleShape *obj;
 
 	Jogador();
 	~Jogador();
 
-	
 	void atualizarJogador();
-	void ataque();
-	void ataqueAereo();
 	void direcionalEsquerdo();
 	void direcionalDireito();
 	void direcionalCima();
 	void cair();
-	void executar();
-
 	void atualizarTextura();
-
 };

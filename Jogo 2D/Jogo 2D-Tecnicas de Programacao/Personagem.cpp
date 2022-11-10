@@ -19,17 +19,6 @@ Personagem::~Personagem()
 	estaMorto = false;
 }
 
-void Personagem::setAtaque(bool nr_vd)
-{
-	this->atacou = nr_vd;
-}
-
-bool Personagem::getAtaque()
-{
-	return atacou;
-}
-
-
 void Personagem::setVidas(const int nr_vd)
 {
 	vidas = nr_vd;

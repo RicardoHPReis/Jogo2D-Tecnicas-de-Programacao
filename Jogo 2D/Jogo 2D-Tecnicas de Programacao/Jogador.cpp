@@ -1,69 +1,182 @@
-ï»¿#include "Jogador.h"
+#include "Jogador.h"
 
-Jogador::Jogador()
+Jogador::Jogador() 
 {
-	this->Tela = new Ente();
-	this->iniciarVariaiveis();
 	this->iniciarJogador();
-	this->iniciarStatus();
+	this->iniciarVariaiveis();
 	this->iniciarTexturas();
 }
 
 Jogador::~Jogador()
 {
-	delete this->Tela;
+	delete obj;
 }
 
-void Jogador::iniciarStatus()
+void Jogador::atualizarJogador()
 {
-	this->status.setVidas(5);
-	this->status.setLado(1);
-	this->status.setPodeAtacar(true);
-	this->status.setAtaque(false);
-	this->status.setDano(1);
-	this->status.setVelocidadeMaxima(13);
 
-	this->status.setVelocidadeX(0.f);
-	this->status.setVelocidadeY(0.f);
+	//textura no frame
+	this->obj->setTexture(&txJogadorParado[this->velTex]);
+
+	//oega posicoes importantes
+	this->cPos = this->chao.getPosition();
+	this->obj->setPosition(this->xpos, this->ypos);
+
+	//define para qual lado o player esta virado
+	if (this->lado == 0) {
+		this->obj->setScale(Vector2f(-1, 1));
+		this->lado = 2;
+	}
+	else if (this->lado == 1) {
+		this->obj->setScale(Vector2f(1, 1));
+		this->lado = 2;
+	}
+
+	//defina para nao passar a velocidade maxima
+	if (this->xvel >= this->velMax)
+		this->xvel = this->velMax;
+
+	//andar para os 2 lados
+	if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left))
+		direcionalEsquerdo();
+
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || Keyboard::isKeyPressed(Keyboard::Right))
+		direcionalDireito();
+
+	//se nao andar a velocidade é 0 // fica parado
+	else
+		this->xvel = 0.f;
+
+	//pulo
+	if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up)) {
+		direcionalCima();
+	}
+
+	else {
+		this->jogador_pulou = false;
+	}
+
+	this->fdist = this->cPos.y - (this->ypos + this->pAltura);
+
+	cair();
+
+	if (this->jogador_pulou == true)
+		this->limitadorTex = 0;
+
+	//limita os frames do pulo
+	if (this->limitadorTex <= 9) {
+
+		this->obj->setTexture(&txJogadorPula[this->limitadorTex]);
+		if (this->frame % 3 == 0)
+			this->limitadorTex++;
+
+	}
+
+	atualizarTextura();
+
+	this->Tela.executar(obj);
+
+}
+
+void Jogador::direcionalEsquerdo() {
+
+	this->obj->setTexture(&txJogadorCorre[this->velTex]);
+	this->lado = 0;
+	if (this->xpos > this->obj->getSize().x) { //Player nao passar dos limites da tela esquerda
+		this->xpos -= this->xvel;
+		this->xvel += 1.f;
+	}
+
+
+}
+
+void Jogador::direcionalDireito() {
+
+	this->obj->setTexture(&txJogadorCorre[this->velTex]);
+
+	this->lado = 1.f;
+	if (this->xpos < (this->videoModeP.width - this->obj->getSize().x)) {  //Player nao passar dos limites da tela direita
+		this->xpos += xvel;
+		this->xvel += 1.f;
+	}
+
+}
+
+void Jogador::direcionalCima() {
+
+	if (this->aT <= 10) {
+		this->yvel = this->gravidade;
+		this->jogador_pulou = true;
+		if (this->aT >= 10) {
+			this->jogador_pulou = false;
+		}
+	}
+
+}
+
+void Jogador::cair() {
+
+	//Atterrisar do pulo
+	if (this->fdist <= 0.f && this->jogador_pulou == false) {
+		this->yvel = 0.f;
+		this->aT = 0.f;
+		this->jogador_pulou = false;
+		this->ypos = this->cPos.y - this->pAltura;
+	}
+	else {
+		this->yvel += -1.f;
+		this->ypos -= this->yvel;
+		this->aT += 1.f;
+	}
+
+}
+
+void Jogador::atualizarTextura() {
+
+	//muda para a proxima textura a cada 7 frames
+	if (this->velTex == 9)
+		this->velTex = 0;
+	if (this->frame % 7 == 0)
+		this->velTex++;
+	this->frame++;
 }
 
 void Jogador::iniciarVariaiveis()
 {
-
 	//VideoMode
 
-	this->videoModeP.height = 1080; //RESOLUï¿½OES
-	this->videoModeP.width = 1920;
+	this->videoModeP.height = 1080.f; //RESOLUÇOES
+	this->videoModeP.width = 1920.f;
 
 
 	//chao
 
 	this->chao.setPosition(0.f, this->videoModeP.height - 85.f);
-	this->chao.setSize(Vector2f(this->videoModeP.width, 85));
+	this->chao.setSize(Vector2f(this->videoModeP.width, 85.f));
 
 	//logica player
 
+	this->lado = 1;
 	this->jogador_pulou = false;
 	this->xpos = 50.f;
 	this->ypos = 50.f;
-	this->gravidade = 20.f;
+	this->gravidade = 15.f;
+	this->velMax = 13;
+	this->xvel = 0.f;
+	this->yvel = 0.f;
 	this->aT = 0.f;
-	this->pAltura = 90.f;
-	this->pLargura = (pAltura / 3) * 2;
+	this->pAltura = 150.f;
 	this->cPos = chao.getPosition();
-	this->pPos = player.getPosition();
+	this->pPos = obj->getPosition();
 	this->frame = 0;
 	this->velTex = 0;
-
-	this->delay = 0;
-	this->tempoDelay = 10;
 }
 
 void Jogador::iniciarJogador()
 {
-	this->player.setSize(Vector2f(pLargura, pAltura));
-	this->player.setPosition(50.f, 600.f - player.getSize().y);
-
+	obj = new RectangleShape;
+	this->obj->setSize(Vector2f(100.f, pAltura));
+	this->obj->setPosition(50.f, 600.f - obj->getSize().y);
 }
 
 void Jogador::iniciarTexturas()
@@ -86,196 +199,5 @@ void Jogador::iniciarTexturas()
 			std::cout << "ERROR";
 		}
 		this->txJogadorParado[i].setSmooth(true);
-
-		if (!this->txJogadorAtaque[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Atacar.png", IntRect(51 + (i * 588), 30, 448, 626))) {
-			std::cout << "ERROR";
-		}
-
-		this->txJogadorAtaque[i].setSmooth(true);
-		if (!this->txJogadorAtaquePula[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/AtaquePulo.png", IntRect(51 + (i * 588), 30, 448, 626))) {
-			std::cout << "ERROR";
-		}
-		this->txJogadorAtaquePula[i].setSmooth(true);
 	}
-}
-
-void Jogador::atualizarJogador()
-{
-
-	//textura no frame
-	this->player.setTexture(&txJogadorParado[this->velTex]);
-
-	//oega posicoes importantes
-	this->cPos = this->chao.getPosition();
-	this->player.setPosition(this->xpos, this->ypos);
-
-	//define para qual lado o player esta virado
-	if (this->status.getLado() == 0) {
-		this->player.setScale(Vector2f(-1, 1));
-		this->status.setLado(2);
-	}
-	else if (this->status.getLado() == 1) {
-		this->player.setScale(Vector2f(1, 1));
-		this->status.setLado(2);
-	}
-
-	//defina para nao passar a velocidade maxima
-	if (this->status.getVelocidadeX() >= this->status.getVelocidadeMaxima())
-		this->status.setVelocidadeX(this->status.getVelocidadeMaxima());
-
-	//andar para os 2 lados
-	if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left))
-		direcionalEsquerdo();
-
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || Keyboard::isKeyPressed(Keyboard::Right))
-		direcionalDireito();
-
-	//se nao andar a velocidade ï¿½ 0 // fica parado
-	else
-		this->status.setVelocidadeX(0.f);
-	
-	//pulo 
-	if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up)) {
-		direcionalCima();
-	}
-
-	else {
-		this->jogador_pulou = false;
-	}
-
-	this->fdist = this->cPos.y - (this->ypos + this->pAltura);
-
-	cair();
-
-	if (this->jogador_pulou == true)
-		this->limitadorTex = 0;
-
-	//limita os frames do pulo
-	if (this->limitadorTex <= 9) {
-
-		this->player.setTexture(&txJogadorPula[this->limitadorTex]);
-		if (this->frame % 3 == 0)
-			this->limitadorTex++;
-
-	}
-
-	//atacar
-
-	if (Mouse::isButtonPressed(Mouse::Left) || Keyboard::isKeyPressed(Keyboard::Space)) {
-		this->status.setAtaque(true);
-	}
-
-	else {
-		this->status.setAtaque(false);
-	}
-
-	ataque();
-
-	if (this->jogador_pulou == true) 
-	{
-		ataqueAereo();
-	}
-
-	atualizarTextura();
-
-}
-
-void Jogador::ataque()
-{
-	if (this->status.getAtaque() == true)
-		this->limitadorTex1 = 0;
-
-	//limita os frames do Ataque
-
-	if (this->limitadorTex1 <= 9) {
-
-		this->player.setTexture(&txJogadorAtaque[this->limitadorTex1]);
-		if (this->frame % 3 == 0)
-			this->limitadorTex1++;
-
-	}
-}
-
-void Jogador::ataqueAereo()
-{
-	if (this->status.getAtaque() == true)
-		this->limitadorTex1 = 0;
-
-	//limita os frames do pulo
-	if (this->limitadorTex1 <= 9) {
-
-		this->player.setTexture(&txJogadorAtaquePula[this->limitadorTex1]);
-		if (this->frame % 3 == 0)
-			this->limitadorTex1++;
-
-	}
-}
-
-void Jogador::direcionalEsquerdo() {
-
-	this->player.setTexture(&txJogadorCorre[this->velTex]);
-	this->status.setLado(0);
-	if (this->xpos > this->player.getSize().x) { //Player nao passar dos limites da tela esquerda
-		this->xpos -= this->status.getVelocidadeX();
-		this->status.setVelocidadeX(this->status.getVelocidadeX() + 1.f);
-	}
-
-
-}
-
-void Jogador::direcionalDireito() {
-
-	this->player.setTexture(&txJogadorCorre[this->velTex]);
-
-	this->status.setLado(1);
-	if (this->xpos < (this->videoModeP.width - this->player.getSize().x)) {  //Player nao passar dos limites da tela direita
-		this->xpos += this->status.getVelocidadeX();
-		this->status.setVelocidadeX(this->status.getVelocidadeX() + 1.f);
-	}
-
-}
-
-void Jogador::direcionalCima() {
-
-	if (this->aT <= 10) {
-		this->status.setVelocidadeY(gravidade);
-		this->jogador_pulou = true;
-		if (this->aT >= 10) {
-			this->jogador_pulou = false;
-		}
-	}
-
-}
-
-void Jogador::cair() {
-
-	//Atterrisar do pulo
-	if (this->fdist <= 0.f && this->jogador_pulou == false) {
-		this->status.setVelocidadeY(0.f);
-		this->aT = 0.f;
-		this->jogador_pulou = false;
-		this->ypos = this->cPos.y - this->pAltura;
-		this->delay = 0;
-	}
-	else {
-		this->status.setVelocidadeY(status.getVelocidadeY() - 1.f);
-		this->ypos -= this->status.getVelocidadeY();
-		this->aT += 1.f;
-	}
-
-}
-
-void Jogador::executar()
-{
-	this->Tela->executar(this->player);
-}
-
-void Jogador::atualizarTextura() {
-
-	//muda para a proxima textura a cada 7 frames
-	if (this->velTex == 9)
-		this->velTex = 0;
-	if (this->frame % 7 == 0)
-		this->velTex++;
-	this->frame++;
 }

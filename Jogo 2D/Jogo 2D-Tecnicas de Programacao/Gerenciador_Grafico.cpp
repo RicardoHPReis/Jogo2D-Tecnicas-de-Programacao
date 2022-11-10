@@ -1,73 +1,85 @@
-ï»¿#include "Gerenciador_Grafico.h"
+#include "Gerenciador_Grafico.h"
+
 
 Gerenciador_Grafico::Gerenciador_Grafico()
 {
-	this->inicJanela();
+	video.height = 1080;
+	video.width = 1920;
+
+	janela = new RenderWindow (video, "Jogo 2D", Style::Titlebar | Style::Close);
+	if (!janela)
+	{
+		cout << "Erro na criação da janela!" << endl;
+		exit(1);
+	}
+	janela->setFramerateLimit(60);
+	executarJanela();
+
+	instancia_grafico->getInstancia_Grafico();
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico()
 {
-	delete this->janelaP;
+	video = { 0, 0 };
+	if(janela)
+		delete janela;
+	if (instancia_grafico)
+		delete instancia_grafico;
 }
 
- void Gerenciador_Grafico::inicJanela()
+static Gerenciador_Grafico* Gerenciador_Grafico::getInstancia_Grafico()
 {
-	this->janelaP = nullptr;
-
-	this->videoMode.height = 1080; //RESOLUï¿½OES
-	this->videoMode.width = 1920;
-	this->janelaP = new RenderWindow(this->videoMode,
-		"Game 1", Style::Titlebar |
-		Style::Fullscreen);
-
-	this->janelaP->setFramerateLimit(60); //limite FPS
-}
-
-void Gerenciador_Grafico::pollEvents()
-{
-
-	//evento
-	while (this->janelaP->pollEvent(this->ev))
+	if (!instancia_grafico)
 	{
-		switch (this->ev.type)
+		instancia_grafico = new Gerenciador_Grafico;
+	}
+	return instancia_grafico;
+}
+
+const RenderWindow* Gerenciador_Grafico::getJanela() const
+{
+	return janela;
+}
+
+void Gerenciador_Grafico::executarJanela()
+{
+	while (instancia_grafico->janelaEstaAberta())
+	{
+		Event evento;
+		if (instancia_grafico->getJanela()->pollEvent(evento))
 		{
-		case Event::Closed:
-			this->janelaP->close();
-			break;
-		case Event::KeyPressed:
-			if (this->ev.key.code == Keyboard::Escape)
-
-				this->janelaP->close();
-
-			break;
+			switch (evento.type)
+			{
+				case Event::Closed:
+					this->janela->close();
+					break;
+				case Event::KeyPressed:
+					if (evento.key.code == Keyboard::Escape)
+					{
+						this->janela->close();
+						break;
+					}
+			}
 		}
 	}
-
 }
 
-void Gerenciador_Grafico::desenhar(RectangleShape* tela)
+const bool Gerenciador_Grafico::janelaEstaAberta()
 {
-	this->janelaP->draw(*tela);
+	while (janela->isOpen())
+		return true;
+	return false;
 }
 
-void Gerenciador_Grafico::desenharT(Text* tela)
+
+void Gerenciador_Grafico::desenhar(RectangleShape* figura)
 {
-	this->janelaP->draw(*tela);
+	this->janela->draw(*figura);
+	this->janela->display();
 }
 
-void Gerenciador_Grafico::desenharS(Sprite* tela)
-{
-	this->janelaP->draw(*tela);
-}
 
-void Gerenciador_Grafico::clear()
+void Gerenciador_Grafico::fechar()
 {
-	this->janelaP->clear();
-
-}
-
-Gerenciador_Grafico& Gerenciador_Grafico::getInstancia()
-{
-	static Gerenciador_Grafico INSTANCE;
-	return INSTANCE;
+	this->janela->clear();
 }

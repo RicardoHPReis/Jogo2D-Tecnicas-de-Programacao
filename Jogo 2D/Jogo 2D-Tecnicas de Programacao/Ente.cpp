@@ -1,65 +1,116 @@
-﻿#include "Ente.h"
+#include "Ente.h"
 
-Ente::Ente(int i) {
-	this->id = i;
-	this->janela = NULL;
-}
-
-Ente::Ente()
+Ente::Ente():
+grafico()
 {
 	id = 0;
-	janela = NULL;
-	this->inicEnte();
+	posicao = { 0,0 };
+	coordenada = { 0,0 };
+	tamanho = { 0,0 };
+	estaImprimindo = false;
+	grafico = new Gerenciador_Grafico;
 }
+
+/*Ente::Ente(int nr_id, Vector2f pos, Vector2f coord, Vector2f tam)
+{
+	id = nr_id;
+	posicao = pos;
+	coordenada = coord;
+	tamanho = tam;
+	estaImprimindo = false;
+}*/
 
 Ente::~Ente()
 {
 	id = 0;
+	posicao = { 0,0 };
+	coordenada = { 0,0 };
+	tamanho = { 0,0 };
+	estaImprimindo = false;
 }
 
-void Ente::inicEnte()
+
+void Ente::setId(const int nr_id)
 {
-	this->janela = nullptr;
-	
-	this->janela = &Gerenciador_Grafico::getInstancia();
+	this->id = nr_id;
 }
 
-void Ente::executar(RectangleShape obj)
+const int Ente::getId() const
 {
-	this->janela->desenhar(&obj);
+	return id;
 }
 
-void Ente::executarTex(Text obj)
+void Ente::setPosicao(const Vector2f pos)
 {
-	this->janela->desenharT(&obj);
+	this->posicao = pos;
 }
 
-void Ente::executarSprite(Sprite obj)
+const Vector2f Ente::getPosicao() const
 {
-	this->janela->desenharS(&obj);
+	return posicao;
 }
 
-void Ente::clear()
+void Ente::setCoordenada(const Vector2f coord)
 {
-	this->janela->clear();
+	this->coordenada = coord;
 }
 
-void Ente::display()
+const Vector2f Ente::getCoordenada() const
 {
-	this->janela->janelaP->display();
+	return coordenada;
 }
 
-RenderWindow* Ente::getJanelaCoord(void)
+void Ente::setTamanho(const Vector2f coord)
 {
-	return (janela->janelaP);
+	this->coordenada = coord;
 }
 
-void Ente::setId(int i)
+const Vector2f Ente::getTamanho() const
 {
-	id = i;
+	return tamanho;
 }
 
-int Ente::getAberta(void)
+void Ente::setImprimindo(const bool imp)
 {
-	return (1);
+	this->estaImprimindo = imp;
+}
+
+const bool Ente::getImprimindo() const
+{
+	return estaImprimindo;
+}
+
+void Ente::setTextura(Texture* tx)
+{
+	textura = tx;
+}
+
+const Texture* Ente::getTextura() const
+{
+	return textura;
+}
+
+void Ente::setSprite(Sprite* sp)
+{
+	sprite = sp;
+}
+
+const Sprite* Ente::getSprite() const
+{
+	return sprite;
+}
+
+
+void Ente::executar(RectangleShape* obj)
+{
+	this->grafico->fechar();
+	this->grafico->desenhar(obj);
+}
+
+bool Ente::getAberta()
+{
+	if (this->grafico->aberta() == 1)
+		return true;
+	else
+		return false;
 }
