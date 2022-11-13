@@ -14,6 +14,19 @@ Inimigo::~Inimigo()
 	nocivo = false;
 }
 
+void Inimigo::iniciarStatus()
+{
+	this->status->setVidas(15);
+	this->status->setLado(2);
+	this->status->setPodeAtacar(true);
+	this->status->setAtaque(false);
+	this->status->setDano(1);
+	this->status->setVelocidadeMaxima(6);
+
+	this->status->setVelocidadeX(0.f);
+	this->status->setVelocidadeY(0.f);
+}
+
 void Inimigo::inicEnemies()
 {
 

@@ -25,7 +25,11 @@ protected:
 
 	void iniciarTexturas();
 
+	void iniciarStatus();
+
 public:
+
+	Personagem* status;
 
 	RectangleShape inimigo;
 

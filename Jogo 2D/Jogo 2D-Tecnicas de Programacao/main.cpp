@@ -18,9 +18,7 @@ int main()
         //update
 
         jogo.update();
-        //render
 
-        //jogo.render();
     }
 
     //fim

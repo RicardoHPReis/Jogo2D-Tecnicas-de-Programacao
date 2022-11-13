@@ -4,76 +4,29 @@
 Jogo::Jogo()
 {
 
-	this->inicVariaiveis();
-	this->inicMapa();
-	this->inicTexturas();
-
-	this->inimigo = new Inimigo();
-	this->jogador = new Jogador();
-	this->Tela = new Ente();
+	this->inicVariaveis();
 }
 
 Jogo::~Jogo()
 {
-	delete this->inimigo;
 	delete this->menuP;
-	delete this->jogador;
-	delete this->Tela;
 }
 
-void Jogo::inicVariaiveis()
+void Jogo::inicVariaveis()
 {
+	this->fase1 = new FaseUm();
 	this->menuP = new Menu();
 	//logica jogo
 	this->menuAbre = true;
-
-	this->points = 0;
-	this->baixo = true;
-
-	this->vidasN = 5;
-	this->vidas.resize(this->vidasN);
 	
-
-}
-
-void Jogo::inicTexturas()
-{
-	int i;
-
-	//textura fundo
-	this->tBg.loadFromFile("../../Texturas/Cenario/Fundo.jpg", IntRect(0, 0, this->videoMode.width, this->videoMode.height));
-	this->tBg.setSmooth(true);
-	this->fundo.setTexture(tBg);
-
-	this->tVidas.loadFromFile("../../Texturas/Cenario/Vida.png");
-	this->tVidas.setSmooth(true);
-
-	//textura vidas
-
-	for (size_t i{}; i < vidas.size(); ++i) {
-
-		this->vidas[i].setTexture(tVidas);
-		this->vidas[i].setPosition(Vector2f((30.f) + (50 * i), 10.f));
-
-	}
-
-}
-
-void Jogo::inicMapa()
-{
-	//chao
-
-	this->chao.setPosition(0, videoMode.height - 85.f);
-	this->chao.setSize(Vector2f((videoMode.width), 85));
-	chao.setFillColor(Color::White);
-
+	this->faseAtual = 1;
 }
 
 //accesos
 
 const bool Jogo::rodando() const
 {
-	if ((Tela->getAberta()) == 1)
+	if (fase1->principal->Tela->getAberta() == 1)
 		return 1;
 	else
 		return 0;
@@ -88,14 +41,6 @@ void Jogo::atualizaMenu()
 	}
 }
 
-void Jogo::imprimeVidas()
-{
-	for (int i = 0; i < this->jogador->getVidas(); i++)
-	{
-		this->Tela->executarSprite(this->vidas[i]);
-	}
-}
-
 void Jogo::update()
 {
 	if (menuAbre == true) {
@@ -105,24 +50,19 @@ void Jogo::update()
 
 	this->atualizaMenu();
 
-	this->jogador->atualizarJogador();
+	if (this->numFase == 1)
+	{
+		this->fase1->principal->atualiza();
 
-	this->inimigo->atualizaInimigo();
+		this->fase1->principal->desenha();
+	}
+	/*
+	else if (this->numFase == 2)
+	{
+		this->fase2->principal->atualiza();
 
-	this->render();
+		this->fase2->principal->desenha();
+	}
+	*/
 }
 
-void Jogo::render()
-{
-	this->Tela->clear();
-
-	this->Tela->executarSprite(fundo);
-
-	this->imprimeVidas();
-
-	this->Tela->executar(this->jogador->player);
-
-	this->Tela->executar(this->inimigo->inimigo);
-
-	this->Tela->display();
-}
