@@ -5,15 +5,14 @@ Obstaculo::Obstaculo():
 Entidade()
 {
 	dano = 0;
-	atacou = false;
+	podeDarDano = false;
 }
 
 Obstaculo::~Obstaculo()
 {
 	dano = 0;
-	atacou = false;
+	podeDarDano = false;
 }
-
 
 void Obstaculo::setDano(const int nr_dano)
 {
@@ -25,12 +24,12 @@ const int Obstaculo::getDano() const
 	return dano;
 }
 
-void Obstaculo::setAtacou(const bool atc)
+void Obstaculo::setPodeDarDano(const bool dano)
 {
-	atacou = atc;
+	podeDarDano = dano;
 }
 
-const bool Obstaculo::getAtacou() const
+const bool Obstaculo::getPodeDarDano() const
 {
-	return atacou;
+	return podeDarDano;
 }

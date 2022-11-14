@@ -14,11 +14,12 @@ public:
 	~Gerenciador_Grafico();
 	static Gerenciador_Grafico* getInstancia_Grafico();
 	const RenderWindow* getJanela() const;
+	void executarJanela();
 
 	const bool janelaEstaAberta();
-	void desenhar(RectangleShape* figura);
+	Vector2u getTamanhoJanela();
+	void desenhar(Drawable* figura);
+	void limpar();
+	void mostrar();
 	void fechar();
-	void executarJanela();
 };
-
-Gerenciador_Grafico* Gerenciador_Grafico::instancia_grafico = NULL;

@@ -10,7 +10,7 @@
 #include <math.h>
 #include <string.h>
 #include <time.h>
-#include <pthread.h>
+//#include <pthread.h>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>

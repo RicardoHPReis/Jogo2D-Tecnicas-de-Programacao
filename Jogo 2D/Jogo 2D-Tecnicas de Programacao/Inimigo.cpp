@@ -1,12 +1,11 @@
-#include "Inimigo.h"
+﻿#include "Inimigo.h"
 
-Inimigo::Inimigo():
-Personagem()
+Inimigo::Inimigo()
 {
-	nocivo = true;
+	contador_movimento = 0;
 }
 
 Inimigo::~Inimigo()
 {
-	nocivo = false;
+	contador_movimento = 0;
 }

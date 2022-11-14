@@ -8,12 +8,22 @@ protected:
 	int vidas;
 	int dano;
 	int lado;
+	float vida;
 	bool podeAtacar;
 	bool estaMorto;
+	bool atacou;
 
 public:
 	Personagem();
-	~Personagem();
+	virtual ~Personagem();
+
+
+	virtual void executar() = 0;
+	virtual void imprimir() = 0;
+
+
+	void setAtaque(const int nr_vd);
+	const int getAtaque() const;
 
 	void setVidas(const int nr_vd);
 	const int getVidas() const;

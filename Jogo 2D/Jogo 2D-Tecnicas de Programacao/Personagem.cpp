@@ -19,6 +19,17 @@ Personagem::~Personagem()
 	estaMorto = false;
 }
 
+void Personagem::setAtaque(const int nr_vd)
+{
+	atacou = nr_vd;
+}
+
+const int Personagem::getAtaque() const
+{
+	return atacou;
+}
+
+
 void Personagem::setVidas(const int nr_vd)
 {
 	vidas = nr_vd;

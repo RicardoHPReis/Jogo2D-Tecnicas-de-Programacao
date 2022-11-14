@@ -5,7 +5,7 @@
 class FaseUm :public Fase
 {
 private:
-	
+
 public:
 	FaseUm();
 	~FaseUm();

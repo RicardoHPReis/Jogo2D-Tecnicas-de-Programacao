@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "Jogo.h"
 
 
@@ -9,10 +9,8 @@ int main()
 
     while (jogo.rodando())
     {
-        jogo.atualizar();
-        
-        //render
-        //jogo.render();
+        jogo.atualizaJogo();
     }
+
     return EXIT_SUCCESS;
 }

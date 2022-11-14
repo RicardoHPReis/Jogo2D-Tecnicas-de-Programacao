@@ -1,13 +1,16 @@
 #pragma once
-#include "Personagem.h"
 #include "stdafx.h"
+#include "Personagem.h"
 
 class Inimigo : public Personagem
 {
 protected:
-	bool nocivo;
+	int contador_movimento;
 
 public:
 	Inimigo();
-	~Inimigo();
+	virtual ~Inimigo();
+
+	virtual void executar() = 0;
+	virtual void imprimir() = 0;
 };

@@ -3,10 +3,13 @@
 Entidade::Entidade() :
 Ente()
 {
-	seMovimenta = false;
+	forma = new RectangleShape;
 	velocidade = { 0,0 };
+	tamanho = { 0,0 };
+	posicao = { 0,0 };
 	velocidade_max = 0;
 	empuxo = 0;
+	seMovimenta = false;
 	tiraVida = false;
 }
 
@@ -22,11 +25,39 @@ Ente()
 
 Entidade::~Entidade()
 {
-	seMovimenta = false;
+	delete forma;
 	velocidade = { 0,0 };
+	tamanho = { 0,0 };
+	posicao = { 0,0 };
 	velocidade_max = 0;
 	empuxo = 0;
+	seMovimenta = false;
 	tiraVida = false;
+}
+
+const RectangleShape* Entidade::getForma() const
+{
+	return forma;
+}
+
+void Entidade::setPosicao(const Vector2f pos)
+{
+	posicao = pos;
+}
+
+const Vector2f Entidade::getPosicao() const
+{
+	return posicao;
+}
+
+void Entidade::setTamanho(const Vector2f tam)
+{
+	tamanho = tam;
+}
+
+const Vector2f Entidade::getTamanho() const
+{
+	return tamanho;
 }
 
 void Entidade::setSeMovimenta(const bool mov)
@@ -39,14 +70,24 @@ const bool Entidade::getSeMovimenta() const
 	return seMovimenta;
 }
 
-void Entidade::setVelocidade(const Vector2f vel)
+void Entidade::setVelocidadeY(const float vel)
 {
-	velocidade = vel;
+	velocidade.y = vel;
 }
 
-const Vector2f Entidade::getVelocidade() const
+void Entidade::setVelocidadeX(const float vel)
 {
-	return velocidade;
+	velocidade.x = vel;
+}
+
+const float Entidade::getVelocidadeY() const
+{
+	return velocidade.y;
+}
+
+const float Entidade::getVelocidadeX() const
+{
+	return velocidade.x;
 }
 
 void Entidade::setVelocidadeMaxima(const float vel_max)

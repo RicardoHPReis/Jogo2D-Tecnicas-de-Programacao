@@ -1,15 +1,15 @@
 #include "Fase.h"
 
-Fase::Fase() :
-colisao()
+//Gerenciador_Colisoes* Gerenciador_Colisoes::instancia_colisoes = NULL;
+
+Fase::Fase()
 {
-	gravidade = 0;
+
 }
 
 Fase::~Fase()
 {
-	gravidade = 0;
-	delete colisao;
+
 }
 
 void Fase::setGravidade(const float grav)

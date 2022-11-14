@@ -16,6 +16,7 @@ public:
 	~Gerenciador_Colisoes();
 	static Gerenciador_Colisoes* getInstancia_Colisoes();
 
-	Vector2f calcularColisao(Ente* entidade, Ente* ent);
-	void executar();
+	Vector2f calcularColisao(Entidade* entidade, Entidade* ent);
+	void colisaoJogadorInimigo();
+	void colisaoJogadorObstaculo();
 };
