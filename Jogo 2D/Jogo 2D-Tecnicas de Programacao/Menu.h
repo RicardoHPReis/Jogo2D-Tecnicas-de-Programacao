@@ -4,7 +4,15 @@
 
 class Menu : public Ente
 {
-private:
+
+	Texture cursor;
+	Sprite* cursorSprite;
+
+	//Ente
+
+	Ente *Tela;
+
+	//
 	int delay, tempoDelay;
 	int posi;
 	bool pressed, theselect;
@@ -22,12 +30,16 @@ private:
 	vector<Text> texts;
 	vector<size_t>sizes;
 
-	void iniciaVariaveis();
+protected:
+
+	//define valores para cada objeto
+	void inicVariaveis();
+	void inicCursor();
 
 public:
 	Menu();
 	~Menu();
 
-	void executar();
+	void run_menu();
 	void imprimir();
 };

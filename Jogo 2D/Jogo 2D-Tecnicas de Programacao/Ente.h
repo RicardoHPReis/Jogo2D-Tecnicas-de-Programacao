@@ -5,16 +5,25 @@
 class Ente
 {
 protected:
-	Gerenciador_Grafico* grafico;
-	const int id;
+
+	int id;
+	Gerenciador_Grafico* janela;
+	VideoMode videoMode;
 
 public:
-	Ente();
-	Ente(int i);
-	virtual ~Ente();
+	Ente(int i=0);
+	~Ente();
 
-	virtual void executar() = 0;
-	virtual void imprimir() = 0;
+	virtual void executar(RectangleShape obj);
+	virtual void executarTex(Text obj);
+	virtual void executarSprite(Sprite obj);
+	virtual void clear();
+	virtual void display();
+	
+	RenderWindow* getJanelaCoord(void);
 
-	const int getId() const;
+	void setId(int i);
+
+	int getAberta(void);
+
 };

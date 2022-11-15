@@ -11,8 +11,13 @@ Menu::Menu()
 	this->font = new Font();
 	this->image = new Texture();
 	this->bg = new Sprite();
+	this->Tela = new Ente();
 
-	iniciaVariaveis();
+	this->cursorSprite = new Sprite;
+
+	this->inicCursor();
+
+	inicVariaveis();
 }
 
 Menu::~Menu()
@@ -25,10 +30,13 @@ Menu::~Menu()
 	delete font;
 	delete image;
 	delete bg;
+	delete Tela;
 }
 
-void Menu::iniciaVariaveis()
+void Menu::inicVariaveis()
 {
+	//inicializa todas variaveis
+
 	this->pressed = this->theselect = false;
 
 	this->delay = 0;
@@ -42,7 +50,7 @@ void Menu::iniciaVariaveis()
 	this->posMouse = { 0,0 };
 	this->cordMouse = { 0,0 };
 
-	this->options = { "NOME DO JOGO","Jogar","Fases","Opcoes","Sobre","Sair" };
+	this->options = { "A Floresta","Jogar","Fases","Ranking","Sobre","Sair" };
 	this->texts.resize(6);
 	coords = { { 610,200 } , { 610,350 }, { 610,450 }, { 610,550 }, { 610,650 }, { 610,750 } };
 	sizes = { 100,50,50,50,50,50 };
@@ -71,25 +79,19 @@ void Menu::iniciaVariaveis()
 
 }
 
-void Menu::imprimir()
+void Menu::inicCursor()
 {
-	grafico->fechar();
-	grafico->desenhar(bg);
-	grafico->desenhar(&texts[0]);
-	grafico->desenhar(&texts[1]);
-	grafico->desenhar(&texts[2]);
-	grafico->desenhar(&texts[3]);
-	grafico->desenhar(&texts[4]);
-	grafico->desenhar(&texts[5]);
+	if (cursor.loadFromFile("../../Texturas/Cenario/Cursor.png"))
+		cursorSprite->setTexture(cursor);
 }
 
-void Menu::executar()
+void Menu::run_menu()
 {
 	bool clique = false;
 	while (clique == false) {
 
-		posMouse = Mouse::getPosition(*(grafico->getJanela()));
-		cordMouse = grafico->getJanela()->mapPixelToCoords(posMouse);
+		posMouse = Mouse::getPosition(*Tela->getJanelaCoord());
+		cordMouse = (Tela->getJanelaCoord())->mapPixelToCoords(posMouse);
 
 		//Seleciona as opcoes usando seta para cima e para baixo
 
@@ -99,7 +101,7 @@ void Menu::executar()
 				++posi;
 				this->pressed = true;
 				this->texts[posi].setOutlineThickness(4);
-				this->texts[posi - 1].setOutlineThickness(0);
+				this->texts[posi - 1].setOutlineThickness(0);		
 				this->theselect = false;
 				this->pressed = false;
 			}
@@ -124,6 +126,7 @@ void Menu::executar()
 			//realizar� as acoes de cada opcao
 
 			if (posi == 1) { //RODA JOGO
+
 				clique = true;
 			}
 			else if (posi == 2) { //COLOCAR AS FASES
@@ -141,31 +144,32 @@ void Menu::executar()
 			}
 		}
 
-		//Verifica se o mouse esta acima de alguma opcao, se estiver marcara a opcao e verificar se foi realizado o clique com o mouse
-		if (this->play->getGlobalBounds().contains(cordMouse))
-		{
+		//Verifica se o mouse est� acima de alguma op�ao, se estiver marcara a op�ao e verificar� se foi realizado o clique com o mouse
+
+		if (this->play->getGlobalBounds().contains(cordMouse)) {
+
 			this->texts[posi].setOutlineThickness(0);
 			this->posi = 1;
 			this->texts[posi].setOutlineThickness(4);
-			if (Mouse::isButtonPressed(Mouse::Left))
-			{
+			if (Mouse::isButtonPressed(Mouse::Left)) {
+
 				clique = true;
+
 			}
 		}
 
-		if (this->fases->getGlobalBounds().contains(cordMouse))
-		{
+		if (this->fases->getGlobalBounds().contains(cordMouse)) {
+
 			this->texts[posi].setOutlineThickness(0);
 			this->posi = 2;
 			this->texts[posi].setOutlineThickness(4);
-			if (Mouse::isButtonPressed(Mouse::Left))
-			{
+			if (Mouse::isButtonPressed(Mouse::Left)) {
 
 			}
 		}
 
-		if (this->opcoes->getGlobalBounds().contains(cordMouse))
-		{
+		if (this->opcoes->getGlobalBounds().contains(cordMouse)) {
+
 			this->texts[posi].setOutlineThickness(0);
 			this->posi = 3;
 			this->texts[posi].setOutlineThickness(4);
@@ -174,8 +178,8 @@ void Menu::executar()
 			}
 		}
 
-		if (this->sobre->getGlobalBounds().contains(cordMouse))
-		{
+		if (this->sobre->getGlobalBounds().contains(cordMouse)) {
+
 			this->texts[posi].setOutlineThickness(0);
 			this->posi = 4;
 			this->texts[posi].setOutlineThickness(4);
@@ -184,8 +188,8 @@ void Menu::executar()
 			}
 		}
 
-		if (this->sair->getGlobalBounds().contains(cordMouse))
-		{
+		if (this->sair->getGlobalBounds().contains(cordMouse)) {
+
 			this->texts[posi].setOutlineThickness(0);
 			this->posi = 5;
 			this->texts[posi].setOutlineThickness(4);
@@ -196,12 +200,30 @@ void Menu::executar()
 			}
 		}
 
-		if (delay > 0)
-		{
-			delay += 1;
-			if (delay >= tempoDelay)
-				delay = 0;
+		if (this->delay > 0) {
+			this->delay += 1;
+			if (this->delay >= this->tempoDelay)
+				this->delay = 0;
 		}
+
+		this->cursorSprite->setPosition(Mouse::getPosition(*Tela->getJanelaCoord()).x, Mouse::getPosition(*Tela->getJanelaCoord()).y);
 		imprimir();
 	}
 }
+
+void Menu::imprimir()
+{
+	this->Tela->clear();
+
+	Tela->executarSprite(*bg);
+	Tela->executarTex(texts[0]);
+	Tela->executarTex(texts[1]);
+	Tela->executarTex(texts[2]);
+	Tela->executarTex(texts[3]);
+	Tela->executarTex(texts[4]);
+	Tela->executarTex(texts[5]);
+	Tela->executarSprite(*cursorSprite);
+
+	this->Tela->display();
+}
+

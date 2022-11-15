@@ -1,23 +1,53 @@
 ﻿#include "Ente.h"
 
-Ente::Ente(int i):
-id(i),
-grafico(grafico->getInstancia_Grafico())
-{
-}
 
-Ente::Ente() :
-grafico(grafico->getInstancia_Grafico()),
-id()
+Ente::Ente(int i):
+janela(janela->getInstancia_Grafico())
 {
+	id = i;
 }
 
 Ente::~Ente()
 {
-	delete grafico;
+	id = 0;
 }
 
-const int Ente::getId() const
+void Ente::executar(RectangleShape obj)
 {
-	return id;
+	this->janela->desenhar(&obj);
+}
+
+void Ente::executarTex(Text obj)
+{
+	this->janela->desenharT(&obj);
+}
+
+void Ente::executarSprite(Sprite obj)
+{
+	this->janela->desenharS(&obj);
+}
+
+void Ente::clear()
+{
+	this->janela->limpar();
+}
+
+void Ente::display()
+{
+	this->janela->mostrar();
+}
+
+RenderWindow* Ente::getJanelaCoord(void)
+{
+	return janela->getJanela();
+}
+
+void Ente::setId(int i)
+{
+	id = i;
+}
+
+int Ente::getAberta(void)
+{
+	return (1);
 }

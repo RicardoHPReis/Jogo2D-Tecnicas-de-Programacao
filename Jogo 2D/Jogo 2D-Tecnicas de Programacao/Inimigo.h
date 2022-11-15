@@ -1,16 +1,37 @@
 #pragma once
 #include "stdafx.h"
 #include "Personagem.h"
+#include "Ente.h"
 
 class Inimigo : public Personagem
 {
 protected:
-	int contador_movimento;
+
+	bool nocivo;
+
+	int frame1, velTex1, aux1;
+
+	Ente* Tela;
+
+	Texture tEnemy[11];
+
+	RectangleShape chao;
+
+	VideoMode videoModeE;
+
+	void inicEnemies();
+
+	void spawnInimigo();
+
+	void iniciarTexturas();
+
+	void iniciarStatus();
 
 public:
-	Inimigo();
-	virtual ~Inimigo();
+	RectangleShape inimigo;
 
-	virtual void executar() = 0;
-	virtual void imprimir() = 0;
+	void atualizaInimigo();
+
+	Inimigo();
+	~Inimigo();
 };

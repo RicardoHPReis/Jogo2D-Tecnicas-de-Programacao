@@ -1,13 +1,14 @@
 #include "Personagem.h"
 
-Personagem::Personagem():
-Entidade()
+Personagem::Personagem(int id, bool mov, Vector2f pos, Vector2f tam, int nr_vidas, int nr_dano, int ld, bool atacar, bool morreu, bool foiAtacado):
+Entidade(id, mov, pos, tam)
 {
-	vidas = 1;
-	dano = 0;
-	lado = 0;
-	podeAtacar = false;
-	estaMorto = false;
+	vidas = nr_vidas;
+	dano = nr_dano;
+	lado = ld;
+	podeAtacar = atacar;
+	estaMorto = morreu;
+	atacou = foiAtacado;
 }
 
 Personagem::~Personagem()
@@ -17,14 +18,15 @@ Personagem::~Personagem()
 	lado = 0;
 	podeAtacar = false;
 	estaMorto = false;
+	atacou = false;
 }
 
-void Personagem::setAtaque(const int nr_vd)
+void Personagem::setAtaque(bool foiAtacado)
 {
-	atacou = nr_vd;
+	atacou = foiAtacado;
 }
 
-const int Personagem::getAtaque() const
+bool Personagem::getAtaque()
 {
 	return atacou;
 }

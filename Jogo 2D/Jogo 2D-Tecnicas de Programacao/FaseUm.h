@@ -5,10 +5,11 @@
 class FaseUm :public Fase
 {
 private:
-
+	
 public:
 	FaseUm();
 	~FaseUm();
 
-	void iniciarFase();
+	void inicVariaveis();
+	void inicMapa();
 };

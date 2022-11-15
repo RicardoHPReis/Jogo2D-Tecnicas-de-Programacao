@@ -1,67 +1,69 @@
 ﻿#include "Jogo.h"
 
+
 Gerenciador_Grafico* Gerenciador_Grafico::instancia_grafico = NULL;
-Gerenciador_Colisoes* Gerenciador_Colisoes::instancia_colisoes = NULL;
 
 Jogo::Jogo():
-menu(),
-jogador()
+grafico(grafico->getInstancia_Grafico())
 {
-	iniciaMapa();
-
-	grafico->getInstancia_Grafico();
-	colisao->getInstancia_Colisoes();
-	menuAbre = true;
-	baixo = true;
+	this->inicVariaveis();
 }
 
 Jogo::~Jogo()
 {
-	delete grafico;
-	delete colisao;
+	delete this->menuP;
+	delete this->fase1;
 }
 
-
-
-void Jogo::iniciaMapa()
+void Jogo::inicVariaveis()
 {
-	chao.setPosition(0, 1080.f - 85.f);
-	chao.setSize(Vector2f((1920.f), 85.f));
-	chao.setFillColor(Color::Blue);
+	this->fase1 = new FaseUm();
+	this->menuP = new Menu();
+	//logica jogo
+	this->menuAbre = true;
+	
+	this->faseAtual = 1;
 }
+
+//accesos
 
 const bool Jogo::rodando() const
 {
 	if (grafico->janelaEstaAberta())
-		return 1;
+		return true;
 	else
-		return 0;
+		return false;
 }
 
 void Jogo::atualizaMenu()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
 	{
 		this->menuAbre = true;
 	}
 }
 
-void Jogo::atualizaJogo()
+void Jogo::update()
 {
-	if (menuAbre == true) 
-	{
-		menu.executar();
+	if (menuAbre == true) {
+		this->menuP->run_menu();
 		menuAbre = false;
 	}
+	numFase = 1;
+	this->atualizaMenu();
 
-	atualizaMenu();
+	if (this->numFase == 1)
+	{
+		this->fase1->atualiza();
+		this->fase1->desenha();
+	}
+	/*
+	else if (this->numFase == 2)
+	{
+		this->fase2->atualiza();
 
-	jogador.executar();
-	renderizar();
+		this->fase2->desenha();
+	}
+	*/
 }
 
-void Jogo::renderizar()
-{
-	grafico->fechar();
-	jogador.imprimir();
-}

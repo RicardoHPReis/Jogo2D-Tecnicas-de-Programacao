@@ -1,41 +1,28 @@
 #include "Entidade.h"
 
-Entidade::Entidade() :
-Ente()
-{
-	forma = new RectangleShape;
-	velocidade = { 0,0 };
-	tamanho = { 0,0 };
-	posicao = { 0,0 };
-	velocidade_max = 0;
-	empuxo = 0;
-	seMovimenta = false;
-	tiraVida = false;
-}
 
-/*Entidade::Entidade(bool mov, Vector2f vel, float vel_max, bool danoso, int nr_id, Vector2f pos, Vector2f coord, Vector2f tam) :
-//Ente(nr_id, pos, coord, tam)
-Ente()
+Entidade::Entidade(int id, bool mov, Vector2f pos, Vector2f tam) :
+	Ente(id)
 {
+	forma;
+	tamanho = tam;
+	posicao = pos;
 	seMovimenta = mov;
-	velocidade = vel;
-	velocidade_max = vel_max;
-	tiraVida = danoso;
-}*/
+	velocidade = { 0,0 };
+	velocidade_max = 0.f;
+}
 
 Entidade::~Entidade()
 {
-	delete forma;
+	forma;
 	velocidade = { 0,0 };
 	tamanho = { 0,0 };
 	posicao = { 0,0 };
 	velocidade_max = 0;
-	empuxo = 0;
 	seMovimenta = false;
-	tiraVida = false;
 }
 
-const RectangleShape* Entidade::getForma() const
+const RectangleShape Entidade::getForma() const
 {
 	return forma;
 }
@@ -70,24 +57,14 @@ const bool Entidade::getSeMovimenta() const
 	return seMovimenta;
 }
 
-void Entidade::setVelocidadeY(const float vel)
+void Entidade::setVelocidade(const Vector2f vel)
 {
-	velocidade.y = vel;
+	velocidade = vel;
 }
 
-void Entidade::setVelocidadeX(const float vel)
+const Vector2f Entidade::getVelocidade() const
 {
-	velocidade.x = vel;
-}
-
-const float Entidade::getVelocidadeY() const
-{
-	return velocidade.y;
-}
-
-const float Entidade::getVelocidadeX() const
-{
-	return velocidade.x;
+	return velocidade;
 }
 
 void Entidade::setVelocidadeMaxima(const float vel_max)
@@ -98,24 +75,4 @@ void Entidade::setVelocidadeMaxima(const float vel_max)
 const float Entidade::getVelocidadeMaxima() const
 {
 	return velocidade_max;
-}
-
-void Entidade::setEmpuxo(const float empx)
-{
-	empuxo = empx;
-}
-
-const float Entidade::getEmpuxo() const
-{
-	return empuxo;
-}
-
-void Entidade::setTiraVida(const bool danoso)
-{
-	tiraVida = danoso;
-}
-
-const bool Entidade::getTiraVida() const
-{
-	return tiraVida;
 }

@@ -7,9 +7,9 @@ int main()
     srand(static_cast<unsigned>(time(NULL)));
     Jogo jogo;
 
-    while (jogo.rodando())
+    while (jogo.rodando() == 1)
     {
-        jogo.atualizaJogo();
+        jogo.update();
     }
 
     return EXIT_SUCCESS;

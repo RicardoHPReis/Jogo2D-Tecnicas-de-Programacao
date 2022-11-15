@@ -10,7 +10,7 @@ protected:
 
 public:
 	Projetil();
-	virtual ~Projetil();
+	~Projetil();
 
 	void setDano(const int nr_dano);
 	const int getDano() const;

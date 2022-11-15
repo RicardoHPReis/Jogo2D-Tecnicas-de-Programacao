@@ -2,10 +2,10 @@
 
 
 Gerenciador_Colisoes::Gerenciador_Colisoes() :
-listaInimigos(),
-listaObstaculos()
+	listaInimigos(),
+	listaObstaculos()
 {
-
+	it = nullptr;
 }
 
 Gerenciador_Colisoes::~Gerenciador_Colisoes()
@@ -16,6 +16,7 @@ Gerenciador_Colisoes::~Gerenciador_Colisoes()
 		//delete listaObstaculos;
 	if (instancia_colisoes)
 		delete instancia_colisoes;
+	it = nullptr;
 }
 
 Gerenciador_Colisoes* Gerenciador_Colisoes::getInstancia_Colisoes()
@@ -38,29 +39,58 @@ Vector2f Gerenciador_Colisoes::calcularColisao(Entidade* entidade, Entidade* ent
 	return colisao;
 }
 
-void Gerenciador_Colisoes::colisaoJogadorInimigo()
+
+void Gerenciador_Colisoes::gerenciaColisoes(Jogador* jogador, Inimigo* inimigo, Obstaculo* obstaculo)
+{
+	for (int i = 0; i < listaInimigos.size(); i++)
+	{
+		colisaoJogadorInimigo(jogador, listaInimigos[i]);
+	}
+	for (*it = listaObstaculos.begin(); *it != listaObstaculos.end(); *it++) //Não funcionou então deixei comentado
+	{
+		//colisaoJogadorObstaculo(jogador, it);
+	}
+}
+
+
+bool Gerenciador_Colisoes::colisaoJogadorInimigo(Jogador* jogador, Inimigo* inimigo)
 {
 	Vector2f colidiu;
 	for (int i = 0; i < listaInimigos.size(); i++)
 	{
-		//colidiu = calcularColisao(, listaInimigos[i]);
+		colidiu = calcularColisao(jogador, listaInimigos[i]);
 		if (colidiu.x >= -1.f && colidiu.y >= -1.f)
 		{
-
+			return true;
 		}
+		else
+			return false;
 	}
 }
 
-void Gerenciador_Colisoes::colisaoJogadorObstaculo()
+bool Gerenciador_Colisoes::colisaoJogadorObstaculoTeste(Jogador* jogador, Obstaculo* obstaculo)
 {
-	list<Obstaculo*>::iterator* it;
 	Vector2f colidiu;
-	/*for (*it = listaObstaculos.begin(); *it != listaObstaculos.end(); *it++) //Não funcionou então deixei comentado
+	for (*it = listaObstaculos.begin(); *it != listaObstaculos.end(); *it++) //Não funcionou então deixei comentado
 	{
-		//colidiu = calcularColisao(, it);
+		colidiu = calcularColisao(jogador, obstaculo /*it */);
 		if (colidiu.x >= -1.f && colidiu.y >= -1.f)
 		{
-
+			return true;
 		}
-	}*/
+		else
+			return false;
+	}
+}
+
+bool Gerenciador_Colisoes::colisaoJogadorObstaculo(Jogador* jogador, Obstaculo* obstaculo)
+{
+	Vector2f colidiu;
+	colidiu = calcularColisao(jogador, obstaculo);
+	if (colidiu.x >= -1.f && colidiu.y >= -1.f)
+	{
+		return true;
+	}
+	else
+		return false;
 }

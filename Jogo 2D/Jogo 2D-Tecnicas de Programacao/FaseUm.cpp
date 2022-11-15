@@ -3,15 +3,21 @@
 FaseUm::FaseUm():
 Fase()
 {
-
+	this->inicVariaveis();
+	this->inicMapa();
 }
 
 FaseUm::~FaseUm()
 {
-
 }
 
-void FaseUm::iniciarFase()
-{
 
+void FaseUm::inicVariaveis()
+{
+	
+}
+
+void FaseUm::inicMapa()
+{
+	
 }
