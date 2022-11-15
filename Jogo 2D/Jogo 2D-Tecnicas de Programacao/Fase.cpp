@@ -96,7 +96,7 @@ void Fase::desenha()
 
 	this->Tela->executar(this->jogador->player);
 
-	this->Tela->executar(this->inimigo->inimigo);
+	this->Tela->executar(this->inimigo->esqueleto);
 
 	this->Tela->display();
 }

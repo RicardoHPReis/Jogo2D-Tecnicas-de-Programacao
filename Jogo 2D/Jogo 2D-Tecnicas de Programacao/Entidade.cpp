@@ -37,22 +37,22 @@ const bool Entidade::getSeMovimenta() const
 	return seMovimenta;
 }
 
-void Entidade::setVelocidadeY(const float vel)
+void Entidade::setVelocidadeY( float vel)
 {
 	velocidade.y = vel;
 }
 
-void Entidade::setVelocidadeX(const float vel)
+void Entidade::setVelocidadeX( float vel)
 {
 	velocidade.x = vel;
 }
 
-const float Entidade::getVelocidadeY() const
+ float Entidade::getVelocidadeY() 
 {
 	return velocidade.y;
 }
 
-const float Entidade::getVelocidadeX() const
+ float Entidade::getVelocidadeX() 
 {
 	return velocidade.x;
 }

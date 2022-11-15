@@ -11,9 +11,11 @@ protected:
 
 	int frame1, velTex1, aux1;
 
+	float xpos, ypos;
+
 	Ente* Tela;
 
-	Texture tEnemy[11];
+	Texture tEnemy[11], tEnemyAnda[13];
 
 	RectangleShape chao;
 
@@ -27,11 +29,19 @@ protected:
 
 	void iniciarStatus();
 
+	void atualizaTextura();
+
+	void andarDir();
+
+	void andarEsq();
+
+	void andar();
+
 public:
 
 	Personagem* status;
 
-	RectangleShape inimigo;
+	RectangleShape esqueleto;
 
 	void atualizaInimigo();
 

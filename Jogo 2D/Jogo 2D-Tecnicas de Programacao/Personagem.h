@@ -12,6 +12,8 @@ protected:
 	bool podeAtacar;
 	bool estaMorto;
 	bool atacou;
+	bool estaAndando;
+	bool estaParado;
 
 public:
 
@@ -27,12 +29,18 @@ public:
 	void setDano(const int nr_dano);
 	const int getDano() const;
 
-	void setLado(const int ld);
-	const int getLado() const;
+	void setLado(int ld);
+	int getLado();
 
 	void setPodeAtacar(const bool atc);
 	const bool getPodeAtacar() const;
 
 	void setEstaMorto(const bool mrt);
 	const bool getEstaMorto() const;
+
+	void setEstaAndando( bool mrt);
+	bool getEstaAndando() ;
+
+	void setEstaParado(bool mrt);
+	bool getEstaParado()
 };

@@ -12,7 +12,6 @@ private:
 
 	//fases
 	FaseUm *fase1;
-	int numFase;
 
 	//menu
 	Menu* menuP;

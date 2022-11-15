@@ -49,12 +49,12 @@ const int Personagem::getDano() const
 	return dano;
 }
 
-void Personagem::setLado(const int ld)
+void Personagem::setLado( int ld)
 {
 	lado = ld;
 }
 
-const int Personagem::getLado() const
+ int Personagem::getLado() 
 {
 	return lado;
 }
@@ -74,7 +74,27 @@ void Personagem::setEstaMorto(const bool mrt)
 	estaMorto = mrt;
 }
 
-const bool Personagem::getEstaMorto() const
+const bool Personagem::getEstaMorto() const 
 {
 	return estaMorto;
+}
+
+void Personagem::setEstaAndando(bool mrt)
+{
+	estaAndando = mrt;
+}
+
+bool Personagem::getEstaAndando()
+{
+	return estaAndando;
+}
+
+void Personagem::setEstaParado(bool mrt)
+{
+	estaParado = mrt;
+}
+
+bool Personagem::getEstaParado()
+{
+	return estaParado;
 }

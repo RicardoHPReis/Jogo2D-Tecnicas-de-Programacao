@@ -50,7 +50,7 @@ void Jogo::update()
 
 	this->atualizaMenu();
 
-	if (this->numFase == 1)
+	if (this->faseAtual == 1)
 	{
 		this->fase1->principal->atualiza();
 

@@ -18,11 +18,11 @@ public:
 	void setSeMovimenta(const bool mov);
 	const bool getSeMovimenta() const;
 
-	void setVelocidadeY(const float vel);
-	const float getVelocidadeY() const;
+	void setVelocidadeY( float vel);
+	float getVelocidadeY() ;
 
-	void setVelocidadeX(const float vel);
-	const float getVelocidadeX() const;
+	void setVelocidadeX( float vel);
+	float getVelocidadeX();
 
 	void setVelocidadeMaxima(const float vel_max);
 	const float getVelocidadeMaxima() const;
