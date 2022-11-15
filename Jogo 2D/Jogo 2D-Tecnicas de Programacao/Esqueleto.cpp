@@ -1,10 +1,14 @@
 ﻿#include "Esqueleto.h"
 
-/*Esqueleto::Esqueleto()
+
+Esqueleto::Esqueleto(int id, bool mov, Vector2f pos, Vector2f tam, int nr_vidas, int nr_dano, int ld, bool atacar, bool morreu, bool foiAtacado, bool nocv) :
+	Inimigo(2, true, pos, tam, 15, 1, 2, true, false, false)
 {
+	this->iniciarStatus();
 	this->iniciarTexturas();
 	this->inicEnemies();
-	this->nocivo = true;
+	this->spawnInimigo();
+	nocivo = true;
 }
 
 Esqueleto::~Esqueleto()
@@ -14,64 +18,108 @@ Esqueleto::~Esqueleto()
 
 void Esqueleto::iniciarStatus()
 {
-	this->setVidas(15);
-	this->setLado(2);
-	this->setPodeAtacar(true);
-	this->setAtaque(false);
-	this->setDano(1);
-	this->setVelocidadeMaxima(6);
-
-	this->setVelocidadeX(0.f);
-	this->setVelocidadeY(0.f);
+	setVelocidadeMaxima(6);
+	setVelocidade({ 7.f, 0.f });
 }
 
 void Esqueleto::inicEnemies()
 {
-
-	this->videoModeE.height = 1080; //RESOLU�OES
-	this->videoModeE.width = 1920;
-
-
-	this->inimigo.setPosition(10, 10);
-	this->inimigo.setSize(Vector2f(150.f, 200.f));
+	posicao = { 1700.f, 795.f };
+	tamanho = { 150.f, 200.f };
+	forma.setSize(tamanho);
 
 	//chao
-
-	this->chao.setPosition(0.f, this->videoModeE.height - 85.f);
-	this->chao.setSize(Vector2f(this->videoModeE.width, 85));
+	this->chao.setPosition(0.f, grafico->getVideo().height - 85.f);
+	this->chao.setSize(Vector2f(grafico->getVideo().width, 85 ));
 }
 
 void Esqueleto::spawnInimigo()
 {
-	this->inimigo.setPosition(this->videoModeE.width - 200.f, this->chao.getPosition().y - this->inimigo.getSize().y);
+	forma.setPosition(grafico->getVideo().width - 200.f, chao.getPosition().y - forma.getSize().y);
 }
 
 void Esqueleto::iniciarTexturas()
 {
 	if (!this->tEnemy[0].loadFromFile("../../Texturas/Personagens/Esqueleto/Parado.png", IntRect(20, 0, 270, 386))) {
-		std::cout << "ERROR";
+		cout << "Erro ao carregar a textura do esqueleto parado\n";
 	}
 	tEnemy[0].setSmooth(true);
 
-	//texturas Player
-	for (int i = 0; i < 10; i++) {
-
-		//textura inimigo
+	for (int i = 0; i < 10; i++) 
+	{
 		if (!this->tEnemy[i + 1].loadFromFile("../../Texturas/Personagens/Esqueleto/Parado.png", IntRect(20 + ((i + 1) * 290), 0, 270, 386))) {
-			std::cout << "ERROR";
+			cout << "Erro ao carregar a textura do esqueleto parado\n";
 		}
 		tEnemy[i + 1].setSmooth(true);
 	}
+
+	// Texturas inimigo Andando
+	for (int i = 0; i < 13; i++) 
+	{
+		if (!this->tEnemyAnda[i].loadFromFile("../../Texturas/Personagens/Esqueleto/Andar.png", IntRect((i * 256.69), 0, 256.69, 385))) {
+			cout << "Erro ao carregar a textura do esqueleto andando\n";
+		}
+		tEnemyAnda[i].setSmooth(true);
+	}
 }
+
 
 void Esqueleto::atualizaInimigo()
 {
-	this->spawnInimigo();
-	this->inimigo.setTexture(&tEnemy[velTex1]);
+	forma.setPosition(posicao);
+	andar();
 
-	if (this->velTex1 == 10)
-		this->velTex1 = 0;
-	if (this->frame1 % 7 == 0)
-		this->velTex1++;
-	this->frame1++;
-}*/
+	atualizaTextura();
+	forma.setTexture(&tEnemyAnda[velTex1]);
+}
+
+void Esqueleto::atualizaTextura()
+{
+	//muda para a proxima textura a cada 7 frames
+	if (velTex1 == 12)
+		velTex1 = 0;
+	if (frame1 % 7 == 0)
+		velTex1++;
+	frame1++;
+}
+
+
+void Esqueleto::andar()
+{
+	if (lado == 2)
+	{
+		forma.setScale(Vector2f(-1, 1));
+		andarEsquerda();
+	}
+
+	else if (lado == 1)
+	{
+		forma.setScale(Vector2f(1, 1));
+		andarDireita();
+	}
+
+}
+
+void Esqueleto::andarDireita()
+{
+	if (posicao.x <= 1920.f - 250.f) //Player nao passar dos limites da tela esquerda
+	{ 
+		posicao.x = posicao.x + getVelocidade().x;
+	}
+	else
+	{
+		lado = 2;
+	}
+}
+
+void Esqueleto::andarEsquerda()
+{
+	if (posicao.x >= 100.f) //Player nao passar dos limites da tela esquerda
+	{ 
+		posicao.x = posicao.x - getVelocidade().x;
+	}
+	else
+	{
+		lado = 1;
+	}
+}

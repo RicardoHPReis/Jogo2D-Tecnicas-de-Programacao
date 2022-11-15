@@ -1,44 +1,35 @@
 #pragma once
-#include "Lista_Entidades.h"
 #include "stdafx.h"
+#include "Lista_Entidades.h"
 #include "Jogador.h"
-#include "Inimigo.h"
+#include "Esqueleto.h"
 #include "Gerenciador_Colisoes.h"
+#include "Gerenciador_Grafico.h"
 
 class Fase
 {
 protected:
 	Texture tChao;
 	vector <RectangleShape> chao;
-
 	Jogador* jogador;
-	Inimigo* inimigo;
+	Esqueleto* esqueleto;
 
 	Sprite fundo;
-	Texture TexturaFundo;
+	Texture texturaFundo;
 	Lista_Entidades listaEntidades;
 	Lista_Entidades listaObstaculos;
 	Lista_Entidades listaPersonagens;
 	Gerenciador_Colisoes* colisao;
+	Gerenciador_Grafico* grafico; //Atributo temporario
+
 	float gravidade;
 
-	void inicVariaveis();
-	void inicTexturas();
-
 public:
+	Fase(float grav);
+	virtual ~Fase();
 
-	//janela
-	Ente* Tela;
-	VideoMode videoMode;
-
-	Fase();
-	~Fase();
-
-	void iniciaFase();
-
-	void atualiza();
-
-	void desenha();
-
-	//void calculaQueda();
+	virtual void iniciaFase() = 0;
+	virtual void atualiza() = 0;
+	virtual void desenha() = 0;
+	void calculaQueda(Lista_Entidades LEntidades);
 };

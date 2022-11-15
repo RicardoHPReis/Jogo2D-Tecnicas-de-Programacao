@@ -11,4 +11,5 @@ public:
 	~Plano();
 
 	void executado();
+	//Vector2f valorEmpuxo();
 };

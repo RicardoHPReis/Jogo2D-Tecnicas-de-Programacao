@@ -28,31 +28,21 @@ void Jogador::iniciarVariaiveis()
 {
 	this->limitadorTex = 0;
 
-	//VideoMode
-
-	VideoMode video;
-	video.height = 1080; //RESOLU�OES
-	video.width = 1920;
-
 	//chao
 
-	this->chao.setPosition(0.f, video.height - 85.f);
-	this->chao.setSize(Vector2f(video.width, 85.f));
+	this->chao.setPosition(0.f, grafico->getVideo().height - 85.f);
+	this->chao.setSize(Vector2f(grafico->getVideo().width, 85.f));
+	this->cPos = chao.getPosition();
 
 	//logica jogador
 
-	this->jogador_pulou = false;
-
-	this->gravidade = 1.f;
-	this->forcaPulo = 25.f;
-
-	this->pAltura = 90.f;
-	this->pLargura = (pAltura / 3) * 2;
-	this->cPos = chao.getPosition();
-	this->pPos = forma.getPosition();
-	this->frame = 0;
-	this->velTex = 0;
-
+	jogador_pulou = false;
+	gravidade = 1.f;
+	forcaPulo = 25.f;
+	tamanho = { (tamanho.y / 3) * 2, 90.f };
+	posicao = forma.getPosition();
+	frame = 0;
+	velTex = 0;
 	vidasSp.resize(vidas);
 }
 
@@ -62,10 +52,9 @@ void Jogador::iniciarJogador()
 	video.height = 1080; //RESOLU�OES
 	video.width = 1920;
 
-	this->forma.setSize(Vector2f(pLargura, pAltura));
-	this->forma.setPosition(50.f, (video.height - forma.getSize().y) - chao.getSize().y);
-	this->xpos = this->forma.getPosition().x;
-	this->ypos = this->forma.getPosition().y;
+	this->forma.setSize(tamanho);
+	this->forma.setPosition(50.f, grafico->getVideo().height - forma.getSize().y - chao.getSize().y);
+	posicao = forma.getPosition();
 }
 
 void Jogador::iniciarTexturas()
@@ -92,7 +81,8 @@ void Jogador::iniciarTexturas()
 		}
 		this->txJogadorAtaque[i].setSmooth(true);
 		
-		/*if (!this->txJogadorAtaquePula[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/AtaquePulo.png", IntRect(51 + (i * 588), 30, 448, 626))) {
+		/*if (!this->txJogadorAtaquePula[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/AtaquePulo.png", IntRect(51 + (i * 588), 30, 448, 626))) 
+		{
 			std::cout << "Erro ao carregar textura do Pulo com Ataque do Cavaleiro\n";
 		}
 		this->txJogadorAtaquePula[i].setSmooth(true);*/
@@ -112,36 +102,31 @@ void Jogador::iniciarTexturas()
 
 void Jogador::imprimeVidas()
 {
-	for (int i = 0; i < vidas; i++)
-	{
-		executarSprite(vidasSp[i]);
-	}
+	
 }
 
 void Jogador::atualizarJogador()
 {
-	//textura no frame
-	this->forma.setTexture(&txJogadorParado[this->velTex]);
+	forma.setTexture(&txJogadorParado[this->velTex]);
 
-	//oega posicoes importantes
-	this->cPos = this->chao.getPosition();
-	this->forma.setPosition(this->xpos, this->ypos);
+	cPos = chao.getPosition();
+	forma.setPosition(posicao);
 
-	//define para qual lado o forma esta virado
-	if (getLado() == 0) 
+	
+	if (lado == 0) //define para qual lado o forma esta virado
 	{
 		forma.setScale(Vector2f(-1, 1));
 		lado = 2;
 	}
-	else if (getLado() == 1) 
+	else if (lado == 1) 
 	{
 		forma.setScale(Vector2f(1, 1));
 		lado = 2;
 	}
 
 	//defina para nao passar a velocidade maxima
-	if (getVelocidade().x >= getVelocidadeMaxima())
-		setVelocidade({ getVelocidadeMaxima(), getVelocidade().y});
+	if (velocidade.x >= velocidade_max)
+		velocidade = { velocidade_max, velocidade.y};
 
 	//andar para os 2 lados
 	if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left))
@@ -149,14 +134,15 @@ void Jogador::atualizarJogador()
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || Keyboard::isKeyPressed(Keyboard::Right))
 		direcionalDireito();
 	else
-		setVelocidade({ 0.f, getVelocidade().y});
+		velocidade = { 0.f, velocidade.y};
 	
 	//pulo 
-	if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up)) {
+	if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up)) 
+	{
 		jogador_pulou = true;
 	}
 
-	this->fdist = this->cPos.y - (this->ypos + this->pAltura);
+	fdist = cPos.y - (posicao.y + tamanho.y);
 
 	//cair();
 	if (jogador_pulou == true)
@@ -165,7 +151,6 @@ void Jogador::atualizarJogador()
 	}
 	
 	//atacar
-
 	if ((Mouse::isButtonPressed(Mouse::Left) || Keyboard::isKeyPressed(Keyboard::Space)) && atacou == false) 
 	{
 		atacou = true;
@@ -186,6 +171,11 @@ void Jogador::atualizarJogador()
 
 void Jogador::atualizaVidas()
 {
+	for (int i = 0; i < vidas; i++)
+	{
+		grafico->desenharSprite(vidasSp[i]);
+	}
+
 	//se sofrer dano
 	//this->jogador->status.setVidas(this->jogador->status.getVidas()--);
 
@@ -199,20 +189,20 @@ void Jogador::pulo()
 	video.height = 1080; //RESOLU�OES
 	video.width = 1920;
 
-	setVelocidade({ getVelocidade().x, forcaPulo});
+	velocidade = { velocidade.x, forcaPulo};
 	forcaPulo -= gravidade;
-	ypos -= getVelocidade().y;
+	posicao.y -= velocidade.y;
 
-	this->forma.setTexture(&txJogadorPula[this->limitadorTex]);
-	if (this->frame % 6 == 0)
-		this->limitadorTex++;
+	forma.setTexture(&txJogadorPula[limitadorTex]);
+	if (frame % 6 == 0)
+		limitadorTex++;
 
-	if(this->ypos >= (video.height - forma.getSize().y) - chao.getSize().y)
+	if(posicao.y >= (grafico->getVideo().height - forma.getSize().y) - chao.getSize().y)
 	{
-		this->forcaPulo = 25.f;
-		this->jogador_pulou = false;
-		setVelocidade({ getVelocidade().x, 0.f });
-		this->limitadorTex = 0;
+		forcaPulo = 25.f;
+		jogador_pulou = false;
+		velocidade = { velocidade.x, 0.f };
+		limitadorTex = 0;
 	}
 }
 
@@ -230,49 +220,48 @@ void Jogador::ataque()
 
 void Jogador::ataqueAereo()
 {
-	if (this->limitadorTex1 <= 9) 
+	if (limitadorTex1 <= 9)
 	{
-		this->forma.setTexture(&txJogadorAtaquePula[this->limitadorTex1]);
-		if (this->frame % 3 == 0)
-			this->limitadorTex1++;
+		forma.setTexture(&txJogadorAtaquePula[limitadorTex1]);
+		if (frame % 3 == 0)
+			limitadorTex1++;
 	}
 	else
-		setAtaque(false);
+		atacou = false;
 }
 
-void Jogador::direcionalEsquerdo() {
-
+void Jogador::direcionalEsquerdo() 
+{
 	forma.setTexture(&txJogadorCorre[velTex]);
-	setLado(0);
-	if (xpos > forma.getSize().x) //forma nao passar dos limites da tela esquerda
+	lado = 0;
+
+	if (posicao.x > forma.getSize().x) //forma nao passar dos limites da tela esquerda
 	{
-		xpos -= getVelocidade().x;
-		setVelocidade({getVelocidade().x + 1.f, getVelocidade().y});
+		posicao.x -= velocidade.x;
+		velocidade = {velocidade.x + 1.f, velocidade.y};
 	}
 }
 
-void Jogador::direcionalDireito() {
-
-	VideoMode video;
-	video.height = 1080; //RESOLU�OES
-	video.width = 1920;
-
+void Jogador::direcionalDireito() 
+{
 	forma.setTexture(&txJogadorCorre[velTex]);
-	setLado(1);
-	if (xpos < (video.width - forma.getSize().x)) {  //forma nao passar dos limites da tela direita
-		xpos += getVelocidade().x;
-		setVelocidade({ getVelocidade().x + 1.f, getVelocidade().y });
+	lado = 1;
+
+	if (posicao.x < (grafico->getVideo().width - forma.getSize().x)) //forma nao passar dos limites da tela direita
+	{  
+		posicao.x += velocidade.x;
+		velocidade = { velocidade.x + 1.f, velocidade.y };
 	}
 }
 
 void Jogador::executar()
 {
-	janela->desenhar(&forma);
+	grafico->desenhar(forma);
 }
 
 int Jogador::getVidas()
 {
-	return getVidas();
+	return vidas;
 }
 
 void Jogador::atualizarTextura() 

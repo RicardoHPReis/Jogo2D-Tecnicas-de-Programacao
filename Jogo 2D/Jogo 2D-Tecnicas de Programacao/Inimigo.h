@@ -6,32 +6,11 @@
 class Inimigo : public Personagem
 {
 protected:
-
 	bool nocivo;
 
-	int frame1, velTex1, aux1;
-
-	Ente* Tela;
-
-	Texture tEnemy[11];
-
-	RectangleShape chao;
-
-	VideoMode videoModeE;
-
-	void inicEnemies();
-
-	void spawnInimigo();
-
-	void iniciarTexturas();
-
-	void iniciarStatus();
-
 public:
-	RectangleShape inimigo;
+	Inimigo(int id = 0, bool mov = false, Vector2f pos = { 0,0 }, Vector2f tam = { 0,0 }, int nr_vidas = 0, int nr_dano = 0, int ld = 0, bool atacar = true, bool morreu = false, bool foiAtacado = false, bool nocv = true);
+	virtual ~Inimigo();
 
-	void atualizaInimigo();
-
-	Inimigo();
-	~Inimigo();
+	virtual void atualizaInimigo() = 0;
 };

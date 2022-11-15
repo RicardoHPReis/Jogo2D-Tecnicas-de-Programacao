@@ -13,9 +13,8 @@ private:
 
 	//estat Player
 	bool jogador_pulou;
-	float gravidade, fdist, pAltura, pLargura, forcaPulo, xpos, ypos;
+	float gravidade, fdist, forcaPulo;
 	Vector2f cPos;
-	Vector2f pPos;
 
 	//objetivos jogo
 	RectangleShape chao;

@@ -1,7 +1,7 @@
 #include "FaseDois.h"
 
 FaseDois::FaseDois():
-Fase()
+Fase(1)
 {
 
 }

@@ -4,28 +4,21 @@
 Gerenciador_Grafico* Gerenciador_Grafico::instancia_grafico = NULL;
 
 Jogo::Jogo():
-grafico(grafico->getInstancia_Grafico())
+grafico(grafico->getInstancia_Grafico()),
+menu(),
+fase1()
 {
-	this->inicVariaveis();
+	menuAbre = true;
+	faseAtual = 1;
+	numFase = 0;
 }
 
 Jogo::~Jogo()
 {
-	delete this->menuP;
-	delete this->fase1;
+	menuAbre = false;
+	faseAtual = 0;
+	numFase = 0;
 }
-
-void Jogo::inicVariaveis()
-{
-	this->fase1 = new FaseUm();
-	this->menuP = new Menu();
-	//logica jogo
-	this->menuAbre = true;
-	
-	this->faseAtual = 1;
-}
-
-//accesos
 
 const bool Jogo::rodando() const
 {
@@ -37,33 +30,33 @@ const bool Jogo::rodando() const
 
 void Jogo::atualizaMenu()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
+	if (Keyboard::isKeyPressed(Keyboard::Escape)) 
 	{
-		this->menuAbre = true;
+		menuAbre = true;
 	}
 }
 
 void Jogo::update()
 {
-	if (menuAbre == true) {
-		this->menuP->run_menu();
+	if (menuAbre == true)
+	{
+		menu.run_menu();
 		menuAbre = false;
 	}
 	numFase = 1;
-	this->atualizaMenu();
+	atualizaMenu();
 
-	if (this->numFase == 1)
+	if (numFase == 1)
 	{
-		this->fase1->atualiza();
-		this->fase1->desenha();
+		fase1.atualiza();
+		fase1.desenha();
+		//jogador.atualiza();
+		//jogador.desenha();
 	}
-	/*
-	else if (this->numFase == 2)
+	/*else if (this->numFase == 2)
 	{
-		this->fase2->atualiza();
-
-		this->fase2->desenha();
-	}
-	*/
+		fase2.atualiza();
+		fase2.desenha();
+	}*/
 }
 

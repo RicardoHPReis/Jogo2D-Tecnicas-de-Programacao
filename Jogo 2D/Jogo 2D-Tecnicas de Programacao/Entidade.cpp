@@ -22,7 +22,7 @@ Entidade::~Entidade()
 	seMovimenta = false;
 }
 
-const RectangleShape Entidade::getForma() const
+RectangleShape Entidade::getForma()
 {
 	return forma;
 }

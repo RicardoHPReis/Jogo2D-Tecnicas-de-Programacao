@@ -19,7 +19,7 @@ public:
 	//virtual void executar() = 0;
 	//virtual void imprimir() = 0;
 
-	const RectangleShape getForma() const;
+	RectangleShape getForma();
 
 	void setPosicao(const Vector2f pos);
 	const Vector2f getPosicao() const;

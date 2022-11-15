@@ -4,35 +4,26 @@
 
 class Menu : public Ente
 {
-
+private:
 	Texture cursor;
-	Sprite* cursorSprite;
-
-	//Ente
-
-	Ente *Tela;
-
-	//
-	int delay, tempoDelay;
-	int posi;
-	bool pressed, theselect;
-
-	RectangleShape* play, * fases, * opcoes, * sobre, * sair;
-	Font* font;
-	Texture* image;
-	Sprite* bg;
+	Sprite cursorSprite;
 
 	Vector2i posMouse;
 	Vector2f cordMouse;
 
+	int delay, tempoDelay;
+	int posi;
+	bool apertou, selecao;
+
+	RectangleShape play, fases, ranking, opcoes, sair;
+	Font fonte;
+	Texture imagem;
+	Sprite fundo;
 	vector<const char*> options;
 	vector<Vector2f>coords;
 	vector<Text> texts;
 	vector<size_t>sizes;
 
-protected:
-
-	//define valores para cada objeto
 	void inicVariaveis();
 	void inicCursor();
 
