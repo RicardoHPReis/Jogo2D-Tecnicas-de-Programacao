@@ -5,15 +5,10 @@
 class Obstaculo :public Entidade
 {
 protected:
-	int dano;
-	bool atacou;
 
 public:
-	Obstaculo();
-	~Obstaculo();
+	Obstaculo(int id = 0, bool mov = false, Vector2f pos = { 0,0 }, Vector2f tam = { 0,0 });
+	virtual ~Obstaculo();
 
-	void setDano(const int nr_dano);
-	const int getDano() const;
-	void setAtacou(const bool atc);
-	const bool getAtacou() const;
+	virtual void executado()=0;
 };

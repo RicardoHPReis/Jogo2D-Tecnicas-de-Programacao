@@ -1,9 +1,8 @@
 ﻿#include "Jogador.h"
 
-Jogador::Jogador()
+Jogador::Jogador(int id, bool mov, Vector2f pos, Vector2f tam, int nr_vidas, int nr_dano, int ld, bool atacar, bool morreu, bool foiAtacado):
+	Personagem(1, true, pos, tam, 5, nr_dano, 1, true, false, false)
 {
-	this->Tela = new Ente();
-	this->status = new Personagem();
 	this->iniciarVariaiveis();
 	this->iniciarJogador();
 	this->iniciarStatus();
@@ -12,264 +11,225 @@ Jogador::Jogador()
 
 Jogador::~Jogador()
 {
-	delete this->status;
-	delete this->Tela;
 }
 
 void Jogador::iniciarStatus()
 {
-	this->status->setVidas(5);
-	this->status->setLado(1);
-	this->status->setPodeAtacar(true);
-	this->status->setAtaque(false);
-	this->status->setDano(1);
-	this->status->setVelocidadeMaxima(13);
-
-	this->status->setVelocidadeX(0.f);
-	this->status->setVelocidadeY(0.f);
+	setVidas(5);
+	setLado(1);
+	setPodeAtacar(true);
+	setAtaque(false);
+	setDano(1);
+	setVelocidadeMaxima(13);
+	setVelocidade({ 0.f, 0.f });
 }
 
 void Jogador::iniciarVariaiveis()
 {
 	this->limitadorTex = 0;
 
-	//VideoMode
-
-	this->videoModeP.height = 1080; //RESOLU�OES
-	this->videoModeP.width = 1920;
-
 	//chao
 
-	this->chao.setPosition(0.f, this->videoModeP.height - 85.f);
-	this->chao.setSize(Vector2f(this->videoModeP.width, 85));
-
-	//logica player
-
-	this->jogador_pulou = false;
-
-	this->gravidade = 1.f;
-	this->forcaPulo = 25.f;
-
-	this->pAltura = 90.f;
-	this->pLargura = (pAltura / 3) * 2;
+	this->chao.setPosition(0.f, grafico->getVideo().height - 85.f);
+	this->chao.setSize(Vector2f(grafico->getVideo().width, 85.f));
 	this->cPos = chao.getPosition();
-	this->pPos = player.getPosition();
-	this->frame = 0;
-	this->velTex = 0;
+
+	//logica jogador
+
+	jogador_pulou = false;
+	gravidade = 1.f;
+	forcaPulo = 25.f;
+	tamanho.y = 90.f; // DEFINE O TAMANHO
+
+	tamanho.x = { (tamanho.y / 3.f) * 2.f};
+	posicao = forma.getPosition();
+	frame = 0;
+	velTex = 0;
 }
 
 void Jogador::iniciarJogador()
 {
-	this->player.setSize(Vector2f(pLargura, pAltura));
-	this->player.setPosition(50.f, (videoModeP.height - player.getSize().y) - chao.getSize().y);
-	this->xpos = this->player.getPosition().x;
-	this->ypos = this->player.getPosition().y;
+	VideoMode video;
+	video.height = 1080; //RESOLU�OES
+	video.width = 1920;
+
+	this->forma.setSize(tamanho);
+	this->forma.setPosition(50.f, grafico->getVideo().height - forma.getSize().y - chao.getSize().y);
+	posicao = forma.getPosition();
 }
 
 void Jogador::iniciarTexturas()
 {
-	int i;
-
-	//texturas Player
-	for (i = 0; i < 10; i++) {
+	for (int i = 0; i < 10; i++) 
+	{
 		if (!this->txJogadorCorre[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Correr.png", IntRect(99 + (i * 580), 30, 460, 660))) {
-			std::cout << "ERROR";
+			std::cout << "Erro ao carregar textura da corrida do cavaleiro\n";
 		}
 		this->txJogadorCorre[i].setSmooth(true);
 
 		if (!this->txJogadorPula[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Pular.png", IntRect(51 + (i * 588), 30, 470, 626))) {
-			std::cout << "ERROR";
+			std::cout << "Erro ao carregar textura do pulo do cavaleiro\n";
 		}
 		this->txJogadorPula[i].setSmooth(true);
 
 		if (!this->txJogadorParado[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Parado.png", IntRect(51 + (i * 588), 30, 448, 626))) {
-			std::cout << "ERROR";
+			std::cout << "Erro ao carregar textura do cavaleiro parado\n";
 		}
 		this->txJogadorParado[i].setSmooth(true);
 
 		if (!this->txJogadorAtaque[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Atacar.png", IntRect(51 + (i * 588), 30, 448, 626))) {
-			std::cout << "ERROR";
+			std::cout << "Erro ao carregar textura do ataque do cavaleiro\n";
 		}
-
 		this->txJogadorAtaque[i].setSmooth(true);
-		if (!this->txJogadorAtaquePula[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/AtaquePulo.png", IntRect(51 + (i * 588), 30, 448, 626))) {
-			std::cout << "ERROR";
+		
+		if (!this->txJogadorAtaquePula[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/AtaquePulo.png", IntRect(51 + (i * 588), 30, 448, 626))) 
+		{
+			std::cout << "Erro ao carregar textura do Pulo com Ataque do Cavaleiro\n";
 		}
 		this->txJogadorAtaquePula[i].setSmooth(true);
 	}
 }
 
-void Jogador::atualizarJogador()
+void Jogador::atualizaJogador()
 {
+	forma.setTexture(&txJogadorParado[this->velTex]);
 
-	//textura no frame
-	this->player.setTexture(&txJogadorParado[this->velTex]);
+	cPos = chao.getPosition();
+	forma.setPosition(posicao);
 
-	//oega posicoes importantes
-	this->cPos = this->chao.getPosition();
-	this->player.setPosition(this->xpos, this->ypos);
-
-	//define para qual lado o player esta virado
-	if (this->status->getLado() == 0) {
-		this->player.setScale(Vector2f(-1, 1));
-		this->status->setLado(2);
+	
+	if (lado == 0) //define para qual lado o forma esta virado
+	{
+		forma.setScale(Vector2f(-1, 1));
+		lado = 2;
 	}
-	else if (this->status->getLado() == 1) {
-		this->player.setScale(Vector2f(1, 1));
-		this->status->setLado(2);
+	else if (lado == 1) 
+	{
+		forma.setScale(Vector2f(1, 1));
+		lado = 2;
 	}
 
 	//defina para nao passar a velocidade maxima
-	if (this->status->getVelocidadeX() >= this->status->getVelocidadeMaxima())
-		this->status->setVelocidadeX(this->status->getVelocidadeMaxima());
+	if (velocidade.x >= velocidade_max)
+		velocidade = { velocidade_max, velocidade.y};
 
 	//andar para os 2 lados
 	if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left))
 		direcionalEsquerdo();
-
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || Keyboard::isKeyPressed(Keyboard::Right))
 		direcionalDireito();
-
-	//se nao andar a velocidade � 0 // fica parado
 	else
-		this->status->setVelocidadeX(0.f);
+		velocidade = { 0.f, velocidade.y};
 	
 	//pulo 
-	if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up)) {
-		this->jogador_pulou = true;
+	if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up)) 
+	{
+		jogador_pulou = true;
 	}
 
-	this->fdist = this->cPos.y - (this->ypos + this->pAltura);
+	fdist = cPos.y - (posicao.y + tamanho.y);
 
 	//cair();
-
-	if (this->jogador_pulou == true)
+	if (jogador_pulou == true)
 	{
 		pulo();
 	}
 	
 	//atacar
-
-	if ((Mouse::isButtonPressed(Mouse::Left) || Keyboard::isKeyPressed(Keyboard::Space)) && this->status->getAtaque() == false) {
-		this->status->setAtaque(true);
-		this->limitadorTex1 = 0;
+	if ((Mouse::isButtonPressed(Mouse::Left) || Keyboard::isKeyPressed(Keyboard::Space)) && atacou == false) 
+	{
+		atacou = true;
+		limitadorTex1 = 0;
 	}
-
-	if (this->status->getAtaque() == true)
+	if (atacou == true)
 	{
 		ataque();
 	}
-
-	if (this->status->getAtaque() == true && this->jogador_pulou == true)
+	if (atacou == true && jogador_pulou == true)
 	{
 		ataqueAereo();
 	}
 
 	atualizarTextura();
-	atualizaVidas();
-}
-
-void Jogador::atualizaVidas() {
-
-	//se sofrer dano
-	//this->jogador->status.setVidas(this->jogador->status.getVidas()--);
-
-	//se ganhar uma vida
-	//this->jogador->status.setVidas(this->jogador->status.getVidas()++);
 }
 
 void Jogador::pulo() 
 {
-	
-	this->status->setVelocidadeY(this->forcaPulo);
-	this->forcaPulo -= this->gravidade;
-	this->ypos -= this->status->getVelocidadeY();
+	VideoMode video;
+	video.height = 1080; //RESOLU�OES
+	video.width = 1920;
 
-	this->player.setTexture(&txJogadorPula[this->limitadorTex]);
-	if (this->frame % 6 == 0)
-		this->limitadorTex++;
+	velocidade = { velocidade.x, forcaPulo};
+	forcaPulo -= gravidade;
+	posicao.y -= velocidade.y;
 
-	if(this->ypos >= (videoModeP.height - player.getSize().y) - chao.getSize().y)
+	forma.setTexture(&txJogadorPula[limitadorTex]);
+	if (frame % 6 == 0)
+		limitadorTex++;
+
+	if(posicao.y >= (grafico->getVideo().height - forma.getSize().y) - chao.getSize().y)
 	{
-		this->forcaPulo = 25.f;
-		this->jogador_pulou = false;
-		this->status->setVelocidadeY(0.f);
-		this->limitadorTex = 0;
+		forcaPulo = 25.f;
+		jogador_pulou = false;
+		velocidade = { velocidade.x, 0.f };
+		limitadorTex = 0;
 	}
 }
 
 void Jogador::ataque()
 {
-
-	//limita os frames do Ataque
-
-	if (this->limitadorTex1 <= 9) {
-
-		this->player.setTexture(&txJogadorAtaque[this->limitadorTex1]);
+	if (this->limitadorTex1 <= 9) 
+	{
+		this->forma.setTexture(&txJogadorAtaque[this->limitadorTex1]);
 		if (this->frame % 3 == 0)
 			this->limitadorTex1++;
-
 	}
 	else
-		this->status->setAtaque(false);
+		setAtaque(false);
 }
 
 void Jogador::ataqueAereo()
 {
-
-	//limita os frames do pulo
-	if (this->limitadorTex1 <= 9) {
-
-		this->player.setTexture(&txJogadorAtaquePula[this->limitadorTex1]);
-		if (this->frame % 3 == 0)
-			this->limitadorTex1++;
-
+	if (limitadorTex1 <= 9)
+	{
+		forma.setTexture(&txJogadorAtaquePula[limitadorTex1]);
+		if (frame % 3 == 0)
+			limitadorTex1++;
 	}
 	else
-		this->status->setAtaque(false);
+		atacou = false;
 }
 
-void Jogador::direcionalEsquerdo() {
-
-	this->player.setTexture(&txJogadorCorre[this->velTex]);
-	this->status->setLado(0);
-	if (this->xpos > this->player.getSize().x) { //Player nao passar dos limites da tela esquerda
-		this->xpos -= this->status->getVelocidadeX();
-		this->status->setVelocidadeX(this->status->getVelocidadeX() + 1.f);
-	}
-
-
-}
-
-void Jogador::direcionalDireito() {
-
-	this->player.setTexture(&txJogadorCorre[this->velTex]);
-
-	this->status->setLado(1);
-	if (this->xpos < (this->videoModeP.width - this->player.getSize().x)) {  //Player nao passar dos limites da tela direita
-		this->xpos += this->status->getVelocidadeX();
-		this->status->setVelocidadeX(this->status->getVelocidadeX() + 1.f);
-	}
-
-}
-
-void Jogador::executar()
+void Jogador::direcionalEsquerdo() 
 {
-	this->Tela->executar(this->player);
+	forma.setTexture(&txJogadorCorre[velTex]);
+	lado = 0;
+
+	if (posicao.x > forma.getSize().x) //forma nao passar dos limites da tela esquerda
+	{
+		posicao.x -= velocidade.x;
+		velocidade = {velocidade.x + 1.f, velocidade.y};
+	}
 }
 
-int Jogador::getVidas()
+void Jogador::direcionalDireito() 
 {
-	return this->status->getVidas();
+	forma.setTexture(&txJogadorCorre[velTex]);
+	lado = 1;
+
+	if (posicao.x < (grafico->getVideo().width - forma.getSize().x)) //forma nao passar dos limites da tela direita
+	{  
+		posicao.x += velocidade.x;
+		velocidade = { velocidade.x + 1.f, velocidade.y };
+	}
 }
 
-void Jogador::atualizarTextura() {
-
-	//muda para a proxima textura a cada 7 frames
-	if (this->velTex == 9)
-		this->velTex = 0;
-	if (this->frame % 7 == 0)
-		this->velTex++;
-	this->frame++;
+void Jogador::atualizarTextura() 
+{
+	
+	if (frame % 7 == 0)
+		velTex++;
+	if (velTex == 10)
+		velTex = 0;
+	frame++;
 }
-

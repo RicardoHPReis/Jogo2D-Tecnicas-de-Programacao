@@ -1,36 +1,13 @@
 #include "Obstaculo.h"
 
 
-Obstaculo::Obstaculo():
-Entidade()
+Obstaculo::Obstaculo(int id, bool mov, Vector2f pos, Vector2f tam):
+Entidade(id, mov, pos, tam)
 {
-	dano = 0;
-	atacou = false;
+	forma.setFillColor(Color::Red);
 }
 
 Obstaculo::~Obstaculo()
 {
-	dano = 0;
-	atacou = false;
-}
 
-
-void Obstaculo::setDano(const int nr_dano)
-{
-	dano = nr_dano;
-}
-
-const int Obstaculo::getDano() const
-{
-	return dano;
-}
-
-void Obstaculo::setAtacou(const bool atc)
-{
-	atacou = atc;
-}
-
-const bool Obstaculo::getAtacou() const
-{
-	return atacou;
 }

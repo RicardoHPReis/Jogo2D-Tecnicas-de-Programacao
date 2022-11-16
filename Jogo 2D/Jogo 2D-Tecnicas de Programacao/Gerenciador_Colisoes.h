@@ -1,18 +1,26 @@
 #pragma once
 #include "Inimigo.h"
 #include "Obstaculo.h"
+#include "Jogador.h"
 #include "stdafx.h"
 
 class Gerenciador_Colisoes
 {
 private:
-	vector<Inimigo*> inimigos;
-	list<Obstaculo*> obstaculos;
-	bool colidiu;
+	vector<Inimigo*> listaInimigos;
+	list<Obstaculo*> listaObstaculos;
+	list<Obstaculo*>::iterator* it;
+
+	static Gerenciador_Colisoes* instancia_colisoes;
+	Gerenciador_Colisoes();
 
 public:
-	Gerenciador_Colisoes();
 	~Gerenciador_Colisoes();
+	static Gerenciador_Colisoes* getInstancia_Colisoes();
 
-	bool colisao();
+	void gerenciaColisoes(Jogador* jogador, Inimigo* inimigo, Obstaculo* obstaculo);
+	Vector2f calcularColisao(Entidade* entidade, Entidade* ent);
+	bool colisaoJogadorInimigo(Jogador* jogador, Inimigo* inimigo);
+	bool colisaoJogadorObstaculoTeste(Jogador* jogador, Obstaculo* obstaculo);
+	bool colisaoJogadorObstaculo(Jogador* jogador, Obstaculo* obstaculo);
 };

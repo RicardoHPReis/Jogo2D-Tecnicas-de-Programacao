@@ -1,12 +1,14 @@
 #include "Personagem.h"
 
-Personagem::Personagem():
-Entidade()
+Personagem::Personagem(int id, bool mov, Vector2f pos, Vector2f tam, int nr_vidas, int nr_dano, int ld, bool atacar, bool morreu, bool foiAtacado):
+Entidade(id, mov, pos, tam)
 {
-	dano = 0;
-	lado = 0;
-	podeAtacar = false;
-	estaMorto = false;
+	vidas = nr_vidas;
+	dano = nr_dano;
+	lado = ld;
+	podeAtacar = atacar;
+	estaMorto = morreu;
+	atacou = foiAtacado;
 }
 
 Personagem::~Personagem()
@@ -16,11 +18,12 @@ Personagem::~Personagem()
 	lado = 0;
 	podeAtacar = false;
 	estaMorto = false;
+	atacou = false;
 }
 
-void Personagem::setAtaque(bool nr_vd)
+void Personagem::setAtaque(bool foiAtacado)
 {
-	this->atacou = nr_vd;
+	atacou = foiAtacado;
 }
 
 bool Personagem::getAtaque()
@@ -49,12 +52,12 @@ const int Personagem::getDano() const
 	return dano;
 }
 
-void Personagem::setLado( int ld)
+void Personagem::setLado(const int ld)
 {
 	lado = ld;
 }
 
- int Personagem::getLado() 
+const int Personagem::getLado() const
 {
 	return lado;
 }
@@ -74,27 +77,7 @@ void Personagem::setEstaMorto(const bool mrt)
 	estaMorto = mrt;
 }
 
-const bool Personagem::getEstaMorto() const 
+const bool Personagem::getEstaMorto() const
 {
 	return estaMorto;
-}
-
-void Personagem::setEstaAndando(bool mrt)
-{
-	estaAndando = mrt;
-}
-
-bool Personagem::getEstaAndando()
-{
-	return estaAndando;
-}
-
-void Personagem::setEstaParado(bool mrt)
-{
-	estaParado = mrt;
-}
-
-bool Personagem::getEstaParado()
-{
-	return estaParado;
 }

@@ -1,68 +1,61 @@
 ﻿#include "Jogo.h"
 
-//contrutores / destrutores
-Jogo::Jogo()
-{
 
-	this->inicVariaveis();
+Gerenciador_Grafico* Gerenciador_Grafico::instancia_grafico = NULL;
+
+Jogo::Jogo():
+grafico(grafico->getInstancia_Grafico()),
+menu(),
+fase1()
+{
+	menuAbre = true;
+	faseAtual = 1;
+	numFase = 0;
 }
 
 Jogo::~Jogo()
 {
-	delete this->menuP;
+	menuAbre = false;
+	faseAtual = 0;
+	numFase = 0;
 }
-
-void Jogo::inicVariaveis()
-{
-	this->fase1 = new FaseUm();
-	this->menuP = new Menu();
-	//logica jogo
-	this->menuAbre = true;
-	
-	this->faseAtual = 1;
-}
-
-//accesos
 
 const bool Jogo::rodando() const
 {
-	if (fase1->principal->Tela->getAberta() == 1)
-		return 1;
+	if (grafico->janelaEstaAberta())
+		return true;
 	else
-		return 0;
+		return false;
 }
-
-//funcoes
 
 void Jogo::atualizaMenu()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-		this->menuAbre = true;
+	if (Keyboard::isKeyPressed(Keyboard::Escape)) 
+	{
+		menuAbre = true;
 	}
 }
 
 void Jogo::update()
 {
-	if (menuAbre == true) {
-		this->menuP->run_menu();
-		menuAbre = false;
+	if (this->menuAbre == true)
+	{
+		this->menu.run_menu();
+		this->menuAbre = false;
 	}
 
+	this->numFase = 1;
 	this->atualizaMenu();
 
-	if (this->faseAtual == 1)
+	if (this->numFase == 1)
 	{
-		this->fase1->principal->atualiza();
-
-		this->fase1->principal->desenha();
+		this->fase1.atualiza();
+		this->fase1.desenha();
 	}
-	/*
-	else if (this->numFase == 2)
+	/*else if (this->numFase == 2)
 	{
-		this->fase2->principal->atualiza();
-
-		this->fase2->principal->desenha();
-	}
-	*/
+		fase2.atualiza();
+		fase2.desenha();
+	}*/
 }
 
