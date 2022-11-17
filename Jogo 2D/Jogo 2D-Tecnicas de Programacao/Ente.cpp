@@ -1,65 +1,54 @@
 ﻿#include "Ente.h"
 
-Ente::Ente(int i) {
-	this->id = i;
-	this->janela = NULL;
-}
 
-Ente::Ente()
+Ente::Ente(int i):
+	id(i)
 {
-	id = 0;
-	janela = NULL;
-	this->inicEnte();
+	setGerenciador_Grafico(Gerenciador_Grafico::getInstancia_Grafico());
 }
 
 Ente::~Ente()
 {
-	id = 0;
 }
 
-void Ente::inicEnte()
+const int Ente::getId() const
 {
-	this->janela = nullptr;
-	
-	this->janela = &Gerenciador_Grafico::getInstancia();
+	return id;
 }
 
-void Ente::executar(RectangleShape obj)
+void Ente::setGerenciador_Grafico(Gerenciador_Grafico* gg)
 {
-	this->janela->desenhar(&obj);
+	grafico = gg;
 }
 
-void Ente::executarTex(Text obj)
+void Ente::desenhar(RectangleShape retangulo)
 {
-	this->janela->desenharT(&obj);
+	grafico->desenhar(retangulo);
 }
 
-void Ente::executarSprite(Sprite obj)
+void Ente::desenharTexto(Text texto)
 {
-	this->janela->desenharS(&obj);
+	grafico->desenharTexto(texto);
 }
 
-void Ente::clear()
+void Ente::desenharSprite(Sprite sprite)
 {
-	this->janela->clear();
+	grafico->desenharSprite(sprite);
 }
 
-void Ente::display()
+void Ente::limpar()
 {
-	this->janela->janelaP->display();
+	grafico->limpar();
 }
 
-RenderWindow* Ente::getJanelaCoord(void)
+void Ente::mostrar()
 {
-	return (janela->janelaP);
+	grafico->mostrar();
 }
 
-void Ente::setId(int i)
+bool Ente::janelaEstaAberta()
 {
-	id = i;
-}
-
-int Ente::getAberta(void)
-{
-	return (1);
+	if(grafico->getJanela())
+		return true;
+	return false;
 }

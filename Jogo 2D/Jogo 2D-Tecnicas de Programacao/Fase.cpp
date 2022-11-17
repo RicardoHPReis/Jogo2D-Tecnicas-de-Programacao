@@ -1,102 +1,58 @@
 #include "Fase.h"
 
-Fase::Fase() :
-Ente()
-{
-	this->inicVariaveis();
-	this->inicVidas();
-	this->inicTexturas();
-	this->iniciaFase();
 
-	this->inimigo = new Inimigo();
-	this->jogador = new Jogador();
-	this->Tela = new Ente();
+Gerenciador_Colisoes* Gerenciador_Colisoes::instancia_colisoes = NULL;
+
+Fase::Fase(int i):
+	Ente(i),
+	listaEntidades()
+{
+	Fase::setGerenciador_Colisoes(Gerenciador_Colisoes::getInstancia_Colisoes());
 }
 
 Fase::~Fase()
 {
-	delete this->inimigo;
-	delete this->jogador;
-	delete this->Tela;
 }
 
-void Fase::inicVariaveis()
+void Fase::gerenciaColisoes()
 {
-	this->vidasN = 5;
-	this->vidas.resize(this->vidasN);
-	
-	this->chao.resize(23);
+	colisao->colisaoJogadorInimigo();
+	colisao->colisaoJogadorObstaculo();
+	colisao->colisaoJogadorProjetil();
+	colisao->colisaoInimigoObstaculo();
+	colisao->colisaoProjetilObstaculo();
 }
 
-void Fase::inicVidas()
+void Fase::setGerenciador_Colisoes(Gerenciador_Colisoes* gc)
 {
-	this->tVidas.loadFromFile("../../Texturas/Cenario/Vida.png");
-	this->tVidas.setSmooth(true);
-
-	//textura vidas
-
-	for (size_t i{}; i < vidas.size(); ++i) {
-
-		this->vidas[i].setTexture(tVidas);
-		this->vidas[i].setPosition(Vector2f((30.f) + (50 * i), 10.f));
-
-	}
+	colisao = gc;
 }
 
-void Fase::inicTexturas()
+void Fase::criarEsqueletos(Vector2f pos)
 {
-	int i;
-
-	//textura fundo
-	this->tBg.loadFromFile("../../Texturas/Cenario/Fundo.jpg", IntRect(0, 0, this->videoMode.width, this->videoMode.height));
-	this->tBg.setSmooth(true);
-	this->fundo.setTexture(tBg);
-
-	//
-	if (!this->tChao.loadFromFile("../../Texturas/Cenario/Texturas_mapa.png", IntRect(184, 18, 77, 77))) {
-		cout << "ERROR";
-	}
-	this->tChao.setSmooth(true);
+	Esqueleto* esqueleto = new Esqueleto(pos);
+	listaEntidades.adicionarEntidade(esqueleto);
+	colisao->adicionarInimigo(esqueleto);
 }
 
-void Fase::iniciaFase()
+void Fase::criarMorcego(Vector2f pos)
 {
-	
-	for (int i = 0; i < 23; i++)
-	{
-		this->chao[i].setSize(Vector2f(85, 85));
-		this->chao[i].setPosition(0 + (i * chao[0].getSize().x), videoMode.height - 85.f);
-		this->chao[i].setTexture(&tChao);
-	}
-
+	Morcego* morcego = new Morcego(pos);
+	listaEntidades.adicionarEntidade(morcego);
+	colisao->adicionarInimigo(esqueleto);
 }
 
-void Fase::atualiza()
+void Fase::criarPlataformas(Vector2f pos, Vector2f tam)
 {
-	this->jogador->atualizarJogador();
-
-	this->inimigo->atualizaInimigo();
+	Plataforma* plataforma = new Plataforma(pos, tam);
+	listaEntidades.adicionarEntidade(plataforma);
+	colisao->adicionarObstaculo(plataforma);
 }
 
-void Fase::imprimeVidas()
+
+void Fase::deletarEntidades()
 {
-	for (int i = 0; i < this->jogador->getVidas(); i++)
-	{
-		this->Tela->executarSprite(this->vidas[i]);
-	}
-}
-
-void Fase::desenha()
-{
-	this->Tela->clear();
-
-	this->Tela->executarSprite(fundo);
-
-	this->imprimeVidas();
-
-	this->Tela->executar(this->jogador->player);
-
-	this->Tela->executar(this->inimigo->inimigo);
-
-	this->Tela->display();
+	delete morcego;
+	delete esqueleto;
+	delete jogador;
 }

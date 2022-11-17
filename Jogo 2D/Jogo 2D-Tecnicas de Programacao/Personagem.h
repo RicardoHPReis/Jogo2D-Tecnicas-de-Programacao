@@ -6,29 +6,21 @@ class Personagem : public Entidade
 {
 protected:
 	int vidas;
-	int dano;
-	int lado;
-	float vida;
 	bool podeAtacar;
 	bool estaMorto;
 	bool atacou;
 
 public:
-
-	Personagem();
+	Personagem(int i = 0, Vector2f pos = {0.f, 0.f}, Vector2f tam = { 0.f, 0.f });
 	~Personagem();
 
-	void setAtaque(bool nr_vd);
+	//virtual void atualizaJogador() = 0;
+
+	void setAtaque(bool foiAtacado);
 	bool getAtaque();
 
 	void setVidas(const int nr_vd);
 	const int getVidas() const;
-
-	void setDano(const int nr_dano);
-	const int getDano() const;
-
-	void setLado(const int ld);
-	const int getLado() const;
 
 	void setPodeAtacar(const bool atc);
 	const bool getPodeAtacar() const;

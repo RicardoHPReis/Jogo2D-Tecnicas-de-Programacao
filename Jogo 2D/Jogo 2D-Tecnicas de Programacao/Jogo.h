@@ -1,48 +1,30 @@
 #pragma once
 #include "stdafx.h"
 #include "Menu.h"
+#include "Jogador.h"
 #include "FaseUm.h"
+#include "Ente.h"
 //#include "FaseDois.h"
 #include "Gerenciador_Grafico.h"
 
 
-class Jogo 
+class Jogo
 {
 private:
+	Menu menu;
+	Jogador jogador;
+	FaseUm fase1;
+	//FaseDois fase2;
 
-	//fases
-	FaseUm *fase1;
 	int numFase;
-
-	//menu
-	Menu* menuP;
-
-	//fases
 	int faseAtual;
-
-	//Fase 1
-
 	bool menuAbre;
 
-	//posicoes mouse
-	Vector2i mousePos;
-
-	//funcoes privadas
-	void inicVariaveis();
-
 public:
-
-	//construtores e destrutores
 	Jogo();
 	virtual ~Jogo();
 
-	//acessos
 	const bool rodando() const;
-
-	//funcoes
-
 	void atualizaMenu();
-
 	void update();
-
 };

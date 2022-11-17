@@ -1,30 +1,74 @@
 #include "Entidade.h"
 
-Entidade::Entidade() :
-Ente()
+
+Entidade::Entidade(int i, Vector2f pos, Vector2f tam) :
+	Ente(i),
+	tamanho(tam),
+	posicao(pos),
+	forma()
 {
 	seMovimenta = false;
 	velocidade = { 0,0 };
-	velocidade_max = 0;
-	tiraVida = false;
+	velocidade_max = 0.f;
+	dano = 0;
+	lado = 0;
+	gravidade = 1;
 }
-
-/*Entidade::Entidade(bool mov, Vector2f vel, float vel_max, bool danoso, int nr_id, Vector2f pos, Vector2f coord, Vector2f tam) :
-//Ente(nr_id, pos, coord, tam)
-Ente()
-{
-	seMovimenta = mov;
-	velocidade = vel;
-	velocidade_max = vel_max;
-	tiraVida = danoso;
-}*/
 
 Entidade::~Entidade()
 {
-	seMovimenta = false;
+	forma;
 	velocidade = { 0,0 };
+	tamanho = { 0,0 };
+	posicao = { 0,0 };
 	velocidade_max = 0;
-	tiraVida = false;
+	seMovimenta = false;
+	gravidade = 0;
+}
+
+RectangleShape Entidade::getForma()
+{
+	return forma;
+}
+
+void Entidade::setPosicao(const Vector2f pos)
+{
+	posicao = pos;
+}
+
+const Vector2f Entidade::getPosicao() const
+{
+	return posicao;
+}
+
+void Entidade::setTamanho(const Vector2f tam)
+{
+	tamanho = tam;
+}
+
+const Vector2f Entidade::getTamanho() const
+{
+	return tamanho;
+}
+
+void Entidade::setDano(const int nr_dano)
+{
+	dano = nr_dano;
+}
+
+const int Entidade::getDano() const
+{
+	return dano;
+}
+
+void Entidade::setLado(const int ld)
+{
+	lado = ld;
+}
+
+const int Entidade::getLado() const
+{
+	return lado;
 }
 
 void Entidade::setSeMovimenta(const bool mov)
@@ -37,24 +81,14 @@ const bool Entidade::getSeMovimenta() const
 	return seMovimenta;
 }
 
-void Entidade::setVelocidadeY(const float vel)
+void Entidade::setVelocidade(const Vector2f vel)
 {
-	velocidade.y = vel;
+	velocidade = vel;
 }
 
-void Entidade::setVelocidadeX(const float vel)
+const Vector2f Entidade::getVelocidade() const
 {
-	velocidade.x = vel;
-}
-
-const float Entidade::getVelocidadeY() const
-{
-	return velocidade.y;
-}
-
-const float Entidade::getVelocidadeX() const
-{
-	return velocidade.x;
+	return velocidade;
 }
 
 void Entidade::setVelocidadeMaxima(const float vel_max)
@@ -67,12 +101,17 @@ const float Entidade::getVelocidadeMaxima() const
 	return velocidade_max;
 }
 
-void Entidade::setTiraVida(const bool danoso)
+void Entidade::setGravidade(const float grav)
 {
-	tiraVida = danoso;
+	gravidade = grav;
 }
 
-const bool Entidade::getTiraVida() const
+const float Entidade::getGravidade() const
 {
-	return tiraVida;
+	return gravidade;
+}
+
+void Entidade::calculaQueda()
+{
+
 }

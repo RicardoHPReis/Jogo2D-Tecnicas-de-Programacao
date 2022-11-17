@@ -7,6 +7,6 @@ class FaseDois :public Fase
 private:
 
 public:
-	FaseDois();
+	FaseDois(int i = 2);
 	~FaseDois();
 };

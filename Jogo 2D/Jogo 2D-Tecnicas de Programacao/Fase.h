@@ -1,51 +1,43 @@
 #pragma once
-#include "Ente.h"
 #include "stdafx.h"
+#include "Lista_Entidades.h"
 #include "Jogador.h"
-#include "Inimigo.h"
+#include "Esqueleto.h"
+#include "Morcego.h"
+#include "Plataforma.h"
+#include "Gerenciador_Colisoes.h"
 
-class Fase : public Ente
+class Fase: public Ente
 {
 protected:
+	Texture tChao;
+	vector <RectangleShape> chao;
 
-	//vidas 
-	int vidasN;
-	vector<Sprite> vidas;
-	
+	Jogador* jogador;
+	Esqueleto* esqueleto;
+	Morcego* morcego;
+
+
+	vector<Sprite> vidasSp;
 	Texture tVidas;
 
-	//Player
-	Jogador* jogador;
-
-	//inimigo
-	Inimigo* inimigo;
-
-	//Texturas
-	Texture tChao, tBg;
-
-	//mapa
 	Sprite fundo;
-
-	vector < RectangleShape > chao;
-
-	void inicVariaveis();
-	void inicVidas();
-	void imprimeVidas();
-	void inicTexturas();
+	Texture texturaFundo;
+	Lista_Entidades listaEntidades;
+	static Gerenciador_Colisoes *colisao;
 
 public:
+	Fase(int i = 0);
+	virtual ~Fase();
 
-	//janela
-	Ente* Tela;
-	VideoMode videoMode;
+	virtual void iniciaFase() = 0;
+	virtual void atualiza() = 0;
+	virtual void desenhar() = 0;
+	void gerenciaColisoes();
+	static void setGerenciador_Colisoes(Gerenciador_Colisoes* gc);
 
-	Fase();
-	~Fase();
-
-	void iniciaFase();
-
-	void atualiza();
-
-	void desenha();
-
+	void criarPlataformas(Vector2f pos, Vector2f tam);
+	void criarEsqueletos(Vector2f pos);
+	void criarMorcego(Vector2f pos);
+	void deletarEntidades();
 };

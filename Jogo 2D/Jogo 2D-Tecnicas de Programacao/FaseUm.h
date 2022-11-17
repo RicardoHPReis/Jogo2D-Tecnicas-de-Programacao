@@ -5,15 +5,14 @@
 class FaseUm :public Fase
 {
 private:
-	
+	void iniciaVariaveis();
+	void iniciaTexturas();
 public:
-
-	Fase *principal;
-
-	FaseUm();
+	FaseUm(int i = 1);
 	~FaseUm();
 
-	void inicVariaveis();
-	void inicMapa();
-
+	void iniciaFase();
+	void atualiza();
+	void atualizaVidas();
+	void desenha();
 };

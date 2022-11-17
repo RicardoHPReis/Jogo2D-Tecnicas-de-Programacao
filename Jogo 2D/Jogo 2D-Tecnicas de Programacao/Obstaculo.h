@@ -2,18 +2,14 @@
 #include "Entidade.h"
 #include "stdafx.h"
 
-class Obstaculo :public Entidade
+class Obstaculo : public Entidade
 {
 protected:
-	int dano;
-	bool atacou;
+	bool danoso;
 
 public:
-	Obstaculo();
-	~Obstaculo();
+	Obstaculo(int i = 0, Vector2f pos = {0.f, 0.f}, Vector2f tam = { 0.f, 0.f });
+	virtual ~Obstaculo();
 
-	void setDano(const int nr_dano);
-	const int getDano() const;
-	void setAtacou(const bool atc);
-	const bool getAtacou() const;
+	//virtual void executado()=0;
 };

@@ -2,19 +2,36 @@
 #include "Entidade.h"
 #include "stdafx.h"
 
-class Projetil :public Entidade
+class Projetil : public Entidade
 {
 protected:
-	int dano;
+
 	bool atingiu;
+	bool tiro;
+
+	bool danoso;
+
+	//Texture tiro[], acerto[];
+
+	void inicProjetil();
+
+	void iniciarTexturas();
 
 public:
-	Projetil();
+	Projetil(int i = 1000, Vector2f pos = { 0.f, 0.f }, Vector2f tam = { 50.f, 80.f });
 	~Projetil();
+	
+	void atualizar();
 
-	void setDano(const int nr_dano);
-	const int getDano() const;
+	void setAtirar(bool tir);
+	bool getAtirar();
 
 	void setAtingiu(const bool atg);
 	const bool getAtingiu() const;
+
+	void atualizaProjetil();
+	void atirar();
+
+	void setDanoso(const bool mal);
+	const bool getDanoso() const;
 };

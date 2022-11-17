@@ -1,19 +1,19 @@
 #include "Morcego.h"
 
 
-Morcego::Morcego(int id, bool mov, Vector2f pos, Vector2f tam, int nr_vidas, int nr_dano, int ld, bool atacar, bool morreu, bool foiAtacado, bool nocv) :
-	Inimigo(2, true, pos, tam, 1, 1, 2, true, false, false)
+Morcego::Morcego(int i, Vector2f pos, Vector2f tam) :
+	Inimigo(i, pos, tam)
 {
 	this->iniciarStatus();
 	this->iniciarTexturas();
 	this->inicEnemies();
 
-	nocivo = true;
+	danoso = true;
 }
 
 Morcego::~Morcego()
 {
-	nocivo = false;
+	danoso = false;
 }
 
 void Morcego::iniciarStatus()
@@ -58,8 +58,13 @@ void Morcego::atualizaInimigo()
 {
 	forma.setPosition(posicao);
 	voar();
-
 	atualizaTextura();
+
+	if (tiro->getAtirar() == false)
+		disparar();
+
+	tiro->atualizar();
+
 	forma.setTexture(&tEnemyVoa[velTex1]);
 }
 
@@ -98,6 +103,13 @@ void Morcego::voar()
 		voarBaixo();
 	else if(posicao.x < grafico->getVideo().width / 2.f && posicao.y > 0)
 		voarCima();
+}
+
+void Morcego::disparar()
+{
+	tiro->setPosicao(getPosicao());
+	tiro->setLado(getLado());
+	tiro->setAtirar(true);
 }
 
 void Morcego::voarDireita()

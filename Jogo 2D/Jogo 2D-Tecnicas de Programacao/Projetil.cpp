@@ -1,27 +1,75 @@
 #include "Projetil.h"
 
-Projetil::Projetil():
-Entidade()
+
+Projetil::Projetil(int i, Vector2f pos, Vector2f tam):
+Entidade(i, pos, tam)
 {
-	dano = 0;
-	atingiu = false;
+	inicProjetil();
+	danoso = true;
 }
 
 Projetil::~Projetil()
 {
-	dano = 0;
 	atingiu = false;
+	danoso = false;
+}
+
+void Projetil::atualizar()
+{
+	atualizaProjetil();
+	desenhar(forma);
+}
+
+void Projetil::setDanoso(const bool mal)
+{
+	danoso = mal;
+}
+
+const bool Projetil::getDanoso() const
+{
+	return danoso;
 }
 
 
-void Projetil::setDano(const int nr_dano)
+void Projetil::setAtirar(bool tir)
 {
-	dano = nr_dano;
+	tiro = tir;
 }
 
-const int Projetil::getDano() const
+void Projetil::iniciarTexturas()
 {
-	return dano;
+
+}
+
+void Projetil::atualizaProjetil()
+{
+	forma.setPosition(posicao);
+	atirar();
+	if ((posicao.x <= 0 || posicao.x >= 1920) || posicao.y >= 1000) //Modificar depois para gerenciador de colisoes
+		setAtirar(false);
+}
+
+void Projetil::atirar()
+{
+	//Movimentos do projétil
+
+	posicao.y = posicao.y + velocidade.y;
+	if (lado == 1)
+		posicao.x = posicao.x + velocidade.x;
+	else if (lado == 2)
+		posicao.x = posicao.x - velocidade.x;
+}
+
+bool Projetil::getAtirar()
+{
+	return tiro;
+}
+
+void Projetil::inicProjetil()
+{
+	atingiu = false;
+	tiro = false;
+	setVelocidade({ 5.f, 15.f });
 }
 
 void Projetil::setAtingiu(const bool atg)
