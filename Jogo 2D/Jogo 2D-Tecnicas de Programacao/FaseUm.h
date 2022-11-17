@@ -14,5 +14,5 @@ public:
 	void iniciaFase();
 	void atualiza();
 	void atualizaVidas();
-	void desenha();
+	void desenhar();
 };

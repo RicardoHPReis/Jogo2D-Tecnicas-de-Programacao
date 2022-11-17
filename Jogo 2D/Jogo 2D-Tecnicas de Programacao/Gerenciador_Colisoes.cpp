@@ -89,7 +89,7 @@ void Gerenciador_Colisoes::colisaoJogadorObstaculo()
 {
 	Vector2f colidiu;
 	list<Obstaculo*>::iterator it;
-	Obstaculo* aux;
+	//Obstaculo aux;
 	for (it = listaObstaculos.begin(); it != listaObstaculos.end(); it++)
 	{
 		colidiu = calcularColisao(jogador, *it);
@@ -173,10 +173,10 @@ void Gerenciador_Colisoes::colisaoInimigoObstaculo()
 void Gerenciador_Colisoes::colisaoProjetilObstaculo()
 {
 	Vector2f colidiu;
-	list<Obstaculo*>::iterator* it;
+	list<Obstaculo*>::iterator it;
 	for (int i = 0; i < listaProjeteis.size(); i++)
 	{
-		for (*it = listaObstaculos.begin(); *it != listaObstaculos.end(); it++)
+		for (it = listaObstaculos.begin(); it != listaObstaculos.end(); it++)
 		{
 			colidiu = calcularColisao(listaProjeteis[i], listaObstaculos.front());
 			if (colidiu.x < 0.f)

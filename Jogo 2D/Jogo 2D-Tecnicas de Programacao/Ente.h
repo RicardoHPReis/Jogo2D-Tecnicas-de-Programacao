@@ -3,9 +3,9 @@
 #include "Gerenciador_Grafico.h"
 
 
-Gerenciador_Grafico* Gerenciador_Grafico::instancia_grafico = NULL;
+//Gerenciador_Grafico* Gerenciador_Grafico::instancia_grafico = NULL;  -----> declarei como ponteiro null na construtora do gerencador grafico
 
-class Ente
+class Ente 
 {
 protected:
 	const int id;

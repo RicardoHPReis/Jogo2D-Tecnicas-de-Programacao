@@ -3,6 +3,8 @@
 
 Gerenciador_Grafico::Gerenciador_Grafico()
 {
+	instancia_grafico = nullptr;
+
 	janela = nullptr;
 	video.height = 1080;
 	video.width = 1920;

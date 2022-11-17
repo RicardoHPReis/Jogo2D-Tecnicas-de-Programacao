@@ -12,4 +12,7 @@ public:
 	virtual ~Obstaculo();
 
 	//virtual void executado()=0;
+	void setDanoso(const bool mal);
+	const bool getDanoso() const;
+
 };

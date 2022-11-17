@@ -82,7 +82,7 @@ void FaseUm::atualizaVidas()
 	//this->jogador->status.setVidas(this->jogador->status.getVidas()++);
 }
 
-void FaseUm::desenha()
+void FaseUm::desenhar()
 {
 	grafico->limpar();
 

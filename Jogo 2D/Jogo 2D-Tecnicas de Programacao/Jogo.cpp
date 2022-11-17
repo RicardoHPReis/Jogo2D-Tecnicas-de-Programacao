@@ -20,7 +20,7 @@ Jogo::~Jogo()
 
 const bool Jogo::rodando() const
 {
-	if (menu.janelaEstaAberta())
+	if (/*menu.janelaEstaAberta() */ 1)
 		return true;
 	else
 		return false;
@@ -48,7 +48,7 @@ void Jogo::update()
 	if (this->numFase == 1)
 	{
 		this->fase1.atualiza();
-		this->fase1.desenha();
+		this->fase1.desenhar();
 	}
 	/*else if (this->numFase == 2)
 	{

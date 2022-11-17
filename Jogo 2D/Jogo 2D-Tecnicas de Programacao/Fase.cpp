@@ -30,14 +30,14 @@ void Fase::setGerenciador_Colisoes(Gerenciador_Colisoes* gc)
 
 void Fase::criarEsqueletos(Vector2f pos)
 {
-	Esqueleto* esqueleto = new Esqueleto(pos);
+	Esqueleto* esqueleto = new Esqueleto(10,pos);
 	listaEntidades.adicionarEntidade(esqueleto);
 	colisao->adicionarInimigo(esqueleto);
 }
 
 void Fase::criarMorcego(Vector2f pos)
 {
-	Morcego* morcego = new Morcego(pos);
+	Morcego* morcego = new Morcego(11,pos);
 	listaEntidades.adicionarEntidade(morcego);
 	colisao->adicionarInimigo(esqueleto);
 }

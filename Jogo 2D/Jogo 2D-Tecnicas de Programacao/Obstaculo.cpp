@@ -11,3 +11,13 @@ Obstaculo::~Obstaculo()
 {
 	danoso = false;
 }
+
+void Obstaculo::setDanoso(const bool mal)
+{
+	danoso = mal;
+}
+
+const bool Obstaculo::getDanoso() const
+{
+	return danoso;
+}

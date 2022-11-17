@@ -4,6 +4,9 @@
 #include "Jogador.h"
 #include "FaseUm.h"
 #include "Ente.h"
+#include "Lista_Encadeada.h"
+#include "Lista_Entidades.h"
+
 //#include "FaseDois.h"
 #include "Gerenciador_Grafico.h"
 
