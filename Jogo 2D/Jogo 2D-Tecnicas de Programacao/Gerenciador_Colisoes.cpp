@@ -1,6 +1,7 @@
 #include "Gerenciador_Colisoes.h"
 
 
+
 Gerenciador_Colisoes::Gerenciador_Colisoes() :
 	jogador(),
 	listaInimigos(),
@@ -73,6 +74,7 @@ void Gerenciador_Colisoes::colisaoJogadorInimigo()
 			{
 				jogador->operator--(listaInimigos[i]->getDano());
 			}
+			cout << "Colidiu\n";
 		}
 		if (colidiu.y < 0.f)
 		{
@@ -81,6 +83,7 @@ void Gerenciador_Colisoes::colisaoJogadorInimigo()
 			{
 				jogador->operator--(listaInimigos[i]->getDano());
 			}
+			cout << "Colidiu\n";
 		}
 	}
 }
@@ -89,7 +92,6 @@ void Gerenciador_Colisoes::colisaoJogadorObstaculo()
 {
 	Vector2f colidiu;
 	list<Obstaculo*>::iterator it;
-	//Obstaculo aux;
 	for (it = listaObstaculos.begin(); it != listaObstaculos.end(); it++)
 	{
 		colidiu = calcularColisao(jogador, *it);
@@ -102,6 +104,7 @@ void Gerenciador_Colisoes::colisaoJogadorObstaculo()
 			{
 				jogador->operator--((*it)->getDano());
 			}
+			cout << "Colidiu\n";
 		}
 		if (colidiu.y < 0.f)
 		{
@@ -110,6 +113,7 @@ void Gerenciador_Colisoes::colisaoJogadorObstaculo()
 			{
 				jogador->operator--((*it)->getDano());
 			}
+			cout << "Colidiu\n";
 		}
 	}
 }
@@ -129,6 +133,7 @@ void Gerenciador_Colisoes::colisaoJogadorProjetil()
 			{
 				jogador->operator--(listaProjeteis[i]->getDano());
 			}
+			cout << "Colidiu\n";
 		}
 		if (colidiu.y < 0.f)
 		{
@@ -137,6 +142,7 @@ void Gerenciador_Colisoes::colisaoJogadorProjetil()
 			{
 				jogador->operator--(listaProjeteis[i]->getDano());
 			}
+			cout << "Colidiu\n";
 		}
 	}
 }
@@ -153,6 +159,7 @@ void Gerenciador_Colisoes::colisaoInimigoObstaculo()
 			if (colidiu.x < 0.f)
 			{
 				listaInimigos[i]->setVelocidade({ listaInimigos[i]->getVelocidade().x, 0.f });
+				cout << "Colidiu\n";
 				/*if(listaObstaculos.front()->getDanoso())
 				{
 					listaInimigos[i]->setVidas(listaInimigos[i]->getVidas() - listaObstaculos.front()->getDanoso());
@@ -161,6 +168,7 @@ void Gerenciador_Colisoes::colisaoInimigoObstaculo()
 			if (colidiu.y < 0.f)
 			{
 				listaInimigos[i]->setVelocidade({ 0.f, listaInimigos[i]->getVelocidade().y });
+				cout << "Colidiu\n";
 				/*if (listaObstaculos.front()->getDanoso())
 				{
 					listaInimigos[i]->setVidas(listaInimigos[i]->getVidas() - listaObstaculos.front()->getDanoso());
@@ -182,10 +190,12 @@ void Gerenciador_Colisoes::colisaoProjetilObstaculo()
 			if (colidiu.x < 0.f)
 			{
 				listaProjeteis[i]->setVelocidade({ listaProjeteis[i]->getVelocidade().x, 0.f });
+				cout << "Colidiu\n";
 			}
 			if (colidiu.y < 0.f)
 			{
 				listaProjeteis[i]->setVelocidade({ 0.f, listaProjeteis[i]->getVelocidade().y });
+				cout << "Colidiu\n";
 			}
 		}
 	}

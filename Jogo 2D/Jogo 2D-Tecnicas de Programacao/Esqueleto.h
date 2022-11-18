@@ -20,7 +20,7 @@ public:
 	void andarEsquerda();
 	void andar();
 
-	void atualizaInimigo();
+	void atualizar();
 
 	Esqueleto(int i = 10, Vector2f pos = { 0.f, 0.f }, Vector2f tam = { 150.f, 200.f });
 	~Esqueleto();

@@ -20,8 +20,6 @@ protected:
 public:
 	Projetil(int i = 1000, Vector2f pos = { 0.f, 0.f }, Vector2f tam = { 50.f, 80.f });
 	~Projetil();
-	
-	void atualizar();
 
 	void setAtirar(bool tir);
 	bool getAtirar();
@@ -29,7 +27,7 @@ public:
 	void setAtingiu(const bool atg);
 	const bool getAtingiu() const;
 
-	void atualizaProjetil();
+	void atualizar();
 	void atirar();
 
 	void setDanoso(const bool mal);

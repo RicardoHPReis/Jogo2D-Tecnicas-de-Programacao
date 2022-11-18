@@ -1,10 +1,13 @@
 ﻿#include "Ente.h"
 
 
+Gerenciador_Grafico* Gerenciador_Grafico::instancia_grafico = NULL;
+
 Ente::Ente(int i):
-	id(i)
+	id(i),
+	grafico(grafico->getInstancia_Grafico())
 {
-	setGerenciador_Grafico(Gerenciador_Grafico::getInstancia_Grafico());
+	//setGerenciador_Grafico(Gerenciador_Grafico::getInstancia_Grafico());
 }
 
 Ente::~Ente()
@@ -16,10 +19,10 @@ const int Ente::getId() const
 	return id;
 }
 
-void Ente::setGerenciador_Grafico(Gerenciador_Grafico* gg)
+/*void Ente::setGerenciador_Grafico(Gerenciador_Grafico* gg)
 {
 	grafico = gg;
-}
+}*/
 
 void Ente::desenhar(RectangleShape retangulo)
 {

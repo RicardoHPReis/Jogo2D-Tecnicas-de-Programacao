@@ -11,11 +11,8 @@ class Fase: public Ente
 {
 protected:
 	Texture tChao;
-	vector <RectangleShape> chao;
 
 	Jogador* jogador;
-	Esqueleto* esqueleto;
-	Morcego* morcego;
 
 
 	vector<Sprite> vidasSp;
@@ -24,7 +21,8 @@ protected:
 	Sprite fundo;
 	Texture texturaFundo;
 	Lista_Entidades listaEntidades;
-	static Gerenciador_Colisoes *colisao;
+	//static Gerenciador_Colisoes *colisao;
+	Gerenciador_Colisoes* colisao;
 
 public:
 	Fase(int i = 0);
@@ -34,7 +32,7 @@ public:
 	virtual void atualiza() = 0;
 	virtual void desenhar() = 0;
 	void gerenciaColisoes();
-	static void setGerenciador_Colisoes(Gerenciador_Colisoes* gc);
+	//static void setGerenciador_Colisoes(Gerenciador_Colisoes* gc);
 
 	void criarPlataformas(Vector2f pos, Vector2f tam);
 	void criarEsqueletos(Vector2f pos);

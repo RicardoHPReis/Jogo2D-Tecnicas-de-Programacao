@@ -14,6 +14,7 @@ private:
 	vector<Projetil*> listaProjeteis;
 
 	static Gerenciador_Colisoes* instancia_colisoes;
+	//Gerenciador_Colisoes* instancia_colisoes;
 	Gerenciador_Colisoes();
 
 public:

@@ -18,8 +18,8 @@ Esqueleto::~Esqueleto()
 
 void Esqueleto::iniciarStatus()
 {
-	setVelocidadeMaxima(6);
-	setVelocidade({ 4.f, 0.f });
+	velocidade_max = 6;
+	velocidade = { 4.f, 0.f };
 }
 
 void Esqueleto::inicEnemies()
@@ -63,7 +63,7 @@ void Esqueleto::iniciarTexturas()
 	}
 }
 
-void Esqueleto::atualizaInimigo()
+void Esqueleto::atualizar()
 {
 	forma.setPosition(posicao);
 	andar();
@@ -102,7 +102,7 @@ void Esqueleto::andarDireita()
 {
 	if (posicao.x <= 1920.f - 250.f) //Player nao passar dos limites da tela esquerda
 	{ 
-		posicao.x = posicao.x + getVelocidade().x;
+		posicao.x = posicao.x + velocidade.x;
 	}
 	else
 	{
@@ -114,7 +114,7 @@ void Esqueleto::andarEsquerda()
 {
 	if (posicao.x >= 100.f) //Player nao passar dos limites da tela esquerda
 	{ 
-		posicao.x = posicao.x - getVelocidade().x;
+		posicao.x = posicao.x - velocidade.x;
 	}
 	else
 	{

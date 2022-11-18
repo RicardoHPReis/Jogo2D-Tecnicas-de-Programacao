@@ -122,7 +122,7 @@ L* Lista_Encadeada<L>::operator[](int num)
 	for (int i = 0; i <= num || i < num_elementos; i++)
 	{
 		atual = atual->getProximo();
-		if (i = num)
+		if (i == num)
 		{
 			encontrou = true;
 			return atual->getInfo();

@@ -14,7 +14,7 @@ public:
 	Personagem(int i = 0, Vector2f pos = {0.f, 0.f}, Vector2f tam = { 0.f, 0.f });
 	~Personagem();
 
-	//virtual void atualizaJogador() = 0;
+    virtual void atualizar() = 0;
 
 	void setAtaque(bool foiAtacado);
 	bool getAtaque();

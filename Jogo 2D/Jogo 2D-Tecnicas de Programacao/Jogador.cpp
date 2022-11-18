@@ -91,7 +91,7 @@ void Jogador::iniciarTexturas()
 	}
 }
 
-void Jogador::atualizaJogador()
+void Jogador::atualizar()
 {
 	forma.setTexture(&txJogadorParado[this->velTex]);
 
@@ -150,7 +150,6 @@ void Jogador::atualizaJogador()
 	{
 		ataqueAereo();
 	}
-
 	atualizarTextura();
 }
 
@@ -227,7 +226,6 @@ void Jogador::direcionalDireito()
 
 void Jogador::atualizarTextura() 
 {
-	
 	if (frame % 7 == 0)
 		velTex++;
 	if (velTex == 10)

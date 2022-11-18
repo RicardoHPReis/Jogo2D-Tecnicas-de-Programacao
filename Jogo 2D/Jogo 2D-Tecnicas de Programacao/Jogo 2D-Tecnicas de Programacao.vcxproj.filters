@@ -51,15 +51,6 @@
     <ClCompile Include="Obstaculo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Lista.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Elemento.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Plano.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Gerenciador_Colisoes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -67,6 +58,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Projetil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lista_Entidades.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Esqueleto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Morcego.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Plataforma.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -107,13 +110,7 @@
     <ClInclude Include="Obstaculo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Elemento.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Lista.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Plano.h">
+    <ClInclude Include="Lista_Encadeada.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Gerenciador_Colisoes.h">
@@ -123,6 +120,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Projetil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Lista_Entidades.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Esqueleto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Morcego.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Plataforma.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

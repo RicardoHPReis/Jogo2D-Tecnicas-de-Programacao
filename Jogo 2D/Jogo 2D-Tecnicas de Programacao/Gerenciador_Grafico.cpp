@@ -3,12 +3,12 @@
 
 Gerenciador_Grafico::Gerenciador_Grafico()
 {
-	instancia_grafico = nullptr;
+	//instancia_grafico = nullptr;
 
 	janela = nullptr;
 	video.height = 1080;
 	video.width = 1920;
-	janela = new RenderWindow(video, "Game 1", Style::Titlebar | Style::Fullscreen);
+	janela = new RenderWindow(video, "Game 1", Style::Titlebar | Style::Close);
 	janela->setMouseCursorVisible(false);
 	janela->setFramerateLimit(60);
 }
@@ -87,4 +87,11 @@ RenderWindow* Gerenciador_Grafico::getJanela()
 VideoMode Gerenciador_Grafico::getVideo()
 {
 	return video;
+}
+
+bool Gerenciador_Grafico::janelaEstaAberta()
+{
+	if (janela)
+		return true;
+	return false;
 }

@@ -3,13 +3,8 @@
 #include "Menu.h"
 #include "Jogador.h"
 #include "FaseUm.h"
-#include "Ente.h"
-#include "Lista_Encadeada.h"
-#include "Lista_Entidades.h"
-
 //#include "FaseDois.h"
 #include "Gerenciador_Grafico.h"
-
 
 class Jogo
 {
@@ -18,6 +13,7 @@ private:
 	Jogador jogador;
 	FaseUm fase1;
 	//FaseDois fase2;
+	Gerenciador_Grafico* grafico;
 
 	int numFase;
 	int faseAtual;

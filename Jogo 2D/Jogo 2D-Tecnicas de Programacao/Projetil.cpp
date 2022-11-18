@@ -6,18 +6,15 @@ Entidade(i, pos, tam)
 {
 	inicProjetil();
 	danoso = true;
+	tiro = false;
+	atingiu = false;
 }
 
 Projetil::~Projetil()
 {
 	atingiu = false;
 	danoso = false;
-}
-
-void Projetil::atualizar()
-{
-	atualizaProjetil();
-	desenhar(forma);
+	tiro = false;
 }
 
 void Projetil::setDanoso(const bool mal)
@@ -30,7 +27,6 @@ const bool Projetil::getDanoso() const
 	return danoso;
 }
 
-
 void Projetil::setAtirar(bool tir)
 {
 	tiro = tir;
@@ -41,12 +37,15 @@ void Projetil::iniciarTexturas()
 
 }
 
-void Projetil::atualizaProjetil()
+void Projetil::atualizar()
 {
+	desenhar(forma);
 	forma.setPosition(posicao);
 	atirar();
 	if ((posicao.x <= 0 || posicao.x >= 1920) || posicao.y >= 1000) //Modificar depois para gerenciador de colisoes
 		setAtirar(false);
+
+	grafico->desenhar(forma);
 }
 
 void Projetil::atirar()

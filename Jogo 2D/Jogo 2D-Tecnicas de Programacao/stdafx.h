@@ -4,6 +4,7 @@
 #include <string>
 #include <ctime>
 #include <algorithm>
+#include <fstream>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>

@@ -27,7 +27,7 @@ public:
 	Jogador(int i = 4, Vector2f pos = { 0.f, 0.f }, Vector2f tam = { 60.f, 90.f });
 	~Jogador();
 
-	void atualizaJogador();
+	void atualizar();
 	void ataque();
 	void ataqueAereo();
 	void direcionalEsquerdo();

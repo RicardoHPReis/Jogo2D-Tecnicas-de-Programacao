@@ -9,7 +9,6 @@ private:
 	//View visao;
 
 	static Gerenciador_Grafico* instancia_grafico;
-
 	Gerenciador_Grafico();
 
 public:
@@ -26,4 +25,6 @@ public:
 	RenderWindow* getJanela();
 	VideoMode getVideo();
 	static Gerenciador_Grafico* getInstancia_Grafico();
+
+	bool janelaEstaAberta();
 };

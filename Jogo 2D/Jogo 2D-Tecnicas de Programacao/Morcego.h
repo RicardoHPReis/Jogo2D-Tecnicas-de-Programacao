@@ -6,11 +6,11 @@
 class Morcego : public Inimigo
 {
 private:
-	int frame1, velTex1, aux1;
-	Texture tEnemy[5], tEnemyVoa[5];
-	RectangleShape chao;
 
-	Projetil *tiro;
+	int frame1, velTex1, aux1;
+	Texture tEnemyDie[5], tEnemyVoa[5];
+
+	//Projetil *tiro;
 
 	void iniciarTexturas();
 	void iniciarStatus();
@@ -25,7 +25,7 @@ public:
 	void voar();
 	void disparar();
 
-	void atualizaInimigo();
+	void atualizar();
 
 	Morcego(int i = 11, Vector2f pos = { 0.f, 0.f }, Vector2f tam = { 110.f, 85.f });
 	~Morcego();

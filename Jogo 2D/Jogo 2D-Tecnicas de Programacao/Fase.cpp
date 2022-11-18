@@ -5,9 +5,10 @@ Gerenciador_Colisoes* Gerenciador_Colisoes::instancia_colisoes = NULL;
 
 Fase::Fase(int i):
 	Ente(i),
-	listaEntidades()
+	listaEntidades(),
+	colisao(colisao->getInstancia_Colisoes())
 {
-	Fase::setGerenciador_Colisoes(Gerenciador_Colisoes::getInstancia_Colisoes());
+	//Fase::setGerenciador_Colisoes(Gerenciador_Colisoes::getInstancia_Colisoes());
 }
 
 Fase::~Fase()
@@ -23,10 +24,10 @@ void Fase::gerenciaColisoes()
 	colisao->colisaoProjetilObstaculo();
 }
 
-void Fase::setGerenciador_Colisoes(Gerenciador_Colisoes* gc)
+/*void Fase::setGerenciador_Colisoes(Gerenciador_Colisoes* gc)
 {
 	colisao = gc;
-}
+}*/
 
 void Fase::criarEsqueletos(Vector2f pos)
 {
@@ -39,7 +40,7 @@ void Fase::criarMorcego(Vector2f pos)
 {
 	Morcego* morcego = new Morcego(11,pos);
 	listaEntidades.adicionarEntidade(morcego);
-	colisao->adicionarInimigo(esqueleto);
+	colisao->adicionarInimigo(morcego);
 }
 
 void Fase::criarPlataformas(Vector2f pos, Vector2f tam)
@@ -52,7 +53,10 @@ void Fase::criarPlataformas(Vector2f pos, Vector2f tam)
 
 void Fase::deletarEntidades()
 {
+	/*
 	delete morcego;
 	delete esqueleto;
 	delete jogador;
+	delete plataforma;
+	*/
 }

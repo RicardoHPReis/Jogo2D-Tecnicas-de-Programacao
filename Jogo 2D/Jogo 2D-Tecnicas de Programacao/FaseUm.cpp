@@ -4,7 +4,7 @@ FaseUm::FaseUm(int i):
 Fase(i)
 {
 	jogador = new Jogador();
-
+	
 	iniciaVariaveis();
 	iniciaTexturas();
 	iniciaFase();
@@ -17,7 +17,6 @@ FaseUm::~FaseUm()
 
 void FaseUm::iniciaVariaveis()
 {
-	chao.resize(23);
 	vidasSp.resize(5);
 }
 
@@ -52,20 +51,26 @@ void FaseUm::iniciaTexturas()
 
 void FaseUm::iniciaFase()
 {
-	for (int i = 0; i < 23; i++)
+	//criarPlataformas(Vector2f(0.f, 995.f), Vector2f(85, 85));
+	for (int i = 0; i < 3; i++)
 	{
-		chao[i].setSize(Vector2f(85, 85));
-		chao[i].setPosition(0 + (i * chao[0].getSize().x), grafico->getVideo().height - 85.f);
-		chao[i].setTexture(&tChao);
+		criarPlataformas(Vector2f{ (i * 85.f), grafico->getVideo().height - 85.f }, Vector2f(85, 85));
+	}
+	for (int i = 0; i < 2; i++)
+	{
+		criarEsqueletos(Vector2f(900 * (i+1), 795));
+		criarMorcego(Vector2f(365 * (i + 1), 400));
+	}
+	cout << listaEntidades.getNumeroEntidades();
+	for (int i = 0; i < 7; i++)
+	{
+		//cout << listaEntidades.operator[](i)->getId() << endl;
 	}
 }
 
 void FaseUm::atualiza()
 {
-	morcego->atualizaInimigo();
-	esqueleto->atualizaInimigo();
-	jogador->atualizaJogador();
-
+	listaEntidades.atualizarEntidade();
 }
 
 void FaseUm::atualizaVidas()
@@ -85,11 +90,10 @@ void FaseUm::atualizaVidas()
 void FaseUm::desenhar()
 {
 	grafico->limpar();
-
+	cout << "Teste desenho\n";
 	grafico->desenharSprite(fundo);
-	grafico->desenhar(esqueleto->getForma());
 	grafico->desenhar(jogador->getForma());
-	grafico->desenhar(morcego->getForma());
+	listaEntidades.desenharEntidades();
 
 	atualizaVidas();
 	grafico->mostrar();

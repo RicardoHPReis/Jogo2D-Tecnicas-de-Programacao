@@ -8,6 +8,8 @@ Morcego::Morcego(int i, Vector2f pos, Vector2f tam) :
 	this->iniciarTexturas();
 	this->inicEnemies();
 
+	//tiro->setAtirar(false);
+
 	danoso = true;
 }
 
@@ -18,7 +20,7 @@ Morcego::~Morcego()
 
 void Morcego::iniciarStatus()
 {
-	setVelocidade({ 8.f, 3.f });
+	velocidade = { 8.f, 3.f };
 }
 
 void Morcego::inicEnemies()
@@ -28,9 +30,6 @@ void Morcego::inicEnemies()
 	forma.setSize(tamanho);
 	forma.setPosition(posicao);
 
-	//chao
-	this->chao.setPosition(0.f, grafico->getVideo().height - 85.f);
-	this->chao.setSize(Vector2f(grafico->getVideo().width, 85));
 }
 
 void Morcego::iniciarTexturas()
@@ -38,32 +37,32 @@ void Morcego::iniciarTexturas()
 	//texturas morcego morrendo
 	for (int i = 0; i < 5; i++)
 	{
-		if (!this->tEnemy[i].loadFromFile("../../Texturas/Personagens/Morcego.png", IntRect(i * 290, 0, 270, 386))) {
-			cout << "Erro ao carregar a textura do Morcego parado\n";
+		if (!this->tEnemyDie[i].loadFromFile("../../Texturas/Personagens/Morcego.png", IntRect(i * 100, 322, 100, 80))) {
+			cout << "Erro ao carregar a textura do Morcego morrendo\n";
 		}
-		tEnemy[i].setSmooth(true);
+		tEnemyDie[i].setSmooth(true);
 	}
 
 	// Texturas inimigo Voando
 	for (int i = 0; i < 5; i++)
 	{
-		if (!this->tEnemyVoa[i].loadFromFile("../../Texturas/Personagens/Morcego.png", IntRect(i * 100, 164, 100, 80))) {
-			cout << "Erro ao carregar a textura do Morcego andando\n";
+		if (!this->tEnemyVoa[i].loadFromFile("../../Texturas/Personagens/Morcego.png", IntRect(i * 100, 164, 100, 125))) {
+			cout << "Erro ao carregar a textura do Morcego voando\n";
 		}
 		tEnemyVoa[i].setSmooth(true);
 	}
 }
 
-void Morcego::atualizaInimigo()
+void Morcego::atualizar()
 {
 	forma.setPosition(posicao);
 	voar();
 	atualizaTextura();
 
-	if (tiro->getAtirar() == false)
-		disparar();
+	//if (tiro->getAtirar() == false)
+	//	disparar();
 
-	tiro->atualizar();
+	//tiro->atualizar();
 
 	forma.setTexture(&tEnemyVoa[velTex1]);
 }
@@ -107,9 +106,9 @@ void Morcego::voar()
 
 void Morcego::disparar()
 {
-	tiro->setPosicao(getPosicao());
-	tiro->setLado(getLado());
-	tiro->setAtirar(true);
+	//tiro->setPosicao(getPosicao());
+	//tiro->setLado(getLado());
+	//tiro->setAtirar(true);
 }
 
 void Morcego::voarDireita()

@@ -1,14 +1,14 @@
 ﻿#include "Jogo.h"
 
-
 Jogo::Jogo():
 menu(),
-fase1()
+fase1(),
+grafico(grafico->getInstancia_Grafico())
 {
 	menuAbre = true;
 	faseAtual = 1;
 	numFase = 0;
-	Ente::setGerenciador_Grafico(Gerenciador_Grafico::getInstancia_Grafico());
+	//Ente::setGerenciador_Grafico(Gerenciador_Grafico::getInstancia_Grafico());
 }
 
 Jogo::~Jogo()
@@ -20,7 +20,7 @@ Jogo::~Jogo()
 
 const bool Jogo::rodando() const
 {
-	if (/*menu.janelaEstaAberta() */ 1)
+	if (grafico->janelaEstaAberta())
 		return true;
 	else
 		return false;

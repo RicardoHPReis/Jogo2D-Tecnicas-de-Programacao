@@ -20,7 +20,7 @@ public:
 	virtual ~Entidade();
 
 	//virtual void executar() = 0;
-	//virtual void imprimir() = 0;
+	virtual void atualizar() = 0;
 
 	RectangleShape getForma();
 

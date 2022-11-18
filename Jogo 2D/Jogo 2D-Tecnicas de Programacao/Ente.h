@@ -2,21 +2,19 @@
 #include "stdafx.h"
 #include "Gerenciador_Grafico.h"
 
-
-//Gerenciador_Grafico* Gerenciador_Grafico::instancia_grafico = NULL;  -----> declarei como ponteiro null na construtora do gerencador grafico
-
 class Ente 
 {
 protected:
 	const int id;
-	static Gerenciador_Grafico* grafico;
+	Gerenciador_Grafico* grafico;
+	//static Gerenciador_Grafico* grafico;
 
 public:
 	Ente(int i = 0);
 	virtual ~Ente();
 
 	const int getId() const;
-	static void setGerenciador_Grafico(Gerenciador_Grafico* gg);
+	//static void setGerenciador_Grafico(Gerenciador_Grafico* gg);
 
 	void desenhar(RectangleShape retangulo);
 	void desenharTexto(Text texto);
