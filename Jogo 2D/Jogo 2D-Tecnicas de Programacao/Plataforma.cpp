@@ -1,14 +1,16 @@
 #include "Plataforma.h"
 
-Plataforma::Plataforma( Vector2f pos, Vector2f tam):
+Plataforma::Plataforma(int id, Vector2f pos, Vector2f tam):
 Obstaculo(id, pos, tam)
 {
+	forma.setFillColor(Color::Blue);
 	posicao = pos;
 
 	this->iniciarStatus();
 	this->iniciarTexturas();
 
 	forçaEmpuxo = gravidade * -1; //forca empuxo anula a gravidade
+	cout << "Criou plataforma!" << endl;
 }
 
 Plataforma::~Plataforma()
@@ -16,12 +18,7 @@ Plataforma::~Plataforma()
 	forçaEmpuxo = 0;
 }
 
-void Plataforma::executado()
-{
-
-}
-
-void Plataforma::atualizar()
+void Plataforma::executar()
 {
 	posicao.y = posicao.y + (gravidade + forçaEmpuxo); //aplicando gravidade nas plataformas voadoras que professor pediu
 	forma.setPosition(posicao);
@@ -29,9 +26,7 @@ void Plataforma::atualizar()
 
 void Plataforma::iniciarTexturas()
 {
-	if (!this->plataformaIMG.loadFromFile("../../Texturas/Cenario/Plataforma.png", IntRect(1025, 987, 865, 600))) {
-		cout << "Erro ao carregar a textura do Morcego morrendo\n";
-	}
+	
 }
 
 void Plataforma::iniciarStatus()

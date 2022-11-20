@@ -12,10 +12,6 @@ private:
 	bool jogador_pulou;
 	bool levou_dano;
 	float fdist, forcaPulo;
-	Vector2f cPos;
-
-	//objetivos jogo
-	RectangleShape chao;
 
 	//funcoes privadas
 	void iniciarStatus();
@@ -27,13 +23,14 @@ public:
 	Jogador(int i = 4, Vector2f pos = { 0.f, 0.f }, Vector2f tam = { 60.f, 90.f });
 	~Jogador();
 
-	void atualizar();
+	void executar();
 	void ataque();
 	void ataqueAereo();
 	void direcionalEsquerdo();
 	void direcionalDireito();
 	void pulo();
 
+	void colisao(Entidade* ent);
 	void atualizarTextura();
 	void operator--(int dano);
 

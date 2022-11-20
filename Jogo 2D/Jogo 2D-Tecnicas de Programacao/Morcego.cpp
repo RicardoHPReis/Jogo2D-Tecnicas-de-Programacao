@@ -1,7 +1,7 @@
 #include "Morcego.h"
 
 
-Morcego::Morcego(int i, Vector2f pos, Vector2f tam) :
+/*Morcego::Morcego(int i, Vector2f pos, Vector2f tam) :
 	Inimigo(i, pos, tam)
 {
 	this->iniciarStatus();
@@ -29,7 +29,6 @@ void Morcego::inicEnemies()
 	tamanho = { 110.f, 85.f };
 	forma.setSize(tamanho);
 	forma.setPosition(posicao);
-
 }
 
 void Morcego::iniciarTexturas()
@@ -53,7 +52,7 @@ void Morcego::iniciarTexturas()
 	}
 }
 
-void Morcego::atualizar()
+void Morcego::executar()
 {
 	forma.setPosition(posicao);
 	voar();
@@ -98,9 +97,10 @@ void Morcego::voar()
 		}
 		voarDireita();
 	}
-	if (posicao.x > grafico->getVideo().width / 2.f)
+	if (posicao.x > Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width / 2.f)
 		voarBaixo();
-	else if(posicao.x < grafico->getVideo().width / 2.f && posicao.y > 0)
+	else if(posicao.x < Gerenciador_Grafico::getInstancia_Grafico()
+		->getVideo().width / 2.f && posicao.y > 0)
 		voarCima();
 }
 
@@ -143,5 +143,4 @@ void Morcego::voarCima()
 void Morcego::voarBaixo()
 {
 	posicao.y = posicao.y + getVelocidade().y;
-}
-
+}*/

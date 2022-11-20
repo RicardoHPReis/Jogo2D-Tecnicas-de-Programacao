@@ -22,8 +22,8 @@ void FaseUm::iniciaVariaveis()
 
 void FaseUm::iniciaTexturas()
 {
-	texturaFundo.loadFromFile("../../Texturas/Cenario/Fundo.jpg", IntRect(0, 0, grafico->getVideo().width, grafico->getVideo().height));
-	if (!texturaFundo.loadFromFile("../../Texturas/Cenario/Fundo.jpg", IntRect(0, 0, grafico->getVideo().width, grafico->getVideo().height)))
+	texturaFundo.loadFromFile("../../Texturas/Cenario/Fundo.jpg", IntRect(0, 0, Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width, Gerenciador_Grafico::getInstancia_Grafico()->getVideo().height));
+	if (!texturaFundo.loadFromFile("../../Texturas/Cenario/Fundo.jpg", IntRect(0, 0, Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width, Gerenciador_Grafico::getInstancia_Grafico()->getVideo().height)))
 	{
 		cout << "Erro na textura do fundo do mapa.\n";
 	}
@@ -52,32 +52,33 @@ void FaseUm::iniciaTexturas()
 void FaseUm::iniciaFase()
 {
 	//criarPlataformas(Vector2f(0.f, 995.f), Vector2f(85, 85));
+	criarJogador(Vector2f(), jogador);
 	for (int i = 0; i < 3; i++)
 	{
-		criarPlataformas(Vector2f{ (i * 85.f), grafico->getVideo().height - 85.f }, Vector2f(85, 85));
+		criarPlataformas(Vector2f{ (i * 85.f), Gerenciador_Grafico::getInstancia_Grafico()->getVideo().height - 85.f }, Vector2f(85.f, 1920.f));
 	}
 	for (int i = 0; i < 2; i++)
 	{
-		criarEsqueletos(Vector2f(900 * (i+1), 795));
-		criarMorcego(Vector2f(365 * (i + 1), 400));
-	}
-	cout << listaEntidades.getNumeroEntidades();
-	for (int i = 0; i < 7; i++)
-	{
-		//cout << listaEntidades.operator[](i)->getId() << endl;
+		//criarEsqueletos(Vector2f(900 * (i+1), 795));
+		//criarMorcego(Vector2f(365 * (i + 1), 400));
 	}
 }
 
-void FaseUm::atualiza()
+void FaseUm::executar()
 {
 	listaEntidades.atualizarEntidade();
+	Gerenciador_Grafico::getInstancia_Grafico()->desenharSprite(fundo);
+	Gerenciador_Grafico::getInstancia_Grafico()->desenhar(jogador->getForma());
+	listaEntidades.desenharEntidades();
+
+	atualizaVidas();
 }
 
 void FaseUm::atualizaVidas()
 {
 	for (int i = 0; i < 5; i++)
 	{
-		grafico->desenharSprite(vidasSp[i]);
+		Gerenciador_Grafico::getInstancia_Grafico()->desenharSprite(vidasSp[i]);
 	}
 
 	//se sofrer dano
@@ -85,16 +86,4 @@ void FaseUm::atualizaVidas()
 
 	//se ganhar uma vida
 	//this->jogador->status.setVidas(this->jogador->status.getVidas()++);
-}
-
-void FaseUm::desenhar()
-{
-	grafico->limpar();
-	cout << "Teste desenho\n";
-	grafico->desenharSprite(fundo);
-	grafico->desenhar(jogador->getForma());
-	listaEntidades.desenharEntidades();
-
-	atualizaVidas();
-	grafico->mostrar();
 }

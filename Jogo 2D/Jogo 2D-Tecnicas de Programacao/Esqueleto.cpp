@@ -1,7 +1,7 @@
 ﻿#include "Esqueleto.h"
 
 
-Esqueleto::Esqueleto(int i, Vector2f pos, Vector2f tam) :
+/*Esqueleto::Esqueleto(int i, Vector2f pos, Vector2f tam) :
 	Inimigo(i, pos, tam)
 {
 	this->iniciarStatus();
@@ -29,13 +29,13 @@ void Esqueleto::inicEnemies()
 	forma.setSize(tamanho);
 
 	//chao
-	this->chao.setPosition(0.f, grafico->getVideo().height - 85.f);
-	this->chao.setSize(Vector2f(grafico->getVideo().width, 85 ));
+	this->chao.setPosition(0.f, Gerenciador_Grafico::getInstancia_Grafico()->getVideo().height - 85.f);
+	this->chao.setSize(Vector2f(Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width, 85 ));
 }
 
 void Esqueleto::spawnInimigo()
 {
-	forma.setPosition(grafico->getVideo().width - 200.f, chao.getPosition().y - forma.getSize().y);
+	forma.setPosition(Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width - 200.f, chao.getPosition().y - forma.getSize().y);
 }
 
 void Esqueleto::iniciarTexturas()
@@ -63,13 +63,13 @@ void Esqueleto::iniciarTexturas()
 	}
 }
 
-void Esqueleto::atualizar()
+void Esqueleto::executar()
 {
 	forma.setPosition(posicao);
 	andar();
 
 	atualizaTextura();
-	forma.setTexture(&tEnemyAnda[velTex1]);
+	forma.setTexture(&tEnemyAnda[velTex1]); // Erro
 }
 
 void Esqueleto::atualizaTextura()
@@ -120,4 +120,4 @@ void Esqueleto::andarEsquerda()
 	{
 		lado = 1;
 	}
-}
+}*/

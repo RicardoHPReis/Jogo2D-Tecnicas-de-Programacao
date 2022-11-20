@@ -14,13 +14,13 @@ private:
 	vector<Projetil*> listaProjeteis;
 
 	static Gerenciador_Colisoes* instancia_colisoes;
-	//Gerenciador_Colisoes* instancia_colisoes;
 	Gerenciador_Colisoes();
 
 public:
 	~Gerenciador_Colisoes();
 	static Gerenciador_Colisoes* getInstancia_Colisoes();
 
+	void setJogador(Jogador* player);
 	void adicionarInimigo(Inimigo* inimigo);
 	void adicionarObstaculo(Obstaculo* obstaculo);
 	void adicionarProjetil(Projetil* projetil);

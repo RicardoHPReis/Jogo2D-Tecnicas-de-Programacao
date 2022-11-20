@@ -13,14 +13,14 @@ protected:
 	float gravidade;
 	int dano;
 	int lado;
-	bool seMovimenta;
+	//bool danoso;
 
 public:
 	Entidade(int i = 0, Vector2f pos = {0.f, 0.f}, Vector2f tam = { 0.f, 0.f });
 	virtual ~Entidade();
 
-	//virtual void executar() = 0;
-	virtual void atualizar() = 0;
+	virtual void executar() = 0;
+	//virtual void colisao(Entidade* outro) = 0;
 
 	RectangleShape getForma();
 
@@ -30,20 +30,17 @@ public:
 	void setTamanho(const Vector2f tam);
 	const Vector2f getTamanho() const;
 
-	void setSeMovimenta(const bool mov);
-	const bool getSeMovimenta() const;
-
-	void setDano(const int nr_dano);
-	const int getDano() const;
-
 	void setVelocidade(const Vector2f vel);
 	const Vector2f getVelocidade() const;
 
 	void setVelocidadeMaxima(const float vel_max);
 	const float getVelocidadeMaxima() const;
 
-    void setGravidade(const float grav);
-    const float getGravidade() const;
+	void setGravidade(const float grav);
+	const float getGravidade() const;
+
+	void setDano(const int nr_dano);
+	const int getDano() const;
 
 	void setLado(const int ld);
 	const int getLado() const;

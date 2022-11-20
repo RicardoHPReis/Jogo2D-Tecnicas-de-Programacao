@@ -14,7 +14,8 @@ public:
 	Personagem(int i = 0, Vector2f pos = {0.f, 0.f}, Vector2f tam = { 0.f, 0.f });
 	~Personagem();
 
-    virtual void atualizar() = 0;
+	virtual void executar() = 0;
+	//virtual void colisao(Entidade* outro) = 0;
 
 	void setAtaque(bool foiAtacado);
 	bool getAtaque();

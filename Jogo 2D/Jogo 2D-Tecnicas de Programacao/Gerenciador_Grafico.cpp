@@ -31,24 +31,6 @@ Gerenciador_Grafico* Gerenciador_Grafico::getInstancia_Grafico()
 	return instancia_grafico;
 }
 
-void Gerenciador_Grafico::pollEvents()
-{
-	Event evento;
-	while (janela->pollEvent(evento))
-	{
-		switch (evento.type)
-		{
-			case Event::Closed:
-				janela->close();
-				break;
-			case Event::KeyPressed:
-				if (evento.key.code == Keyboard::Escape)
-					janela->close();
-				break;
-		}
-	}
-}
-
 void Gerenciador_Grafico::desenhar(RectangleShape retangulo)
 {
 	janela->draw(retangulo);

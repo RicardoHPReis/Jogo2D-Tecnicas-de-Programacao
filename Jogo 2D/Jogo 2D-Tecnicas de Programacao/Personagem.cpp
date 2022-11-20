@@ -12,8 +12,6 @@ Entidade(i, pos, tam)
 Personagem::~Personagem()
 {
 	vidas = 0;
-	dano = 0;
-	lado = 0;
 	podeAtacar = false;
 	estaMorto = false;
 	atacou = false;

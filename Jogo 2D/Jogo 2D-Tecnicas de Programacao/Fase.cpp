@@ -3,60 +3,55 @@
 
 Gerenciador_Colisoes* Gerenciador_Colisoes::instancia_colisoes = NULL;
 
-Fase::Fase(int i):
+Fase::Fase(int i) :
 	Ente(i),
 	listaEntidades(),
-	colisao(colisao->getInstancia_Colisoes())
+	jogador()
 {
-	//Fase::setGerenciador_Colisoes(Gerenciador_Colisoes::getInstancia_Colisoes());
 }
 
 Fase::~Fase()
 {
+	deletarEntidades();
 }
 
 void Fase::gerenciaColisoes()
 {
-	colisao->colisaoJogadorInimigo();
-	colisao->colisaoJogadorObstaculo();
-	colisao->colisaoJogadorProjetil();
-	colisao->colisaoInimigoObstaculo();
-	colisao->colisaoProjetilObstaculo();
+	Gerenciador_Colisoes::getInstancia_Colisoes()->colisaoJogadorInimigo();
+	Gerenciador_Colisoes::getInstancia_Colisoes()->colisaoJogadorObstaculo();
+	Gerenciador_Colisoes::getInstancia_Colisoes()->colisaoJogadorProjetil();
+	Gerenciador_Colisoes::getInstancia_Colisoes()->colisaoInimigoObstaculo();
+	Gerenciador_Colisoes::getInstancia_Colisoes()->colisaoProjetilObstaculo();
 }
 
-/*void Fase::setGerenciador_Colisoes(Gerenciador_Colisoes* gc)
+void Fase::criarJogador(Vector2f pos, Jogador *player)
 {
-	colisao = gc;
-}*/
+	listaEntidades.adicionarEntidade(static_cast<Entidade*>(jogador));
+	Gerenciador_Colisoes::getInstancia_Colisoes()->setJogador(jogador);
+}
 
-void Fase::criarEsqueletos(Vector2f pos)
+/*void Fase::criarEsqueletos(Vector2f pos)
 {
 	Esqueleto* esqueleto = new Esqueleto(10,pos);
-	listaEntidades.adicionarEntidade(esqueleto);
-	colisao->adicionarInimigo(esqueleto);
-}
+	listaEntidades.adicionarEntidade(static_cast<Entidade*>(esqueleto));
+	Gerenciador_Colisoes::getInstancia_Colisoes()->adicionarInimigo(esqueleto);
+}*/
 
-void Fase::criarMorcego(Vector2f pos)
+/*void Fase::criarMorcego(Vector2f pos)
 {
 	Morcego* morcego = new Morcego(11,pos);
-	listaEntidades.adicionarEntidade(morcego);
-	colisao->adicionarInimigo(morcego);
-}
+	listaEntidades.adicionarEntidade(static_cast<Entidade*>(morcego));
+	Gerenciador_Colisoes::getInstancia_Colisoes()->adicionarInimigo(morcego);
+}*/
 
 void Fase::criarPlataformas(Vector2f pos, Vector2f tam)
 {
-	Plataforma* plataforma = new Plataforma(pos, tam);
-	listaEntidades.adicionarEntidade(plataforma);
-	colisao->adicionarObstaculo(plataforma);
+	Plataforma* plataforma = new Plataforma(100, pos, tam);
+	listaEntidades.adicionarEntidade(static_cast<Entidade*>(plataforma));
+	Gerenciador_Colisoes::getInstancia_Colisoes()->adicionarObstaculo(plataforma);
 }
-
 
 void Fase::deletarEntidades()
 {
-	/*
-	delete morcego;
-	delete esqueleto;
-	delete jogador;
-	delete plataforma;
-	*/
+	listaEntidades.limparEntidades();
 }

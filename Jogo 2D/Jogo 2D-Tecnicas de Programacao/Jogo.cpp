@@ -1,18 +1,24 @@
 ﻿#include "Jogo.h"
 
-Jogo::Jogo():
-menu(),
-fase1(),
-grafico(grafico->getInstancia_Grafico())
+//Gerenciador_Eventos* Gerenciador_Eventos::instancia_eventos = NULL;
+
+Jogo::Jogo()
 {
+	menu = new Menu(3);
+	fase1 = new FaseUm(1);
+	jogador = new Jogador(4, Vector2f(100.f, 100.f));
+
 	menuAbre = true;
 	faseAtual = 1;
 	numFase = 0;
-	//Ente::setGerenciador_Grafico(Gerenciador_Grafico::getInstancia_Grafico());
 }
 
 Jogo::~Jogo()
 {
+	delete menu;
+	delete fase1;
+	delete jogador;
+
 	menuAbre = false;
 	faseAtual = 0;
 	numFase = 0;
@@ -20,40 +26,35 @@ Jogo::~Jogo()
 
 const bool Jogo::rodando() const
 {
-	if (grafico->janelaEstaAberta())
+	if (Gerenciador_Grafico::getInstancia_Grafico()->janelaEstaAberta())
 		return true;
 	else
 		return false;
 }
 
-void Jogo::atualizaMenu()
+void Jogo::update()
 {
-	if (Keyboard::isKeyPressed(Keyboard::Escape)) 
+	//Gerenciador_Eventos::getInstancia_Eventos()->executar();
+	if (menuAbre == true)
+	{
+		menu->executar();
+		menuAbre = false;
+	}
+
+	numFase = 1;
+	if (Keyboard::isKeyPressed(Keyboard::Escape))
 	{
 		menuAbre = true;
 	}
-}
-
-void Jogo::update()
-{
-	if (this->menuAbre == true)
-	{
-		this->menu.run_menu();
-		this->menuAbre = false;
-	}
-
-	this->numFase = 1;
-	this->atualizaMenu();
+	jogador->executar();
 
 	if (this->numFase == 1)
 	{
-		this->fase1.atualiza();
-		this->fase1.desenhar();
+		fase1->executar();
 	}
 	/*else if (this->numFase == 2)
 	{
-		fase2.atualiza();
-		fase2.desenha();
+		fase2.executar();
 	}*/
 }
 

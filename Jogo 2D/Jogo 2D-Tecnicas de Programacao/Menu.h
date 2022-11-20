@@ -14,6 +14,7 @@ private:
 	int delay, tempoDelay;
 	int posi;
 	bool apertou, selecao;
+	bool rodando_menu;
 
 	RectangleShape play, fases, ranking, opcoes, sair;
 	Font fonte;
@@ -31,6 +32,8 @@ public:
 	Menu(int i = 3);
 	~Menu();
 
-	void run_menu();
+	void executar();
 	void imprimir();
+	const bool getRodandoMenu() const;
+	void setRodandoMenu(const bool rodMen);
 };

@@ -5,19 +5,15 @@
 class Plataforma :public Obstaculo
 {
 private:
-
-	int forçaEmpuxo;
-
-	Texture plataformaIMG;
+	float forçaEmpuxo;
 
 	void iniciarTexturas();
 	void iniciarStatus();
 
 public:
-	Plataforma(Vector2f pos = { 0,0 }, Vector2f tam = { 85.f, 1920.f });
+	Plataforma(int id = 100, Vector2f pos = { 0,0 }, Vector2f tam = { 85.f, 1920.f });
 	~Plataforma();
 
-	void executado();
-	void atualizar();
+	void executar();
 	//Vector2f valorEmpuxo();
 };

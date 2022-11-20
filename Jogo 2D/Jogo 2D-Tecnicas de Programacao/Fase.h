@@ -21,21 +21,19 @@ protected:
 	Sprite fundo;
 	Texture texturaFundo;
 	Lista_Entidades listaEntidades;
-	//static Gerenciador_Colisoes *colisao;
-	Gerenciador_Colisoes* colisao;
 
 public:
 	Fase(int i = 0);
 	virtual ~Fase();
 
 	virtual void iniciaFase() = 0;
-	virtual void atualiza() = 0;
-	virtual void desenhar() = 0;
+	virtual void executar() = 0;
 	void gerenciaColisoes();
 	//static void setGerenciador_Colisoes(Gerenciador_Colisoes* gc);
 
+	void criarJogador(Vector2f pos, Jogador *player);
 	void criarPlataformas(Vector2f pos, Vector2f tam);
-	void criarEsqueletos(Vector2f pos);
-	void criarMorcego(Vector2f pos);
+	//void criarEsqueletos(Vector2f pos);
+	//void criarMorcego(Vector2f pos);
 	void deletarEntidades();
 };

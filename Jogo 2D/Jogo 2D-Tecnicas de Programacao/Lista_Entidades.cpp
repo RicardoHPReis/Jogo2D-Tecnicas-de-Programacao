@@ -12,9 +12,11 @@ Lista_Entidades::~Lista_Entidades()
 
 Entidade* Lista_Entidades::operator[](int num)
 {
-	if(LEntidades[num] == NULL)
-		cout << "VERIFICAR SE EH NULO";
-	//cout << LEntidades[num]->getId() << endl;         //Testes para achar o erro com monitor
+	if (LEntidades[num] == NULL)
+	{
+		cout << "Operador de Entidades retorna nulo";
+		return NULL;
+	}
 	return LEntidades[num];
 }
 
@@ -39,9 +41,12 @@ void Lista_Entidades::apagarEntidade(Entidade *entidade)
 
 void Lista_Entidades::apagarNumEntidade(int num)
 {
-	if (num >= 0 && num < LEntidades.getNumeroElementos())
-		cout << "Sla pq não ta pegando a funcao";
-		//LEntidades.apagarNumEntidade(num);
+	if (num < 0 && num > LEntidades.getNumeroElementos())
+	{
+		cout << "Não pode ser apagado algo além do número de elementos" << endl;
+		return;
+	}
+	LEntidades.apagarNum(num);
 }
 
 void Lista_Entidades::limparEntidades()
@@ -53,16 +58,16 @@ void Lista_Entidades::desenharEntidades()
 {
 	for(int i=0; i< LEntidades.getNumeroElementos(); i++)
 	{
-		LEntidades.operator[](i)->desenhar(LEntidades.operator[](i)->getForma());
+		Gerenciador_Grafico::getInstancia_Grafico()->desenhar(LEntidades.operator[](i)->getForma());
 	}
-	LEntidades.operator[](0)->mostrar();
+	Gerenciador_Grafico::getInstancia_Grafico()->mostrar();
 }
 
 void Lista_Entidades::atualizarEntidade()
 {
 	for(int i=0; i< LEntidades.getNumeroElementos(); i++)
 	{
-		LEntidades.operator[](i)->atualizar();
+		LEntidades.operator[](i)->executar();
 	}
 }
 

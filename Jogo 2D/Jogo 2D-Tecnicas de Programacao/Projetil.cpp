@@ -37,15 +37,15 @@ void Projetil::iniciarTexturas()
 
 }
 
-void Projetil::atualizar()
+void Projetil::executar()
 {
-	desenhar(forma);
+	Gerenciador_Grafico::getInstancia_Grafico()->desenhar(forma);
 	forma.setPosition(posicao);
 	atirar();
 	if ((posicao.x <= 0 || posicao.x >= 1920) || posicao.y >= 1000) //Modificar depois para gerenciador de colisoes
 		setAtirar(false);
 
-	grafico->desenhar(forma);
+	Gerenciador_Grafico::getInstancia_Grafico()->desenhar(forma);
 }
 
 void Projetil::atirar()

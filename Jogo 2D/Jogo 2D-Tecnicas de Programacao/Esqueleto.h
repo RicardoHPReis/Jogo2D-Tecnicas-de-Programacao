@@ -2,7 +2,7 @@
 #include "Inimigo.h"
 #include "stdafx.h"
 
-class Esqueleto : public Inimigo
+/*lass Esqueleto : public Inimigo
 {
 private:
 	int frame1, velTex1, aux1;
@@ -20,8 +20,8 @@ public:
 	void andarEsquerda();
 	void andar();
 
-	void atualizar();
+	void executar();
 
 	Esqueleto(int i = 10, Vector2f pos = { 0.f, 0.f }, Vector2f tam = { 150.f, 200.f });
 	~Esqueleto();
-};
+};*/

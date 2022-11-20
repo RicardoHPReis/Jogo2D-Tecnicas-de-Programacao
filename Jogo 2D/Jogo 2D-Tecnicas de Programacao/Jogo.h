@@ -5,15 +5,15 @@
 #include "FaseUm.h"
 //#include "FaseDois.h"
 #include "Gerenciador_Grafico.h"
+#include "Gerenciador_Eventos.h"
 
 class Jogo
 {
 private:
-	Menu menu;
-	Jogador jogador;
-	FaseUm fase1;
-	//FaseDois fase2;
-	Gerenciador_Grafico* grafico;
+	Menu *menu;
+	Jogador *jogador;
+	FaseUm *fase1;
+	//FaseDois *fase2;
 
 	int numFase;
 	int faseAtual;

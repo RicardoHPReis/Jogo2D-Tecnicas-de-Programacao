@@ -45,10 +45,10 @@ public:
 	~Lista_Encadeada();
 
 	void setPrimeiro(const Elemento<L>* prim);
-	const L* getPrimeiro() const;
+	const Elemento<L>* getPrimeiro() const;
 
 	void setUltimo(const Elemento<L>* ult);
-	const L* getUltimo() const;
+	const Elemento<L>* getUltimo() const;
 
 	void setNumeroElementos(const int num_el);
 	const int getNumeroElementos() const;
@@ -56,6 +56,7 @@ public:
 	L* operator[](int num);
 	void adicionar(L* informacao);
 	void apagar(L* informacao);
+	void apagarNum(int num);
 	void limpar();
 };
 
@@ -85,7 +86,7 @@ void Lista_Encadeada<L>::setPrimeiro(const Elemento<L>* prim)
 }
 
 template<class L>
-const L* Lista_Encadeada<L>::getPrimeiro() const
+const Lista_Encadeada<L>::Elemento<L>* Lista_Encadeada<L>::getPrimeiro() const
 {
 	return primeiro;
 }
@@ -97,7 +98,7 @@ void Lista_Encadeada<L>::setUltimo(const Elemento<L>* ult)
 }
 
 template<class L>
-const L* Lista_Encadeada<L>::getUltimo() const
+const Lista_Encadeada<L>::Elemento<L>* Lista_Encadeada<L>::getUltimo() const
 {
 	return ultimo;
 }
@@ -121,12 +122,12 @@ L* Lista_Encadeada<L>::operator[](int num)
 	atual = primeiro;
 	for (int i = 0; i <= num || i < num_elementos; i++)
 	{
-		atual = atual->getProximo();
 		if (i == num)
 		{
 			encontrou = true;
 			return atual->getInfo();
 		}
+		atual = atual->getProximo();
 	}
 	if (encontrou == false)
 	{
@@ -181,6 +182,35 @@ void Lista_Encadeada<L>::apagar(L* informacao)
 	for (int i = 0; apagou != false || i < num_elementos; i++)
 	{
 		if (atual->getInfo() == informacao)
+		{
+			aux = atual;
+			atual = aux->getProximo();
+			aux->setProximo(atual->getProximo());
+			atual = atual->getProximo();
+			atual->setAnterior(aux);
+			aux = aux->getProximo();
+			aux = NULL;
+			delete aux;
+			apagou = true;
+		}
+		atual = atual->getProximo();
+	}
+}
+
+template<class L>
+void Lista_Encadeada<L>::apagarNum(int num)
+{
+	Elemento<L>* aux = NULL;
+	bool apagou = false;
+	atual = primeiro;
+	if (num < 0 || num > num_elementos)
+	{
+		cout << "Ultrapassou o limite de elementos na lista encadeada" << endl;
+		return;
+	}
+	for (int i = 0; i < num_elementos; i++)
+	{
+		if (i == num)
 		{
 			aux = atual;
 			atual = aux->getProximo();

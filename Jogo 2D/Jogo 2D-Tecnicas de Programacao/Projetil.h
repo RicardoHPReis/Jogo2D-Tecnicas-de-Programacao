@@ -27,7 +27,7 @@ public:
 	void setAtingiu(const bool atg);
 	const bool getAtingiu() const;
 
-	void atualizar();
+	void executar();
 	void atirar();
 
 	void setDanoso(const bool mal);

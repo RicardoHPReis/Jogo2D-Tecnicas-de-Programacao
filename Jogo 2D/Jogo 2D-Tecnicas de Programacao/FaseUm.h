@@ -12,7 +12,6 @@ public:
 	~FaseUm();
 
 	void iniciaFase();
-	void atualiza();
+	void executar();
 	void atualizaVidas();
-	void desenhar();
 };

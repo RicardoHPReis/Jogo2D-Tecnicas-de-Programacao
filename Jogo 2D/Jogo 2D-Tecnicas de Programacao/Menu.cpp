@@ -26,12 +26,14 @@ Menu::~Menu()
 	posMouse = { 0,0 };
 	cordMouse = { 0,0 };
 	posi = 0;
+	rodando_menu = true;
 }
 
 void Menu::inicVariaveis()
 {
 	apertou = false;
 	selecao = false;
+	rodando_menu = true;
 
 	delay = 0;
 	tempoDelay = 15;
@@ -79,13 +81,13 @@ void Menu::inicCursor()
 		cursorSprite.setTexture(cursor);
 }
 
-void Menu::run_menu()
+void Menu::executar()
 {
 	bool clique = false;
 	while (clique == false) 
 	{
-		posMouse = Mouse::getPosition(*grafico->getJanela());
-		cordMouse = (grafico->getJanela())->mapPixelToCoords(posMouse);
+		posMouse = Mouse::getPosition(*Gerenciador_Grafico::getInstancia_Grafico()->getJanela());
+		cordMouse = (Gerenciador_Grafico::getInstancia_Grafico()->getJanela())->mapPixelToCoords(posMouse);
 
 		//Seleciona as opcoes usando seta para cima e para baixo
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && delay == 0) 
@@ -200,21 +202,31 @@ void Menu::run_menu()
 				delay = 0;
 		}
 
-		cursorSprite.setPosition(Mouse::getPosition(*grafico->getJanela()).x, Mouse::getPosition(*grafico->getJanela()).y);
+		cursorSprite.setPosition(Mouse::getPosition(*Gerenciador_Grafico::getInstancia_Grafico()->getJanela()).x, Mouse::getPosition(*Gerenciador_Grafico::getInstancia_Grafico()->getJanela()).y);
 		imprimir();
 	}
 }
 
 void Menu::imprimir()
 {
-	grafico->limpar();
-	grafico->desenharSprite(fundo);
-	grafico->desenharTexto(texts[0]);
-	grafico->desenharTexto(texts[1]);
-	grafico->desenharTexto(texts[2]);
-	grafico->desenharTexto(texts[3]);
-	grafico->desenharTexto(texts[4]);
-	grafico->desenharTexto(texts[5]);
-	grafico->desenharSprite(cursorSprite);
-	grafico->mostrar();
+	Gerenciador_Grafico::getInstancia_Grafico()->limpar();
+	Gerenciador_Grafico::getInstancia_Grafico()->desenharSprite(fundo);
+	Gerenciador_Grafico::getInstancia_Grafico()->desenharTexto(texts[0]);
+	Gerenciador_Grafico::getInstancia_Grafico()->desenharTexto(texts[1]);
+	Gerenciador_Grafico::getInstancia_Grafico()->desenharTexto(texts[2]);
+	Gerenciador_Grafico::getInstancia_Grafico()->desenharTexto(texts[3]);
+	Gerenciador_Grafico::getInstancia_Grafico()->desenharTexto(texts[4]);
+	Gerenciador_Grafico::getInstancia_Grafico()->desenharTexto(texts[5]);
+	Gerenciador_Grafico::getInstancia_Grafico()->desenharSprite(cursorSprite);
+	Gerenciador_Grafico::getInstancia_Grafico()->mostrar();
+}
+
+const bool Menu::getRodandoMenu() const
+{
+	return rodando_menu;
+}
+
+void Menu::setRodandoMenu(const bool rodMen)
+{
+	rodando_menu = rodMen;
 }

@@ -3,7 +3,7 @@
 #include "Projetil.h"
 #include "stdafx.h"
 
-class Morcego : public Inimigo
+/*class Morcego : public Inimigo
 {
 private:
 
@@ -25,8 +25,8 @@ public:
 	void voar();
 	void disparar();
 
-	void atualizar();
+	void executar();
 
 	Morcego(int i = 11, Vector2f pos = { 0.f, 0.f }, Vector2f tam = { 110.f, 85.f });
 	~Morcego();
-};
+};*/

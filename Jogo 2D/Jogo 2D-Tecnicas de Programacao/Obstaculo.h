@@ -11,7 +11,8 @@ public:
 	Obstaculo(int i = 0, Vector2f pos = {0.f, 0.f}, Vector2f tam = { 0.f, 0.f });
 	virtual ~Obstaculo();
 
-    virtual void atualizar() = 0;
+	virtual void executar() = 0;
+	
 	void setDanoso(const bool mal);
 	const bool getDanoso() const;
 

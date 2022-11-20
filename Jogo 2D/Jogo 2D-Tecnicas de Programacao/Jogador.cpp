@@ -28,12 +28,6 @@ void Jogador::iniciarVariaiveis()
 {
 	this->limitadorTex = 0;
 
-	//chao
-
-	this->chao.setPosition(0.f, grafico->getVideo().height - 85.f);
-	this->chao.setSize(Vector2f(grafico->getVideo().width, 85.f));
-	this->cPos = chao.getPosition();
-
 	//logica jogador
 
 	levou_dano = false;
@@ -55,7 +49,7 @@ void Jogador::iniciarJogador()
 	video.width = 1920;
 
 	this->forma.setSize(tamanho);
-	this->forma.setPosition(50.f, grafico->getVideo().height - forma.getSize().y - chao.getSize().y);
+	this->forma.setPosition(50.f, 50.f);
 	posicao = forma.getPosition();
 }
 
@@ -83,19 +77,17 @@ void Jogador::iniciarTexturas()
 		}
 		this->txJogadorAtaque[i].setSmooth(true);
 		
-		if (!this->txJogadorAtaquePula[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/AtaquePulo.png", IntRect(51 + (i * 588), 30, 448, 626))) 
+		/*if (!this->txJogadorAtaquePula[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/AtaquePulo.png", IntRect(51 + (i * 588), 30, 448, 626)))
 		{
 			std::cout << "Erro ao carregar textura do Pulo com Ataque do Cavaleiro\n";
 		}
-		this->txJogadorAtaquePula[i].setSmooth(true);
+		this->txJogadorAtaquePula[i].setSmooth(true);*/
 	}
 }
 
-void Jogador::atualizar()
+void Jogador::executar()
 {
 	forma.setTexture(&txJogadorParado[this->velTex]);
-
-	cPos = chao.getPosition();
 	forma.setPosition(posicao);
 
 	
@@ -127,8 +119,6 @@ void Jogador::atualizar()
 	{
 		jogador_pulou = true;
 	}
-
-	fdist = cPos.y - (posicao.y + tamanho.y);
 
 	//cair();
 	if (jogador_pulou == true)
@@ -167,7 +157,7 @@ void Jogador::pulo()
 	if (frame % 6 == 0)
 		limitadorTex++;
 
-	if(posicao.y >= (grafico->getVideo().height - forma.getSize().y) - chao.getSize().y)
+	if(posicao.y >= video.width)
 	{
 		forcaPulo = 25.f;
 		jogador_pulou = false;
@@ -217,7 +207,7 @@ void Jogador::direcionalDireito()
 	forma.setTexture(&txJogadorCorre[velTex]);
 	lado = 1;
 
-	if (posicao.x < (grafico->getVideo().width - forma.getSize().x)) //forma nao passar dos limites da tela direita
+	if (posicao.x < (Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width - forma.getSize().x)) //forma nao passar dos limites da tela direita
 	{  
 		posicao.x += velocidade.x;
 		velocidade = { velocidade.x + 1.f, velocidade.y };
@@ -242,4 +232,22 @@ void Jogador::operator--(int dano)
 const bool Jogador::getLevouDano() const
 {
 	return levou_dano;
+}
+
+void Jogador::colisao(Entidade* ent)
+{
+	if (ent->getId() >= 10 && ent->getId() <= 99)
+	{
+		if (ent->getDano()!=0)
+			operator--(ent->getDano());
+	}
+	else if (ent->getId() >= 100 && ent->getId() <= 999)
+	{
+		if (ent->getDano()!=0)
+			operator--(ent->getDano());
+	}
+	else
+	{
+		operator--(ent->getDano());
+	}
 }
