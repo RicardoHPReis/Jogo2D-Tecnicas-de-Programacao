@@ -1,7 +1,7 @@
 #include "Fase.h"
 
 
-Gerenciador_Colisoes* Gerenciador_Colisoes::instancia_colisoes = NULL;
+Gerenciador_Colisoes* Gerenciador_Colisoes::instancia_colisoes = Gerenciador_Colisoes::getInstancia_Colisoes();
 
 Fase::Fase(int i) :
 	Ente(i),
@@ -19,11 +19,11 @@ Fase::~Fase()
 void Fase::gerenciaColisoes()
 {
 	
-	Gerenciador_Colisoes::getInstancia_Colisoes()->colisaoJogadorInimigo();
+	//Gerenciador_Colisoes::getInstancia_Colisoes()->colisaoJogadorInimigo();
 	Gerenciador_Colisoes::getInstancia_Colisoes()->colisaoJogadorObstaculo();
-	Gerenciador_Colisoes::getInstancia_Colisoes()->colisaoJogadorProjetil();
-	Gerenciador_Colisoes::getInstancia_Colisoes()->colisaoInimigoObstaculo();
-	Gerenciador_Colisoes::getInstancia_Colisoes()->colisaoProjetilObstaculo();
+	//Gerenciador_Colisoes::getInstancia_Colisoes()->colisaoJogadorProjetil();
+	//Gerenciador_Colisoes::getInstancia_Colisoes()->colisaoInimigoObstaculo();
+	//Gerenciador_Colisoes::getInstancia_Colisoes()->colisaoProjetilObstaculo();
 	
 }
 

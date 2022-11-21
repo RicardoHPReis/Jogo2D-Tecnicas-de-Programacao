@@ -101,7 +101,7 @@ Vector2f Gerenciador_Colisoes::calcularColisao(Entidade* ent1, Entidade* ent2)
 void Gerenciador_Colisoes::colisaoJogadorInimigo()
 {
 	Vector2f colidiu;
-	for (int i = 0; i < listaInimigos.size() - 1; i++)
+	for (int i = 0; i < listaInimigos.size(); i++)
 	{
 		colidiu = calcularColisao(static_cast<Entidade*>(jogador), static_cast<Entidade*>(listaInimigos[i]));
 		if (jogador->getLevouDano())
@@ -121,9 +121,10 @@ void Gerenciador_Colisoes::colisaoJogadorInimigo()
 void Gerenciador_Colisoes::colisaoJogadorObstaculo()
 {
 	Vector2f colidiu;
-	list<Obstaculo*>::iterator it;
-	for (int i = 0; i < listaObstaculos.size() - 1; i++)
+	list<Obstaculo*>::iterator it = listaObstaculos.begin();
+	for (int i = 0; i < listaObstaculos.size(); i++)
 	{
+		(*it)++;
 		colidiu = calcularColisao(jogador, *it);
 		if (colidiu.x < 0.0f && colidiu.y < 0.0f)
 		{
@@ -136,7 +137,7 @@ void Gerenciador_Colisoes::colisaoJogadorObstaculo()
 void Gerenciador_Colisoes::colisaoJogadorProjetil()
 {
 	Vector2f colidiu;
-	for (int i = 0; i < listaProjeteis.size() - 1; i++)
+	for (int i = 0; i < listaProjeteis.size(); i++)
 	{
 		colidiu = calcularColisao(jogador, listaProjeteis[i]);
 		if (jogador->getLevouDano())
@@ -157,7 +158,7 @@ void Gerenciador_Colisoes::colisaoInimigoObstaculo()
 {
 	Vector2f colidiu;
 	list<Obstaculo*>::iterator it;
-	for (int i = 0; i < listaInimigos.size() - 1; i++)
+	for (int i = 0; i < listaInimigos.size() ; i++)
 	{
 		for (it = listaObstaculos.begin(); it != listaObstaculos.end(); it++)
 		{
@@ -175,7 +176,7 @@ void Gerenciador_Colisoes::colisaoProjetilObstaculo()
 {
 	Vector2f colidiu;
 	list<Obstaculo*>::iterator it;
-	for (int i = 0; i < listaProjeteis.size() - 1; i++)
+	for (int i = 0; i < listaProjeteis.size(); i++)
 	{
 		for (it = listaObstaculos.begin(); it != listaObstaculos.end(); it++)
 		{
