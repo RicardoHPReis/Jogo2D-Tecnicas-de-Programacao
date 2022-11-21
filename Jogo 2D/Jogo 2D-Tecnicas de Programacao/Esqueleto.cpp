@@ -84,13 +84,13 @@ void Esqueleto::atualizaTextura()
 
 void Esqueleto::andar()
 {
-	if (lado == 2)
+	if (lado == Lado::esquerda)
 	{
 		forma.setScale(Vector2f(-1, 1));
 		andarEsquerda();
 	}
 
-	else if (lado == 1)
+	else if (lado == Lado::direita)
 	{
 		forma.setScale(Vector2f(1, 1));
 		andarDireita();
@@ -106,7 +106,7 @@ void Esqueleto::andarDireita()
 	}
 	else
 	{
-		lado = 2;
+		lado = Lado::esquerda;
 	}
 }
 
@@ -118,6 +118,6 @@ void Esqueleto::andarEsquerda()
 	}
 	else
 	{
-		lado = 1;
+		lado = Lado::direita;
 	}
 }*/

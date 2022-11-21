@@ -2,7 +2,7 @@
 #include "Inimigo.h"
 #include "stdafx.h"
 
-/*lass Esqueleto : public Inimigo
+/*class Esqueleto : public Inimigo
 {
 private:
 	int frame1, velTex1, aux1;

@@ -207,6 +207,24 @@ void Jogador::pulo()
 		limitadorTex++;
 }
 
+void Jogador::colisao(Entidade* outraEntidade, Vector2f ds)
+{
+	switch (outraEntidade->getId())
+	{
+	case(int (ID::plataforma)): //id da plataforma
+		{
+			velocidade.x = 0.f;
+			velocidade.y = 0.f;
+		}
+	break;
+	case(int (ID::esqueleto)): //id do esqueleto
+		{
+
+		}
+	}
+}
+
+
 void Jogador::atualizarTextura() 
 {
 	if (frame % 7 == 0)

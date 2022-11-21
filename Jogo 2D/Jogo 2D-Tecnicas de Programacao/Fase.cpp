@@ -18,11 +18,13 @@ Fase::~Fase()
 
 void Fase::gerenciaColisoes()
 {
+	
 	Gerenciador_Colisoes::getInstancia_Colisoes()->colisaoJogadorInimigo();
 	Gerenciador_Colisoes::getInstancia_Colisoes()->colisaoJogadorObstaculo();
 	Gerenciador_Colisoes::getInstancia_Colisoes()->colisaoJogadorProjetil();
 	Gerenciador_Colisoes::getInstancia_Colisoes()->colisaoInimigoObstaculo();
 	Gerenciador_Colisoes::getInstancia_Colisoes()->colisaoProjetilObstaculo();
+	
 }
 
 void Fase::criarJogador(Vector2f pos, Jogador *player)

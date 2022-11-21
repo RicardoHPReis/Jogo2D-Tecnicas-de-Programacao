@@ -14,7 +14,7 @@ protected:
 	Texture tChao;
 
 	Jogador* jogador;
-
+	//Esqueleto* esqueleto;
 
 	vector<Sprite> vidasSp;
 	Texture tVidas;
@@ -35,7 +35,7 @@ public:
 	void criarJogador(Vector2f pos, Jogador *player);
 	void criarPlataformas(Vector2f pos, Vector2f tam);
 	void criarEspinhos(Vector2f pos, Vector2f tam);
-	//void criarEsqueletos(Vector2f pos);
+	void criarEsqueletos(Vector2f pos);
 	//void criarMorcego(Vector2f pos);
 	void deletarEntidades();
 };

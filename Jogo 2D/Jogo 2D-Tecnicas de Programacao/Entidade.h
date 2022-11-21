@@ -8,6 +8,17 @@ enum class Lado
 	neutro,
 	direita
 };
+enum class ID {
+
+	fase1 = 1,
+	fase2 = 2,
+	menu = 3,
+	jogador = 4,
+	esqueleto = 10,
+	morcego = 11,
+	plataforma = 100,
+	projetil = 1000
+};
 
 class Entidade : public Ente
 {

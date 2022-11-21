@@ -4,6 +4,7 @@ FaseUm::FaseUm(int i):
 Fase(i)
 {
 	jogador = new Jogador();
+	//esqueleto = new Esqueleto();
 	
 	iniciaVariaveis();
 	iniciaTexturas();
@@ -75,18 +76,22 @@ void FaseUm::iniciaFase()
 		//criarEspinhos(Vector2f{ (rand() % 8)*100.f, (rand() % 8)*980.f }, Vector2f((rand() % 8)*1920.f, (rand() % 8)*100.f));
 	}
 	
-	//criarEsqueletos(Vector2f(900 * (i+1), 795));
+	//criarEsqueletos(Vector2f(900, 795));
 	//criarMorcego(Vector2f(365 * (i + 1), 400));
 }
 
 void FaseUm::executar()
 {
+
 	gerenciaColisoes();
 
 	Gerenciador_Grafico::getInstancia_Grafico()->desenharSprite(fundo);
 	listaEntidades.atualizarEntidade();
 	Gerenciador_Grafico::getInstancia_Grafico()->desenhar(jogador->getForma());
+	//Gerenciador_Grafico::getInstancia_Grafico()->desenhar(esqueleto->getForma());
 	listaEntidades.desenharEntidades();
+
+	//Gerenciador_Colisoes::executar();
 
 	atualizaVidas();
 }

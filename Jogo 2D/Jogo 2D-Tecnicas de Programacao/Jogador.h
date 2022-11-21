@@ -30,6 +30,8 @@ public:
 	void direcionalDireito();
 	void pulo();
 
+	void colisao(Entidade* outraEntidade,Vector2f ds);
+
 	void atualizarTextura();
 	void operator--(int dano);
 
