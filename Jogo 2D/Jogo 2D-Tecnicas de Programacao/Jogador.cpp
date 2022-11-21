@@ -16,7 +16,7 @@ Jogador::~Jogador()
 void Jogador::iniciarStatus()
 {
 	setVidas(5);
-	setLado(1);
+	setLado(Lado::direita);
 	setPodeAtacar(true);
 	setAtaque(false);
 	setDano(1);
@@ -32,7 +32,6 @@ void Jogador::iniciarVariaiveis()
 
 	levou_dano = false;
 	jogador_pulou = false;
-	gravidade = 1.f;
 	forcaPulo = 25.f;
 	tamanho.y = 90.f; // DEFINE O TAMANHO
 
@@ -49,7 +48,7 @@ void Jogador::iniciarJogador()
 	video.width = 1920;
 
 	this->forma.setSize(tamanho);
-	this->forma.setPosition(50.f, 50.f);
+	this->forma.setPosition(50.f, 905.f);
 	posicao = forma.getPosition();
 }
 
@@ -90,17 +89,18 @@ void Jogador::executar()
 	forma.setTexture(&txJogadorParado[this->velTex]);
 	//forma.setPosition(posicao);
 
-	
-	if (lado == 0) //define para qual lado o forma esta virado
+	if (lado == Lado::esquerda) //define para qual lado o forma esta virado
 	{
 		forma.setScale(Vector2f(-1, 1));
-		lado = 2;
+		lado = Lado::neutro;
 	}
-	else if (lado == 1) 
+	else if (lado == Lado::direita)
 	{
 		forma.setScale(Vector2f(1, 1));
-		lado = 2;
+		lado = Lado::neutro;
 	}
+
+
 
 	//defina para nao passar a velocidade maxima
 	if (velocidade.x >= velocidade_max)
@@ -108,15 +108,20 @@ void Jogador::executar()
 
 	//andar para os 2 lados
 	if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left))
+
 		direcionalEsquerdo();
+
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || Keyboard::isKeyPressed(Keyboard::Right))
+
 		direcionalDireito();
+
 	else
 		velocidade = { 0.f, velocidade.y};
 	
 	//pulo 
-	if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up)) 
+	if ((Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up)) && jogador_pulou == false)
 	{
+		velocidade = { velocidade.x, forcaPulo };
 		jogador_pulou = true;
 	}
 
@@ -141,31 +146,6 @@ void Jogador::executar()
 		ataqueAereo();
 	}
 	atualizarTextura();
-}
-
-void Jogador::pulo() 
-{
-	VideoMode video;
-	video.height = 1080; //RESOLU�OES
-	video.width = 1920;
-
-	velocidade = { velocidade.x, forcaPulo};
-	forcaPulo -= gravidade;
-	posicao.y -= velocidade.y;
-	forma.move(velocidade.x, velocidade.y);
-
-	forma.setTexture(&txJogadorPula[limitadorTex]);
-	if (frame % 6 == 0)
-		limitadorTex++;
-
-	if(posicao.y >= video.width)
-	{
-		forcaPulo = 25.f;
-		jogador_pulou = false;
-		velocidade = { velocidade.x, 0.f };
-		forma.move(velocidade.x, velocidade.y);
-		limitadorTex = 0;
-	}
 }
 
 void Jogador::ataque()
@@ -195,27 +175,36 @@ void Jogador::ataqueAereo()
 void Jogador::direcionalEsquerdo() 
 {
 	forma.setTexture(&txJogadorCorre[velTex]);
-	lado = 0;
+	lado = Lado::esquerda;
 
-	if (posicao.x > forma.getSize().x) //forma nao passar dos limites da tela esquerda
+	if (forma.getPosition().x > forma.getSize().x) //forma nao passar dos limites da tela esquerda
 	{
-		posicao.x -= velocidade.x;
 		velocidade = {velocidade.x + 1.f, velocidade.y};
-		forma.move(velocidade.x, velocidade.y);
+		forma.move(velocidade.x * -1, velocidade.y);
 	}
 }
 
 void Jogador::direcionalDireito() 
 {
 	forma.setTexture(&txJogadorCorre[velTex]);
-	lado = 1;
+	lado = Lado::direita;
 
-	if (posicao.x < (Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width - forma.getSize().x)) //forma nao passar dos limites da tela direita
+	if (forma.getPosition().x < (Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width - forma.getSize().x)) //forma nao passar dos limites da tela direita
 	{  
-		posicao.x += velocidade.x;
 		velocidade = { velocidade.x + 1.f, velocidade.y };
 		forma.move(velocidade.x, velocidade.y);
 	}
+}
+
+void Jogador::pulo()
+{
+	forma.move(velocidade.x, - (velocidade.y));
+
+	calculaQueda();
+
+	forma.setTexture(&txJogadorPula[limitadorTex]);
+	if (frame % 6 == 0)
+		limitadorTex++;
 }
 
 void Jogador::atualizarTextura() 

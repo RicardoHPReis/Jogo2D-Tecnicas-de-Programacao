@@ -7,6 +7,7 @@ class FaseUm :public Fase
 private:
 	void iniciaVariaveis();
 	void iniciaTexturas();
+
 public:
 	FaseUm(int i = 1);
 	~FaseUm();

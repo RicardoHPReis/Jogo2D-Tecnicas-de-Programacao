@@ -12,6 +12,7 @@ Fase::Fase(int i) :
 
 Fase::~Fase()
 {
+	delete jogador;
 	deletarEntidades();
 }
 
@@ -49,6 +50,13 @@ void Fase::criarPlataformas(Vector2f pos, Vector2f tam)
 	Plataforma* plataforma = new Plataforma(100, pos, tam);
 	listaEntidades.adicionarEntidade(static_cast<Entidade*>(plataforma));
 	Gerenciador_Colisoes::getInstancia_Colisoes()->adicionarObstaculo(plataforma);
+}
+
+void Fase::criarEspinhos(Vector2f pos, Vector2f tam)
+{
+	Espinho* espinho = new Espinho(100, pos, tam);
+	listaEntidades.adicionarEntidade(static_cast<Entidade*>(espinho));
+	Gerenciador_Colisoes::getInstancia_Colisoes()->adicionarObstaculo(espinho);
 }
 
 void Fase::deletarEntidades()

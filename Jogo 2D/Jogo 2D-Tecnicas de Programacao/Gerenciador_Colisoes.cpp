@@ -93,7 +93,6 @@ Vector2f Gerenciador_Colisoes::calcularColisao(Entidade* entidade, Entidade* ent
 	return colisao;
 }
 
-
 void Gerenciador_Colisoes::colisaoJogadorInimigo()
 {
 	Vector2f colidiu;
@@ -124,12 +123,11 @@ void Gerenciador_Colisoes::colisaoJogadorObstaculo()
 		if (colidiu.x < 0.f || colidiu.y < 0.f)
 		{
 			jogador->setVelocidade({ 0.f, 0.f });
-			jogador->setVelocidade({ 0.f, 0.f });
 			if((*it)->getDanoso())
 			{
 				jogador->operator--((*it)->getDano());
 			}
-			cout << "Colidiu" << endl;
+			cout << "Colidiu Jogador/Obstaculo" << endl;
 		}
 	}
 }
@@ -149,7 +147,7 @@ void Gerenciador_Colisoes::colisaoJogadorProjetil()
 			{
 				jogador->operator--(listaProjeteis[i]->getDano());
 			}
-			cout << "Colidiu" << endl;
+			cout << "Colidiu Jogador/Projetil" << endl;
 		}
 	}
 }
@@ -166,7 +164,7 @@ void Gerenciador_Colisoes::colisaoInimigoObstaculo()
 			if (colidiu.x < 0.f && colidiu.y < 0.f)
 			{
 				listaInimigos[i]->setVelocidade({ listaInimigos[i]->getVelocidade().x, 0.f });
-				cout << "Colidiu" << endl;
+				cout << "Colidiu Inimigo/Obstaculo" << endl;
 			}
 		}
 	}
@@ -184,7 +182,7 @@ void Gerenciador_Colisoes::colisaoProjetilObstaculo()
 			if (colidiu.x < 0.f && colidiu.y < 0.f)
 			{
 				listaProjeteis[i]->setVelocidade({ listaProjeteis[i]->getVelocidade().x, 0.f });
-				cout << "Colidiu" << endl;
+				cout << "Colidiu Projetil/Obstaculo" << endl;
 			}
 		}
 	}

@@ -5,6 +5,7 @@
 #include "Esqueleto.h"
 #include "Morcego.h"
 #include "Plataforma.h"
+#include "Espinho.h"
 #include "Gerenciador_Colisoes.h"
 
 class Fase: public Ente
@@ -33,6 +34,7 @@ public:
 
 	void criarJogador(Vector2f pos, Jogador *player);
 	void criarPlataformas(Vector2f pos, Vector2f tam);
+	void criarEspinhos(Vector2f pos, Vector2f tam);
 	//void criarEsqueletos(Vector2f pos);
 	//void criarMorcego(Vector2f pos);
 	void deletarEntidades();

@@ -2,6 +2,13 @@
 #include "Ente.h"
 #include "stdafx.h"
 
+enum class Lado
+{
+	esquerda = -1,
+	neutro,
+	direita
+};
+
 class Entidade : public Ente
 {
 protected:
@@ -12,7 +19,7 @@ protected:
 	float velocidade_max;
 	float gravidade;
 	int dano;
-	int lado;
+	Lado lado;
 	//bool danoso;
 
 public:
@@ -20,7 +27,6 @@ public:
 	virtual ~Entidade();
 
 	virtual void executar() = 0;
-	//virtual void colisao(Entidade* outro) = 0;
 
 	RectangleShape getForma();
 
@@ -42,8 +48,8 @@ public:
 	void setDano(const int nr_dano);
 	const int getDano() const;
 
-	void setLado(const int ld);
-	const int getLado() const;
+	void setLado(const Lado ld);
+	const Lado getLado() const;
 
     void calculaQueda();
 };

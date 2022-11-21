@@ -3,8 +3,7 @@
 Plataforma::Plataforma(int id, Vector2f pos, Vector2f tam):
 Obstaculo(id, pos, tam)
 {
-	forma.setFillColor(Color::Blue);
-	posicao = pos;
+	//forma.setFillColor(Color::Blue);
 
 	this->iniciarStatus();
 	this->iniciarTexturas();
@@ -26,12 +25,16 @@ void Plataforma::executar()
 
 void Plataforma::iniciarTexturas()
 {
-	
+	if (!this->textura_plataforma.loadFromFile("../../Texturas/Cenario/Plataforma.png", IntRect( 1025 , 995 , 870 , 600))) {
+		std::cout << "Erro ao carregar textura da plataforma\n";
+	}
+	this->textura_plataforma.setSmooth(true);
+	forma.setTexture(&textura_plataforma);
 }
 
 void Plataforma::iniciarStatus()
 {
 	danoso = false;
-	lado = 1;
+	lado = Lado::direita;
 	velocidade = { 0.f, gravidade};
 }

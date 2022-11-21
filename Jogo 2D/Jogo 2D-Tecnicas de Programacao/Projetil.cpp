@@ -53,9 +53,9 @@ void Projetil::atirar()
 	//Movimentos do projétil
 
 	posicao.y = posicao.y + velocidade.y;
-	if (lado == 1)
+	if (lado == Lado::direita)
 		posicao.x = posicao.x + velocidade.x;
-	else if (lado == 2)
+	else if (lado == Lado::esquerda)
 		posicao.x = posicao.x - velocidade.x;
 }
 

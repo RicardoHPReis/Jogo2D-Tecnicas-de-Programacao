@@ -5,6 +5,7 @@
 class Plataforma :public Obstaculo
 {
 private:
+	Texture textura_plataforma;
 	float forçaEmpuxo;
 
 	void iniciarTexturas();

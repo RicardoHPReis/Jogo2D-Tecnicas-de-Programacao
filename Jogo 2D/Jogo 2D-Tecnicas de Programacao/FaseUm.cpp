@@ -12,7 +12,7 @@ Fase(i)
 
 FaseUm::~FaseUm()
 {
-	delete jogador;
+	deletarEntidades();
 }
 
 void FaseUm::iniciaVariaveis()
@@ -22,7 +22,6 @@ void FaseUm::iniciaVariaveis()
 
 void FaseUm::iniciaTexturas()
 {
-	texturaFundo.loadFromFile("../../Texturas/Cenario/Fundo.jpg", IntRect(0, 0, Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width, Gerenciador_Grafico::getInstancia_Grafico()->getVideo().height));
 	if (!texturaFundo.loadFromFile("../../Texturas/Cenario/Fundo.jpg", IntRect(0, 0, Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width, Gerenciador_Grafico::getInstancia_Grafico()->getVideo().height)))
 	{
 		cout << "Erro na textura do fundo do mapa.\n";
@@ -51,27 +50,44 @@ void FaseUm::iniciaTexturas()
 
 void FaseUm::iniciaFase()
 {
-	//criarPlataformas(Vector2f(200, 200.f), Vector2f(55, 55));
+	int chance;
+	srand(time(NULL));
 	criarJogador(Vector2f(), jogador);
+
+	//chao
 	for (int i = 0; i < 3; i++)
 	{
-		criarPlataformas(Vector2f{ (i * 85.f), Gerenciador_Grafico::getInstancia_Grafico()->getVideo().height - 85.f }, Vector2f(85.f, 1920.f));
+		criarPlataformas(Vector2f{ 0.f + (i * 1920.f), 980.f }, Vector2f(1920.f, 300.f));
+
+		//plataformas baixas laterais
+
+		criarPlataformas(Vector2f{ 300.f + (i * 1920.f), 675.f }, Vector2f(260.f, 100.f));
+		criarPlataformas(Vector2f{ 1360.f + (i * 1920.f), 675.f }, Vector2f(260.f, 100.f));
+
+		//plataformas altas centralizads
+
+		criarPlataformas(Vector2f{ 660.f + (i * 1920.f), 370.f }, Vector2f(600.f, 100.f));
 	}
-	for (int i = 0; i < 2; i++)
+
+	chance = rand() % 8 + 3;
+	for (int i = 0; i < chance; i++)
 	{
-		//criarEsqueletos(Vector2f(900 * (i+1), 795));
-		//criarMorcego(Vector2f(365 * (i + 1), 400));
+		//criarEspinhos(Vector2f{ (rand() % 8)*100.f, (rand() % 8)*980.f }, Vector2f((rand() % 8)*1920.f, (rand() % 8)*100.f));
 	}
+	
+	//criarEsqueletos(Vector2f(900 * (i+1), 795));
+	//criarMorcego(Vector2f(365 * (i + 1), 400));
 }
 
 void FaseUm::executar()
 {
+	gerenciaColisoes();
+
 	Gerenciador_Grafico::getInstancia_Grafico()->desenharSprite(fundo);
 	listaEntidades.atualizarEntidade();
 	Gerenciador_Grafico::getInstancia_Grafico()->desenhar(jogador->getForma());
 	listaEntidades.desenharEntidades();
 
-	gerenciaColisoes();
 	atualizaVidas();
 }
 

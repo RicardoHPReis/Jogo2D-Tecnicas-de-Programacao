@@ -10,9 +10,9 @@ Entidade::Entidade(int i, Vector2f pos, Vector2f tam) :
 	posicao = pos,
 	velocidade = { 0,0 };
 	velocidade_max = 0.f;
-	gravidade = 1.f;
+	gravidade = -1.f;
 	dano = 0;
-	lado = 0;
+	lado = Lado::neutro;
 }
 
 Entidade::~Entidade()
@@ -24,7 +24,7 @@ Entidade::~Entidade()
 	velocidade_max = 0.f;
 	gravidade = 0.f;
 	dano = 0;
-	lado = 0;
+	lado = Lado::neutro;
 }
 
 RectangleShape Entidade::getForma()
@@ -92,17 +92,17 @@ const int Entidade::getDano() const
 	return dano;
 }
 
-void Entidade::setLado(const int ld)
+void Entidade::setLado(const Lado ld)
 {
 	lado = ld;
 }
 
-const int Entidade::getLado() const
+const Lado Entidade::getLado() const
 {
 	return lado;
 }
 
 void Entidade::calculaQueda()
 {
-
+	velocidade = { velocidade.x, velocidade.y + gravidade };
 }
