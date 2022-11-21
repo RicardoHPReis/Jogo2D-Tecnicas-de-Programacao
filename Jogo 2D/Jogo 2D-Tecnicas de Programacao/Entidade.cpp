@@ -4,7 +4,8 @@
 Entidade::Entidade(int i, Vector2f pos, Vector2f tam) :
 	Ente(i)
 {
-	forma;
+	forma.setSize(tam);
+	forma.setPosition(pos);
 	tamanho = tam,
 	posicao = pos,
 	velocidade = { 0,0 };

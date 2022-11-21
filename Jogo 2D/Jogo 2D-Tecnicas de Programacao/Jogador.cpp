@@ -88,7 +88,7 @@ void Jogador::iniciarTexturas()
 void Jogador::executar()
 {
 	forma.setTexture(&txJogadorParado[this->velTex]);
-	forma.setPosition(posicao);
+	//forma.setPosition(posicao);
 
 	
 	if (lado == 0) //define para qual lado o forma esta virado
@@ -120,7 +120,7 @@ void Jogador::executar()
 		jogador_pulou = true;
 	}
 
-	//cair();
+	//cair
 	if (jogador_pulou == true)
 	{
 		pulo();
@@ -152,6 +152,7 @@ void Jogador::pulo()
 	velocidade = { velocidade.x, forcaPulo};
 	forcaPulo -= gravidade;
 	posicao.y -= velocidade.y;
+	forma.move(velocidade.x, velocidade.y);
 
 	forma.setTexture(&txJogadorPula[limitadorTex]);
 	if (frame % 6 == 0)
@@ -162,6 +163,7 @@ void Jogador::pulo()
 		forcaPulo = 25.f;
 		jogador_pulou = false;
 		velocidade = { velocidade.x, 0.f };
+		forma.move(velocidade.x, velocidade.y);
 		limitadorTex = 0;
 	}
 }
@@ -199,6 +201,7 @@ void Jogador::direcionalEsquerdo()
 	{
 		posicao.x -= velocidade.x;
 		velocidade = {velocidade.x + 1.f, velocidade.y};
+		forma.move(velocidade.x, velocidade.y);
 	}
 }
 
@@ -211,6 +214,7 @@ void Jogador::direcionalDireito()
 	{  
 		posicao.x += velocidade.x;
 		velocidade = { velocidade.x + 1.f, velocidade.y };
+		forma.move(velocidade.x, velocidade.y);
 	}
 }
 
@@ -232,22 +236,4 @@ void Jogador::operator--(int dano)
 const bool Jogador::getLevouDano() const
 {
 	return levou_dano;
-}
-
-void Jogador::colisao(Entidade* ent)
-{
-	if (ent->getId() >= 10 && ent->getId() <= 99)
-	{
-		if (ent->getDano()!=0)
-			operator--(ent->getDano());
-	}
-	else if (ent->getId() >= 100 && ent->getId() <= 999)
-	{
-		if (ent->getDano()!=0)
-			operator--(ent->getDano());
-	}
-	else
-	{
-		operator--(ent->getDano());
-	}
 }

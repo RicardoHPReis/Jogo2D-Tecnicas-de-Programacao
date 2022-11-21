@@ -3,14 +3,15 @@
 
 Gerenciador_Grafico::Gerenciador_Grafico()
 {
-	//instancia_grafico = nullptr;
-
 	janela = nullptr;
 	video.height = 1080;
 	video.width = 1920;
 	janela = new RenderWindow(video, "Game 1", Style::Titlebar | Style::Close);
 	janela->setMouseCursorVisible(false);
 	janela->setFramerateLimit(60);
+
+	//visao = new View({ 700, 500 }, { 1400, 1000 });
+	//janela->setView(*visao);
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico()

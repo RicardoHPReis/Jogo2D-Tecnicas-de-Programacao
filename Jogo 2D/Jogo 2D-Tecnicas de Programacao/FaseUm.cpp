@@ -51,7 +51,7 @@ void FaseUm::iniciaTexturas()
 
 void FaseUm::iniciaFase()
 {
-	//criarPlataformas(Vector2f(0.f, 995.f), Vector2f(85, 85));
+	//criarPlataformas(Vector2f(200, 200.f), Vector2f(55, 55));
 	criarJogador(Vector2f(), jogador);
 	for (int i = 0; i < 3; i++)
 	{
@@ -66,11 +66,12 @@ void FaseUm::iniciaFase()
 
 void FaseUm::executar()
 {
-	listaEntidades.atualizarEntidade();
 	Gerenciador_Grafico::getInstancia_Grafico()->desenharSprite(fundo);
+	listaEntidades.atualizarEntidade();
 	Gerenciador_Grafico::getInstancia_Grafico()->desenhar(jogador->getForma());
 	listaEntidades.desenharEntidades();
 
+	gerenciaColisoes();
 	atualizaVidas();
 }
 

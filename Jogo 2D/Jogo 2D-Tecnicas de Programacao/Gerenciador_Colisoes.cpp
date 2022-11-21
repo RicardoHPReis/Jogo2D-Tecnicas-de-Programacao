@@ -84,11 +84,12 @@ void Gerenciador_Colisoes::adicionarProjetil(Projetil* projetil)
 Vector2f Gerenciador_Colisoes::calcularColisao(Entidade* entidade, Entidade* ent)
 {
 	Vector2f distancia, metade_retangulo, colisao;
-	distancia = { fabs((entidade->getPosicao().x + entidade->getTamanho().x) / 2.0f - (ent->getPosicao().x + ent->getTamanho().x) / 2.0f),
-				  fabs((entidade->getPosicao().y + entidade->getTamanho().y) / 2.0f - (ent->getPosicao().y + ent->getTamanho().y) / 2.0f) };
+	distancia = { abs((entidade->getPosicao().x + entidade->getTamanho().x) / 2.0f - (ent->getPosicao().x + ent->getTamanho().x) / 2.0f),
+				  abs((entidade->getPosicao().y + entidade->getTamanho().y) / 2.0f - (ent->getPosicao().y + ent->getTamanho().y) / 2.0f) };
 	metade_retangulo = { entidade->getTamanho().x - ent->getTamanho().x,
 						 entidade->getTamanho().y - ent->getTamanho().y };
 	colisao = distancia - metade_retangulo;
+	cout << colisao.x << endl << colisao.y << endl;
 	return colisao;
 }
 
@@ -103,7 +104,7 @@ void Gerenciador_Colisoes::colisaoJogadorInimigo()
 			continue;
 		if (colidiu.x < 0.f && colidiu.y < 0.f)
 		{
-			jogador->setVelocidade({ jogador->getVelocidade().x, 0.f });
+			jogador->setVelocidade({ 0.f, 0.f });
 			if (listaInimigos[i]->getDanoso())
 			{
 				jogador->operator--(listaInimigos[i]->getDano());
@@ -120,11 +121,10 @@ void Gerenciador_Colisoes::colisaoJogadorObstaculo()
 	for (it = listaObstaculos.begin(); it != listaObstaculos.end(); it++)
 	{
 		colidiu = calcularColisao(jogador, *it);
-		if (jogador->getLevouDano())
-			continue;
-		if (colidiu.x < 0.f && colidiu.y < 0.f)
+		if (colidiu.x < 0.f || colidiu.y < 0.f)
 		{
-			jogador->setVelocidade({ jogador->getVelocidade().x, 0.f });
+			jogador->setVelocidade({ 0.f, 0.f });
+			jogador->setVelocidade({ 0.f, 0.f });
 			if((*it)->getDanoso())
 			{
 				jogador->operator--((*it)->getDano());
