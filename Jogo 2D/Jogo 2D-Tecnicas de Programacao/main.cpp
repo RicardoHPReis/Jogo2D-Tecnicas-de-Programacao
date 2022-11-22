@@ -7,8 +7,10 @@ int main()
     srand(static_cast<unsigned>(time(NULL)));
     Jogo jogo;
 
-    while (jogo.rodando() == 1)
+    while (jogo.rodando())
     {
+        //jogo.rodar_menu();
+        //if()
         jogo.update();
     }
 

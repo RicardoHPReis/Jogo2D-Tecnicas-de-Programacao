@@ -10,13 +10,10 @@ class Gerenciador_Colisoes
 private:
 	Jogador* jogador;
 	vector<Inimigo*> listaInimigos;
-
 	list<Obstaculo*> listaObstaculos;
-
 	vector<Projetil*> listaProjeteis;
 
 	static Gerenciador_Colisoes* instancia_colisoes;
-	
 
 public:
 

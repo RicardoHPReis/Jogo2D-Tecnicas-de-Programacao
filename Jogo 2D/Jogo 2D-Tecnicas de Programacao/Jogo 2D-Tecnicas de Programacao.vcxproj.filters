@@ -75,6 +75,12 @@
     <ClCompile Include="Gerenciador_Eventos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Espinho.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Pause.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -138,6 +144,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Gerenciador_Eventos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Espinho.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pause.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

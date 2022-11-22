@@ -2,24 +2,22 @@
 
 //Gerenciador_Eventos* Gerenciador_Eventos::instancia_eventos = NULL;
 
-Jogo::Jogo()
+Jogo::Jogo() :
+	menu(),
+	fase1(),
+	jogador(4, Vector2f(100.f, 100.f)),
+	pause()
 {
-	menu = new Menu(3);
-	fase1 = new FaseUm(1);
-	jogador = new Jogador(4, Vector2f(100.f, 100.f));
-
 	menuAbre = true;
+	pausou = false;
 	faseAtual = 1;
 	numFase = 0;
 }
 
 Jogo::~Jogo()
 {
-	delete menu;
-	delete fase1;
-	delete jogador;
-
 	menuAbre = false;
+	pausou = false;
 	faseAtual = 0;
 	numFase = 0;
 }
@@ -32,29 +30,58 @@ const bool Jogo::rodando() const
 		return false;
 }
 
-void Jogo::update()
+void Jogo::rodando_menu()
 {
-	//Gerenciador_Eventos::getInstancia_Eventos()->executar();
-	if (menuAbre == true)
-	{
-		menu->executar();
-		menuAbre = false;
-	}
+	menu.executar();
+	menuAbre = false;
 
-	numFase = 1;
 	if (Keyboard::isKeyPressed(Keyboard::Escape))
 	{
 		menuAbre = true;
 	}
-	jogador->executar();
+	jogador.executar();
 
 	if (this->numFase == 1)
 	{
-		fase1->executar();
+		fase1.executar();
 	}
 	/*else if (this->numFase == 2)
 	{
 		fase2.executar();
 	}*/
+}
+
+void Jogo::update()
+{
+	//Gerenciador_Eventos::getInstancia_Eventos()->executar();
+	menu.executar();
+	while (!menu.getRodandoMenu())
+	{
+		if (Keyboard::isKeyPressed(Keyboard::Escape))
+		{
+			cout << "pausou!" << endl;
+			pause.executar();
+			if (pause.getVoltarMenu())
+			{
+				cout << "voltou para o menu!" << endl;
+				menu.setRodandoMenu(true);
+				break;
+			}
+		}
+		jogador.executar();
+		if (menu.getNumJogadores() == 2)
+		{
+			//jogador2.executar();
+		}
+
+		if (menu.getEscolha() == 1 || menu.getNumFase() == 1)
+		{
+			fase1.executar();
+		}
+		else if (menu.getNumFase() == 2)
+		{
+			//fase2.executar();
+		}
+	}
 }
 

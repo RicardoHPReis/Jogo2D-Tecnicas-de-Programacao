@@ -23,7 +23,8 @@ void FaseUm::iniciaVariaveis()
 
 void FaseUm::iniciaTexturas()
 {
-	if (!texturaFundo.loadFromFile("../../Texturas/Cenario/Fundo.jpg", IntRect(0, 0, Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width, Gerenciador_Grafico::getInstancia_Grafico()->getVideo().height)))
+	//Gerenciador_Grafico::getInstancia_Grafico()->centralizar(forma.getPosition().x);
+	if (!texturaFundo.loadFromFile("../../Texturas/Cenario/Fundo.jpg"))
 	{
 		cout << "Erro na textura do fundo do mapa.\n";
 	}
@@ -53,7 +54,7 @@ void FaseUm::iniciaFase()
 {
 	int chance;
 	srand(time(NULL));
-	criarJogador(Vector2f(), jogador);
+	criarJogador(Vector2f(960.f, 200.f), jogador);
 
 	//chao
 	for (int i = 0; i < 3; i++)
@@ -84,15 +85,14 @@ void FaseUm::executar()
 {
 
 	gerenciaColisoes();
+	listaEntidades.atualizarEntidade();
 
 	Gerenciador_Grafico::getInstancia_Grafico()->desenharSprite(fundo);
-	listaEntidades.atualizarEntidade();
 	Gerenciador_Grafico::getInstancia_Grafico()->desenhar(jogador->getForma());
 	//Gerenciador_Grafico::getInstancia_Grafico()->desenhar(esqueleto->getForma());
 	listaEntidades.desenharEntidades();
 
 	//Gerenciador_Colisoes::executar();
-
 	atualizaVidas();
 }
 

@@ -1,6 +1,15 @@
-﻿  Gerenciador_Colisoes.cpp
-  Gerenciador_Grafico.cpp
-  Inimigo.cpp
-  Projetil.cpp
+﻿  Menu.cpp
+E:\Visual Studio\Jogo2D-Tecnicas-de-Programacao-main\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Menu.cpp(29,21): warning C4018: '<': signed/unsigned mismatch
+E:\Visual Studio\Jogo2D-Tecnicas-de-Programacao-main\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Menu.cpp(37,21): warning C4018: '<': signed/unsigned mismatch
+E:\Visual Studio\Jogo2D-Tecnicas-de-Programacao-main\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Menu.cpp(45,21): warning C4018: '<': signed/unsigned mismatch
+E:\Visual Studio\Jogo2D-Tecnicas-de-Programacao-main\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Menu.cpp(53,21): warning C4018: '<': signed/unsigned mismatch
+E:\Visual Studio\Jogo2D-Tecnicas-de-Programacao-main\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Menu.cpp(61,21): warning C4018: '<': signed/unsigned mismatch
+E:\Visual Studio\Jogo2D-Tecnicas-de-Programacao-main\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Menu.cpp(91,20): warning C4018: '<': signed/unsigned mismatch
+  Pause.cpp
+E:\Visual Studio\Jogo2D-Tecnicas-de-Programacao-main\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Pause.cpp(24,21): warning C4018: '<': signed/unsigned mismatch
+E:\Visual Studio\Jogo2D-Tecnicas-de-Programacao-main\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Pause.cpp(32,21): warning C4018: '<': signed/unsigned mismatch
+E:\Visual Studio\Jogo2D-Tecnicas-de-Programacao-main\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Pause.cpp(40,21): warning C4018: '<': signed/unsigned mismatch
+E:\Visual Studio\Jogo2D-Tecnicas-de-Programacao-main\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Pause.cpp(48,21): warning C4018: '<': signed/unsigned mismatch
+E:\Visual Studio\Jogo2D-Tecnicas-de-Programacao-main\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Pause.cpp(75,18): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
-  Jogo 2D-Tecnicas de Programacao.vcxproj -> C:\Users\Usuario\source\repos\Jogo 2D-Tecnicas de Programacao\Jogo 2D\Debug\Jogo 2D-Tecnicas de Programacao.exe
+  Jogo 2D-Tecnicas de Programacao.vcxproj -> E:\Visual Studio\Jogo2D-Tecnicas-de-Programacao-main\Jogo 2D\Debug\Jogo 2D-Tecnicas de Programacao.exe

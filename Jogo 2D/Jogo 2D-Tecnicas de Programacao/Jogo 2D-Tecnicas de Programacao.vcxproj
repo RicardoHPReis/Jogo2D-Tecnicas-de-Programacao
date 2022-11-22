@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="Ente.cpp" />
     <ClCompile Include="Entidade.cpp" />
+    <ClCompile Include="Espinho.cpp" />
     <ClCompile Include="Esqueleto.cpp" />
     <ClCompile Include="Fase.cpp" />
     <ClCompile Include="FaseDois.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Morcego.cpp" />
     <ClCompile Include="Obstaculo.cpp" />
+    <ClCompile Include="Pause.cpp" />
     <ClCompile Include="Personagem.cpp" />
     <ClCompile Include="Plataforma.cpp" />
     <ClCompile Include="Projetil.cpp" />
@@ -163,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="Ente.h" />
     <ClInclude Include="Entidade.h" />
+    <ClInclude Include="Espinho.h" />
     <ClInclude Include="Esqueleto.h" />
     <ClInclude Include="Fase.h" />
     <ClInclude Include="FaseDois.h" />
@@ -178,6 +181,7 @@
     <ClInclude Include="Jogo.h" />
     <ClInclude Include="Morcego.h" />
     <ClInclude Include="Obstaculo.h" />
+    <ClInclude Include="Pause.h" />
     <ClInclude Include="Personagem.h" />
     <ClInclude Include="Plataforma.h" />
     <ClInclude Include="Projetil.h" />

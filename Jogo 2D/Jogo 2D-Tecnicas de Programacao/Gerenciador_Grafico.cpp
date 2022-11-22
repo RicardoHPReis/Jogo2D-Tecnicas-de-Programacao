@@ -10,7 +10,8 @@ Gerenciador_Grafico::Gerenciador_Grafico()
 	janela->setMouseCursorVisible(false);
 	janela->setFramerateLimit(60);
 
-	//visao = new View({ 700, 500 }, { 1400, 1000 });
+	visao = nullptr;
+	//visao = new View({ 960, 540 }, { 1920, 1080 });
 	//janela->setView(*visao);
 }
 
@@ -19,6 +20,8 @@ Gerenciador_Grafico::~Gerenciador_Grafico()
 	video = { 0, 0 };
 	if (janela)
 		delete janela;
+	if (visao)
+		delete visao;
 	if (instancia_grafico)
 		delete instancia_grafico;
 }
@@ -77,4 +80,10 @@ bool Gerenciador_Grafico::janelaEstaAberta()
 	if (janela)
 		return true;
 	return false;
+}
+
+void Gerenciador_Grafico::centralizar(float x)
+{
+	visao->setCenter({ x, 540 });
+	janela->setView(*visao);
 }

@@ -5,28 +5,26 @@
 class Menu : public Ente
 {
 private:
-	Texture cursor;
-	Sprite cursorSprite;
-
-	Vector2i posMouse;
-	Vector2f cordMouse;
-
 	int delay, tempoDelay;
-	int posi;
+	int escolha, escFase, escOpcoes;
 	bool apertou, selecao;
 	bool rodando_menu;
+	int numFase;
+	int numJogadores;
 
-	RectangleShape play, fases, ranking, opcoes, sair;
 	Font fonte;
 	Texture imagem;
 	Sprite fundo;
-	vector<const char*> options;
-	vector<Vector2f>coords;
-	vector<Text> texts;
-	vector<size_t>sizes;
+
+	Texture previa1, previa2;
+
+	vector<string> escrita;
+	vector<Vector2f> coordenadas;
+	vector<Text> textos;
+	vector<size_t> tamanhos;
+	vector<RectangleShape> escolhaFases;
 
 	void inicVariaveis();
-	void inicCursor();
 
 public:
 	Menu(int i = 3);
@@ -34,6 +32,13 @@ public:
 
 	void executar();
 	void imprimir();
+	void imprimirOpcoesFases();
+	void imprimirOpcoes();
+	void setRodandoMenu(const bool mn);
 	const bool getRodandoMenu() const;
-	void setRodandoMenu(const bool rodMen);
+	const int getEscolha() const;
+	void escolhaFase();
+	void escolhaOpcoes();
+	const int getNumFase() const;
+	const int getNumJogadores() const;
 };

@@ -33,10 +33,6 @@ void Jogador::iniciarVariaiveis()
 	levou_dano = false;
 	jogador_pulou = false;
 	forcaPulo = 25.f;
-	tamanho.y = 90.f; // DEFINE O TAMANHO
-
-	tamanho.x = { (tamanho.y / 3.f) * 2.f};
-	posicao = forma.getPosition();
 	frame = 0;
 	velTex = 0;
 }
@@ -176,29 +172,28 @@ void Jogador::direcionalEsquerdo()
 {
 	forma.setTexture(&txJogadorCorre[velTex]);
 	lado = Lado::esquerda;
+	velocidade = {velocidade.x - 1.f, velocidade.y};
+	forma.move(velocidade.x, velocidade.y);
+	posicao = { posicao.x - velocidade.x, posicao.y + velocidade.y };
 
-	if (forma.getPosition().x > forma.getSize().x) //forma nao passar dos limites da tela esquerda
-	{
-		velocidade = {velocidade.x + 1.f, velocidade.y};
-		forma.move(velocidade.x * -1, velocidade.y);
-	}
+	//Gerenciador_Grafico::getInstancia_Grafico()->centralizar(forma.getPosition().x);
 }
 
 void Jogador::direcionalDireito() 
 {
 	forma.setTexture(&txJogadorCorre[velTex]);
 	lado = Lado::direita;
-
-	if (forma.getPosition().x < (Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width - forma.getSize().x)) //forma nao passar dos limites da tela direita
-	{  
-		velocidade = { velocidade.x + 1.f, velocidade.y };
-		forma.move(velocidade.x, velocidade.y);
-	}
+	velocidade = { velocidade.x + 1.f, velocidade.y };
+	forma.move(velocidade.x, velocidade.y);
+	posicao = { posicao.x - velocidade.x, posicao.y + velocidade.y };
+	//Gerenciador_Grafico::getInstancia_Grafico()->centralizar(forma.getPosition().x);
+	
 }
 
 void Jogador::pulo()
 {
-	forma.move(velocidade.x, - (velocidade.y));
+	forma.move(velocidade.x, -velocidade.y);
+	posicao = { posicao.x + velocidade.x, posicao.y - velocidade.y };
 
 	calculaQueda();
 
@@ -207,20 +202,21 @@ void Jogador::pulo()
 		limitadorTex++;
 }
 
-void Jogador::colisao(Entidade* outraEntidade, Vector2f ds)
+void Jogador::colisao(Entidade* outro, Vector2f ds)
 {
-	switch (outraEntidade->getId())
+	switch (outro->getId())
 	{
-	case(int (ID::plataforma)): //id da plataforma
+		case(int (ID::plataforma)): //id da plataforma
 		{
 			velocidade.x = 0.f;
 			velocidade.y = 0.f;
 		}
-	break;
-	case(int (ID::esqueleto)): //id do esqueleto
+		break;
+		case(int (ID::esqueleto)): //id do esqueleto
 		{
-
+			operator--(outro->getDano());
 		}
+		break;
 	}
 }
 

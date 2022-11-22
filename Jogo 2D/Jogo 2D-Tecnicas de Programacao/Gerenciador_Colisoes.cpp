@@ -81,21 +81,15 @@ void Gerenciador_Colisoes::adicionarProjetil(Projetil* projetil)
 	listaProjeteis.push_back(projetil);
 }
 
-Vector2f Gerenciador_Colisoes::calcularColisao(Entidade* ent1, Entidade* ent2)
+Vector2f Gerenciador_Colisoes::calcularColisao(Entidade* entidade, Entidade* ent)
 {
-	Vector2f posicao1 = ent1->getPosicao();
-	Vector2f posicao2 = ent2->getPosicao();
-
-	Vector2f tamanho1 = ent1->getTamanho();
-	Vector2f tamanho2 = ent2->getTamanho();
-	
-	Vector2f distanciaEntreCentros(
-		fabs((posicao1.x + tamanho1.x/2.0f) - (posicao2.x + tamanho2.x/2.0f)),
-		fabs((posicao1.y + tamanho1.y / 2.0f) - (posicao2.y + tamanho2.y / 2.0f))
-	);
-	Vector2f somaMetadeRetangulo(tamanho1.x / 2.0f + tamanho2.x / 2.0f, tamanho1.y / 2.0f + tamanho2.y / 2.0f);
-
-	return Vector2f(distanciaEntreCentros.x - somaMetadeRetangulo.x, distanciaEntreCentros.y - somaMetadeRetangulo.y);
+	Vector2f distancia, metade_retangulo, colisao;
+	distancia = { fabs((entidade->getPosicao().x + entidade->getTamanho().x) / 2.0f - (ent->getPosicao().x + ent->getTamanho().x) / 2.0f),
+				  fabs((entidade->getPosicao().y + entidade->getTamanho().y) / 2.0f - (ent->getPosicao().y + ent->getTamanho().y) / 2.0f) };
+	metade_retangulo = { entidade->getTamanho().x - ent->getTamanho().x,
+						 entidade->getTamanho().y - ent->getTamanho().y };
+	colisao = distancia - metade_retangulo;
+	return colisao;
 }
 
 void Gerenciador_Colisoes::colisaoJogadorInimigo()
@@ -104,15 +98,9 @@ void Gerenciador_Colisoes::colisaoJogadorInimigo()
 	for (int i = 0; i < listaInimigos.size(); i++)
 	{
 		colidiu = calcularColisao(static_cast<Entidade*>(jogador), static_cast<Entidade*>(listaInimigos[i]));
-		if (jogador->getLevouDano())
-			continue;
 		if (colidiu.x < 0.f && colidiu.y < 0.f)
 		{
-			jogador->setVelocidade({ 0.f, 0.f });
-			if (listaInimigos[i]->getDanoso())
-			{
-				jogador->operator--(listaInimigos[i]->getDano());
-			}
+			jogador->colisao(static_cast<Entidade*>(listaInimigos[i]), colidiu);
 			cout << "Colidiu Jogador/Inimigo" << endl;
 		}
 	}
@@ -122,13 +110,12 @@ void Gerenciador_Colisoes::colisaoJogadorObstaculo()
 {
 	Vector2f colidiu;
 	list<Obstaculo*>::iterator it = listaObstaculos.begin();
-	for (int i = 0; i < listaObstaculos.size(); i++)
+	for (it = listaObstaculos.begin(); it != listaObstaculos.end(); it++)
 	{
-		(*it)++;
-		colidiu = calcularColisao(jogador, *it);
+		colidiu = calcularColisao(static_cast<Entidade*>(jogador), static_cast<Entidade*>(*it));
 		if (colidiu.x < 0.0f && colidiu.y < 0.0f)
 		{
-			jogador->colisao(*it , colidiu);
+			jogador->colisao(static_cast<Entidade*>(*it) , colidiu);
 			cout << "Colidiu Jogador/Obstaculo" << endl;
 		}
 	}
@@ -139,16 +126,10 @@ void Gerenciador_Colisoes::colisaoJogadorProjetil()
 	Vector2f colidiu;
 	for (int i = 0; i < listaProjeteis.size(); i++)
 	{
-		colidiu = calcularColisao(jogador, listaProjeteis[i]);
-		if (jogador->getLevouDano())
-			continue;
+		colidiu = calcularColisao(static_cast<Entidade*>(jogador), static_cast<Entidade*>(listaProjeteis[i]));
 		if (colidiu.x < 0.f && colidiu.y < 0.f)
 		{
-			jogador->setVelocidade({ jogador->getVelocidade().x, 0.f });
-			if (listaProjeteis[i]->getDanoso())
-			{
-				jogador->operator--(listaProjeteis[i]->getDano());
-			}
+			jogador->colisao(static_cast<Entidade*>(listaProjeteis[i]), colidiu);
 			cout << "Colidiu Jogador/Projetil" << endl;
 		}
 	}
@@ -158,11 +139,11 @@ void Gerenciador_Colisoes::colisaoInimigoObstaculo()
 {
 	Vector2f colidiu;
 	list<Obstaculo*>::iterator it;
-	for (int i = 0; i < listaInimigos.size() ; i++)
+	for (int i = 0; i < listaInimigos.size(); i++)
 	{
 		for (it = listaObstaculos.begin(); it != listaObstaculos.end(); it++)
 		{
-			colidiu = calcularColisao(listaInimigos[i], *it);
+			colidiu = calcularColisao(static_cast<Entidade*>(listaInimigos[i]), static_cast<Entidade*>(*it));
 			if (colidiu.x < 0.f && colidiu.y < 0.f)
 			{
 				listaInimigos[i]->setVelocidade({ listaInimigos[i]->getVelocidade().x, 0.f });
@@ -180,7 +161,7 @@ void Gerenciador_Colisoes::colisaoProjetilObstaculo()
 	{
 		for (it = listaObstaculos.begin(); it != listaObstaculos.end(); it++)
 		{
-			colidiu = calcularColisao(listaProjeteis[i], listaObstaculos.front());
+			colidiu = calcularColisao(static_cast<Entidade*>(listaProjeteis[i]), static_cast<Entidade*>(*it));
 			if (colidiu.x < 0.f && colidiu.y < 0.f)
 			{
 				listaProjeteis[i]->setVelocidade({ listaProjeteis[i]->getVelocidade().x, 0.f });
