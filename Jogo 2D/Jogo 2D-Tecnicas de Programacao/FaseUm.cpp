@@ -59,6 +59,7 @@ void FaseUm::iniciaFase()
 	//chao
 	for (int i = 0; i < 3; i++)
 	{
+		//chao
 		criarPlataformas(Vector2f{ 0.f + (i * 1920.f), 980.f }, Vector2f(1920.f, 300.f));
 
 		//plataformas baixas laterais

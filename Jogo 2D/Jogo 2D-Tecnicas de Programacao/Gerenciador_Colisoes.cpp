@@ -84,11 +84,12 @@ void Gerenciador_Colisoes::adicionarProjetil(Projetil* projetil)
 Vector2f Gerenciador_Colisoes::calcularColisao(Entidade* entidade, Entidade* ent)
 {
 	Vector2f distancia, metade_retangulo, colisao;
-	distancia = { fabs((entidade->getPosicao().x + entidade->getTamanho().x) / 2.0f - (ent->getPosicao().x + ent->getTamanho().x) / 2.0f),
-				  fabs((entidade->getPosicao().y + entidade->getTamanho().y) / 2.0f - (ent->getPosicao().y + ent->getTamanho().y) / 2.0f) };
-	metade_retangulo = { entidade->getTamanho().x - ent->getTamanho().x,
-						 entidade->getTamanho().y - ent->getTamanho().y };
+	distancia = { fabs((entidade->getPosicao().x + entidade->getTamanho().x / 2.0f) - (ent->getPosicao().x + ent->getTamanho().x/2.0f)) ,
+				  fabs((entidade->getPosicao().y + entidade->getTamanho().y / 2.0f) - (ent->getPosicao().y + ent->getTamanho().y / 2.0f)) };
+	metade_retangulo = { (entidade->getTamanho().x + ent->getTamanho().x)/2.0f,
+						 (entidade->getTamanho().y + ent->getTamanho().y)/2.0f };
 	colisao = distancia - metade_retangulo;
+	cout << colisao.x <<"    " << colisao.y << "\n";
 	return colisao;
 }
 
@@ -112,11 +113,13 @@ void Gerenciador_Colisoes::colisaoJogadorObstaculo()
 	list<Obstaculo*>::iterator it = listaObstaculos.begin();
 	for (it = listaObstaculos.begin(); it != listaObstaculos.end(); it++)
 	{
+		//cout << "%f\n" << jogador->getPosicao().y;
 		colidiu = calcularColisao(static_cast<Entidade*>(jogador), static_cast<Entidade*>(*it));
 		if (colidiu.x < 0.0f && colidiu.y < 0.0f)
 		{
-			jogador->colisao(static_cast<Entidade*>(*it) , colidiu);
 			cout << "Colidiu Jogador/Obstaculo" << endl;
+			jogador->colisao(static_cast<Entidade*>(*it) , colidiu);
+			//jogador->setPosicao(Vector2f{ 1000.f, 50.f });
 		}
 	}
 }

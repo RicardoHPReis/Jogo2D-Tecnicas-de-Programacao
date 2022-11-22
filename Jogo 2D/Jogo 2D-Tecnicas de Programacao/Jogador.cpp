@@ -32,7 +32,7 @@ void Jogador::iniciarVariaiveis()
 
 	levou_dano = false;
 	jogador_pulou = false;
-	forcaPulo = -25.f;
+	forcaPulo = 25.f;
 	frame = 0;
 	velTex = 0;
 }
@@ -44,7 +44,7 @@ void Jogador::iniciarJogador()
 	video.width = 1920;
 
 	this->forma.setSize(tamanho);
-	this->forma.setPosition(50.f, 905.f);
+	this->forma.setPosition(400.f, 400.f);
 	posicao = forma.getPosition();
 }
 
@@ -87,9 +87,9 @@ void Jogador::executar()
 
 	if (lado == Lado::esquerda) //define para qual lado o forma esta virado
 	{
-		forma.setScale(Vector2f(-1, 1));
+		forma.setScale(Vector2f(-1, 1));                                      
 		lado = Lado::neutro;
-	}
+	}																				//forma.setOrigin(Vector2f{forma.getOrigin().x + tamanho.x,forma.getOrigin().y});
 	else if (lado == Lado::direita)
 	{
 		forma.setScale(Vector2f(1, 1));
@@ -109,14 +109,13 @@ void Jogador::executar()
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || Keyboard::isKeyPressed(Keyboard::Right))
 
 		direcionalDireito();
-
 	else
 		velocidade = { 0.f, velocidade.y};
 	
 	//pulo 
 	if ((Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up)) && jogador_pulou == false)
 	{
-		velocidade = { velocidade.x, forcaPulo };
+		velocidade = { velocidade.x,velocidade.y - forcaPulo };
 		jogador_pulou = true;
 	}
 
@@ -143,7 +142,14 @@ void Jogador::executar()
 
 	calculaQueda();
 
-	forma.move(velocidade.x, velocidade.y);
+	//forma.move(velocidade.x, velocidade.y);
+
+	Vector2f pos = forma.getPosition();
+	pos += velocidade;
+
+
+	setPosicao(pos);
+
 
 	atualizarTextura();
 }
@@ -194,9 +200,12 @@ void Jogador::direcionalDireito()
 
 void Jogador::pulo()
 {
-	posicao = { posicao.x + velocidade.x, posicao.y - velocidade.y };
 
+	posicao = { posicao.x + velocidade.x, posicao.y - velocidade.y };
 	forma.setTexture(&txJogadorPula[limitadorTex]);
+
+	if (limitadorTex++ > 10)
+		limitadorTex = 0;
 	if (frame % 6 == 0)
 		limitadorTex++;
 }
@@ -208,9 +217,11 @@ void Jogador::colisao(Entidade* outro, Vector2f ds)
 		case(int (ID::plataforma)): //id da plataforma
 		{
 			cout << "A";
+			setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
 			velocidade.x = 0.f;
 			velocidade.y = 0.f;
-			forma.move( 0.f, -ds.y);
+			jogador_pulou = false;
+			// forma.move(0.f, -ds.y);
 		}
 		break;
 		case(int (ID::esqueleto)): //id do esqueleto
