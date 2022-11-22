@@ -354,7 +354,6 @@ void Menu::imprimirOpcoesFases()
 	Gerenciador_Grafico::getInstancia_Grafico()->desenharTexto(textos[6]);
 	Gerenciador_Grafico::getInstancia_Grafico()->desenharTexto(textos[7]);
 	Gerenciador_Grafico::getInstancia_Grafico()->desenharTexto(textos[10]);
-	Gerenciador_Grafico::getInstancia_Grafico()->desenhar(escolhaFases[0]);
 	Gerenciador_Grafico::getInstancia_Grafico()->desenhar(escolhaFases[1]);
 	Gerenciador_Grafico::getInstancia_Grafico()->mostrar();
 }
@@ -374,7 +373,6 @@ const bool Menu::getRodandoMenu() const
 {
 	return rodando_menu;
 }
-
 
 void Menu::setRodandoMenu(const bool mn)
 {

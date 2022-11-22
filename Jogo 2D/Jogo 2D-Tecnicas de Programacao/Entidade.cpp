@@ -10,7 +10,7 @@ Entidade::Entidade(int i, Vector2f pos, Vector2f tam) :
 	posicao = pos,
 	velocidade = { 0,0 };
 	velocidade_max = 0.f;
-	gravidade = -1.f;
+	gravidade = 1.f;
 	dano = 0;
 	lado = Lado::neutro;
 }
@@ -34,6 +34,7 @@ RectangleShape Entidade::getForma()
 
 void Entidade::setPosicao(const Vector2f pos)
 {
+	forma.setPosition(pos);
 	posicao = pos;
 }
 

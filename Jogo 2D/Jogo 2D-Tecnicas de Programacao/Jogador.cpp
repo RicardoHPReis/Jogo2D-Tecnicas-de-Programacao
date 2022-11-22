@@ -32,7 +32,7 @@ void Jogador::iniciarVariaiveis()
 
 	levou_dano = false;
 	jogador_pulou = false;
-	forcaPulo = 25.f;
+	forcaPulo = -25.f;
 	frame = 0;
 	velTex = 0;
 }
@@ -72,11 +72,11 @@ void Jogador::iniciarTexturas()
 		}
 		this->txJogadorAtaque[i].setSmooth(true);
 		
-		/*if (!this->txJogadorAtaquePula[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/AtaquePulo.png", IntRect(51 + (i * 588), 30, 448, 626)))
+		if (!this->txJogadorAtaquePula[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/AtaquePulo.png", IntRect(51 + (i * 588), 30, 448, 626)))
 		{
 			std::cout << "Erro ao carregar textura do Pulo com Ataque do Cavaleiro\n";
 		}
-		this->txJogadorAtaquePula[i].setSmooth(true);*/
+		this->txJogadorAtaquePula[i].setSmooth(true);
 	}
 }
 
@@ -96,13 +96,12 @@ void Jogador::executar()
 		lado = Lado::neutro;
 	}
 
-
-
 	//defina para nao passar a velocidade maxima
 	if (velocidade.x >= velocidade_max)
 		velocidade = { velocidade_max, velocidade.y};
 
 	//andar para os 2 lados
+
 	if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left))
 
 		direcionalEsquerdo();
@@ -141,6 +140,11 @@ void Jogador::executar()
 	{
 		ataqueAereo();
 	}
+
+	calculaQueda();
+
+	forma.move(velocidade.x, velocidade.y);
+
 	atualizarTextura();
 }
 
@@ -173,7 +177,6 @@ void Jogador::direcionalEsquerdo()
 	forma.setTexture(&txJogadorCorre[velTex]);
 	lado = Lado::esquerda;
 	velocidade = {velocidade.x - 1.f, velocidade.y};
-	forma.move(velocidade.x, velocidade.y);
 	posicao = { posicao.x - velocidade.x, posicao.y + velocidade.y };
 
 	//Gerenciador_Grafico::getInstancia_Grafico()->centralizar(forma.getPosition().x);
@@ -184,7 +187,6 @@ void Jogador::direcionalDireito()
 	forma.setTexture(&txJogadorCorre[velTex]);
 	lado = Lado::direita;
 	velocidade = { velocidade.x + 1.f, velocidade.y };
-	forma.move(velocidade.x, velocidade.y);
 	posicao = { posicao.x - velocidade.x, posicao.y + velocidade.y };
 	//Gerenciador_Grafico::getInstancia_Grafico()->centralizar(forma.getPosition().x);
 	
@@ -192,10 +194,7 @@ void Jogador::direcionalDireito()
 
 void Jogador::pulo()
 {
-	forma.move(velocidade.x, -velocidade.y);
 	posicao = { posicao.x + velocidade.x, posicao.y - velocidade.y };
-
-	calculaQueda();
 
 	forma.setTexture(&txJogadorPula[limitadorTex]);
 	if (frame % 6 == 0)
@@ -208,8 +207,10 @@ void Jogador::colisao(Entidade* outro, Vector2f ds)
 	{
 		case(int (ID::plataforma)): //id da plataforma
 		{
+			cout << "A";
 			velocidade.x = 0.f;
 			velocidade.y = 0.f;
+			forma.move( 0.f, -ds.y);
 		}
 		break;
 		case(int (ID::esqueleto)): //id do esqueleto
@@ -219,7 +220,6 @@ void Jogador::colisao(Entidade* outro, Vector2f ds)
 		break;
 	}
 }
-
 
 void Jogador::atualizarTextura() 
 {
