@@ -4,6 +4,7 @@
 
 Gerenciador_Colisoes::Gerenciador_Colisoes() :
 	jogador(),
+	jogador2(),
 	listaInimigos(),
 	listaObstaculos(),
 	listaProjeteis()
@@ -66,6 +67,11 @@ void Gerenciador_Colisoes::setJogador(Jogador* player)
 	jogador = player;
 }
 
+void Gerenciador_Colisoes::setJogadorDois(JogadorDois* player2)
+{
+	jogador2 = player2;
+}
+
 void Gerenciador_Colisoes::adicionarInimigo(Inimigo* inimigo)
 {
 	listaInimigos.push_back(inimigo);
@@ -101,7 +107,16 @@ void Gerenciador_Colisoes::colisaoJogadorInimigo()
 		if (colidiu.x < 0.f && colidiu.y < 0.f)
 		{
 			jogador->colisao(static_cast<Entidade*>(listaInimigos[i]), colidiu);
-			cout << "Colidiu Jogador/Inimigo" << endl;
+			//cout << "Colidiu Jogador/Inimigo" << endl;
+		}
+		if (!jogador2)
+		{
+			colidiu = calcularColisao(static_cast<Entidade*>(jogador2), static_cast<Entidade*>(listaInimigos[i]));
+			if (colidiu.x < 0.f && colidiu.y < 0.f)
+			{
+				jogador2->colisao(static_cast<Entidade*>(listaInimigos[i]), colidiu);
+				cout << "Colidiu Jogador2/Inimigo" << endl;
+			}
 		}
 	}
 }
@@ -117,6 +132,15 @@ void Gerenciador_Colisoes::colisaoJogadorObstaculo()
 		{
 			jogador->colisao(static_cast<Entidade*>(*it) , colidiu);
 			//cout << "Colidiu Jogador/Obstaculo" << endl;
+		}
+		if (!jogador2)
+		{
+			colidiu = calcularColisao(static_cast<Entidade*>(jogador2), static_cast<Entidade*>(*it));
+			if (colidiu.x < 0.0f && colidiu.y < 0.0f)
+			{
+				jogador2->colisao(static_cast<Entidade*>(*it), colidiu);
+				cout << "Colidiu Jogador2/Obstaculo" << endl;
+			}
 		}
 	}
 }
@@ -157,7 +181,16 @@ void Gerenciador_Colisoes::colisaoJogadorProjetil()
 		if (colidiu.x < 0.f && colidiu.y < 0.f)
 		{
 			jogador->colisao(static_cast<Entidade*>(listaProjeteis[i]), colidiu);
-			cout << "Colidiu Jogador/Projetil" << endl;
+			//cout << "Colidiu Jogador/Projetil" << endl;
+		}
+		if (!jogador2)
+		{
+			colidiu = calcularColisao(static_cast<Entidade*>(jogador2), static_cast<Entidade*>(listaProjeteis[i]));
+			if (colidiu.x < 0.f && colidiu.y < 0.f)
+			{
+				jogador2->colisao(static_cast<Entidade*>(listaProjeteis[i]), colidiu);
+				cout << "Colidiu Jogador2/Projetil" << endl;
+			}
 		}
 	}
 }
@@ -174,7 +207,7 @@ void Gerenciador_Colisoes::colisaoInimigoObstaculo()
 			if (colidiu.x < 0.f && colidiu.y < 0.f)
 			{
 				listaInimigos[i]->colisao(static_cast<Entidade*>(*it), colidiu);
-				cout << "Colidiu Inimigo/Obstaculo" << endl;
+				//cout << "Colidiu Inimigo/Obstaculo" << endl;
 			}
 		}
 	}
@@ -192,7 +225,7 @@ void Gerenciador_Colisoes::colisaoProjetilObstaculo()
 			if (colidiu.x < 0.f && colidiu.y < 0.f)
 			{
 				listaProjeteis[i]->colisao(static_cast<Entidade*>(listaProjeteis[i]), colidiu);
-				cout << "Colidiu Projetil/Obstaculo" << endl;
+				//cout << "Colidiu Projetil/Obstaculo" << endl;
 			}
 		}
 	}

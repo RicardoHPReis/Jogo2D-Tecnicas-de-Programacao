@@ -93,7 +93,7 @@ void Menu::inicVariaveis()
 		textos[i].setFont(fonte);
 		textos[i].setString(escrita[i]);
 		textos[i].setCharacterSize(tamanhos[i]);
-		textos[i].setOutlineColor(Color::Black);
+		textos[i].setOutlineColor(Color::Red);
 		textos[i].setPosition(coordenadas[i]);
 	}
 
@@ -119,7 +119,7 @@ void Menu::executar()
 	bool clique = false;
 	if(clique == false) 
 	{
-		if (Keyboard::isKeyPressed(Keyboard::Up) && delay == 0)
+		if ((Keyboard::isKeyPressed(Keyboard::Up) || Keyboard::isKeyPressed(Keyboard::W)) && delay == 0)
 		{
 			delay++;
 			if (escolha > 1 && apertou == false)
@@ -131,7 +131,7 @@ void Menu::executar()
 				apertou = false;
 			}
 		}
-		if (Keyboard::isKeyPressed(Keyboard::Down) && delay == 0) 
+		if ((Keyboard::isKeyPressed(Keyboard::Down) || Keyboard::isKeyPressed(Keyboard::S)) && delay == 0)
 		{
 			delay++;
 			if (escolha < 5 && apertou == false)
@@ -187,58 +187,52 @@ void Menu::escolhaFase()
 	escFase = 1;
 	selecao = false;
 
-	while (!selecao)
+	while (!apertou)
 	{
-		if (Keyboard::isKeyPressed(Keyboard::Left) && delay == 0)
+		if ((Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A)) && delay == 0)
 		{
 			delay++;
-			if (escFase != 1 && apertou == false)
+			if (escFase != 1)
 			{
 				escFase = 1;
 				textos[6].setOutlineThickness(4);
 				textos[7].setOutlineThickness(0);
 				textos[10].setOutlineThickness(0);
-				selecao = false;
-				apertou = false;
 			}
 		}
-		if (Keyboard::isKeyPressed(Keyboard::Right) && delay == 0)
+		if ((Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D)) && delay == 0)
 		{
 			delay++;
-			if (escFase != 2 && apertou == false)
+			if (escFase != 2)
 			{
 				escFase = 2;
 				textos[7].setOutlineThickness(4);
 				textos[6].setOutlineThickness(0);
 				textos[10].setOutlineThickness(0);
-				selecao = false;
-				apertou = false;
 			}
 		}
 
-		if (Keyboard::isKeyPressed(Keyboard::Down) && delay == 0)
+		if ((Keyboard::isKeyPressed(Keyboard::Down) || Keyboard::isKeyPressed(Keyboard::S)) && delay == 0)
 		{
 			delay++;
-			if (escFase != 3 && apertou == false)
+			if (escFase != 3)
 			{
 				escFase = 3;
 				textos[10].setOutlineThickness(4);
 				textos[6].setOutlineThickness(0);
 				textos[7].setOutlineThickness(0);
-				selecao = false;
-				apertou = false;
 			}
 		}
-		if (Keyboard::isKeyPressed(Keyboard::Space) && !selecao)
+		if (Keyboard::isKeyPressed(Keyboard::Space) && !apertou)
 		{
-			selecao = true;
+			apertou = true;
 			if (escFase == 1) //SELECIONA FASE 1
 			{
 				numFase = 1;
 			}
 			else if (escFase == 2) //SELECIONA FASE 2
 			{
-				//numFase = 2;
+				numFase = 2;
 			}
 			else if (escFase == 3) //VOLTA
 			{
@@ -262,7 +256,7 @@ void Menu::escolhaOpcoes()
 	selecao = false;
 	while (!selecao)
 	{
-		if (Keyboard::isKeyPressed(Keyboard::Left) && delay == 0)
+		if ((Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A)) && delay == 0)
 		{
 			delay++;
 			if (escOpcoes != 1 && apertou == false)
@@ -275,7 +269,7 @@ void Menu::escolhaOpcoes()
 				apertou = false;
 			}
 		}
-		if (Keyboard::isKeyPressed(Keyboard::Right) && delay == 0)
+		if ((Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D)) && delay == 0)
 		{
 			delay++;
 			if (escOpcoes != 2 && apertou == false)
@@ -284,12 +278,10 @@ void Menu::escolhaOpcoes()
 				textos[9].setOutlineThickness(4);
 				textos[8].setOutlineThickness(0);
 				textos[10].setOutlineThickness(0);
-				selecao = false;
-				apertou = false;
 			}
 		}
 
-		if (Keyboard::isKeyPressed(Keyboard::Down) && delay == 0)
+		if ((Keyboard::isKeyPressed(Keyboard::Down) || Keyboard::isKeyPressed(Keyboard::S)) && delay == 0)
 		{
 			delay++;
 			if (escOpcoes != 3 && apertou == false)
@@ -298,8 +290,6 @@ void Menu::escolhaOpcoes()
 				textos[10].setOutlineThickness(4);
 				textos[8].setOutlineThickness(0);
 				textos[9].setOutlineThickness(0);
-				selecao = false;
-				apertou = false;
 			}
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Space) && !selecao)
@@ -311,7 +301,7 @@ void Menu::escolhaOpcoes()
 			}
 			else if (escOpcoes == 2) //RODA 2 JOGADORES
 			{
-				//numJogadores = 2;
+				numJogadores = 2;
 			}
 			else if (escOpcoes == 3) //VOLTA
 			{

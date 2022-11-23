@@ -6,9 +6,9 @@ Esqueleto::Esqueleto(int i, Vector2f pos, Vector2f tam) :
 {
 	iniciarTexturas();
 	podeAtacar = true;
-	vidas = 3;
+	vida = 3000;
 	atacou = false;
-	dano = 1;
+	dano = 1000;
 	lado = Lado::esquerda;
 	danoso = true;
 	velocidade_max = 6;

@@ -70,41 +70,18 @@ void Projetil::colisao(Entidade* outro, Vector2f ds)
 			velocidade.y = 0.f;
 		}
 		break;
-		case(int(ID::espinho)): //id do esqueleto
+		case(int(ID::jogador)): //id do primeiro jogador
 		{
 			setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
 			velocidade.x = 0.f;
-			velocidade.y = 0.f;	
-		}
-		break;
-		case(int (ID::fogo)): //id do esqueleto
-		{
-			
-		}
-		break;
-		case(int(ID::esqueleto)): //id do esqueleto
-		{
-
-		}
-		break;
-		case(int(ID::morcego)): //id do morcego
-		{
-			
-		}
-		break;
-		case(int(ID::mago)): //id do mago
-		{
-			
-		}
-		break;
-		case(int(ID::jogador)): //id do primeiro jogador
-		{
-
+			velocidade.y = 0.f;
 		}
 		break;
 		case(int(ID::jogador2)): //id do segundo jogador
 		{
-
+			setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
+			velocidade.x = 0.f;
+			velocidade.y = 0.f;
 		}
 		break;
 	}

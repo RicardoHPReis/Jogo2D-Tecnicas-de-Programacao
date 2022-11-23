@@ -2,6 +2,23 @@
 #include "stdafx.h"
 #include "Gerenciador_Grafico.h"
 
+enum class ID 
+{
+	fase1 = 1,
+	fase2 = 2,
+	menu = 3,
+	jogador = 4,
+	pause = 5,
+	jogador2 = 6,
+	esqueleto = 10,
+	morcego = 11,
+	mago = 12,
+	plataforma = 100,
+	espinho = 101,
+	fogo = 102,
+	projetil = 1000
+};
+
 class Ente 
 {
 protected:
@@ -14,5 +31,4 @@ public:
 	virtual void executar() = 0;
 
 	const int getId() const;
-	//static void setGerenciador_Grafico(Gerenciador_Grafico* gg);
 };

@@ -4,8 +4,7 @@
 Gerenciador_Grafico::Gerenciador_Grafico()
 {
 	janela = nullptr;
-	video.height = 1080;
-	video.width = 1920;
+	video = VideoMode::getDesktopMode();
 	janela = new RenderWindow(video, "Game 1", Style::Titlebar | Style::Close);
 	janela->setMouseCursorVisible(false);
 	janela->setFramerateLimit(60);

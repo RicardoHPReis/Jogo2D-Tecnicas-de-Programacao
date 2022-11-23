@@ -13,6 +13,7 @@ Entidade::Entidade(int i, Vector2f pos, Vector2f tam) :
 	gravidade = 1.f;
 	dano = 0;
 	lado = Lado::neutro;
+	vida = 0;
 }
 
 Entidade::~Entidade()
@@ -25,6 +26,7 @@ Entidade::~Entidade()
 	gravidade = 0.f;
 	dano = 0;
 	lado = Lado::neutro;
+	vida = 0;
 }
 
 RectangleShape Entidade::getForma()
@@ -101,6 +103,16 @@ void Entidade::setLado(const Lado ld)
 const Lado Entidade::getLado() const
 {
 	return lado;
+}
+
+void Entidade::setVida(const int nr_vd)
+{
+	vida = nr_vd;
+}
+
+const int Entidade::getVida() const
+{
+	return vida;
 }
 
 void Entidade::calculaQueda()

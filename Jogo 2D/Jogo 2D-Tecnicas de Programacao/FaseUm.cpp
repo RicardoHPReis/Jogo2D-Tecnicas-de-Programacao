@@ -1,7 +1,7 @@
 #include "FaseUm.h"
 
-FaseUm::FaseUm(int i, Jogador* player):
-Fase(i, player)
+FaseUm::FaseUm(int i, Jogador* player, JogadorDois* player2):
+Fase(i, player, player2)
 {
 	iniciaVariaveis();
 	iniciaTexturas();
@@ -15,7 +15,7 @@ FaseUm::~FaseUm()
 
 void FaseUm::iniciaVariaveis()
 {
-	vidasSp.resize(5);
+	vidaSp.resize(5);
 }
 
 void FaseUm::iniciaTexturas()
@@ -28,16 +28,16 @@ void FaseUm::iniciaTexturas()
 	texturaFundo.setSmooth(true);
 	fundo.setTexture(texturaFundo);
 
-	tVidas.loadFromFile("../../Texturas/Cenario/Vida.png");
-	if (!tVidas.loadFromFile("../../Texturas/Cenario/Vida.png"))
+	tvida.loadFromFile("../../Texturas/Cenario/Vida.png");
+	if (!tvida.loadFromFile("../../Texturas/Cenario/Vida.png"))
 	{
 		cout << "Erro na textura dos corações da vida.\n";
 	}
-	tVidas.setSmooth(true);
+	tvida.setSmooth(true);
 	for (size_t i{}; i < 5; ++i)
 	{
-		vidasSp[i].setTexture(tVidas);
-		vidasSp[i].setPosition(Vector2f((30.f) + (50 * i), 10.f));
+		vidaSp[i].setTexture(tvida);
+		vidaSp[i].setPosition(Vector2f((30.f) + (50 * i), 10.f));
 	}
 }
 
@@ -45,7 +45,9 @@ void FaseUm::iniciaFase()
 {
 	int chance;
 	srand(time(NULL));
-	criarJogador(Vector2f(960.f, 200.f), jogador);
+	criarJogador(Vector2f(960.f, 200.f));
+	if(doisJogadores)
+		criarJogadorDois(Vector2f(1000.f, 200.f));
 
 	//chao
 	for (int i = 0; i < 3; i++)
@@ -54,13 +56,17 @@ void FaseUm::iniciaFase()
 		criarPlataformas(Vector2f{ 0.f + (i * 1920.f), 980.f }, Vector2f(1920.f, 300.f));
 
 		//plataformas baixas laterais
-
 		criarPlataformas(Vector2f{ 300.f + (i * 1920.f), 675.f }, Vector2f(260.f, 100.f));
 		criarPlataformas(Vector2f{ 1360.f + (i * 1920.f), 675.f }, Vector2f(260.f, 100.f));
 
 		//plataformas altas centralizads
-
 		criarPlataformas(Vector2f{ 660.f + (i * 1920.f), 370.f }, Vector2f(600.f, 100.f));
+	}
+
+	chance = rand() % 8 + 3;
+	for (int i = 0; i < chance; i++)
+	{
+		//criarPlataformas(Vector2f{ (rand() % 10 + 1), 980.f }, Vector2f(1920.f, 100.f));
 	}
 
 	chance = rand() % 8 + 3;
@@ -68,19 +74,16 @@ void FaseUm::iniciaFase()
 	{
 		criarEspinhos(Vector2f{ (rand() % 10 + 1) * 100.f, 0.f }, Vector2f{ 50.f, 50.f });
 	}
-
 	chance = rand() % 8 + 3;
 	for (int i = 0; i < chance; i++)
 	{
 		criarFogos(Vector2f{ (rand() % 10 + 1) * 75.f, 0.f }, Vector2f{ 100.f, 50.f });
 	}
-
 	chance = rand() % 2 + 3;
 	for (int i = 0; i < chance; i++)
 	{
 		criarMorcegos(Vector2f{ (rand() % 10 + 1) * 30.f, 0.f });
 	}
-
 	chance = rand() % 2 + 3;
 	for (int i = 0; i < chance; i++)
 	{
@@ -91,29 +94,20 @@ void FaseUm::iniciaFase()
 
 void FaseUm::executar()
 {
-
 	gerenciaColisoes();
 	listaEntidades.atualizarEntidade();
-
 	Gerenciador_Grafico::getInstancia_Grafico()->desenharSprite(fundo);
+	atualizavida();
 	Gerenciador_Grafico::getInstancia_Grafico()->desenhar(jogador->getForma());
-	//Gerenciador_Grafico::getInstancia_Grafico()->desenhar(esqueleto->getForma());
+	if(doisJogadores)
+		Gerenciador_Grafico::getInstancia_Grafico()->desenhar(jogador2->getForma());
 	listaEntidades.desenharEntidades();
-
-	//Gerenciador_Colisoes::executar();
-	atualizaVidas();
 }
 
-void FaseUm::atualizaVidas()
+void FaseUm::atualizavida()
 {
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < (jogador->getVida() / 1000); i++)
 	{
-		Gerenciador_Grafico::getInstancia_Grafico()->desenharSprite(vidasSp[i]);
+		Gerenciador_Grafico::getInstancia_Grafico()->desenharSprite(vidaSp[i]);
 	}
-
-	//se sofrer dano
-	//this->jogador->status.setVidas(this->jogador->status.getVidas()--);
-
-	//se ganhar uma vida
-	//this->jogador->status.setVidas(this->jogador->status.getVidas()++);
 }

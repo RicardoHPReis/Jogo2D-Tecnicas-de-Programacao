@@ -3,7 +3,7 @@
 Personagem::Personagem(int i, Vector2f pos, Vector2f tam):
 Entidade(i, pos, tam)
 {
-	vidas = 0;
+	vida = 0;
 	podeAtacar = true;
 	estaMorto = false;
 	atacou = false;
@@ -11,7 +11,7 @@ Entidade(i, pos, tam)
 
 Personagem::~Personagem()
 {
-	vidas = 0;
+	vida = 0;
 	podeAtacar = false;
 	estaMorto = false;
 	atacou = false;
@@ -25,17 +25,6 @@ void Personagem::setAtaque(bool foiAtacado)
 bool Personagem::getAtaque()
 {
 	return atacou;
-}
-
-
-void Personagem::setVidas(const int nr_vd)
-{
-	vidas = nr_vd;
-}
-
-const int Personagem::getVidas() const
-{
-	return vidas;
 }
 
 void Personagem::setPodeAtacar(const bool atc)

@@ -4,8 +4,10 @@
 
 Jogo::Jogo() :
 	menu(),
-	fase1(1, &jogador),
 	jogador(),
+	jogador2(),
+	fase1(1, &jogador, &jogador2),
+	//fase2(1, &jogador, &jogador2),
 	pause()
 {
 	menuAbre = true;
@@ -30,7 +32,14 @@ void Jogo::update()
 {
 	//Gerenciador_Eventos::getInstancia_Eventos()->executar();
 	menu.executar();
-	while (!menu.getRodandoMenu() && (jogador.getVidas() != 0 /* && jogador2.getVidas() != 0 */))
+	if (menu.getNumJogadores() == 2)
+	{
+		fase1.setDoisJogadores(true);
+		//fase2.setDoisJogadores(true);
+		//inicializar();
+	}
+		
+	while (!menu.getRodandoMenu() )//&& (jogador.getVida() < 0  && jogador2.getVida() < 0 ))
 	{
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 		{
@@ -44,9 +53,9 @@ void Jogo::update()
 				break;
 			}
 		}
-		if (menu.getNumJogadores() == 2)
-		{
-		}
+
+		cout << menu.getNumJogadores() << endl;
+		cout << menu.getNumFase() << endl;
 
 		if (menu.getEscolha() == 1 || menu.getNumFase() == 1)
 		{

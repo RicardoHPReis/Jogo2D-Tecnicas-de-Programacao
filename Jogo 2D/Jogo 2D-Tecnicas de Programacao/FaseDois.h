@@ -7,6 +7,6 @@ class FaseDois :public Fase
 private:
 
 public:
-	FaseDois(int i = 2, Jogador *player = NULL);
+	FaseDois(int i = 1, Jogador* player = NULL, JogadorDois* player2 = NULL);
 	~FaseDois();
 };

@@ -8,22 +8,6 @@ enum class Lado
 	neutro,
 	direita
 };
-enum class ID {
-
-	fase1 = 1,
-	fase2 = 2,
-	menu = 3,
-	jogador = 4,
-	pause = 5,
-	jogador2 = 6,
-	esqueleto = 10,
-	morcego = 11,
-	mago = 12,
-	plataforma = 100,
-	espinho = 101,
-	fogo = 102,
-	projetil = 1000
-};
 
 class Entidade : public Ente
 {
@@ -36,6 +20,7 @@ protected:
 	float gravidade;
 	int dano;
 	Lado lado;
+	int vida;
 
 public:
 	Entidade(int i = 0, Vector2f pos = {0.f, 0.f}, Vector2f tam = { 0.f, 0.f });
@@ -63,6 +48,9 @@ public:
 
 	void setDano(const int nr_dano);
 	const int getDano() const;
+
+	void setVida(const int nr_vd);
+	const int getVida() const;
 
 	void setLado(const Lado ld);
 	const Lado getLado() const;

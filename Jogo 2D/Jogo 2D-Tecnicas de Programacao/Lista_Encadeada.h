@@ -27,11 +27,11 @@ private:
 			proximo = NULL;
 		}
 
-		void setInfo(E* informacao) { info = informacao; }
+		void setInfo(E* informacao) { this->info = informacao; }
 		E* getInfo() { return info; }
-		void setAnterior(Elemento<E>* ant) { anterior = ant; }
+		void setAnterior(Elemento<E>* ant) { this->anterior = ant; }
 		Elemento<E>* getAnterior() { return anterior; }
-		void setProximo(Elemento<E>* prox) { proximo = prox; }
+		void setProximo(Elemento<E>* prox) { this->proximo = prox; }
 		Elemento<E>* getProximo() { return proximo; }
 	};
 
@@ -192,6 +192,7 @@ void Lista_Encadeada<L>::apagar(L* informacao)
 		}
 		atual = atual->getProximo();
 	}
+	num_elementos--;
 }
 
 template<class L>
@@ -221,6 +222,7 @@ void Lista_Encadeada<L>::apagarNum(int num)
 		}
 		atual = atual->getProximo();
 	}
+	num_elementos--;
 }
 
 template<class L>
@@ -235,10 +237,12 @@ void Lista_Encadeada<L>::limpar()
 		atual = aux->getProximo();
 		aux->setProximo(NULL);
 		aux->setAnterior(NULL);
+		aux->setInfo(NULL);
 		delete aux;
 		aux = NULL;
 	}
 	primeiro = NULL;
 	atual = NULL;
 	ultimo = NULL;
+	num_elementos = 0;
 }

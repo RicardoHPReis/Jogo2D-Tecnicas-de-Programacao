@@ -2,6 +2,7 @@
 #include "Inimigo.h"
 #include "Obstaculo.h"
 #include "Jogador.h"
+#include "JogadorDois.h"
 #include "Projetil.h"
 #include "Plataforma.h"
 #include "stdafx.h"
@@ -10,6 +11,7 @@ class Gerenciador_Colisoes
 {
 private:
 	Jogador* jogador;
+	JogadorDois* jogador2;
 	vector<Inimigo*> listaInimigos;
 	list<Obstaculo*> listaObstaculos;
 	vector<Projetil*> listaProjeteis;
@@ -23,6 +25,7 @@ public:
 	static Gerenciador_Colisoes* getInstancia_Colisoes();
 
 	void setJogador(Jogador* player);
+	void setJogadorDois(JogadorDois* player2);
 	void adicionarInimigo(Inimigo* inimigo);
 	void adicionarObstaculo(Obstaculo* obstaculo);
 	void adicionarProjetil(Projetil* projetil);

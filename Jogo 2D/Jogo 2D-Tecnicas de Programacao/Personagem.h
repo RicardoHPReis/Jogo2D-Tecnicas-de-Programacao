@@ -5,7 +5,6 @@
 class Personagem : public Entidade
 {
 protected:
-	int vidas;
 	bool podeAtacar;
 	bool estaMorto;
 	bool atacou;
@@ -19,9 +18,6 @@ public:
 
 	void setAtaque(bool foiAtacado);
 	bool getAtaque();
-
-	void setVidas(const int nr_vd);
-	const int getVidas() const;
 
 	void setPodeAtacar(const bool atc);
 	const bool getPodeAtacar() const;

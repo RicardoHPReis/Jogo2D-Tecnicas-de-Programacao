@@ -9,10 +9,10 @@ private:
 	void iniciaTexturas();
 
 public:
-	FaseUm(int i = 1, Jogador* player = NULL);
+	FaseUm(int i = 1, Jogador* player = NULL, JogadorDois* player2 = NULL);
 	~FaseUm();
 
 	void iniciaFase();
 	void executar();
-	void atualizaVidas();
+	void atualizavida();
 };

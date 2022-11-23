@@ -14,7 +14,7 @@ private:
 	Menu menu;
 	Pause pause;
 	Jogador jogador;
-	//JogadorDois jogador2;
+	JogadorDois jogador2;
 	FaseUm fase1;
 	//FaseDois fase2;
 

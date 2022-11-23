@@ -6,7 +6,7 @@ Morcego::Morcego(int i, Vector2f pos, Vector2f tam) :
 {
 	iniciarTexturas();
 	podeAtacar = true;
-	vidas = 10;
+	vida = 10;
 	atacou = false;
 	dano = 1;
 	velocidade_max = 6;

@@ -3,12 +3,15 @@
 
 Gerenciador_Colisoes* Gerenciador_Colisoes::instancia_colisoes = Gerenciador_Colisoes::getInstancia_Colisoes();
 
-Fase::Fase(int i, Jogador* player) :
+Fase::Fase(int i, Jogador* player, JogadorDois* player2) :
 	Ente(i),
 	listaEntidades()
 {
 	jogador = player;
+	jogador2 = player2;
+	doisJogadores = false;
 	Gerenciador_Colisoes::getInstancia_Colisoes()->setJogador(jogador);
+	Gerenciador_Colisoes::getInstancia_Colisoes()->setJogadorDois(jogador2);
 }
 
 Fase::~Fase()
@@ -21,10 +24,18 @@ void Fase::gerenciaColisoes()
 	Gerenciador_Colisoes::getInstancia_Colisoes()->executar();
 }
 
-void Fase::criarJogador(Vector2f pos, Jogador *player)
+void Fase::criarJogador(Vector2f pos)
 {
+	jogador->setPosicao(pos);
 	listaEntidades.adicionarEntidade(static_cast<Entidade*>(jogador));
 	Gerenciador_Colisoes::getInstancia_Colisoes()->setJogador(jogador);
+}
+
+void Fase::criarJogadorDois(Vector2f pos)
+{
+	jogador2->setPosicao(pos);
+	listaEntidades.adicionarEntidade(static_cast<Entidade*>(jogador2));
+	Gerenciador_Colisoes::getInstancia_Colisoes()->setJogadorDois(jogador2);
 }
 
 void Fase::criarEsqueletos(Vector2f pos)
@@ -79,4 +90,14 @@ void Fase::criarProjetil(Vector2f pos, Projetil* projetil)
 void Fase::deletarEntidades()
 {
 	listaEntidades.limparEntidades();
+}
+
+const bool Fase::getDoisJogadores() const
+{
+	return doisJogadores;
+}
+
+void Fase::setDoisJogadores(const bool dois)
+{
+	doisJogadores = dois;
 }

@@ -77,7 +77,7 @@ void Pause::inicVariaveis()
 		textos[i].setFont(fonte);
 		textos[i].setString(escrita[i]);
 		textos[i].setCharacterSize(tamanhos[i]);
-		textos[i].setOutlineColor(Color::Black);
+		textos[i].setOutlineColor(Color::Red);
 		textos[i].setPosition(coordenadas[i]);
 	}
 
@@ -90,7 +90,7 @@ void Pause::executar()
 	bool clique = false;
 	while (clique == false)
 	{
-		if (Keyboard::isKeyPressed(Keyboard::Up) && delay == 0)
+		if ((Keyboard::isKeyPressed(Keyboard::Up) || Keyboard::isKeyPressed(Keyboard::W)) && delay == 0)
 		{
 			delay++;
 			if (escolha != 1 && apertou == false)
@@ -103,7 +103,7 @@ void Pause::executar()
 				apertou = false;
 			}
 		}
-		if (Keyboard::isKeyPressed(Keyboard::Down) && delay == 0)
+		if ((Keyboard::isKeyPressed(Keyboard::Down) || Keyboard::isKeyPressed(Keyboard::S)) && delay == 0)
 		{
 			delay++;
 			if (escolha != 2 && apertou == false)
