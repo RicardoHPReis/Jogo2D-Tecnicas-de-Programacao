@@ -27,11 +27,11 @@ private:
 			proximo = NULL;
 		}
 
-		void setInfo(E* informacao) { this->info = informacao; }
+		void setInfo(E* informacao) { info = informacao; }
 		E* getInfo() { return info; }
-		void setAnterior(Elemento<E>* ant) { this->anterior = ant; }
+		void setAnterior(Elemento<E>* ant) { anterior = ant; }
 		Elemento<E>* getAnterior() { return anterior; }
-		void setProximo(Elemento<E>* prox) { this->proximo = prox; }
+		void setProximo(Elemento<E>* prox) { proximo = prox; }
 		Elemento<E>* getProximo() { return proximo; }
 	};
 
@@ -149,7 +149,6 @@ void Lista_Encadeada<L>::adicionar(L* informacao)
 		primeiro = novo;
 		ultimo = novo;
 		num_elementos++;
-		cout << "1° Elemento adicionado\n";
 	}
 	else if (num_elementos == 1)
 	{
@@ -159,7 +158,6 @@ void Lista_Encadeada<L>::adicionar(L* informacao)
 		primeiro->setProximo(novo);
 		ultimo = novo;
 		num_elementos++;
-		cout << "2° Elemento adicionado\n";
 	}
 	else
 	{
@@ -169,7 +167,6 @@ void Lista_Encadeada<L>::adicionar(L* informacao)
 		novo->setProximo(NULL);
 		ultimo = novo;
 		num_elementos++;
-		cout << "Outro Elemento adicionado\n";
 	}
 }
 
@@ -230,15 +227,16 @@ template<class L>
 void Lista_Encadeada<L>::limpar()
 {
 	Elemento<L>* aux = NULL;
+	atual = primeiro;
 	for (int i = 0; i < num_elementos; i++)
 	{
+		//atual[i]
 		aux = atual;
 		atual = aux->getProximo();
 		aux->setProximo(NULL);
 		aux->setAnterior(NULL);
-		aux->setAnterior(NULL);
-		aux = NULL;
 		delete aux;
+		aux = NULL;
 	}
 	primeiro = NULL;
 	atual = NULL;

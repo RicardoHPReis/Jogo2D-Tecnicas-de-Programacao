@@ -23,6 +23,11 @@ void Plataforma::executar()
 	forma.setPosition(posicao);
 }
 
+void Plataforma::colisao(Entidade* outrao, Vector2f ds)
+{
+
+}
+
 void Plataforma::iniciarTexturas()
 {
 	//if (!this->textura_plataforma.loadFromFile("../../Texturas/Cenario/Plataforma.png", IntRect( 1025 , 995 , 870 , 600))) {

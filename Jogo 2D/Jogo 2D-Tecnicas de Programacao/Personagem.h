@@ -15,7 +15,7 @@ public:
 	~Personagem();
 
 	virtual void executar() = 0;
-	//virtual void colisao(Entidade* outro) = 0;
+	virtual void colisao(Entidade* outro, Vector2f ds) = 0;
 
 	void setAtaque(bool foiAtacado);
 	bool getAtaque();

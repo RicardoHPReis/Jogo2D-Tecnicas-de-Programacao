@@ -5,9 +5,11 @@ Projetil::Projetil(int i, Vector2f pos, Vector2f tam):
 Entidade(i, pos, tam)
 {
 	inicProjetil();
+	forma.setFillColor(Color::Cyan);
 	danoso = true;
 	tiro = false;
 	atingiu = false;
+	cout << "Criou projetil!" << endl;
 }
 
 Projetil::~Projetil()
@@ -39,13 +41,11 @@ void Projetil::iniciarTexturas()
 
 void Projetil::executar()
 {
-	Gerenciador_Grafico::getInstancia_Grafico()->desenhar(forma);
-	forma.setPosition(posicao);
+	setPosicao(posicao);
+	calculaQueda();
 	atirar();
 	if ((posicao.x <= 0 || posicao.x >= 1920) || posicao.y >= 1000) //Modificar depois para gerenciador de colisoes
 		setAtirar(false);
-
-	Gerenciador_Grafico::getInstancia_Grafico()->desenhar(forma);
 }
 
 void Projetil::atirar()
@@ -57,6 +57,57 @@ void Projetil::atirar()
 		posicao.x = posicao.x + velocidade.x;
 	else if (lado == Lado::esquerda)
 		posicao.x = posicao.x - velocidade.x;
+}
+
+void Projetil::colisao(Entidade* outro, Vector2f ds)
+{
+	switch (outro->getId())
+	{
+		case(int (ID::plataforma)): //id da plataforma
+		{
+			setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
+			velocidade.x = 0.f;
+			velocidade.y = 0.f;
+		}
+		break;
+		case(int(ID::espinho)): //id do esqueleto
+		{
+			setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
+			velocidade.x = 0.f;
+			velocidade.y = 0.f;	
+		}
+		break;
+		case(int (ID::fogo)): //id do esqueleto
+		{
+			
+		}
+		break;
+		case(int(ID::esqueleto)): //id do esqueleto
+		{
+
+		}
+		break;
+		case(int(ID::morcego)): //id do morcego
+		{
+			
+		}
+		break;
+		case(int(ID::mago)): //id do mago
+		{
+			
+		}
+		break;
+		case(int(ID::jogador)): //id do primeiro jogador
+		{
+
+		}
+		break;
+		case(int(ID::jogador2)): //id do segundo jogador
+		{
+
+		}
+		break;
+	}
 }
 
 bool Projetil::getAtirar()

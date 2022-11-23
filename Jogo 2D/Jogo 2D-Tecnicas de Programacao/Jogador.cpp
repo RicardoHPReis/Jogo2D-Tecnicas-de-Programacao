@@ -3,98 +3,74 @@
 Jogador::Jogador(int i, Vector2f pos, Vector2f tam):
 	Personagem(i, pos, tam)
 {
-	this->iniciarVariaiveis();
-	this->iniciarJogador();
-	this->iniciarStatus();
-	this->iniciarTexturas();
+	iniciarVariaiveis();
+	iniciarTexturas();
 }
 
 Jogador::~Jogador()
 {
 }
 
-void Jogador::iniciarStatus()
-{
-	setVidas(5);
-	setLado(Lado::direita);
-	setPodeAtacar(true);
-	setAtaque(false);
-	setDano(1);
-	setVelocidadeMaxima(13);
-	setVelocidade({ 0.f, 0.f });
-}
-
 void Jogador::iniciarVariaiveis()
 {
-	this->limitadorTex = 0;
+	//forma.setSize(tamanho);
+	//forma.setPosition(400.f, 400.f);
+	//posicao = forma.getPosition();
 
-	//logica jogador
-
+	podeAtacar = true;
+	vidas = 5000;
+	lado = Lado::direita;
+	atacou = false;
+	dano = 1;
+	velocidade_max = 14;
+	velocidade = { 0.f, 0.f };
 	levou_dano = false;
 	jogador_pulou = false;
 	forcaPulo = 25.f;
-	frame = 0;
-	velTex = 0;
-}
 
-void Jogador::iniciarJogador()
-{
-	VideoMode video;
-	video.height = 1080; //RESOLU�OES
-	video.width = 1920;
-
-	this->forma.setSize(tamanho);
-	this->forma.setPosition(400.f, 400.f);
-	posicao = forma.getPosition();
+	limitadorTex_parado = 0;
+	limitadorTex_correndo = 0;
+	frame1 = 0;
 }
 
 void Jogador::iniciarTexturas()
 {
 	for (int i = 0; i < 10; i++) 
 	{
-		if (!this->txJogadorCorre[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Correr.png", IntRect(99 + (i * 580), 30, 460, 660))) {
-			std::cout << "Erro ao carregar textura da corrida do cavaleiro\n";
-		}
-		this->txJogadorCorre[i].setSmooth(true);
-
-		if (!this->txJogadorPula[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Pular.png", IntRect(51 + (i * 588), 30, 470, 626))) {
+		if (!txJogadorPula[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Cavaleiro Dark.png", IntRect(30 +(i * 150), 220, 125, 100))) {
 			std::cout << "Erro ao carregar textura do pulo do cavaleiro\n";
 		}
-		this->txJogadorPula[i].setSmooth(true);
+		txJogadorPula[i].setSmooth(true);
 
-		if (!this->txJogadorParado[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Parado.png", IntRect(51 + (i * 588), 30, 448, 626))) {
-			std::cout << "Erro ao carregar textura do cavaleiro parado\n";
-		}
-		this->txJogadorParado[i].setSmooth(true);
-
-		if (!this->txJogadorAtaque[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Atacar.png", IntRect(51 + (i * 588), 30, 448, 626))) {
+		if (!txJogadorAtaque[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Cavaleiro Dark.png", IntRect(30 + (i * 150), 440, 125, 100))) {
 			std::cout << "Erro ao carregar textura do ataque do cavaleiro\n";
 		}
-		this->txJogadorAtaque[i].setSmooth(true);
-		
-		if (!this->txJogadorAtaquePula[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/AtaquePulo.png", IntRect(51 + (i * 588), 30, 448, 626)))
-		{
-			std::cout << "Erro ao carregar textura do Pulo com Ataque do Cavaleiro\n";
+		txJogadorAtaque[i].setSmooth(true);
+	}
+
+	for(int i = 0; i < 6; i++)
+	{
+		if (!txJogadorCorre[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Cavaleiro Dark.png", IntRect(30 + (i * 150), 110, 125, 100))) {
+			std::cout << "Erro ao carregar textura da corrida do cavaleiro\n";
 		}
-		this->txJogadorAtaquePula[i].setSmooth(true);
+		txJogadorCorre[i].setSmooth(true);
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		if (!txJogadorParado[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Cavaleiro Dark.png", IntRect(30 + (i * 150), 0, 125, 100))) {
+			std::cout << "Erro ao carregar textura do cavaleiro parado\n";
+		}
+		txJogadorParado[i].setSmooth(true);
 	}
 }
 
 void Jogador::executar()
 {
-	forma.setTexture(&txJogadorParado[this->velTex]);
-	//forma.setPosition(posicao);
-
-	if (lado == Lado::esquerda) //define para qual lado o forma esta virado
-	{
-		forma.setScale(Vector2f(-1, 1));                                      
-		lado = Lado::neutro;
-	}																				//forma.setOrigin(Vector2f{forma.getOrigin().x + tamanho.x,forma.getOrigin().y});
-	else if (lado == Lado::direita)
-	{
-		forma.setScale(Vector2f(1, 1));
-		lado = Lado::neutro;
-	}
+	if (frame1 % 10 == 0)
+		limitadorTex_parado++;
+	atualizarTextura();
+	forma.setTexture(&txJogadorParado[limitadorTex_parado]);
 
 	//defina para nao passar a velocidade maxima
 	if (velocidade.x >= velocidade_max)
@@ -103,18 +79,31 @@ void Jogador::executar()
 	//andar para os 2 lados
 
 	if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left))
-
+	{
+		if (lado == Lado::direita)
+		{
+			forma.setScale(Vector2f(-1, 1));
+			forma.setOrigin(Vector2f{forma.getOrigin().x + 100.f,forma.getOrigin().y});
+		}
 		direcionalEsquerdo();
+	}
 
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || Keyboard::isKeyPressed(Keyboard::Right))
-
+	{
+		if (lado == Lado::esquerda)
+		{
+			forma.setScale(Vector2f(1, 1));
+			forma.setOrigin( Vector2f{ forma.getOrigin().x - 100.f,forma.getOrigin().y });
+		}
 		direcionalDireito();
+	}
 	else
 		velocidade = { 0.f, velocidade.y};
 	
 	//pulo 
 	if ((Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up)) && jogador_pulou == false)
 	{
+		limitadorTex_pulando = 0;
 		velocidade = { velocidade.x,velocidade.y - forcaPulo };
 		jogador_pulou = true;
 	}
@@ -129,15 +118,11 @@ void Jogador::executar()
 	if ((Mouse::isButtonPressed(Mouse::Left) || Keyboard::isKeyPressed(Keyboard::Space)) && atacou == false) 
 	{
 		atacou = true;
-		limitadorTex1 = 0;
+		limitadorTex_ataque = 0;
 	}
 	if (atacou == true)
 	{
 		ataque();
-	}
-	if (atacou == true && jogador_pulou == true)
-	{
-		ataqueAereo();
 	}
 
 	calculaQueda();
@@ -147,67 +132,62 @@ void Jogador::executar()
 	Vector2f pos = forma.getPosition();
 	pos += velocidade;
 
-
 	setPosicao(pos);
+	frame1++;
 
-
-	atualizarTextura();
+	cout << vidas << endl;
 }
 
 void Jogador::ataque()
 {
-	if (this->limitadorTex1 <= 9) 
+	if (limitadorTex_ataque <= 9)
 	{
-		this->forma.setTexture(&txJogadorAtaque[this->limitadorTex1]);
-		if (this->frame % 3 == 0)
-			this->limitadorTex1++;
+		forma.setTexture(&txJogadorAtaque[limitadorTex_ataque]);
+		if (frame1 % 5 == 0)
+			limitadorTex_ataque++;
+		atualizarTextura();
 	}
 	else
 		setAtaque(false);
 }
 
-void Jogador::ataqueAereo()
-{
-	if (limitadorTex1 <= 9)
-	{
-		forma.setTexture(&txJogadorAtaquePula[limitadorTex1]);
-		if (frame % 3 == 0)
-			limitadorTex1++;
-	}
-	else
-		atacou = false;
-}
-
 void Jogador::direcionalEsquerdo() 
 {
-	forma.setTexture(&txJogadorCorre[velTex]);
 	lado = Lado::esquerda;
 	velocidade = {velocidade.x - 1.f, velocidade.y};
 	posicao = { posicao.x - velocidade.x, posicao.y + velocidade.y };
-
+	forma.setTexture(&txJogadorCorre[limitadorTex_correndo]);
+	if (frame1 % 6 == 0){
+		limitadorTex_correndo++;
+		atualizarTextura();
+	}
 	//Gerenciador_Grafico::getInstancia_Grafico()->centralizar(forma.getPosition().x);
 }
 
 void Jogador::direcionalDireito() 
 {
-	forma.setTexture(&txJogadorCorre[velTex]);
 	lado = Lado::direita;
 	velocidade = { velocidade.x + 1.f, velocidade.y };
 	posicao = { posicao.x - velocidade.x, posicao.y + velocidade.y };
-	//Gerenciador_Grafico::getInstancia_Grafico()->centralizar(forma.getPosition().x);
-	
+	forma.setTexture(&txJogadorCorre[limitadorTex_correndo]);
+	if (frame1 % 6 == 0)
+	{
+		limitadorTex_correndo++;
+		atualizarTextura();
+	}
+	//Gerenciador_Grafico::getInstancia_Grafico()->centralizar(forma.getPosition().x);	
 }
 
 void Jogador::pulo()
 {
 
 	posicao = { posicao.x + velocidade.x, posicao.y - velocidade.y };
-	forma.setTexture(&txJogadorPula[limitadorTex]);
+	forma.setTexture(&txJogadorPula[limitadorTex_pulando]);
 
-	if (limitadorTex++ > 10)
-		limitadorTex = 0;
-	if (frame % 6 == 0)
-		limitadorTex++;
+	if (limitadorTex_pulando > 10)
+		limitadorTex_pulando = 0;
+	if (frame1 % 10 == 0)
+		limitadorTex_pulando++;
 }
 
 void Jogador::colisao(Entidade* outro, Vector2f ds)
@@ -216,17 +196,55 @@ void Jogador::colisao(Entidade* outro, Vector2f ds)
 	{
 		case(int (ID::plataforma)): //id da plataforma
 		{
-			cout << "A";
 			setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
 			velocidade.x = 0.f;
 			velocidade.y = 0.f;
 			jogador_pulou = false;
-			// forma.move(0.f, -ds.y);
 		}
 		break;
-		case(int (ID::esqueleto)): //id do esqueleto
+		case(int(ID::espinho)): //id do esqueleto
+		{
+			//setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
+			setPosicao(Vector2f{ posicao.x , posicao.y });
+			velocidade.x = 0.f;
+			velocidade.y = 0.f;
+		}
+		case(int(ID::fogo)): //id do esqueleto
+		{
+			//setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
+			//velocidade.x = 0.f;
+			//velocidade.y = 0.f;
+			operator--(outro->getDano());
+		}
+		break;
+		case(int(ID::esqueleto)): //id do esqueleto
 		{
 			operator--(outro->getDano());
+		}
+		break;
+		case(int(ID::morcego)): //id do morcego
+		{
+			operator--(outro->getDano());
+		}
+		break;
+		case(int(ID::mago)): //id do mago
+		{
+			setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
+			velocidade.x = 0.f;
+			velocidade.y = 0.f;
+			operator--(outro->getDano());
+		}
+		break;
+		case(int(ID::projetil)): //id do mago
+		{
+			operator--(outro->getDano());
+		}
+		break;
+		case(int(ID::jogador2)): //id do segundo jogador
+		{
+			setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
+			velocidade.x = 0.f;
+			velocidade.y = 0.f;
 		}
 		break;
 	}
@@ -234,11 +252,10 @@ void Jogador::colisao(Entidade* outro, Vector2f ds)
 
 void Jogador::atualizarTextura() 
 {
-	if (frame % 7 == 0)
-		velTex++;
-	if (velTex == 10)
-		velTex = 0;
-	frame++;
+	if (limitadorTex_parado > 4)
+		limitadorTex_parado = 0;
+	if (limitadorTex_correndo > 6)
+		limitadorTex_correndo = 0;
 }
 
 void Jogador::operator--(int dano)

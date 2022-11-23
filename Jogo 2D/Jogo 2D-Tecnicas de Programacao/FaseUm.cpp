@@ -1,11 +1,8 @@
 #include "FaseUm.h"
 
-FaseUm::FaseUm(int i):
-Fase(i)
+FaseUm::FaseUm(int i, Jogador* player):
+Fase(i, player)
 {
-	jogador = new Jogador();
-	//esqueleto = new Esqueleto();
-	
 	iniciaVariaveis();
 	iniciaTexturas();
 	iniciaFase();
@@ -24,18 +21,12 @@ void FaseUm::iniciaVariaveis()
 void FaseUm::iniciaTexturas()
 {
 	//Gerenciador_Grafico::getInstancia_Grafico()->centralizar(forma.getPosition().x);
-	if (!texturaFundo.loadFromFile("../../Texturas/Cenario/Fundo.jpg"))
+	if (!texturaFundo.loadFromFile("../../Texturas/Cenario/Fundo-Fase1.jpeg"))
 	{
 		cout << "Erro na textura do fundo do mapa.\n";
 	}
 	texturaFundo.setSmooth(true);
 	fundo.setTexture(texturaFundo);
-
-	if (!this->tChao.loadFromFile("../../Texturas/Cenario/Texturas_mapa.png", IntRect(184, 18, 77, 77)))
-	{
-		cout << "Erro na textura do mapa.\n";
-	}
-	this->tChao.setSmooth(true);
 
 	tVidas.loadFromFile("../../Texturas/Cenario/Vida.png");
 	if (!tVidas.loadFromFile("../../Texturas/Cenario/Vida.png"))
@@ -75,11 +66,27 @@ void FaseUm::iniciaFase()
 	chance = rand() % 8 + 3;
 	for (int i = 0; i < chance; i++)
 	{
-		//criarEspinhos(Vector2f{ (rand() % 8)*100.f, (rand() % 8)*980.f }, Vector2f((rand() % 8)*1920.f, (rand() % 8)*100.f));
+		criarEspinhos(Vector2f{ (rand() % 10 + 1) * 100.f, 0.f }, Vector2f{ 50.f, 50.f });
 	}
-	
-	//criarEsqueletos(Vector2f(900, 795));
-	//criarMorcego(Vector2f(365 * (i + 1), 400));
+
+	chance = rand() % 8 + 3;
+	for (int i = 0; i < chance; i++)
+	{
+		criarFogos(Vector2f{ (rand() % 10 + 1) * 75.f, 0.f }, Vector2f{ 100.f, 50.f });
+	}
+
+	chance = rand() % 2 + 3;
+	for (int i = 0; i < chance; i++)
+	{
+		criarMorcegos(Vector2f{ (rand() % 10 + 1) * 30.f, 0.f });
+	}
+
+	chance = rand() % 2 + 3;
+	for (int i = 0; i < chance; i++)
+	{
+		criarEsqueletos(Vector2f{ (rand() % 10 + 1) * 60.f, 0.f });
+	}
+	criarChefao(Vector2f{ 1000.f, 0.f });
 }
 
 void FaseUm::executar()

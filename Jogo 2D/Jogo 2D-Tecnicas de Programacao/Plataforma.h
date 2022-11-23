@@ -16,5 +16,6 @@ public:
 	~Plataforma();
 
 	void executar();
+	void colisao(Entidade* outrao, Vector2f ds);
 	//Vector2f valorEmpuxo();
 };

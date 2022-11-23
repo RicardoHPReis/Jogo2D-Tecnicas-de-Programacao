@@ -89,7 +89,6 @@ Vector2f Gerenciador_Colisoes::calcularColisao(Entidade* entidade, Entidade* ent
 	metade_retangulo = { (entidade->getTamanho().x + ent->getTamanho().x)/2.0f,
 						 (entidade->getTamanho().y + ent->getTamanho().y)/2.0f };
 	colisao = distancia - metade_retangulo;
-	cout << colisao.x <<"    " << colisao.y << "\n";
 	return colisao;
 }
 
@@ -110,16 +109,41 @@ void Gerenciador_Colisoes::colisaoJogadorInimigo()
 void Gerenciador_Colisoes::colisaoJogadorObstaculo()
 {
 	Vector2f colidiu;
-	list<Obstaculo*>::iterator it = listaObstaculos.begin();
+	list<Obstaculo*>::iterator it;
 	for (it = listaObstaculos.begin(); it != listaObstaculos.end(); it++)
 	{
-		//cout << "%f\n" << jogador->getPosicao().y;
 		colidiu = calcularColisao(static_cast<Entidade*>(jogador), static_cast<Entidade*>(*it));
 		if (colidiu.x < 0.0f && colidiu.y < 0.0f)
 		{
-			cout << "Colidiu Jogador/Obstaculo" << endl;
 			jogador->colisao(static_cast<Entidade*>(*it) , colidiu);
-			//jogador->setPosicao(Vector2f{ 1000.f, 50.f });
+			//cout << "Colidiu Jogador/Obstaculo" << endl;
+		}
+	}
+}
+
+void Gerenciador_Colisoes::colisaoPlataformaObstaculo()
+{
+	Vector2f colidiu;
+	list<Obstaculo*>::iterator itP;
+	list<Obstaculo*>::iterator itO;
+	for (itO = listaObstaculos.begin(); itO != listaObstaculos.end(); itO++)
+	{
+		if ((*itO)->getId() == int(ID::plataforma))
+		{
+			continue;
+		}
+		for (itP = listaObstaculos.begin(); itP != listaObstaculos.end(); itP++)
+		{
+			if ((*itP)->getId() == int(ID::espinho) || (*itP)->getId() == int(ID::fogo))
+			{
+				continue;
+			}
+			colidiu = calcularColisao(static_cast<Entidade*>(*itO), static_cast<Entidade*>(*itP));
+			if (colidiu.x < 0.0f && colidiu.y < 0.0f)
+			{
+				(*itO)->colisao(static_cast<Entidade*>(*itP), colidiu);
+				//cout << "Colidiu Plataforma/Obstaculo" << endl;
+			}
 		}
 	}
 }
@@ -149,7 +173,7 @@ void Gerenciador_Colisoes::colisaoInimigoObstaculo()
 			colidiu = calcularColisao(static_cast<Entidade*>(listaInimigos[i]), static_cast<Entidade*>(*it));
 			if (colidiu.x < 0.f && colidiu.y < 0.f)
 			{
-				listaInimigos[i]->setVelocidade({ listaInimigos[i]->getVelocidade().x, 0.f });
+				listaInimigos[i]->colisao(static_cast<Entidade*>(*it), colidiu);
 				cout << "Colidiu Inimigo/Obstaculo" << endl;
 			}
 		}
@@ -167,7 +191,7 @@ void Gerenciador_Colisoes::colisaoProjetilObstaculo()
 			colidiu = calcularColisao(static_cast<Entidade*>(listaProjeteis[i]), static_cast<Entidade*>(*it));
 			if (colidiu.x < 0.f && colidiu.y < 0.f)
 			{
-				listaProjeteis[i]->setVelocidade({ listaProjeteis[i]->getVelocidade().x, 0.f });
+				listaProjeteis[i]->colisao(static_cast<Entidade*>(listaProjeteis[i]), colidiu);
 				cout << "Colidiu Projetil/Obstaculo" << endl;
 			}
 		}
@@ -176,9 +200,10 @@ void Gerenciador_Colisoes::colisaoProjetilObstaculo()
 
 void Gerenciador_Colisoes::executar()
 {
-	colisaoInimigoObstaculo();
 	colisaoJogadorInimigo();
 	colisaoJogadorObstaculo();
 	colisaoJogadorProjetil();
+	colisaoPlataformaObstaculo();
 	colisaoProjetilObstaculo();
+	colisaoInimigoObstaculo();
 }

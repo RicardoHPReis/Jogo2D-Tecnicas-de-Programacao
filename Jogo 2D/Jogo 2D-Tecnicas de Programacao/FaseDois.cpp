@@ -1,7 +1,7 @@
 #include "FaseDois.h"
 
-FaseDois::FaseDois(int i):
-Fase(i)
+FaseDois::FaseDois(int i, Jogador *player):
+Fase(i, player)
 {
 
 }

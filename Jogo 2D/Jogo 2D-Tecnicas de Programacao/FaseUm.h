@@ -9,7 +9,7 @@ private:
 	void iniciaTexturas();
 
 public:
-	FaseUm(int i = 1);
+	FaseUm(int i = 1, Jogador* player = NULL);
 	~FaseUm();
 
 	void iniciaFase();

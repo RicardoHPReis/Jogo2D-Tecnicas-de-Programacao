@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Chefao.cpp" />
     <ClCompile Include="Ente.cpp" />
     <ClCompile Include="Entidade.cpp" />
     <ClCompile Include="Espinho.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="Fase.cpp" />
     <ClCompile Include="FaseDois.cpp" />
     <ClCompile Include="FaseUm.cpp" />
+    <ClCompile Include="Fogo.cpp" />
     <ClCompile Include="Gerenciador_Colisoes.cpp" />
     <ClCompile Include="Gerenciador_Eventos.cpp" />
     <ClCompile Include="Gerenciador_Grafico.cpp" />
@@ -163,6 +165,7 @@
     <ClCompile Include="Projetil.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Chefao.h" />
     <ClInclude Include="Ente.h" />
     <ClInclude Include="Entidade.h" />
     <ClInclude Include="Espinho.h" />
@@ -170,6 +173,7 @@
     <ClInclude Include="Fase.h" />
     <ClInclude Include="FaseDois.h" />
     <ClInclude Include="FaseUm.h" />
+    <ClInclude Include="Fogo.h" />
     <ClInclude Include="Gerenciador_Colisoes.h" />
     <ClInclude Include="Gerenciador_Eventos.h" />
     <ClInclude Include="Gerenciador_Grafico.h" />

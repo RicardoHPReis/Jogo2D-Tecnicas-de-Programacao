@@ -186,8 +186,8 @@ void Menu::escolhaFase()
 	apertou = false;
 	escFase = 1;
 	selecao = false;
-	bool clicar = false;
-	if (clicar == false)
+
+	while (!selecao)
 	{
 		if (Keyboard::isKeyPressed(Keyboard::Left) && delay == 0)
 		{
@@ -229,22 +229,19 @@ void Menu::escolhaFase()
 				apertou = false;
 			}
 		}
-		if (Keyboard::isKeyPressed(Keyboard::Enter) && !selecao)
+		if (Keyboard::isKeyPressed(Keyboard::Space) && !selecao)
 		{
 			selecao = true;
 			if (escFase == 1) //SELECIONA FASE 1
 			{
-				clicar = true;
 				numFase = 1;
 			}
 			else if (escFase == 2) //SELECIONA FASE 2
 			{
-				clicar = true;
 				//numFase = 2;
 			}
 			else if (escFase == 3) //VOLTA
 			{
-				clicar = true;
 			}
 		}
 		if (delay > 0)
@@ -255,15 +252,15 @@ void Menu::escolhaFase()
 		}
 		imprimirOpcoesFases();
 	}
+	
 }
 
 void Menu::escolhaOpcoes()
 {
 	apertou = false;
-	bool clicar = false;
 	escOpcoes = 1;
 	selecao = false;
-	if (clicar == false)
+	while (!selecao)
 	{
 		if (Keyboard::isKeyPressed(Keyboard::Left) && delay == 0)
 		{
@@ -305,22 +302,19 @@ void Menu::escolhaOpcoes()
 				apertou = false;
 			}
 		}
-		if (Keyboard::isKeyPressed(Keyboard::Enter) && !selecao)
+		if (Keyboard::isKeyPressed(Keyboard::Space) && !selecao)
 		{
 			selecao = true;
 			if (escOpcoes == 1) //RODA 1 JOGADOR
 			{
-				clicar = true;
 				numJogadores = 1;
 			}
 			else if (escOpcoes == 2) //RODA 2 JOGADORES
 			{
-				clicar = true;
 				//numJogadores = 2;
 			}
 			else if (escOpcoes == 3) //VOLTA
 			{
-				clicar = true;
 			}
 		}
 		if (delay > 0)
@@ -331,6 +325,7 @@ void Menu::escolhaOpcoes()
 		}
 		imprimirOpcoes();
 	}
+	
 }
 
 void Menu::imprimir()

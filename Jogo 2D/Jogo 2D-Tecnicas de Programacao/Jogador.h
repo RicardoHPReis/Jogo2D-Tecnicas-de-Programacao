@@ -5,27 +5,21 @@
 class Jogador : public Personagem
 {
 private:
-	Texture txJogadorCorre[10], txJogadorPula[10], txJogadorParado[10],txJogadorAtaque[10],txJogadorAtaquePula[10];
-	int frame, velTex, limitadorTex1 ,limitadorTex;
+	Texture txJogadorCorre[6], txJogadorPula[10], txJogadorParado[4],txJogadorAtaque[10];
+	int frame1, limitadorTex_parado ,limitadorTex_correndo, limitadorTex_pulando, limitadorTex_ataque;
 
-	//estat Player
 	bool jogador_pulou;
 	bool levou_dano;
 	float fdist, forcaPulo;
 
-	//funcoes privadas
-	void iniciarStatus();
-	void iniciarVariaiveis();
-	void iniciarJogador();
 	void iniciarTexturas();
 
 public:
-	Jogador(int i = 4, Vector2f pos = { 0.f, 0.f }, Vector2f tam = { 60.f, 90.f });
+	Jogador(int i = 4, Vector2f pos = { 0.f, 0.f }, Vector2f tam = { 125.f, 100.f });
 	~Jogador();
 
 	void executar();
 	void ataque();
-	void ataqueAereo();
 	void direcionalEsquerdo();
 	void direcionalDireito();
 	void pulo();
@@ -35,5 +29,6 @@ public:
 	void atualizarTextura();
 	void operator--(int dano);
 
+	void iniciarVariaiveis();
 	const bool getLevouDano() const;
 };

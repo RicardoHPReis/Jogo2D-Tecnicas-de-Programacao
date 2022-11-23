@@ -14,11 +14,11 @@ private:
 	Menu menu;
 	Pause pause;
 	Jogador jogador;
+	//JogadorDois jogador2;
 	FaseUm fase1;
 	//FaseDois fase2;
 
-	int numFase;
-	int faseAtual;
+
 	bool menuAbre;
 	bool pausou;
 
@@ -27,6 +27,6 @@ public:
 	virtual ~Jogo();
 
 	const bool rodando() const;
-	void rodando_menu();
 	void update();
+	void inicializar();
 };

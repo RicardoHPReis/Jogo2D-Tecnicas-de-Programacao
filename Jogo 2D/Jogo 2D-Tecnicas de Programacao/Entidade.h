@@ -14,9 +14,14 @@ enum class ID {
 	fase2 = 2,
 	menu = 3,
 	jogador = 4,
+	pause = 5,
+	jogador2 = 6,
 	esqueleto = 10,
 	morcego = 11,
+	mago = 12,
 	plataforma = 100,
+	espinho = 101,
+	fogo = 102,
 	projetil = 1000
 };
 
@@ -31,13 +36,13 @@ protected:
 	float gravidade;
 	int dano;
 	Lado lado;
-	//bool danoso;
 
 public:
 	Entidade(int i = 0, Vector2f pos = {0.f, 0.f}, Vector2f tam = { 0.f, 0.f });
 	virtual ~Entidade();
 
 	virtual void executar() = 0;
+	virtual void colisao(Entidade* outro, Vector2f ds) = 0;
 
 	RectangleShape getForma();
 

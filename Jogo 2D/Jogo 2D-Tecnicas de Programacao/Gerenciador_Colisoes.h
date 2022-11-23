@@ -3,6 +3,7 @@
 #include "Obstaculo.h"
 #include "Jogador.h"
 #include "Projetil.h"
+#include "Plataforma.h"
 #include "stdafx.h"
 
 class Gerenciador_Colisoes
@@ -31,6 +32,7 @@ public:
 	void colisaoJogadorProjetil();
 	void colisaoInimigoObstaculo();
 	void colisaoProjetilObstaculo();
+	void colisaoPlataformaObstaculo();
 
 	void executar();
 };
