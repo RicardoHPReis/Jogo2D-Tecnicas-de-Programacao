@@ -1,13 +1,4 @@
 ﻿  Chefao.cpp
-  Fase.cpp
-  FaseDois.cpp
-  FaseUm.cpp
-E:\Visual Studio\Jogo2D-Tecnicas-de-Programacao-main\Jogo 2D\Jogo 2D-Tecnicas de Programacao\FaseUm.cpp(47,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Jogador.cpp
-  JogadorDois.cpp
-  Jogo.cpp
-  main.cpp
   Morcego.cpp
-  Personagem.cpp
   Generating Code...
   Jogo 2D-Tecnicas de Programacao.vcxproj -> E:\Visual Studio\Jogo2D-Tecnicas-de-Programacao-main\Jogo 2D\Debug\Jogo 2D-Tecnicas de Programacao.exe
