@@ -32,18 +32,20 @@ void Jogador::iniciarVariaiveis()
 	limitadorTex_parado = 0;
 	limitadorTex_correndo = 0;
 	frame1 = 0;
+
+	vidaSp.resize(5);
 }
 
 void Jogador::iniciarTexturas()
 {
 	for (int i = 0; i < 10; i++) 
 	{
-		if (!txJogadorPula[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Cavaleiro Dark.png", IntRect(30 +(i * 150), 220, 125, 100))) {
+		if (!txJogadorPula[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Cavaleiro Dark.png", IntRect((i * 150), 220, 125, 100))) {
 			std::cout << "Erro ao carregar textura do pulo do cavaleiro\n";
 		}
 		txJogadorPula[i].setSmooth(true);
 
-		if (!txJogadorAtaque[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Cavaleiro Dark.png", IntRect(30 + (i * 150), 440, 125, 100))) {
+		if (!txJogadorAtaque[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Cavaleiro Dark.png", IntRect( (i * 150), 440, 125, 100))) {
 			std::cout << "Erro ao carregar textura do ataque do cavaleiro\n";
 		}
 		txJogadorAtaque[i].setSmooth(true);
@@ -51,7 +53,7 @@ void Jogador::iniciarTexturas()
 
 	for(int i = 0; i < 6; i++)
 	{
-		if (!txJogadorCorre[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Cavaleiro Dark.png", IntRect(30 + (i * 150), 110, 125, 100))) {
+		if (!txJogadorCorre[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Cavaleiro Dark.png", IntRect( (i * 150), 110, 125, 100))) {
 			std::cout << "Erro ao carregar textura da corrida do cavaleiro\n";
 		}
 		txJogadorCorre[i].setSmooth(true);
@@ -59,10 +61,19 @@ void Jogador::iniciarTexturas()
 
 	for (int i = 0; i < 4; i++)
 	{
-		if (!txJogadorParado[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Cavaleiro Dark.png", IntRect(30 + (i * 150), 0, 125, 100))) {
+		if (!txJogadorParado[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Cavaleiro Dark.png", IntRect( (i * 150), 0, 125, 100))) {
 			std::cout << "Erro ao carregar textura do cavaleiro parado\n";
 		}
 		txJogadorParado[i].setSmooth(true);
+	}
+
+	tvida.loadFromFile("../../Texturas/Cenario/Vida.png");
+	
+	tvida.setSmooth(true);
+	for (size_t i{}; i < 5; ++i)
+	{
+		vidaSp[i].setTexture(tvida);
+		vidaSp[i].setPosition(Vector2f((30.f) + (50 * i), 10.f));
 	}
 }
 
@@ -118,7 +129,7 @@ void Jogador::executar()
 	}
 	
 	//atacar
-	if (Keyboard::isKeyPressed(Keyboard::Space) && atacou == false) 
+	if ((Keyboard::isKeyPressed(Keyboard::Space) || Mouse::isButtonPressed(Mouse::Left)) && atacou == false) 
 	{
 		atacou = true;
 		limitadorTex_ataque = 0;
@@ -138,7 +149,7 @@ void Jogador::executar()
 	setPosicao(pos);
 	frame1++;
 
-	cout << vida << endl;
+	atualizavida();
 }
 
 void Jogador::ataque()
@@ -157,7 +168,8 @@ void Jogador::ataque()
 void Jogador::direcionalEsquerdo() 
 {
 	lado = Lado::esquerda;
-	velocidade = {velocidade.x - 1.f, velocidade.y};
+	
+	velocidade = { velocidade.x - 1.f, velocidade.y };
 	posicao = { posicao.x - velocidade.x, posicao.y + velocidade.y };
 	forma.setTexture(&txJogadorCorre[limitadorTex_correndo]);
 	if (frame1 % 6 == 0){
@@ -170,6 +182,7 @@ void Jogador::direcionalEsquerdo()
 void Jogador::direcionalDireito() 
 {
 	lado = Lado::direita;
+	
 	velocidade = { velocidade.x + 1.f, velocidade.y };
 	posicao = { posicao.x - velocidade.x, posicao.y + velocidade.y };
 	forma.setTexture(&txJogadorCorre[limitadorTex_correndo]);
@@ -502,6 +515,15 @@ void Jogador::atualizarTextura()
 	if (limitadorTex_correndo > 6)
 		limitadorTex_correndo = 0;
 }
+
+void Jogador::atualizavida()
+{
+	for (int i = 0; i < (vida / 1000); i++)
+	{
+		Gerenciador_Grafico::getInstancia_Grafico()->desenharSprite(vidaSp[i]);
+	}
+}
+
 
 void Jogador::operator--(int dano)
 {

@@ -13,6 +13,7 @@ Esqueleto::Esqueleto(int i, Vector2f pos, Vector2f tam) :
 	danoso = true;
 	velocidade_max = 1;
 	velocidade = { 1.f, 0.f };
+	velTex1 = 0;
 
 	cout << "Criou esqueleto!" << endl;
 }
@@ -35,17 +36,16 @@ void Esqueleto::iniciarTexturas()
 			cout << "Erro ao carregar a textura do esqueleto parado\n";
 		}
 		tEnemy[i + 1].setSmooth(true);
-	}
+	}*/
 
 	// Texturas inimigo Andando
-	for (int i = 0; i < 13; i++) 
+	for (int i = 0; i < 8; i++) 
 	{
-		if (!this->tEnemyAnda[i].loadFromFile("../../Texturas/Personagens/Esqueleto/Andar.png", IntRect((i * 257), 0, 250, 385))) {
+		if (!this->tEnemyAnda[i].loadFromFile("../../Texturas/Personagens/Slime.png", IntRect((i * 111), 0, 111, 85))) {
 			cout << "Erro ao carregar a textura do esqueleto andando\n";
 		}
 		tEnemyAnda[i].setSmooth(true);
-	}*/
-	forma.setFillColor(Color::Green);
+	}
 }
 
 void Esqueleto::executar()
@@ -54,7 +54,7 @@ void Esqueleto::executar()
 	
 	andar();
 	atualizaTextura();
-	//forma.setTexture(&tEnemyAnda[velTex1]); // Erro
+	forma.setTexture(&tEnemyAnda[velTex1]);
 
 	calculaQueda();
 
@@ -282,7 +282,7 @@ void Esqueleto::atualizaTextura()
 	//muda para a proxima textura a cada 7 frames
 	if (frame1 % 7 == 0)
 		velTex1++;
-	if (velTex1 == 13)
+	if (velTex1 == 8)
 		velTex1 = 0;
 	frame1++;
 }
@@ -291,13 +291,13 @@ void Esqueleto::andar()
 {
 	if (lado == Lado::esquerda)
 	{
-		forma.setScale(Vector2f(-1, 1));
+		forma.setScale(Vector2f(1, 1));
 		andarEsquerda();
 	}
 
 	else if (lado == Lado::direita)
 	{
-		forma.setScale(Vector2f(1, 1));
+		forma.setScale(Vector2f(-1, 1));
 		andarDireita();
 	}
 	if (velocidade.x >= velocidade_max)

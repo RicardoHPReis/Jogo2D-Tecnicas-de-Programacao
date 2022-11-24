@@ -7,7 +7,7 @@ class Chefao : public Inimigo
 {
 private:
 	int frame1, velTex1, aux1;
-	Texture tEnemy[11], tEnemyAnda[13];
+	Texture tEnemy[8], tEnemyAnda[13];
 
 	Projetil *projetil;
 
@@ -23,7 +23,7 @@ public:
 	void executar();
 	void colisao(Entidade* outrao, Vector2f ds);
 
-	Chefao(int i = 12, Vector2f pos = { 0.f, 0.f }, Vector2f tam = { 300.f, 200.f });
+	Chefao(int i = 12, Vector2f pos = { 0.f, 0.f }, Vector2f tam = { 300.f, 330.f });
 	~Chefao();
 
 	Projetil* getProjetil();

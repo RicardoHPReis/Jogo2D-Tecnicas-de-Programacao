@@ -68,7 +68,7 @@ Menu::~Menu()
 
 void Menu::inicVariaveis()
 {
-	
+	escolha = 1;
 	apertou = false;
 	selecao = false;
 	rodando_menu = true;

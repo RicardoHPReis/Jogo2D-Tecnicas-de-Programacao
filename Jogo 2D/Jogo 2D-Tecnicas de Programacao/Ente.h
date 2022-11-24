@@ -13,6 +13,7 @@ enum class ID
 	esqueleto = 10,
 	morcego = 11,
 	mago = 12,
+	chefao = 13,
 	plataforma = 100,
 	espinho = 101,
 	fogo = 102,

@@ -12,6 +12,11 @@ private:
 	bool levou_dano;
 	float fdist, forcaPulo;
 
+	//vidas
+	vector<Sprite> vidaSp;
+	Texture tvida;
+
+
 	void iniciarTexturas();
 
 public:
@@ -23,6 +28,7 @@ public:
 	void direcionalEsquerdo();
 	void direcionalDireito();
 	void pulo();
+	void atualizavida();
 
 	void colisao(Entidade* outrao,Vector2f ds);
 

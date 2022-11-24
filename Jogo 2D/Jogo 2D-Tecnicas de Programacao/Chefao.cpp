@@ -14,6 +14,7 @@ Chefao::Chefao(int i, Vector2f pos, Vector2f tam) :
 	velocidade_max = 6;
 	velocidade = { 4.f, 0.f };
 	projetil = new Projetil();
+	velTex1 = 0;
 	cout << "Criou Chefao!" << endl;
 }
 
@@ -25,28 +26,14 @@ Chefao::~Chefao()
 
 void Chefao::iniciarTexturas()
 {
-	/*if (!this->tEnemy[0].loadFromFile("../../Texturas/Personagens/Chefao/Parado.png", IntRect(20, 0, 270, 386))) {
-		cout << "Erro ao carregar a textura do Chefao parado\n";
-	}
-	tEnemy[0].setSmooth(true);
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 8; i++)
 	{
-		if (!this->tEnemy[i + 1].loadFromFile("../../Texturas/Personagens/Chefao/Parado.png", IntRect(20 + ((i + 1) * 290), 0, 270, 386))) {
+		if (!this->tEnemy[i].loadFromFile("../../Texturas/Personagens/Necromancer.png", IntRect(100 + (i * 353), 115, 140, 160))) {
 			cout << "Erro ao carregar a textura do Chefao parado\n";
 		}
-		tEnemy[i + 1].setSmooth(true);
+		tEnemy[i].setSmooth(true);
 	}
-
-	// Texturas inimigo Andando
-	for (int i = 0; i < 13; i++)
-	{
-		if (!this->tEnemyAnda[i].loadFromFile("../../Texturas/Personagens/Chefao/Andar.png", IntRect((i * 257), 0, 250, 385))) {
-			cout << "Erro ao carregar a textura do Chefao andando\n";
-		}
-		tEnemyAnda[i].setSmooth(true);
-	}*/
-	forma.setFillColor(Color::Magenta);
 }
 
 void Chefao::executar()
@@ -62,7 +49,7 @@ void Chefao::executar()
 
 	setPosicao(pos);
 
-	//forma.setTexture(&tEnemyAnda[velTex1]); // Erro
+	forma.setTexture(&tEnemy[velTex1]);
 }
 
 void Chefao::colisao(Entidade* outro, Vector2f ds)
@@ -228,7 +215,7 @@ void Chefao::atualizaTextura()
 	//muda para a proxima textura a cada 7 frames
 	if (frame1 % 7 == 0)
 		velTex1++;
-	if (velTex1 == 13)
+	if (velTex1 == 8)
 		velTex1 = 0;
 	frame1++;
 }
@@ -246,6 +233,10 @@ void Chefao::andar()
 		forma.setScale(Vector2f(1, 1));
 		andarDireita();
 	}
+	if (velocidade.x >= velocidade_max)
+		velocidade = { velocidade_max, velocidade.y };
+	else if (velocidade.x <= -velocidade_max)
+		velocidade = { -velocidade_max, velocidade.y };
 
 }
 

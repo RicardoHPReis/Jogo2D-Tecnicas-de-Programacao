@@ -14,5 +14,4 @@ public:
 
 	void iniciaFase();
 	void executar();
-	void atualizavida();
 };

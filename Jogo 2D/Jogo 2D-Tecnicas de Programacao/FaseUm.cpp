@@ -15,7 +15,6 @@ FaseUm::~FaseUm()
 
 void FaseUm::iniciaVariaveis()
 {
-	vidaSp.resize(5);
 }
 
 void FaseUm::iniciaTexturas()
@@ -28,17 +27,6 @@ void FaseUm::iniciaTexturas()
 	texturaFundo.setSmooth(true);
 	fundo.setTexture(texturaFundo);
 
-	tvida.loadFromFile("../../Texturas/Cenario/Vida.png");
-	if (!tvida.loadFromFile("../../Texturas/Cenario/Vida.png"))
-	{
-		cout << "Erro na textura dos corações da vida.\n";
-	}
-	tvida.setSmooth(true);
-	for (size_t i{}; i < 5; ++i)
-	{
-		vidaSp[i].setTexture(tvida);
-		vidaSp[i].setPosition(Vector2f((30.f) + (50 * i), 10.f));
-	}
 }
 
 void FaseUm::iniciaFase()
@@ -97,20 +85,11 @@ void FaseUm::iniciaFase()
 
 void FaseUm::executar()
 {
+	Gerenciador_Grafico::getInstancia_Grafico()->desenharSprite(fundo);
 	gerenciaColisoes();
 	listaEntidades.atualizarEntidade();
-	Gerenciador_Grafico::getInstancia_Grafico()->desenharSprite(fundo);
-	atualizavida();
 	Gerenciador_Grafico::getInstancia_Grafico()->desenhar(jogador->getForma());
 	if(doisJogadores)
 		Gerenciador_Grafico::getInstancia_Grafico()->desenhar(jogador2->getForma());
 	listaEntidades.desenharEntidades();
-}
-
-void FaseUm::atualizavida()
-{
-	for (int i = 0; i < (jogador->getVida() / 1000); i++)
-	{
-		Gerenciador_Grafico::getInstancia_Grafico()->desenharSprite(vidaSp[i]);
-	}
 }

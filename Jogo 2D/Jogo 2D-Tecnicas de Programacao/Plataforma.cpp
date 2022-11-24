@@ -30,9 +30,9 @@ void Plataforma::colisao(Entidade* outrao, Vector2f ds)
 
 void Plataforma::iniciarTexturas()
 {
-	//if (!this->textura_plataforma.loadFromFile("../../Texturas/Cenario/Plataforma.png", IntRect( 1025 , 995 , 870 , 600))) {
-		//std::cout << "Erro ao carregar textura da plataforma\n";
-	//}
+	if (!this->textura_plataforma.loadFromFile("../../Texturas/Cenario/Plataforma.png", IntRect(  265, 195, 271, 40))) {
+		std::cout << "Erro ao carregar textura da plataforma\n";
+	}
 	this->textura_plataforma.setSmooth(true);
 	forma.setTexture(&textura_plataforma);
 }

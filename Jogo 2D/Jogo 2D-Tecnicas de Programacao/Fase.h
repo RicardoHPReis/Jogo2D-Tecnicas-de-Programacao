@@ -18,9 +18,6 @@ protected:
 	Jogador* jogador;
 	JogadorDois* jogador2;
 
-	vector<Sprite> vidaSp;
-	Texture tvida;
-
 	Sprite fundo;
 	Texture texturaFundo;
 	Lista_Entidades listaEntidades;
