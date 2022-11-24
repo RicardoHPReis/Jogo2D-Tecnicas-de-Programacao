@@ -63,28 +63,31 @@ void FaseUm::iniciaFase()
 		criarPlataformas(Vector2f{ 660.f + (i * 1920.f), 370.f }, Vector2f(600.f, 100.f));
 	}
 
-	chance = rand() % 8 + 3;
+	criarPlataformas(Vector2f{ 0.f, 0.f }, Vector2f(10.f, 1080.f)); // Temporario
+	criarPlataformas(Vector2f{ 1920.f, 0.f }, Vector2f(10.f, 1080.f)); // Temporario
+
+	chance = rand() % 1 + 3;
 	for (int i = 0; i < chance; i++)
 	{
 		//criarPlataformas(Vector2f{ (rand() % 10 + 1), 980.f }, Vector2f(1920.f, 100.f));
 	}
 
-	chance = rand() % 8 + 3;
+	chance = rand() % 1 + 3;
 	for (int i = 0; i < chance; i++)
 	{
-		criarEspinhos(Vector2f{ (rand() % 10 + 1) * 100.f, 0.f }, Vector2f{ 50.f, 50.f });
+		//criarEspinhos(Vector2f{ (rand() % 10 + 1) * 100.f, 0.f }, Vector2f{ 50.f, 50.f });
 	}
-	chance = rand() % 8 + 3;
+	chance = rand() % 1 + 3;
 	for (int i = 0; i < chance; i++)
 	{
-		criarFogos(Vector2f{ (rand() % 10 + 1) * 75.f, 0.f }, Vector2f{ 100.f, 50.f });
+		//criarFogos(Vector2f{ (rand() % 10 + 1) * 75.f, 0.f }, Vector2f{ 100.f, 50.f });
 	}
-	chance = rand() % 2 + 3;
+	chance = rand() % 1 + 3;
 	for (int i = 0; i < chance; i++)
 	{
 		criarMorcegos(Vector2f{ (rand() % 10 + 1) * 30.f, 0.f });
 	}
-	chance = rand() % 2 + 3;
+	chance = rand() % 1 + 3;
 	for (int i = 0; i < chance; i++)
 	{
 		criarEsqueletos(Vector2f{ (rand() % 10 + 1) * 60.f, 0.f });

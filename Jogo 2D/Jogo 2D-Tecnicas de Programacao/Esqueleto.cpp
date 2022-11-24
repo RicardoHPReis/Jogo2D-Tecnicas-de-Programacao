@@ -11,8 +11,8 @@ Esqueleto::Esqueleto(int i, Vector2f pos, Vector2f tam) :
 	dano = 1000;
 	lado = Lado::esquerda;
 	danoso = true;
-	velocidade_max = 6;
-	velocidade = { 4.f, 0.f };
+	velocidade_max = 1;
+	velocidade = { 1.f, 0.f };
 
 	cout << "Criou esqueleto!" << endl;
 }
@@ -71,9 +71,33 @@ void Esqueleto::colisao(Entidade* outro, Vector2f ds)
 	{
 		case(int (ID::plataforma)): //id da plataforma
 		{
-			setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
-			velocidade.x = 0.f;
-			velocidade.y = 0.f;
+			Vector2f distancia;
+			distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
+						  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
+
+			if (ds.x > ds.y)
+			{
+				if (distancia.x > 0.f)
+				{
+					setPosicao(Vector2f(posicao.x + ds.x, posicao.y));
+				}
+				else
+				{
+					setPosicao(Vector2f(posicao.x - ds.x, posicao.y));
+				}
+			}
+			else
+			{
+				if (distancia.y > 0.f)
+				{
+					setPosicao(Vector2f(posicao.x, posicao.y + ds.y)); // CHAO
+					velocidade.y = 0.f;
+				}
+				else
+				{
+					setPosicao(Vector2f(posicao.x, posicao.y - ds.y));
+				}
+			}
 		}
 		break;
 		case(int(ID::espinho)): //id do esqueleto
@@ -90,27 +114,164 @@ void Esqueleto::colisao(Entidade* outro, Vector2f ds)
 		break;
 		case(int(ID::esqueleto)): //id do esqueleto
 		{
+			Vector2f distancia;
+			distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
+						  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
 
+			if (ds.x > ds.y)
+			{
+				if (distancia.x > 0.f)
+				{
+					setPosicao(Vector2f(posicao.x + ds.x, posicao.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x - ds.x, outro->getPosicao().y));
+					outro->setVelocidade({ 0,0 });
+					if (outro->getLado() == Lado::esquerda)
+						outro->setLado(Lado::direita);
+					else
+						outro->setLado(Lado::esquerda);
+				}
+				else
+				{
+					setPosicao(Vector2f(posicao.x - ds.x, posicao.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x + ds.x, outro->getPosicao().y));
+					outro->setVelocidade({ 0,0 });
+					if (outro->getLado() == Lado::esquerda)
+						outro->setLado(Lado::direita);
+					else
+						outro->setLado(Lado::esquerda);
+				}
+			}
+			else
+			{
+				if (distancia.y > 0.f)
+				{
+					setPosicao(Vector2f(posicao.x, posicao.y + ds.y)); // CHAO
+					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - ds.y));
+					outro->setVelocidade({ outro->getVelocidade().x,0 });
+					if (outro->getLado() == Lado::esquerda)
+						outro->setLado(Lado::direita);
+					else
+						outro->setLado(Lado::esquerda);
+				}
+				else
+				{
+					setPosicao(Vector2f(posicao.x, posicao.y - ds.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + ds.y));
+					outro->setVelocidade({ 0,0 });
+					if (outro->getLado() == Lado::esquerda)
+						outro->setLado(Lado::direita);
+					else
+						outro->setLado(Lado::esquerda);
+				}
+			}
 		}
 		break;
 		case(int(ID::morcego)): //id do morcego
 		{
+			Vector2f distancia;
+			distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
+						  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
 
+			if (ds.x > ds.y)
+			{
+				if (distancia.x > 0.f)
+				{
+					setPosicao(Vector2f(posicao.x + ds.x, posicao.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x - ds.x, outro->getPosicao().y));
+					outro->setVelocidade({ 0,0 });
+					if (outro->getLado() == Lado::esquerda)
+						outro->setLado(Lado::direita);
+					else
+						outro->setLado(Lado::esquerda);
+				}
+				else
+				{
+					setPosicao(Vector2f(posicao.x - ds.x, posicao.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x + ds.x, outro->getPosicao().y));
+					outro->setVelocidade({ 0,0 });
+					if (outro->getLado() == Lado::esquerda)
+						outro->setLado(Lado::direita);
+					else
+						outro->setLado(Lado::esquerda);
+				}
+			}
+			else
+			{
+				if (distancia.y > 0.f)
+				{
+					setPosicao(Vector2f(posicao.x, posicao.y + ds.y)); // CHAO
+					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - ds.y));
+					outro->setVelocidade({ outro->getVelocidade().x,0 });
+					if (outro->getLado() == Lado::esquerda)
+						outro->setLado(Lado::direita);
+					else
+						outro->setLado(Lado::esquerda);
+				}
+				else
+				{
+					setPosicao(Vector2f(posicao.x, posicao.y - ds.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + ds.y));
+					outro->setVelocidade({ 0,0 });
+					if (outro->getLado() == Lado::esquerda)
+						outro->setLado(Lado::direita);
+					else
+						outro->setLado(Lado::esquerda);
+				}
+			}
 		}
 		break;
 		case(int(ID::mago)): //id do mago
 		{
+			Vector2f distancia;
+			distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
+						  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
 
-		}
-		break;
-		case(int(ID::jogador)): //id do primeiro jogador
-		{
-
-		}
-		break;
-		case(int(ID::jogador2)): //id do segundo jogador
-		{
-
+			if (ds.x > ds.y)
+			{
+				if (distancia.x > 0.f)
+				{
+					setPosicao(Vector2f(posicao.x + ds.x, posicao.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x - ds.x, outro->getPosicao().y));
+					outro->setVelocidade({ 0,0 });
+					if (outro->getLado() == Lado::esquerda)
+						outro->setLado(Lado::direita);
+					else
+						outro->setLado(Lado::esquerda);
+				}
+				else
+				{
+					setPosicao(Vector2f(posicao.x - ds.x, posicao.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x + ds.x, outro->getPosicao().y));
+					outro->setVelocidade({ 0,0 });
+					if (outro->getLado() == Lado::esquerda)
+						outro->setLado(Lado::direita);
+					else
+						outro->setLado(Lado::esquerda);
+				}
+			}
+			else
+			{
+				if (distancia.y > 0.f)
+				{
+					setPosicao(Vector2f(posicao.x, posicao.y + ds.y)); // CHAO
+					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - ds.y));
+					outro->setVelocidade({ outro->getVelocidade().x,0 });
+					if (outro->getLado() == Lado::esquerda)
+						outro->setLado(Lado::direita);
+					else
+						outro->setLado(Lado::esquerda);
+				}
+				else
+				{
+					setPosicao(Vector2f(posicao.x, posicao.y - ds.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + ds.y));
+					outro->setVelocidade({ 0,0 });
+					if (outro->getLado() == Lado::esquerda)
+						outro->setLado(Lado::direita);
+					else
+						outro->setLado(Lado::esquerda);
+				}
+			}
 		}
 		break;
 	}
@@ -139,7 +300,10 @@ void Esqueleto::andar()
 		forma.setScale(Vector2f(1, 1));
 		andarDireita();
 	}
-
+	if (velocidade.x >= velocidade_max)
+		velocidade = { velocidade_max, velocidade.y };
+	else if (velocidade.x <= -velocidade_max)
+		velocidade = { -velocidade_max, velocidade.y };
 }
 
 void Esqueleto::andarDireita()

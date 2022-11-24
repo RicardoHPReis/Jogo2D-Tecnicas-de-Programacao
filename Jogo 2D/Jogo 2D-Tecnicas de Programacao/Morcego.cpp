@@ -9,10 +9,10 @@ Morcego::Morcego(int i, Vector2f pos, Vector2f tam) :
 	vida = 10;
 	atacou = false;
 	dano = 1;
-	velocidade_max = 6;
+	velocidade_max = 1;
 	lado = Lado::esquerda;
 	danoso = true;
-	velocidade = { 8.f, 3.f };
+	velocidade = { 1.f, 3.f };
 
 	forcaVoar = gravidade * -1;
 	cout << "Criou morcego!" << endl;
@@ -69,9 +69,33 @@ void Morcego::colisao(Entidade* outro, Vector2f ds)
 	{
 		case(int (ID::plataforma)): //id da plataforma
 		{
-			setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
-			velocidade.x = 0.f;
-			velocidade.y = 0.f;
+			Vector2f distancia;
+			distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
+						  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
+
+			if (ds.x > ds.y)
+			{
+				if (distancia.x > 0.f)
+				{
+					setPosicao(Vector2f(posicao.x + ds.x, posicao.y));
+				}
+				else
+				{
+					setPosicao(Vector2f(posicao.x - ds.x, posicao.y));
+				}
+			}
+			else
+			{
+				if (distancia.y > 0.f)
+				{
+					setPosicao(Vector2f(posicao.x, posicao.y + ds.y)); // CHAO
+					velocidade.y = 0.f;
+				}
+				else
+				{
+					setPosicao(Vector2f(posicao.x, posicao.y - ds.y)); // TETO
+				}
+			}
 		}
 		break;
 		case(int(ID::espinho)): //id do esqueleto
@@ -150,6 +174,11 @@ void Morcego::voar()
 		voarBaixo();
 	else if(posicao.x < Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width / 2.f && posicao.y > 0)
 		voarCima();
+
+	if (velocidade.x >= velocidade_max)
+		velocidade = { velocidade_max, velocidade.y };
+	else if (velocidade.x <= -velocidade_max)
+		velocidade = { -velocidade_max, velocidade.y };
 }
 
 void Morcego::disparar()
