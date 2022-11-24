@@ -102,7 +102,6 @@ void Menu::inicVariaveis()
 	escFase = 1;
 	escOpcoes = 1;
 
-	previa1.loadFromFile("../../Texturas/Cenario/Fundo.jpg");
 	escolhaFases[0].setTexture(&previa1);
 	escolhaFases[0].setSize(Vector2f(500, 500));
 	escolhaFases[0].setPosition(310, 290);

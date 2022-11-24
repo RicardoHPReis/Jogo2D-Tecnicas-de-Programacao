@@ -13,7 +13,7 @@ Morcego::Morcego(int i, Vector2f pos, Vector2f tam) :
 	lado = Lado::esquerda;
 	danoso = true;
 	velocidade = { 1.f, 3.f };
-
+	velocidade.y = 0;
 	forcaVoar = gravidade * -1;
 	cout << "Criou morcego!" << endl;
 }
@@ -52,9 +52,7 @@ void Morcego::executar()
 	voar();
 	atualizaTextura();
 
-
-	calculaQueda();
-	velocidade = { velocidade.x, velocidade.y + forcaVoar };
+	velocidade = { velocidade.x, velocidade.y + forcaVoar + gravidade};
 
 	Vector2f pos = forma.getPosition();
 	pos += velocidade;
@@ -151,7 +149,6 @@ void Morcego::atualizaTextura()
 
 void Morcego::voar()
 {
-	//if (lado == 2)
 	if (lado == Lado::direita)
 	{
 		if (forma.getScale().x == 1) 
@@ -161,7 +158,6 @@ void Morcego::voar()
 		voarEsquerda();
 	}
 
-	//else if (lado == 1)
 	else if (lado == Lado::esquerda)
 	{
 		if (forma.getScale().x == -1)
@@ -170,15 +166,10 @@ void Morcego::voar()
 		}
 		voarDireita();
 	}
-	if (posicao.x > Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width / 2.f)
-		voarBaixo();
-	else if(posicao.x < Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width / 2.f && posicao.y > 0)
-		voarCima();
-
-	if (velocidade.x >= velocidade_max)
-		velocidade = { velocidade_max, velocidade.y };
-	else if (velocidade.x <= -velocidade_max)
-		velocidade = { -velocidade_max, velocidade.y };
+	//if (posicao.x > Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width / 2.f)
+		//voarBaixo();
+	//else if(posicao.x < Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width / 2.f && posicao.y > 0)
+		//voarCima();
 }
 
 void Morcego::disparar()
@@ -190,7 +181,7 @@ void Morcego::disparar()
 
 void Morcego::voarDireita()
 {
-	if (posicao.x <= 1920.f - 150.f) //Player nao passar dos limites da tela esquerda
+	if (forma.getPosition().x <= 1920.f - 150.f) //Player nao passar dos limites da tela esquerda
 	{
 		velocidade = { velocidade.x + 1.f, velocidade.y };
 		posicao = { posicao.x - velocidade.x, posicao.y + velocidade.y };
@@ -204,7 +195,7 @@ void Morcego::voarDireita()
 
 void Morcego::voarEsquerda()
 {
-	if (posicao.x >= 150.f) //Player nao passar dos limites da tela esquerda
+	if (forma.getPosition().x >= 150.f) //Player nao passar dos limites da tela esquerda
 	{
 		velocidade = { velocidade.x - 1.f, velocidade.y };
 		posicao = { posicao.x - velocidade.x, posicao.y + velocidade.y };

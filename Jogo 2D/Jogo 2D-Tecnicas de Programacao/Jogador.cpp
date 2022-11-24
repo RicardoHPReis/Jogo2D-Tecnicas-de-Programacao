@@ -148,7 +148,7 @@ void Jogador::executar()
 
 	setPosicao(pos);
 	frame1++;
-
+	cout << forma.getPosition().x <<"    "<< forma.getPosition().y<<"\n";
 	atualizavida();
 }
 
@@ -162,15 +162,17 @@ void Jogador::ataque()
 		atualizarTextura();
 	}
 	else
-		setAtaque(false);
+		atacou = false;
 }
 
 void Jogador::direcionalEsquerdo() 
 {
 	lado = Lado::esquerda;
-	
-	velocidade = { velocidade.x - 1.f, velocidade.y };
-	posicao = { posicao.x - velocidade.x, posicao.y + velocidade.y };
+	if (getPosicao().x >= 0.f) //Player nao passar dos limites da tela esquerda
+	{
+		velocidade = { velocidade.x - 1.f, velocidade.y };
+		posicao = { posicao.x - velocidade.x, posicao.y + velocidade.y };
+	}
 	forma.setTexture(&txJogadorCorre[limitadorTex_correndo]);
 	if (frame1 % 6 == 0){
 		limitadorTex_correndo++;
@@ -182,9 +184,11 @@ void Jogador::direcionalEsquerdo()
 void Jogador::direcionalDireito() 
 {
 	lado = Lado::direita;
-	
-	velocidade = { velocidade.x + 1.f, velocidade.y };
-	posicao = { posicao.x - velocidade.x, posicao.y + velocidade.y };
+	if (getPosicao().x <= 1920.f) //Player nao passar dos limites da tela esquerda
+	{
+		velocidade = { velocidade.x + 1.f, velocidade.y };
+		posicao = { posicao.x - velocidade.x, posicao.y + velocidade.y };
+	}
 	forma.setTexture(&txJogadorCorre[limitadorTex_correndo]);
 	if (frame1 % 6 == 0)
 	{
@@ -244,7 +248,7 @@ void Jogador::colisao(Entidade* outro, Vector2f ds)
 				}
 				else
 				{
-					setPosicao(Vector2f(posicao.x, posicao.y - ds.y)); // TETO
+					setPosicao(Vector2f(posicao.x, posicao.y + ds.y)); // TETO
 					velocidade.x = 0.f;
 					velocidade.y = 0.f;
 					//jogador_pulou = false;
@@ -276,20 +280,14 @@ void Jogador::colisao(Entidade* outro, Vector2f ds)
 					setPosicao(Vector2f(posicao.x + ds.x, posicao.y));
 					outro->setPosicao(Vector2f(outro->getPosicao().x - ds.x, outro->getPosicao().y));
 					outro->setVelocidade({0,0});
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
+					
 				}
 				else
 				{
 					setPosicao(Vector2f(posicao.x - ds.x, posicao.y));
 					outro->setPosicao(Vector2f(outro->getPosicao().x + ds.x, outro->getPosicao().y));
 					outro->setVelocidade({ 0,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
+					
 				}
 			}
 			else
@@ -299,26 +297,22 @@ void Jogador::colisao(Entidade* outro, Vector2f ds)
 					setPosicao(Vector2f(posicao.x, posicao.y + ds.y)); // CHAO
 					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - ds.y));
 					outro->setVelocidade({ outro->getVelocidade().x,0});
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
+					
 				}
 				else
 				{
 					setPosicao(Vector2f(posicao.x, posicao.y - ds.y));
 					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + ds.y));
 					outro->setVelocidade({ 0,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
+					
 				}
 			}
 
 
-			if (!atacou)
+			if (atacou == true)
+			{
 				operator--(outro->getDano());
+			}
 			else
 				outro->setVida(outro->getVida() - dano);
 		}
@@ -336,20 +330,12 @@ void Jogador::colisao(Entidade* outro, Vector2f ds)
 					setPosicao(Vector2f(posicao.x + ds.x, posicao.y));
 					outro->setPosicao(Vector2f(outro->getPosicao().x - ds.x, outro->getPosicao().y));
 					outro->setVelocidade({ 0,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
 				}
 				else
 				{
 					setPosicao(Vector2f(posicao.x - ds.x, posicao.y));
 					outro->setPosicao(Vector2f(outro->getPosicao().x + ds.x, outro->getPosicao().y));
 					outro->setVelocidade({ 0,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
 				}
 			}
 			else
@@ -359,20 +345,12 @@ void Jogador::colisao(Entidade* outro, Vector2f ds)
 					setPosicao(Vector2f(posicao.x, posicao.y + ds.y)); // CHAO
 					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - ds.y));
 					outro->setVelocidade({ outro->getVelocidade().x,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
 				}
 				else
 				{
 					setPosicao(Vector2f(posicao.x, posicao.y - ds.y));
 					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + ds.y));
 					outro->setVelocidade({ 0,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
 				}
 			}
 
@@ -383,7 +361,7 @@ void Jogador::colisao(Entidade* outro, Vector2f ds)
 				outro->setVida(outro->getVida() - dano);
 		}
 		break;
-		case(int(ID::mago)): //id do mago
+		case(int(ID::chefao)): //id do mago
 		{
 			Vector2f distancia;
 			distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
@@ -396,20 +374,12 @@ void Jogador::colisao(Entidade* outro, Vector2f ds)
 					setPosicao(Vector2f(posicao.x + ds.x, posicao.y));
 					outro->setPosicao(Vector2f(outro->getPosicao().x - ds.x, outro->getPosicao().y));
 					outro->setVelocidade({ 0,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
 				}
 				else
 				{
 					setPosicao(Vector2f(posicao.x - ds.x, posicao.y));
 					outro->setPosicao(Vector2f(outro->getPosicao().x + ds.x, outro->getPosicao().y));
 					outro->setVelocidade({ 0,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
 				}
 			}
 			else
@@ -419,20 +389,12 @@ void Jogador::colisao(Entidade* outro, Vector2f ds)
 					setPosicao(Vector2f(posicao.x, posicao.y + ds.y)); // CHAO
 					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - ds.y));
 					outro->setVelocidade({ outro->getVelocidade().x,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
 				}
 				else
 				{
 					setPosicao(Vector2f(posicao.x, posicao.y - ds.y));
 					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + ds.y));
 					outro->setVelocidade({ 0,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
 				}
 			}
 
@@ -456,20 +418,12 @@ void Jogador::colisao(Entidade* outro, Vector2f ds)
 					setPosicao(Vector2f(posicao.x + ds.x, posicao.y));
 					outro->setPosicao(Vector2f(outro->getPosicao().x - ds.x, outro->getPosicao().y));
 					outro->setVelocidade({ 0,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
 				}
 				else
 				{
 					setPosicao(Vector2f(posicao.x - ds.x, posicao.y));
 					outro->setPosicao(Vector2f(outro->getPosicao().x + ds.x, outro->getPosicao().y));
 					outro->setVelocidade({ 0,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
 				}
 			}
 			else
@@ -479,20 +433,12 @@ void Jogador::colisao(Entidade* outro, Vector2f ds)
 					setPosicao(Vector2f(posicao.x, posicao.y + ds.y)); // CHAO
 					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - ds.y));
 					outro->setVelocidade({ outro->getVelocidade().x,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
 				}
 				else
 				{
 					setPosicao(Vector2f(posicao.x, posicao.y - ds.y));
 					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + ds.y));
 					outro->setVelocidade({ 0,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
 				}
 			}
 				operator--(outro->getDano());
