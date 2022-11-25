@@ -19,7 +19,7 @@ void Jogador::iniciarVariaiveis()
 	//posicao = forma.getPosition();
 	delay = 0;
 	podeAtacar = true;
-	vida = 5000;
+	vida = 500;
 	lado = Lado::direita;
 	atacou = false;
 	dano = 1;
@@ -148,7 +148,6 @@ void Jogador::executar()
 
 	setPosicao(pos);
 	frame1++;
-	cout << forma.getPosition().x <<"    "<< forma.getPosition().y<<"\n";
 	atualizavida();
 }
 
@@ -168,10 +167,14 @@ void Jogador::ataque()
 void Jogador::direcionalEsquerdo() 
 {
 	lado = Lado::esquerda;
-	if (getPosicao().x >= 0.f) //Player nao passar dos limites da tela esquerda
+	if (posicao.x >= 0.f) //Player nao passar dos limites da tela esquerda
 	{
 		velocidade = { velocidade.x - 1.f, velocidade.y };
 		posicao = { posicao.x - velocidade.x, posicao.y + velocidade.y };
+	}
+	else
+	{
+		velocidade.x = 0.f;
 	}
 	forma.setTexture(&txJogadorCorre[limitadorTex_correndo]);
 	if (frame1 % 6 == 0){
@@ -184,10 +187,14 @@ void Jogador::direcionalEsquerdo()
 void Jogador::direcionalDireito() 
 {
 	lado = Lado::direita;
-	if (getPosicao().x <= 1920.f) //Player nao passar dos limites da tela esquerda
+	if (posicao.x <= 1920.f - tamanho.x) //Player nao passar dos limites da tela esquerda
 	{
 		velocidade = { velocidade.x + 1.f, velocidade.y };
 		posicao = { posicao.x - velocidade.x, posicao.y + velocidade.y };
+	}
+	else
+	{
+		velocidade.x = 0.f;
 	}
 	forma.setTexture(&txJogadorCorre[limitadorTex_correndo]);
 	if (frame1 % 6 == 0)
@@ -269,7 +276,7 @@ void Jogador::colisao(Entidade* outro, Vector2f ds)
 		break;
 		case(int(ID::esqueleto)): //id do esqueleto
 		{
-			Vector2f distancia;
+			/*Vector2f distancia;
 			distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
 						  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
 
@@ -314,7 +321,7 @@ void Jogador::colisao(Entidade* outro, Vector2f ds)
 				operator--(outro->getDano());
 			}
 			else
-				outro->setVida(outro->getVida() - dano);
+				outro->setVida(outro->getVida() - dano);*/
 		}
 		break;
 		case(int(ID::morcego)): //id do morcego
@@ -397,12 +404,6 @@ void Jogador::colisao(Entidade* outro, Vector2f ds)
 					outro->setVelocidade({ 0,0 });
 				}
 			}
-
-
-			if (!atacou)
-				operator--(outro->getDano());
-			else
-				outro->setVida(outro->getVida() - dano);
 		}
 		break;
 		case(int(ID::projetil)): //id do mago
@@ -441,7 +442,8 @@ void Jogador::colisao(Entidade* outro, Vector2f ds)
 					outro->setVelocidade({ 0,0 });
 				}
 			}
-				operator--(outro->getDano());
+			operator--(outro->getDano());
+			outro->setVida(outro->getVida() - dano);
 		}
 		break;
 		case(int(ID::jogador2)): //id do segundo jogador
@@ -464,7 +466,7 @@ void Jogador::atualizarTextura()
 
 void Jogador::atualizavida()
 {
-	for (int i = 0; i < (vida / 1000); i++)
+	for (int i = 0; i < (vida / 100); i++)
 	{
 		Gerenciador_Grafico::getInstancia_Grafico()->desenharSprite(vidaSp[i]);
 	}

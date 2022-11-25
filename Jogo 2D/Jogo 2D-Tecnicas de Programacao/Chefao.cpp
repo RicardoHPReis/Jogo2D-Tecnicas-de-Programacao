@@ -9,7 +9,7 @@ Chefao::Chefao(int i, Vector2f pos, Vector2f tam) :
 	vida = 10000;
 	lado = Lado::direita;
 	atacou = false;
-	dano = 3000;
+	dano = 100;
 	danoso = true;
 	velocidade_max = 6;
 	velocidade = { 4.f, 0.f };

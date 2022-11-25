@@ -50,10 +50,6 @@ void FaseUm::iniciaFase()
 		//plataformas altas centralizads
 		criarPlataformas(Vector2f{ 660.f + (i * 1920.f), 370.f }, Vector2f(600.f, 100.f));
 	}
-
-	criarPlataformas(Vector2f{ 0.f, 0.f }, Vector2f(10.f, 1080.f)); // Temporario
-	criarPlataformas(Vector2f{ 1920.f, 0.f }, Vector2f(10.f, 1080.f)); // Temporario
-
 	chance = rand() % 1 + 3;
 	for (int i = 0; i < chance; i++)
 	{
@@ -80,7 +76,7 @@ void FaseUm::iniciaFase()
 	{
 		criarEsqueletos(Vector2f{ (rand() % 10 + 1) * 60.f, 0.f });
 	}
-	criarChefao(Vector2f{ 1000.f, 0.f });
+	criarChefao(Vector2f{ 1500.f, 200.f });
 }
 
 void FaseUm::executar()

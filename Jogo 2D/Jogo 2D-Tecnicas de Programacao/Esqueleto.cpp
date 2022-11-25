@@ -8,7 +8,7 @@ Esqueleto::Esqueleto(int i, Vector2f pos, Vector2f tam) :
 	podeAtacar = true;
 	vida = 3000;
 	atacou = false;
-	dano = 1000;
+	dano = 50;
 	lado = Lado::esquerda;
 	danoso = true;
 	velocidade_max = 1;

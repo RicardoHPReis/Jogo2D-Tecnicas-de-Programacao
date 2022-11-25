@@ -8,12 +8,11 @@ Morcego::Morcego(int i, Vector2f pos, Vector2f tam) :
 	podeAtacar = true;
 	vida = 10;
 	atacou = false;
-	dano = 1;
+	dano = 75;
 	velocidade_max = 1;
-	lado = Lado::esquerda;
+	lado = Lado::direita;
 	danoso = true;
-	velocidade = { 1.f, 3.f };
-	velocidade.y = 0;
+	velocidade = { 0.f, 0.f };
 	forcaVoar = gravidade * -1;
 	cout << "Criou morcego!" << endl;
 }
@@ -61,82 +60,6 @@ void Morcego::executar()
 	
 }
 
-void Morcego::colisao(Entidade* outro, Vector2f ds)
-{
-	switch (outro->getId())
-	{
-		case(int (ID::plataforma)): //id da plataforma
-		{
-			Vector2f distancia;
-			distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
-						  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
-
-			if (ds.x > ds.y)
-			{
-				if (distancia.x > 0.f)
-				{
-					setPosicao(Vector2f(posicao.x + ds.x, posicao.y));
-				}
-				else
-				{
-					setPosicao(Vector2f(posicao.x - ds.x, posicao.y));
-				}
-			}
-			else
-			{
-				if (distancia.y > 0.f)
-				{
-					setPosicao(Vector2f(posicao.x, posicao.y + ds.y)); // CHAO
-					velocidade.y = 0.f;
-				}
-				else
-				{
-					setPosicao(Vector2f(posicao.x, posicao.y - ds.y)); // TETO
-				}
-			}
-		}
-		break;
-		case(int(ID::espinho)): //id do esqueleto
-		{
-			setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
-			velocidade.x = 0.f;
-			velocidade.y = 0.f;
-		}
-		break;
-		case(int (ID::fogo)): //id do esqueleto
-		{
-
-		}
-		break;
-		case(int(ID::esqueleto)): //id do esqueleto
-		{
-
-		}
-		break;
-		case(int(ID::morcego)): //id do morcego
-		{
-
-		}
-		break;
-		case(int(ID::mago)): //id do mago
-		{
-
-		}
-		break;
-		case(int(ID::jogador)): //id do primeiro jogador
-		{
-
-		}
-		break;
-		case(int(ID::jogador2)): //id do segundo jogador
-		{
-
-		}
-		break;
-	}
-}
-
-
 void Morcego::atualizaTextura()
 {
 	//muda para a proxima textura a cada 7 frames
@@ -149,7 +72,7 @@ void Morcego::atualizaTextura()
 
 void Morcego::voar()
 {
-	if (lado == Lado::direita)
+	if (lado == Lado::esquerda)
 	{
 		if (forma.getScale().x == 1) 
 		{
@@ -158,7 +81,7 @@ void Morcego::voar()
 		voarEsquerda();
 	}
 
-	else if (lado == Lado::esquerda)
+	else if (lado == Lado::direita)
 	{
 		if (forma.getScale().x == -1)
 		{
@@ -181,30 +104,35 @@ void Morcego::disparar()
 
 void Morcego::voarDireita()
 {
-	if (forma.getPosition().x <= 1920.f - 150.f) //Player nao passar dos limites da tela esquerda
+	Vector2f pos = forma.getPosition();
+	pos += velocidade;
+
+	velocidade = { velocidade.x + 0.3f, velocidade.y };
+	posicao = { posicao.x + velocidade.x, posicao.y + velocidade.y };
+	if (pos.x > 1900) 
 	{
-		velocidade = { velocidade.x + 1.f, velocidade.y };
-		posicao = { posicao.x - velocidade.x, posicao.y + velocidade.y };
-	}
-	else
-	{
-		//lado = 2;
 		lado = Lado::esquerda;
+		cout << "EntrandoDir\n";
+		velocidade.x = 0.f;
 	}
+		
 }
 
 void Morcego::voarEsquerda()
 {
-	if (forma.getPosition().x >= 150.f) //Player nao passar dos limites da tela esquerda
+	Vector2f pos = forma.getPosition();
+	pos += velocidade;
+
+	velocidade = { velocidade.x - 0.3f, velocidade.y };
+	posicao = { posicao.x + velocidade.x, posicao.y + velocidade.y };
+	if (pos.x < 50) 
 	{
-		velocidade = { velocidade.x - 1.f, velocidade.y };
-		posicao = { posicao.x - velocidade.x, posicao.y + velocidade.y };
-	}
-	else
-	{
-		//lado = 1;
+
 		lado = Lado::direita;
+		cout << "EntrandoEsq\n";
+		velocidade.x = 0.f;
 	}
+
 }
 
 void Morcego::voarCima()
@@ -215,4 +143,81 @@ void Morcego::voarCima()
 void Morcego::voarBaixo()
 {
 	velocidade = { velocidade.x, velocidade.y + 0.25f };
+}
+
+void Morcego::colisao(Entidade* outro, Vector2f ds)
+{
+	switch (outro->getId())
+	{
+	case(int(ID::plataforma)): //id da plataforma
+	{
+		/* Vector2f distancia;
+		distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
+					  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
+
+		if (ds.x > ds.y)
+		{
+			if (distancia.x > 0.f)
+			{
+				setPosicao(Vector2f(posicao.x + ds.x, posicao.y));
+				velocidade.x = 0;
+			}
+			else
+			{
+				setPosicao(Vector2f(posicao.x - ds.x, posicao.y));
+				velocidade.x = 0;
+			}
+		}
+		else
+		{
+			if (distancia.y > 0.f)
+			{
+				setPosicao(Vector2f(posicao.x, posicao.y + ds.y)); // CHAO
+				velocidade.y = 0.f;
+			}
+			else
+			{
+				setPosicao(Vector2f(posicao.x, posicao.y - ds.y)); // TETO
+			}
+		}*/
+	}
+	break;
+	case(int(ID::espinho)): //id do esqueleto
+	{
+		setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
+		velocidade.x = 0.f;
+		velocidade.y = 0.f;
+	}
+	break;
+	case(int(ID::fogo)): //id do esqueleto
+	{
+
+	}
+	break;
+	case(int(ID::esqueleto)): //id do esqueleto
+	{
+
+	}
+	break;
+	case(int(ID::morcego)): //id do morcego
+	{
+
+	}
+	break;
+	case(int(ID::mago)): //id do mago
+	{
+
+	}
+	break;
+	case(int(ID::jogador)): //id do primeiro jogador
+	{
+
+	}
+	break;
+	case(int(ID::jogador2)): //id do segundo jogador
+	{
+
+	}
+	break;
+	}
 }
