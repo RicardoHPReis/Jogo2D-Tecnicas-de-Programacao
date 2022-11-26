@@ -4,6 +4,8 @@
 Chefao::Chefao(int i, Vector2f pos, Vector2f tam) :
 	Inimigo(i, pos, tam)
 {
+	projetil = new Projetil();
+
 	iniciarTexturas();
 	podeAtacar = true;
 	vida = 10000;
@@ -13,7 +15,6 @@ Chefao::Chefao(int i, Vector2f pos, Vector2f tam) :
 	danoso = true;
 	velocidade_max = 6;
 	velocidade = { 4.f, 0.f };
-	projetil = new Projetil();
 	velTex1 = 0;
 	cout << "Criou Chefao!" << endl;
 }
@@ -50,6 +51,15 @@ void Chefao::executar()
 	setPosicao(pos);
 
 	forma.setTexture(&tEnemy[velTex1]);
+
+	if (projetil->getAtirar() == false)
+	{
+		disparar();
+	}
+	else
+	{
+		projetil->executar();
+	}
 }
 
 void Chefao::colisao(Entidade* outro, Vector2f ds)
@@ -64,14 +74,14 @@ void Chefao::colisao(Entidade* outro, Vector2f ds)
 
 			if (ds.x > ds.y)
 			{
-				if (distancia.x > 0.f)
+				/*if (distancia.x > 0.f)
 				{
 					setPosicao(Vector2f(posicao.x + ds.x, posicao.y));
 				}
 				else
 				{
 					setPosicao(Vector2f(posicao.x - ds.x, posicao.y));
-				}
+				}*/
 			}
 			else
 			{
@@ -244,10 +254,12 @@ void Chefao::andarDireita()
 {
 	if (posicao.x <= 1920.f - 250.f) //Player nao passar dos limites da tela esquerda
 	{
-		posicao.x = posicao.x + velocidade.x;
+		velocidade = { velocidade.x + 1.f, velocidade.y };
+		posicao = { posicao.x - velocidade.x, posicao.y + velocidade.y };
 	}
 	else
 	{
+		velocidade = { 0.f,0.f };
 		lado = Lado::esquerda;
 	}
 }
@@ -256,18 +268,23 @@ void Chefao::andarEsquerda()
 {
 	if (posicao.x >= 100.f) //Player nao passar dos limites da tela esquerda
 	{
-		posicao.x = posicao.x - velocidade.x;
+		velocidade = { velocidade.x - 1.f, velocidade.y };
+		posicao = { posicao.x - velocidade.x, posicao.y + velocidade.y };
 	}
 	else
 	{
+		velocidade = { 0.f,0.f };
 		lado = Lado::direita;
 	}
 }
 
 void Chefao::disparar()
 {
-	projetil->setPosicao(getPosicao());
-	projetil->setLado(getLado());
+	if(lado == Lado::esquerda)
+		projetil->setPosicao(Vector2f(posicao.x - tamanho.x,posicao.y + 50));
+	else
+		projetil->setPosicao(Vector2f(posicao.x + tamanho.x, posicao.y + 50));
+	projetil->setLado(lado);
 	projetil->setAtirar(true);
 }
 

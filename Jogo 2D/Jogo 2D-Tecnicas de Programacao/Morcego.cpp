@@ -45,9 +45,7 @@ void Morcego::iniciarTexturas()
 }
 
 void Morcego::executar()
-{
-	setPosicao(posicao);
-	
+{	
 	voar();
 	atualizaTextura();
 
@@ -112,7 +110,6 @@ void Morcego::voarDireita()
 	if (pos.x > 1900) 
 	{
 		lado = Lado::esquerda;
-		cout << "EntrandoDir\n";
 		velocidade.x = 0.f;
 	}
 		
@@ -129,7 +126,6 @@ void Morcego::voarEsquerda()
 	{
 
 		lado = Lado::direita;
-		cout << "EntrandoEsq\n";
 		velocidade.x = 0.f;
 	}
 

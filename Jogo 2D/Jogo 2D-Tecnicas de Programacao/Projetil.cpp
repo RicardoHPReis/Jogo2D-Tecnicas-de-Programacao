@@ -4,11 +4,8 @@
 Projetil::Projetil(int i, Vector2f pos, Vector2f tam):
 Entidade(i, pos, tam)
 {
+	iniciarTexturas();
 	inicProjetil();
-	forma.setFillColor(Color::Cyan);
-	danoso = true;
-	tiro = false;
-	atingiu = false;
 	cout << "Criou projetil!" << endl;
 }
 
@@ -36,27 +33,63 @@ void Projetil::setAtirar(bool tir)
 
 void Projetil::iniciarTexturas()
 {
-
+	if (!this->bolaRoxa.loadFromFile("../../Texturas/Personagens/BolaFogo.png")) 
+	{
+		cout << "Erro ao carregar a textura do Chefao parado\n";
+	}
+	bolaRoxa.setSmooth(true);
 }
 
 void Projetil::executar()
 {
-	setPosicao(posicao);
-	calculaQueda();
 	atirar();
-	if ((posicao.x <= 0 || posicao.x >= 1920) || posicao.y >= 1000) //Modificar depois para gerenciador de colisoes
-		setAtirar(false);
+
+	velocidade = { velocidade.x, velocidade.y + aerodinamica + gravidade };
+
+	Vector2f pos = forma.getPosition();
+	pos += velocidade;
+
+	setPosicao(pos);
 }
 
 void Projetil::atirar()
 {
 	//Movimentos do projétil
 
-	posicao.y = posicao.y + velocidade.y;
 	if (lado == Lado::direita)
-		posicao.x = posicao.x + velocidade.x;
+		dispararDireita();
 	else if (lado == Lado::esquerda)
-		posicao.x = posicao.x - velocidade.x;
+		dispararEsquerda();
+}
+
+void Projetil::dispararDireita()
+{
+	Vector2f pos = forma.getPosition();
+	pos += velocidade;
+
+	velocidade = { velocidade.x + 0.2f, velocidade.y };
+	posicao = { posicao.x + velocidade.x, posicao.y + velocidade.y };
+	if (pos.x > 1900)
+	{
+		velocidade.x = 0.f;
+		setAtirar(false);
+	}
+
+}
+
+void Projetil::dispararEsquerda()
+{
+	Vector2f pos = forma.getPosition();
+	pos += velocidade;
+
+	velocidade = { velocidade.x - 0.2f, velocidade.y };
+	posicao = { posicao.x + velocidade.x, posicao.y + velocidade.y };
+	if (pos.x < 50)
+	{
+		velocidade.x = 0.f;
+		setAtirar(false);
+	}
+
 }
 
 void Projetil::colisao(Entidade* outro, Vector2f ds)
@@ -65,23 +98,17 @@ void Projetil::colisao(Entidade* outro, Vector2f ds)
 	{
 		case(int (ID::plataforma)): //id da plataforma
 		{
-			setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
-			velocidade.x = 0.f;
-			velocidade.y = 0.f;
+
 		}
 		break;
 		case(int(ID::jogador)): //id do primeiro jogador
 		{
-			setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
-			velocidade.x = 0.f;
-			velocidade.y = 0.f;
+			
 		}
 		break;
 		case(int(ID::jogador2)): //id do segundo jogador
 		{
-			setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
-			velocidade.x = 0.f;
-			velocidade.y = 0.f;
+			
 		}
 		break;
 	}
@@ -94,9 +121,12 @@ bool Projetil::getAtirar()
 
 void Projetil::inicProjetil()
 {
-	atingiu = false;
+	danoso = true;
 	tiro = false;
-	setVelocidade({ 5.f, 15.f });
+	atingiu = false;
+	aerodinamica = gravidade * -1;
+	setVelocidade({ 1.f, 0.f });
+	forma.setTexture(&bolaRoxa);
 }
 
 void Projetil::setAtingiu(const bool atg)

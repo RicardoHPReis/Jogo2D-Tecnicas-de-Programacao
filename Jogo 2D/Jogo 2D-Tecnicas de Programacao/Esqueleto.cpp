@@ -315,6 +315,7 @@ void Esqueleto::andarDireita()
 	}
 	else
 	{
+		velocidade = { 0.f,0.f };
 		lado = Lado::esquerda;
 	}
 }
@@ -328,6 +329,7 @@ void Esqueleto::andarEsquerda()
 	}
 	else
 	{
+		velocidade = { 0.f,0.f };
 		lado = Lado::direita;
 	}
 }

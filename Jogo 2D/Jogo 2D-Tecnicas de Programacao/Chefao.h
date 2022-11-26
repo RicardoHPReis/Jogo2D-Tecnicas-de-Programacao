@@ -9,7 +9,7 @@ private:
 	int frame1, velTex1, aux1;
 	Texture tEnemy[8], tEnemyAnda[13];
 
-	Projetil *projetil;
+	Projetil* projetil;
 
 	void iniciarTexturas();
 

@@ -6,10 +6,13 @@ class Projetil : public Entidade
 {
 protected:
 
+	Texture bolaRoxa;
+
 	bool atingiu;
 	bool tiro;
-
 	bool danoso;
+
+	float aerodinamica;
 
 	//Texture tiro[], acerto[];
 
@@ -18,7 +21,7 @@ protected:
 	void iniciarTexturas();
 
 public:
-	Projetil(int i = 1000, Vector2f pos = { 900.f, 900.f }, Vector2f tam = { 40.f, 20.f });
+	Projetil(int i = 1000, Vector2f pos = { 0.f,0.f }, Vector2f tam = { 60.f, 60.f });
 	~Projetil();
 
 	void setAtirar(bool tir);
@@ -29,6 +32,8 @@ public:
 
 	void executar();
 	void atirar();
+	void dispararDireita();
+	void dispararEsquerda();
 	void colisao(Entidade* outrao, Vector2f ds);
 
 	void setDanoso(const bool mal);

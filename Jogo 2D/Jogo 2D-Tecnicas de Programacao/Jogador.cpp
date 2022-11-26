@@ -370,7 +370,7 @@ void Jogador::colisao(Entidade* outro, Vector2f ds)
 		break;
 		case(int(ID::chefao)): //id do mago
 		{
-			Vector2f distancia;
+			/*Vector2f distancia;
 			distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
 						  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
 
@@ -403,7 +403,7 @@ void Jogador::colisao(Entidade* outro, Vector2f ds)
 					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + ds.y));
 					outro->setVelocidade({ 0,0 });
 				}
-			}
+			}*/
 		}
 		break;
 		case(int(ID::projetil)): //id do mago
