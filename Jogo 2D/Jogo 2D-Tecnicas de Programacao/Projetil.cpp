@@ -92,7 +92,7 @@ void Projetil::dispararEsquerda()
 
 }
 
-void Projetil::colisao(Entidade* outro, Vector2f ds)
+void Projetil::reageColisao(Entidade* outro, Vector2f ds)
 {
 	switch (outro->getId())
 	{

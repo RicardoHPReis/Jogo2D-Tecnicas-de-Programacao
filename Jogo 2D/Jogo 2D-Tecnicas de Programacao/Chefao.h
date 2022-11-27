@@ -21,7 +21,7 @@ public:
 	void disparar();
 
 	void executar();
-	void colisao(Entidade* outrao, Vector2f ds);
+	void reageColisao(Entidade* outrao, Vector2f ds);
 
 	Chefao(int i = 12, Vector2f pos = { 0.f, 0.f }, Vector2f tam = { 250.f, 275.f });
 	~Chefao();

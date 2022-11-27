@@ -9,11 +9,12 @@ private:
 
 	bool queimou;
 	void iniciarTexturas();
+	void atualizarTextura();
 
 public:
-	Fogo(int id = 102, Vector2f pos = { 0,0 }, Vector2f tam = { 50.f, 100.f });
+	Fogo(int id = 102, Vector2f pos = { 0,0 }, Vector2f tam = { 68.f, 72.f });
 	~Fogo();
 
 	void executar();
-	void colisao(Entidade* outrao, Vector2f ds);
+	void reageColisao(Entidade* outrao, Vector2f ds);
 };

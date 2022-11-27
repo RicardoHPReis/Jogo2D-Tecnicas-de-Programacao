@@ -4,7 +4,6 @@ Personagem::Personagem(int i, Vector2f pos, Vector2f tam):
 Entidade(i, pos, tam)
 {
 	vida = 0;
-	podeAtacar = true;
 	estaMorto = false;
 	atacou = false;
 }
@@ -12,29 +11,18 @@ Entidade(i, pos, tam)
 Personagem::~Personagem()
 {
 	vida = 0;
-	podeAtacar = false;
-	estaMorto = false;
+	estaMorto = true;
 	atacou = false;
 }
 
-void Personagem::setAtaque(bool foiAtacado)
+void Personagem::setAtacou(bool foiAtacado)
 {
 	atacou = foiAtacado;
 }
 
-bool Personagem::getAtaque()
+const bool Personagem::getAtacou() const
 {
 	return atacou;
-}
-
-void Personagem::setPodeAtacar(const bool atc)
-{
-	podeAtacar = atc;
-}
-
-const bool Personagem::getPodeAtacar() const
-{
-	return podeAtacar;
 }
 
 void Personagem::setEstaMorto(const bool mrt)

@@ -3,10 +3,10 @@
 #include "Lista_Entidades.h"
 #include "Jogador.h"
 #include "JogadorDois.h"
-#include "Esqueleto.h"
+#include "Slime.h"
 #include "Morcego.h"
 #include "Plataforma.h"
-#include "Espinho.h"
+#include "Relampago.h"
 #include "Fogo.h"
 #include "Projetil.h"
 #include "Chefao.h"
@@ -22,7 +22,9 @@ protected:
 	Texture texturaFundo;
 	Lista_Entidades listaEntidades;
 
+	int num_inimigos;
 	bool doisJogadores;
+	bool concluido;
 
 public:
 	Fase(int i = 0, Jogador* player = NULL, JogadorDois* player2 = NULL);
@@ -32,18 +34,25 @@ public:
 	virtual void executar() = 0;
 
 	void gerenciaColisoes();
+	void remover();
 
 	void criarJogador(Vector2f pos);
 	void criarJogadorDois(Vector2f pos);
 	void criarPlataformas(Vector2f pos, Vector2f tam);
-	void criarEspinhos(Vector2f pos, Vector2f tam);
+	void criarRelampagos(Vector2f pos, Vector2f tam);
 	void criarFogos(Vector2f pos, Vector2f tam);
-	void criarEsqueletos(Vector2f pos);
+	void criarSlimes(Vector2f pos);
 	void criarMorcegos(Vector2f pos);
 	void criarChefao(Vector2f pos);
 	void criarProjetil(Vector2f pos, Projetil* projetil);
 	void deletarEntidades();
 
+	const int getNumInimigos() const;
+	void setNumInimigos(const int n_inimigos);
+
 	const bool getDoisJogadores() const;
 	void setDoisJogadores(const bool dois);
+
+	const bool getConcluido() const;
+	void setConcluido(const bool concluiu);
 };

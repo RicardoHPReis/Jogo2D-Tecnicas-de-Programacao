@@ -2,22 +2,34 @@
 
 //Gerenciador_Eventos* Gerenciador_Eventos::instancia_eventos = NULL;
 
-Jogo::Jogo() :
-	menu(),
-	jogador(),
-	jogador2(),
-	fase1(1, &jogador, &jogador2),
-	//fase2(1, &jogador, &jogador2),
-	pause()
+Jogo::Jogo()
 {
+	menuInicial = new Menu_Inicial(),
+	jogador1 = new JogadorUm();
+	jogador2 = new JogadorDois();
+	fase1 = new FaseUm(1, jogador1, jogador2),
+	fase2 = new FaseDois(2, jogador1, jogador2),
+	menuPause = new Menu_Pause();
+	
 	menuAbre = true;
 	pausou = false;
 }
 
 Jogo::~Jogo()
 {
+	delete menuInicial;
+	delete jogador1;
+	delete jogador2;
+	delete fase1;
+	delete fase2;
+	delete menuPause;
+
 	menuAbre = false;
 	pausou = false;
+
+	Gerenciador_Grafico::getInstancia_Grafico()->deletarInstancia_Grafico();
+	Gerenciador_Colisoes::getInstancia_Colisoes()->deletarInstancia_Colisoes();
+	//Gerenciador_Eventos::getInstancia_Eventos()->deletarInstancia_Eventos();
 }
 
 const bool Jogo::rodando() const
@@ -31,47 +43,61 @@ const bool Jogo::rodando() const
 void Jogo::update()
 {
 	//Gerenciador_Eventos::getInstancia_Eventos()->executar();
-	menu.executar();
-	if (menu.getNumJogadores() == 2)
+	menuInicial->executar();
+	if (menuInicial->getNumJogadores() == 2)
 	{
-		fase1.setDoisJogadores(true);
-		//fase2.setDoisJogadores(true);
-		//inicializar();
+		fase1->setDoisJogadores(true);
+		fase2->setDoisJogadores(true);
+		jogador2->setEstaMorto(false);
+		inicializar();
 	}
 		
-	while (!menu.getRodandoMenu() )//&& (jogador.getVida() < 0  && jogador2.getVida() < 0 ))
+	while (!menuInicial->getRodandoMenu())
 	{
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 		{
 			cout << "pausou!" << endl;
-			pause.executar();
-			if (pause.getVoltarMenu())
+			menuPause->executar();
+			if (menuPause->getVoltarMenu())
 			{
 				cout << "voltou para o menu!" << endl;
-				menu.setRodandoMenu(true);
-				inicializar();
-				break;
+				menuInicial->setRodandoMenu(true);
+				//inicializar();
+				//break;
 			}
 		}
 
-		cout << menu.getNumJogadores() << endl;
-		cout << menu.getNumFase() << endl;
-
-		if (menu.getEscolha() == 1 || menu.getNumFase() == 1)
+		if (menuInicial->getNumFase() == 1)
 		{
-			fase1.executar();
+			cout << "Entrou Fase 1" << endl;
+			fase1->executar();
+			if (fase1->getConcluido())
+			{
+				cout << "Concluiu" << endl;
+				menuInicial->setNumFase(2);
+			}
 		}
-		else if (menu.getNumFase() == 2)
+		if (menuInicial->getNumFase() == 2)
 		{
-			//fase2.executar();
+			cout << "Entrou Fase 2" << endl;
+			fase2->executar();
+		}
+		cout << "Passou" << endl;
+		if (jogador1->getEstaMorto() && jogador2->getEstaMorto())
+		{
+			cout << "morreu, então volta para o menu!" << endl;
+			menuInicial->setRodandoMenu(true);
+			//inicializar();
+			//break;
 		}
 	}
 }
 
 void Jogo::inicializar()
 {
-	jogador.iniciarVariaiveis();
-	fase1.deletarEntidades();
-	fase1.iniciaFase();
-	//fase2.in;
+	jogador1->iniciarVariaveis();
+	fase1->deletarEntidades();
+	fase2->deletarEntidades();
+	fase1->iniciaFase();
+	fase2->iniciaFase();
 }

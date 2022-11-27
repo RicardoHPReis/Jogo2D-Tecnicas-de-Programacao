@@ -27,7 +27,7 @@ public:
 	virtual ~Entidade();
 
 	virtual void executar() = 0;
-	virtual void colisao(Entidade* outro, Vector2f ds) = 0;
+	virtual void reageColisao(Entidade* outro, Vector2f ds) = 0;
 
 	RectangleShape getForma();
 
@@ -55,5 +55,5 @@ public:
 	void setLado(const Lado ld);
 	const Lado getLado() const;
 
-    void calculaQueda();
+    virtual void calculaQueda();
 };

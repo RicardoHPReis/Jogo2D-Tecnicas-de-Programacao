@@ -9,7 +9,9 @@ Fase::Fase(int i, Jogador* player, JogadorDois* player2) :
 {
 	jogador = player;
 	jogador2 = player2;
+	num_inimigos = 0;
 	doisJogadores = false;
+	concluido = false;
 	Gerenciador_Colisoes::getInstancia_Colisoes()->setJogador(jogador);
 	Gerenciador_Colisoes::getInstancia_Colisoes()->setJogadorDois(jogador2);
 }
@@ -17,11 +19,15 @@ Fase::Fase(int i, Jogador* player, JogadorDois* player2) :
 Fase::~Fase()
 {
 	deletarEntidades();
+	num_inimigos = 0;
+	doisJogadores = false;
+	concluido = false;
 }
 
 void Fase::gerenciaColisoes()
 {
 	Gerenciador_Colisoes::getInstancia_Colisoes()->executar();
+	//if(Gerenciador_Colisoes::getInstancia_Colisoes()->c)
 }
 
 void Fase::criarJogador(Vector2f pos)
@@ -38,11 +44,11 @@ void Fase::criarJogadorDois(Vector2f pos)
 	Gerenciador_Colisoes::getInstancia_Colisoes()->setJogadorDois(jogador2);
 }
 
-void Fase::criarEsqueletos(Vector2f pos)
+void Fase::criarSlimes(Vector2f pos)
 {
-	Esqueleto* esqueleto = new Esqueleto(int(ID::esqueleto),pos);
-	listaEntidades.adicionarEntidade(static_cast<Entidade*>(esqueleto));
-	Gerenciador_Colisoes::getInstancia_Colisoes()->adicionarInimigo(esqueleto);
+	Slime* slime = new Slime(int(ID::slime),pos);
+	listaEntidades.adicionarEntidade(static_cast<Entidade*>(slime));
+	Gerenciador_Colisoes::getInstancia_Colisoes()->adicionarInimigo(slime);
 }
 
 void Fase::criarMorcegos(Vector2f pos)
@@ -59,11 +65,11 @@ void Fase::criarPlataformas(Vector2f pos, Vector2f tam)
 	Gerenciador_Colisoes::getInstancia_Colisoes()->adicionarObstaculo(plataforma);
 }
 
-void Fase::criarEspinhos(Vector2f pos, Vector2f tam)
+void Fase::criarRelampagos(Vector2f pos, Vector2f tam)
 {
-	Espinho* espinho = new Espinho(int(ID::espinho), pos, tam);
-	listaEntidades.adicionarEntidade(static_cast<Entidade*>(espinho));
-	Gerenciador_Colisoes::getInstancia_Colisoes()->adicionarObstaculo(espinho);
+	Relampago* relampago = new Relampago(int(ID::relampago), pos, tam);
+	listaEntidades.adicionarEntidade(static_cast<Entidade*>(relampago));
+	Gerenciador_Colisoes::getInstancia_Colisoes()->adicionarObstaculo(relampago);
 }
 
 void Fase::criarFogos(Vector2f pos, Vector2f tam)
@@ -90,6 +96,17 @@ void Fase::criarProjetil(Vector2f pos, Projetil* projetil)
 void Fase::deletarEntidades()
 {
 	listaEntidades.limparEntidades();
+	Gerenciador_Colisoes::getInstancia_Colisoes()->deletarListasColisoes();
+}
+
+const int Fase::getNumInimigos() const
+{
+	return num_inimigos;
+}
+
+void Fase::setNumInimigos(const int n_inimigos)
+{
+	num_inimigos = n_inimigos;
 }
 
 const bool Fase::getDoisJogadores() const
@@ -100,4 +117,37 @@ const bool Fase::getDoisJogadores() const
 void Fase::setDoisJogadores(const bool dois)
 {
 	doisJogadores = dois;
+}
+
+const bool Fase::getConcluido() const
+{
+	return concluido;
+}
+
+void Fase::setConcluido(const bool concluiu)
+{
+	concluido = concluiu;
+}
+
+void Fase::remover()
+{
+	cout << listaEntidades.getNumeroEntidades() << endl;
+	for (int i = 0; i < listaEntidades.getNumeroEntidades(); i++)
+	{
+		if (listaEntidades.operator[](i)->getVida() < 0)
+		{
+			if (listaEntidades.operator[](i)->getId() != int(ID::jogador) && listaEntidades.operator[](i)->getId() != int(ID::jogador2))
+			{
+				listaEntidades.apagarNumEntidade(i);
+				if (listaEntidades.operator[](i)->getId() == int(ID::mago) || listaEntidades.operator[](i)->getId() == int(ID::chefao) || listaEntidades.operator[](i)->getId() == int(ID::morcego))
+					Gerenciador_Colisoes::getInstancia_Colisoes()->deletarInimigo(i);
+				else if (listaEntidades.operator[](i)->getId() == int(ID::jogador))
+					Gerenciador_Colisoes::getInstancia_Colisoes()->setJogador(NULL);
+				else if (listaEntidades.operator[](i)->getId() == int(ID::jogador2))
+					Gerenciador_Colisoes::getInstancia_Colisoes()->setJogadorDois(NULL);
+				i--;
+			}
+		}
+	}
+	cout << listaEntidades.getNumeroEntidades() << endl;
 }

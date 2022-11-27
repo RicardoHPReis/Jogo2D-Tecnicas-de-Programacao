@@ -6,7 +6,6 @@ class Gerenciador_Grafico
 private:
 	RenderWindow* janela;
 	VideoMode video;
-	View* visao;
 
 	static Gerenciador_Grafico* instancia_grafico;
 	Gerenciador_Grafico();
@@ -24,8 +23,7 @@ public:
 	RenderWindow* getJanela();
 	VideoMode getVideo();
 	static Gerenciador_Grafico* getInstancia_Grafico();
-
-	void centralizar(float x);
+	void deletarInstancia_Grafico();
 
 	bool janelaEstaAberta();
 };

@@ -51,7 +51,13 @@ void Lista_Entidades::apagarNumEntidade(int num)
 
 void Lista_Entidades::limparEntidades()
 {
-	LEntidades.limpar();
+	for (int i = 0; i < LEntidades.getNumeroElementos(); i++)
+	{
+		if (LEntidades[i]->getId() != int(ID::jogador) || LEntidades[i]->getId() != int(ID::jogador))
+		{
+			LEntidades.apagarNum(i);
+		}
+	}
 }
 
 void Lista_Entidades::desenharEntidades()
@@ -65,7 +71,7 @@ void Lista_Entidades::desenharEntidades()
 
 void Lista_Entidades::atualizarEntidade()
 {
-	for(int i=0; i< LEntidades.getNumeroElementos(); i++)
+	for(int i=0; i < LEntidades.getNumeroElementos(); i++)
 	{
 		LEntidades.operator[](i)->executar();
 	}

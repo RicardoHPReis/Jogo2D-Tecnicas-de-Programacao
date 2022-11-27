@@ -12,7 +12,7 @@ public:
 	virtual ~Inimigo();
 
 	virtual void executar() = 0;
-	virtual void colisao(Entidade* outro, Vector2f ds) = 0;
+	virtual void reageColisao(Entidade* outro, Vector2f ds) = 0;
 
 	void setDanoso(const bool mal);
 	const bool getDanoso() const;

@@ -118,9 +118,10 @@ const int Lista_Encadeada<L>::getNumeroElementos() const
 template<class L>
 L* Lista_Encadeada<L>::operator[](int num)
 {
+	int i = 0;
 	bool encontrou = false;
 	atual = primeiro;
-	for (int i = 0; i <= num || i < num_elementos; i++)
+	while (atual != NULL)
 	{
 		if (i == num)
 		{
@@ -128,6 +129,7 @@ L* Lista_Encadeada<L>::operator[](int num)
 			return atual->getInfo();
 		}
 		atual = atual->getProximo();
+		i++;
 	}
 	if (encontrou == false)
 	{
@@ -174,55 +176,179 @@ template<class L>
 void Lista_Encadeada<L>::apagar(L* informacao)
 {
 	Elemento<L>* aux = NULL;
+	int i = 0;
 	bool apagou = false;
 	atual = primeiro;
-	for (int i = 0; apagou != false || i < num_elementos; i++)
+	aux = atual;
+	while (atual != NULL)
 	{
 		if (atual->getInfo() == informacao)
 		{
-			aux = atual;
-			atual = aux->getProximo();
-			aux->setProximo(atual->getProximo());
-			atual = atual->getProximo();
-			atual->setAnterior(aux);
-			aux = aux->getProximo();
-			aux = NULL;
-			delete aux;
-			apagou = true;
+			if (i == 0)
+			{
+				cout << "i = 0" << endl;
+				aux = primeiro;
+				atual->getProximo();
+				atual->setAnterior(NULL);
+				primeiro = atual;
+				delete aux;
+				apagou = true;
+				aux = NULL;
+				num_elementos--;
+			}
+			else if (i == num_elementos - 1)
+			{
+				cout << "i = 11" << endl;
+				aux = atual->getAnterior();
+				aux->setProximo(NULL);
+				aux = atual;
+				ultimo = atual;
+				delete aux;
+				apagou = true;
+				aux = NULL;
+				num_elementos--;
+			}
+			else
+			{
+				cout << "i = outro" << endl;
+				aux = atual->getAnterior();
+				atual = atual->getProximo();
+				aux->setProximo(atual);
+				atual->setAnterior(aux);
+				aux = aux->getProximo();
+				delete aux;
+				apagou = true;
+				aux = NULL;
+				num_elementos--;	
+			}
 		}
-		atual = atual->getProximo();
+		else
+		{
+			atual = atual->getProximo();
+			i++;
+		}
 	}
-	num_elementos--;
 }
 
 template<class L>
 void Lista_Encadeada<L>::apagarNum(int num)
 {
+	int i = 0;
 	Elemento<L>* aux = NULL;
 	bool apagou = false;
 	atual = primeiro;
+	cout << "IF ANTES" << endl;
 	if (num < 0 || num > num_elementos)
 	{
 		cout << "Ultrapassou o limite de elementos na lista encadeada" << endl;
 		return;
 	}
-	for (int i = 0; i < num_elementos; i++)
+
+	if (num == 0)
 	{
+		cout << "i = 0" << endl;
+		aux = primeiro;
+		atual->getProximo();
+		atual->setAnterior(NULL);
+		primeiro = atual;
+		delete aux;
+		apagou = true;
+		aux = NULL;
+		num_elementos--;
+	}
+	else if (num == num_elementos - 1)
+	{
+		cout << "i = 11" << endl;
+		aux = atual->getAnterior();
+		aux->setProximo(NULL);
+		aux = atual;
+		ultimo = atual;
+		delete aux;
+		apagou = true;
+		aux = NULL;
+		num_elementos--;
+	}
+	else
+	{
+		while (atual != NULL && apagou == false)
+		{
+			if (i == num)
+			{
+				cout << "i = outro" << endl;
+				aux = atual->getAnterior();
+				atual = atual->getProximo();
+				aux->setProximo(atual);
+				atual->setAnterior(aux);
+				aux = aux->getProximo();
+				delete aux;
+				apagou = true;
+				aux = NULL;
+				num_elementos--;
+			}
+			else
+			{
+				atual = atual->getProximo();
+				i++;
+			}
+		}
+	}
+
+
+
+	/*cout << "While ANTES" << endl;
+	while (atual != NULL)
+	{
+		cout << "primeiro IF" << endl;
+		cout << num << endl;
+		cout << i << endl;
 		if (i == num)
 		{
-			aux = atual;
-			atual = aux->getProximo();
-			aux->setProximo(atual->getProximo());
-			atual = atual->getProximo();
-			atual->setAnterior(aux);
-			aux = aux->getProximo();
-			aux = NULL;
-			delete aux;
-			apagou = true;
+			if (i == 0)
+			{
+				cout << "i = 0" << endl;
+				aux = primeiro;
+				atual->getProximo();
+				atual->setAnterior(NULL);
+				primeiro = atual;
+				delete aux;
+				apagou = true;
+				aux = NULL;
+				num_elementos--;
+			}
+			else if (i == num_elementos - 1)
+			{
+				cout << "i = 11" << endl;
+				aux = atual->getAnterior();
+				aux->setProximo(NULL);
+				aux = atual;
+				ultimo = atual;
+				delete aux;
+				apagou = true;
+				aux = NULL;
+				num_elementos--;
+			}
+			else
+			{
+				cout << "i = outro" << endl;
+				aux = atual->getAnterior();
+				atual = atual->getProximo();
+				aux->setProximo(atual);
+				atual->setAnterior(aux);
+				aux = aux->getProximo();
+				delete aux;
+				apagou = true;
+				aux = NULL;
+				num_elementos--;
+			}
+			i++;
 		}
-		atual = atual->getProximo();
-	}
-	num_elementos--;
+		else
+		{
+			atual = atual->getProximo();
+			i++;
+		}
+	}*/
+	cout << "Saiu" << endl;
 }
 
 template<class L>
@@ -230,19 +356,17 @@ void Lista_Encadeada<L>::limpar()
 {
 	Elemento<L>* aux = NULL;
 	atual = primeiro;
-	for (int i = 0; i < num_elementos; i++)
+	while (aux != NULL)
 	{
-		//atual[i]
 		aux = atual;
-		atual = aux->getProximo();
+		atual = atual->getProximo();
 		aux->setProximo(NULL);
 		aux->setAnterior(NULL);
 		aux->setInfo(NULL);
 		delete aux;
-		aux = NULL;
 	}
+	num_elementos = 0;
 	primeiro = NULL;
 	atual = NULL;
 	ultimo = NULL;
-	num_elementos = 0;
 }

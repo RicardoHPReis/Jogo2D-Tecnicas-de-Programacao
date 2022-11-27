@@ -6,15 +6,16 @@
 class Morcego : public Inimigo
 {
 private:
-
 	float forcaVoar;
-	int frame1, velTex1, aux1;
+	int frame1, velocidade_Textura, aux1;
 	Texture tEnemyDie[5], tEnemyVoa[5];
 
 	void iniciarTexturas();
 public:
-	
-	void atualizaTextura();
+	Morcego(int i = 11, Vector2f pos = { 0.f, 0.f }, Vector2f tam = { 110.f, 85.f });
+	~Morcego();
+
+	void atualizarTextura();
 	void voarDireita();
 	void voarEsquerda();
 	void voarCima();
@@ -23,8 +24,6 @@ public:
 	void disparar();
 
 	void executar();
-	void colisao(Entidade* outrao,Vector2f ds);
-
-	Morcego(int i = 11, Vector2f pos = { 0.f, 0.f }, Vector2f tam = { 110.f, 85.f });
-	~Morcego();
+	void reageColisao(Entidade* outrao,Vector2f ds);
+	void calculaQueda();
 };

@@ -5,13 +5,14 @@ Morcego::Morcego(int i, Vector2f pos, Vector2f tam) :
 	Inimigo(i, pos, tam)
 {
 	iniciarTexturas();
-	podeAtacar = true;
 	vida = 10;
 	atacou = false;
 	dano = 75;
+	velocidade_Textura = 0;
 	velocidade_max = 1;
 	lado = Lado::direita;
 	danoso = true;
+	estaMorto = false;
 	velocidade = { 0.f, 0.f };
 	forcaVoar = gravidade * -1;
 	cout << "Criou morcego!" << endl;
@@ -20,12 +21,13 @@ Morcego::Morcego(int i, Vector2f pos, Vector2f tam) :
 Morcego::~Morcego()
 {
 	danoso = false;
+	forcaVoar = 0.f;
 }
 
 void Morcego::iniciarTexturas()
 {
 	//texturas morcego morrendo
-	/*for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		if (!this->tEnemyDie[i].loadFromFile("../../Texturas/Personagens/Morcego.png", IntRect(i * 100, 322, 100, 80))) {
 			cout << "Erro ao carregar a textura do Morcego morrendo\n";
@@ -36,35 +38,37 @@ void Morcego::iniciarTexturas()
 	// Texturas inimigo Voando
 	for (int i = 0; i < 5; i++)
 	{
-		if (!this->tEnemyVoa[i].loadFromFile("../../Texturas/Personagens/Morcego.png", IntRect(i * 100, 164, 100, 125))) {
+		if (!this->tEnemyVoa[i].loadFromFile("../../Texturas/Personagens/Morcego.png", IntRect(i * 100, 164, 100, 85))) {
 			cout << "Erro ao carregar a textura do Morcego voando\n";
 		}
 		tEnemyVoa[i].setSmooth(true);
-	}*/
-	forma.setFillColor(Color::Black);
+	}
 }
 
 void Morcego::executar()
 {	
+	if(estaMorto == false){
+        atualizarTextura();
+        forma.setTexture(&tEnemyVoa[velocidade_Textura]);
+	}
 	voar();
-	atualizaTextura();
+	atualizarTextura();
 
-	velocidade = { velocidade.x, velocidade.y + forcaVoar + gravidade};
+	calculaQueda();
 
-	Vector2f pos = forma.getPosition();
-	pos += velocidade;
-
-	setPosicao(pos);
+	posicao = forma.getPosition();
+	posicao += velocidade;
+	setPosicao(posicao);
 	
 }
 
-void Morcego::atualizaTextura()
+void Morcego::atualizarTextura()
 {
 	//muda para a proxima textura a cada 7 frames
 	if (frame1 % 7 == 0)
-		velTex1++;
-	if (velTex1 == 5)
-		velTex1 = 0;
+        velocidade_Textura++;
+	if (velocidade_Textura == 5)
+        velocidade_Textura = 0;
 	frame1++;
 }
 
@@ -87,10 +91,17 @@ void Morcego::voar()
 		}
 		voarDireita();
 	}
-	//if (posicao.x > Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width / 2.f)
-		//voarBaixo();
-	//else if(posicao.x < Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width / 2.f && posicao.y > 0)
-		//voarCima();
+	if (posicao.x > Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width / 2.f)
+	{
+		velocidade.y = 0.f;
+		voarBaixo();
+		
+	}
+	if(posicao.x < Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width / 2.f && posicao.y > 0)
+	{
+		velocidade.y = 0.f;
+		voarCima();
+	}
 }
 
 void Morcego::disparar()
@@ -133,15 +144,15 @@ void Morcego::voarEsquerda()
 
 void Morcego::voarCima()
 {
-	velocidade = { velocidade.x, velocidade.y - 0.25f};
+	velocidade = { velocidade.x, velocidade.y - 1.50f};
 }
 
 void Morcego::voarBaixo()
 {
-	velocidade = { velocidade.x, velocidade.y + 0.25f };
+	velocidade = { velocidade.x, velocidade.y + 1.50f };
 }
 
-void Morcego::colisao(Entidade* outro, Vector2f ds)
+void Morcego::reageColisao(Entidade* outro, Vector2f ds)
 {
 	switch (outro->getId())
 	{
@@ -178,19 +189,19 @@ void Morcego::colisao(Entidade* outro, Vector2f ds)
 		}*/
 	}
 	break;
-	case(int(ID::espinho)): //id do esqueleto
+	case(int(ID::relampago)): //id do Slime
 	{
 		setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
 		velocidade.x = 0.f;
 		velocidade.y = 0.f;
 	}
 	break;
-	case(int(ID::fogo)): //id do esqueleto
+	case(int(ID::fogo)): //id do Slime
 	{
 
 	}
 	break;
-	case(int(ID::esqueleto)): //id do esqueleto
+	case(int(ID::slime)): //id do Slime
 	{
 
 	}
@@ -216,4 +227,9 @@ void Morcego::colisao(Entidade* outro, Vector2f ds)
 	}
 	break;
 	}
+}
+
+void Morcego::calculaQueda()
+{
+	velocidade = { velocidade.x, velocidade.y + gravidade + forcaVoar };
 }

@@ -6,7 +6,7 @@ class Plataforma :public Obstaculo
 {
 private:
 	Texture textura_plataforma;
-	float forçaEmpuxo;
+	float forcaEmpuxo;
 
 	void iniciarTexturas();
 	void iniciarStatus();
@@ -16,6 +16,6 @@ public:
 	~Plataforma();
 
 	void executar();
-	void colisao(Entidade* outrao, Vector2f ds);
-	//Vector2f valorEmpuxo();
+	void reageColisao(Entidade* outrao, Vector2f ds);
+	void calculaQueda();
 };

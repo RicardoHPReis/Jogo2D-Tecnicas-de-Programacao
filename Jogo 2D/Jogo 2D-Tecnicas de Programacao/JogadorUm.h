@@ -1,8 +1,9 @@
 #pragma once
 #include "stdafx.h"
 #include "Jogador.h"
+#include "Gerenciador_Eventos.h"
 
-class JogadorDois : public Jogador
+class JogadorUm : public Jogador
 {
 private:
 	Texture txJogadorCorre[6], txJogadorPula[10], txJogadorParado[4], txJogadorAtaque[10];
@@ -12,8 +13,8 @@ private:
 	void iniciarTexturas();
 
 public:
-	JogadorDois(int i = 4, Vector2f pos = { 0.f, 0.f }, Vector2f tam = { 125.f, 100.f });
-	~JogadorDois();
+	JogadorUm(int i = 4, Vector2f pos = { 0.f, 0.f }, Vector2f tam = { 125.f, 100.f });
+	~JogadorUm();
 
 	void executar();
 	void reageColisao(Entidade* outrao, Vector2f dist_colisao);

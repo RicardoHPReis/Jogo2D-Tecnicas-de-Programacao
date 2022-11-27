@@ -34,7 +34,7 @@ public:
 	void atirar();
 	void dispararDireita();
 	void dispararEsquerda();
-	void colisao(Entidade* outrao, Vector2f ds);
+	void reageColisao(Entidade* outrao, Vector2f ds);
 
 	void setDanoso(const bool mal);
 	const bool getDanoso() const;

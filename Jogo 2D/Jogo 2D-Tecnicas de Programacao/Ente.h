@@ -10,12 +10,12 @@ enum class ID
 	jogador = 4,
 	pause = 5,
 	jogador2 = 6,
-	esqueleto = 10,
+	slime = 10,
 	morcego = 11,
 	mago = 12,
 	chefao = 13,
 	plataforma = 100,
-	espinho = 101,
+	relampago = 101,
 	fogo = 102,
 	projetil = 1000
 };

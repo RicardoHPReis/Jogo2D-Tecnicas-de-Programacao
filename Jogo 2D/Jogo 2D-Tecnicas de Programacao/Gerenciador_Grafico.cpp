@@ -8,10 +8,6 @@ Gerenciador_Grafico::Gerenciador_Grafico()
 	janela = new RenderWindow(video, "Game 1", Style::Titlebar | Style::Close);
 	janela->setMouseCursorVisible(false);
 	janela->setFramerateLimit(60);
-
-	visao = nullptr;
-	//visao = new View({ 960, 540 }, { 1920, 1080 });
-	//janela->setView(*visao);
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico()
@@ -19,10 +15,6 @@ Gerenciador_Grafico::~Gerenciador_Grafico()
 	video = { 0, 0 };
 	if (janela)
 		delete janela;
-	if (visao)
-		delete visao;
-	if (instancia_grafico)
-		delete instancia_grafico;
 }
 
 Gerenciador_Grafico* Gerenciador_Grafico::getInstancia_Grafico()
@@ -32,6 +24,12 @@ Gerenciador_Grafico* Gerenciador_Grafico::getInstancia_Grafico()
 		instancia_grafico = new Gerenciador_Grafico;
 	}
 	return instancia_grafico;
+}
+
+void Gerenciador_Grafico::deletarInstancia_Grafico()
+{
+	if (instancia_grafico)
+		delete instancia_grafico;
 }
 
 void Gerenciador_Grafico::desenhar(RectangleShape retangulo)
@@ -79,10 +77,4 @@ bool Gerenciador_Grafico::janelaEstaAberta()
 	if (janela)
 		return true;
 	return false;
-}
-
-void Gerenciador_Grafico::centralizar(float x)
-{
-	visao->setCenter({ x, 540 });
-	janela->setView(*visao);
 }

@@ -1,9 +1,9 @@
-#include "JogadorDois.h"
+#include "JogadorUm.h"
 
 
 //Gerenciador_Eventos* Gerenciador_Eventos::instancia_eventos = Gerenciador_Eventos::getInstancia_Eventos();
 
-JogadorDois::JogadorDois(int i, Vector2f pos, Vector2f tam) :
+JogadorUm::JogadorUm(int i, Vector2f pos, Vector2f tam) :
 	Jogador(i, pos, tam)
 {
 	delay = 0;
@@ -16,7 +16,6 @@ JogadorDois::JogadorDois(int i, Vector2f pos, Vector2f tam) :
 	levou_dano = false;
 	jogador_pulou = false;
 	forcaPulo = 25.f;
-	estaMorto = true;
 
 	limitadorTex_parado = 0;
 	limitadorTex_correndo = 0;
@@ -24,14 +23,14 @@ JogadorDois::JogadorDois(int i, Vector2f pos, Vector2f tam) :
 
 	iniciarTexturas();
 
-	cout << "Criou Jogador Dois" << endl;
+	cout << "Criou Jogador Um" << endl;
 }
 
-JogadorDois::~JogadorDois()
+JogadorUm::~JogadorUm()
 {
 }
 
-void JogadorDois::iniciarVariaveis()
+void JogadorUm::iniciarVariaveis()
 {
 	delay = 0;
 	vida = 500;
@@ -49,7 +48,7 @@ void JogadorDois::iniciarVariaveis()
 	frame1 = 0;
 }
 
-void JogadorDois::iniciarTexturas()
+void JogadorUm::iniciarTexturas()
 {
 	for (int i = 0; i < 10; i++)
 	{
@@ -83,14 +82,14 @@ void JogadorDois::iniciarTexturas()
 	spVida.resize(vida / 100);
 	txVida.loadFromFile("../../Texturas/Cenario/Vida.png");
 	txVida.setSmooth(true);
-	for (int i=0; i < vida / 100; i++)
+	for (int i=0; i < vida/100; i++)
 	{
 		spVida[i].setTexture(txVida);
 		spVida[i].setPosition(Vector2f((30.f) + (50 * i), 10.f));
 	}
 }
 
-void JogadorDois::executar()
+void JogadorUm::executar()
 {
 	if (frame1 % 10 == 0)
 		limitadorTex_parado++;
@@ -105,12 +104,12 @@ void JogadorDois::executar()
 
 	//andar para os 2 lados
 
-	if (Keyboard::isKeyPressed(Keyboard::Left))
+	if (Keyboard::isKeyPressed(Keyboard::A))
 	{
 		direcionalEsquerdo();
 	}
 
-	else if (Keyboard::isKeyPressed(sf::Keyboard::Right))
+	else if (Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		direcionalDireito();
 	}
@@ -120,7 +119,7 @@ void JogadorDois::executar()
 	}
 
 	//pulo 
-	if (Keyboard::isKeyPressed(Keyboard::Up) && jogador_pulou == false)
+	if (Keyboard::isKeyPressed(Keyboard::W) && jogador_pulou == false)
 	{
 		limitadorTex_pulando = 0;
 		velocidade = { velocidade.x,velocidade.y - forcaPulo };
@@ -134,7 +133,7 @@ void JogadorDois::executar()
 	}
 
 	//atacar
-	if (Mouse::isButtonPressed(Mouse::Left) && atacou == false)
+	if (Keyboard::isKeyPressed(Keyboard::Space) && atacou == false)
 	{
 		atacou = true;
 		limitadorTex_ataque = 0;
@@ -157,7 +156,7 @@ void JogadorDois::executar()
 	atualizavida();
 }
 
-void JogadorDois::ataque()
+void JogadorUm::ataque()
 {
 	if (limitadorTex_ataque <= 9)
 	{
@@ -170,7 +169,7 @@ void JogadorDois::ataque()
 		atacou = false;
 }
 
-void JogadorDois::direcionalEsquerdo()
+void JogadorUm::direcionalEsquerdo()
 {
 	if (lado == Lado::direita)
 	{
@@ -190,14 +189,14 @@ void JogadorDois::direcionalEsquerdo()
 	}
 
 	forma.setTexture(&txJogadorCorre[limitadorTex_correndo]);
-	if (frame1 % 6 == 0)
+	if (frame1 % 6 == 0) 
 	{
 		limitadorTex_correndo++;
 		atualizarTextura();
 	}
 }
 
-void JogadorDois::direcionalDireito()
+void JogadorUm::direcionalDireito()
 {
 	if (lado == Lado::esquerda)
 	{
@@ -223,12 +222,12 @@ void JogadorDois::direcionalDireito()
 	}
 }
 
-void JogadorDois::parar()
+void JogadorUm::parar()
 {
 	velocidade = { 0.f, velocidade.y };
 }
 
-void JogadorDois::pulo()
+void JogadorUm::pulo()
 {
 	posicao = { posicao.x + velocidade.x, posicao.y - velocidade.y };
 	forma.setTexture(&txJogadorPula[limitadorTex_pulando]);
@@ -239,7 +238,7 @@ void JogadorDois::pulo()
 		limitadorTex_pulando++;
 }
 
-void JogadorDois::reageColisao(Entidade* outro, Vector2f dist_colisao)
+void JogadorUm::reageColisao(Entidade* outro, Vector2f dist_colisao)
 {
 	switch (outro->getId())
 	{
@@ -285,7 +284,7 @@ void JogadorDois::reageColisao(Entidade* outro, Vector2f dist_colisao)
 		}
 	}
 	break;
-	case(int(ID::relampago)): //id do Slime
+	case(int(ID::relampago)): //id do Relampago
 	{
 		setPosicao(Vector2f{ posicao.x , posicao.y });
 		velocidade.x = 0.f;
@@ -478,7 +477,7 @@ void JogadorDois::reageColisao(Entidade* outro, Vector2f dist_colisao)
 	}
 }
 
-void JogadorDois::atualizarTextura()
+void JogadorUm::atualizarTextura()
 {
 	if (limitadorTex_parado > 4)
 		limitadorTex_parado = 0;

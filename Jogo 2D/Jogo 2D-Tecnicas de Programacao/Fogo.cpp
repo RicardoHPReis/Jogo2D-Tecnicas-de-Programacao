@@ -23,7 +23,7 @@ void Fogo::iniciarTexturas()
 {
 	for (int i = 0; i < 10; i++)
 	{
-		if (!fogo[i].loadFromFile("../../Texturas/Obstaculo/Fogo.png", IntRect(i * 68.75f, 68.75f, 125.f, 92.f))) {
+		if (!fogo[i].loadFromFile("../../Texturas/Obstaculo/Fogo.png", IntRect(i * 68.75f, 20.f, 68.f, 72.f))) {
 			std::cout << "Erro ao carregar textura do pulo do cavaleiro\n";
 		}
 		fogo[i].setSmooth(true);
@@ -33,8 +33,7 @@ void Fogo::iniciarTexturas()
 void Fogo::executar()
 {
 
-	if (frame % 10 == 0)
-		attTextura++;
+	atualizarTextura();
 	forma.setTexture(&fogo[attTextura]);
 
 	setPosicao(posicao);
@@ -48,7 +47,7 @@ void Fogo::executar()
 	frame++;
 }
 
-void Fogo::colisao(Entidade* outro, Vector2f ds)
+void Fogo::reageColisao(Entidade* outro, Vector2f ds)
 {
 	switch (outro->getId())
 	{
@@ -61,4 +60,14 @@ void Fogo::colisao(Entidade* outro, Vector2f ds)
 		}
 		break;
 	}
+}
+
+void Fogo::atualizarTextura()
+{
+    //muda para a proxima textura a cada 7 frames
+    if (frame % 7 == 0)
+		attTextura++;
+    if (attTextura == 10)
+		attTextura = 0;
+    frame++;
 }

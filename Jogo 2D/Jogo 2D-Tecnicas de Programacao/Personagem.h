@@ -5,7 +5,6 @@
 class Personagem : public Entidade
 {
 protected:
-	bool podeAtacar;
 	bool estaMorto;
 	bool atacou;
 
@@ -14,13 +13,10 @@ public:
 	~Personagem();
 
 	virtual void executar() = 0;
-	virtual void colisao(Entidade* outro, Vector2f ds) = 0;
+	virtual void reageColisao(Entidade* outro, Vector2f ds) = 0;
 
-	void setAtaque(bool foiAtacado);
-	bool getAtaque();
-
-	void setPodeAtacar(const bool atc);
-	const bool getPodeAtacar() const;
+	void setAtacou(bool foiAtacado);
+	const bool getAtacou() const;
 
 	void setEstaMorto(const bool mrt);
 	const bool getEstaMorto() const;

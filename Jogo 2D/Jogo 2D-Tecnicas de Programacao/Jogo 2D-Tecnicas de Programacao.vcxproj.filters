@@ -63,7 +63,7 @@
     <ClCompile Include="Lista_Entidades.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Esqueleto.cpp">
+    <ClCompile Include="Slime.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Morcego.cpp">
@@ -75,7 +75,7 @@
     <ClCompile Include="Gerenciador_Eventos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Espinho.cpp">
+    <ClCompile Include="Relampago.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Pause.cpp">
@@ -88,6 +88,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="JogadorDois.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="JogadorUm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu_Inicial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu_Pause.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu_Morte.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu_Vencedor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -143,7 +158,7 @@
     <ClInclude Include="Lista_Entidades.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Esqueleto.h">
+    <ClInclude Include="Slime.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Morcego.h">
@@ -155,7 +170,7 @@
     <ClInclude Include="Gerenciador_Eventos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Espinho.h">
+    <ClInclude Include="Relampago.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Pause.h">
@@ -168,6 +183,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="JogadorDois.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="JogadorUm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu_Inicial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu_Pause.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu_Morte.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu_Vencedor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
