@@ -5,7 +5,7 @@ Menu_Inicial::Menu_Inicial(int i) :
 	previa1(),
 	previa2()
 {
-	numFase = 1;
+	numFase = 0;
 	numJogadores = 1;
 
 	fonte.loadFromFile("../../Fontes/Font.otf");
@@ -95,6 +95,8 @@ void Menu_Inicial::executar()
 			selecao = true;
 			if (escolha == 1) //RODA JOGO
 			{
+				if (numFase != 2)
+					numFase = 1;
 				rodando_menu = false;
 				clique = true;
 			}

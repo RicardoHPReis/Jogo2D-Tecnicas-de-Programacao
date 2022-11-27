@@ -20,7 +20,6 @@ Menu::~Menu()
 	selecao = false;
 	delay = 0;
 	tempoDelay = 0;
-	escolha = 0;
 	rodando_menu = false;
 
 	if (!escrita.empty())

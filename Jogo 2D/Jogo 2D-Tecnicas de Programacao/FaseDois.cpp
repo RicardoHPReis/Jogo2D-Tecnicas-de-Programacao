@@ -5,7 +5,6 @@ FaseDois::FaseDois(int i, Jogador* player, JogadorDois* player2) :
 {
 	iniciaVariaveis();
 	iniciaTexturas();
-	iniciaFase();
 }
 
 FaseDois::~FaseDois()
@@ -16,6 +15,7 @@ FaseDois::~FaseDois()
 
 void FaseDois::iniciaVariaveis()
 {
+	inicializada = false;
 }
 
 void FaseDois::iniciaTexturas()
@@ -33,7 +33,7 @@ void FaseDois::iniciaFase()
 {
 	int chance;
 	srand(time(NULL));
-	criarJogador(Vector2f(960.f, 200.f));
+	criarJogador(Vector2f(100.f, 960.f));
 	if (doisJogadores)
 		criarJogadorDois(Vector2f(1000.f, 200.f));
 
@@ -51,18 +51,18 @@ void FaseDois::iniciaFase()
 	chance = rand() % 1 + 3;
 	for (int i = 0; i < chance; i++)
 	{
-		//criarRelampagos(Vector2f{ (rand() % 10 + 1) * 100.f, 0.f }, Vector2f{ 50.f, 50.f });
+		criarRelampagos(Vector2f{ 0.f, 0.f }, Vector2f{ 100.f, 980.f });
 	}
 	chance = rand() % 1 + 3;
 	for (int i = 0; i < chance; i++)
 	{
-		//criarFogos(Vector2f{ (rand() % 10 + 1) * 75.f, 0.f }, Vector2f{ 100.f, 50.f });
+		criarFogos(Vector2f{ (rand() % 1820 + 1) * 1.f, 0.f }, Vector2f{ 100.f, 100.f });
 	}
 	chance = rand() % 1 + 3;
 	num_inimigos += chance;
 	for (int i = 0; i < chance; i++)
 	{
-		criarMorcegos(Vector2f{ (rand() % 10 + 1) * 190.f, 0.f });
+		criarMorcegos(Vector2f{ (rand() % 1820 + 1) * 1.f, (rand() % 400 + 1) * 1.f });
 	}
 
 	chance = rand() % 1 + 3;
@@ -89,4 +89,14 @@ void FaseDois::executar()
 	if (doisJogadores)
 		Gerenciador_Grafico::getInstancia_Grafico()->desenhar(jogador2->getForma());
 	listaEntidades.desenharEntidades();
+}
+
+void FaseDois::setInicializada(bool aux)
+{
+	inicializada = aux;
+}
+
+const bool FaseDois::getInicializada() const
+{
+	return inicializada;;
 }

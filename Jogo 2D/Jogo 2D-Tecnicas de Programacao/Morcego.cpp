@@ -10,7 +10,10 @@ Morcego::Morcego(int i, Vector2f pos, Vector2f tam) :
 	dano = 75;
 	velocidade_Textura = 0;
 	velocidade_max = 1;
-	lado = Lado::direita;
+	if(rand() % 3 == 1)
+		lado = Lado::direita;
+	else
+		lado = Lado::esquerda;
 	danoso = true;
 	estaMorto = false;
 	velocidade = { 0.f, 0.f };

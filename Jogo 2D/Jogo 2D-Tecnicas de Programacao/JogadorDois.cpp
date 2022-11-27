@@ -155,6 +155,15 @@ void JogadorDois::executar()
 
 	frame1++;
 	atualizavida();
+
+	if (levou_dano == true)
+	{
+		delay++;
+		if (delay % 100 == 0) {
+			levou_dano = false;
+			delay = 0;
+		}
+	}
 }
 
 void JogadorDois::ataque()
@@ -287,13 +296,13 @@ void JogadorDois::reageColisao(Entidade* outro, Vector2f dist_colisao)
 	break;
 	case(int(ID::relampago)): //id do Slime
 	{
-		setPosicao(Vector2f{ posicao.x , posicao.y });
-		velocidade.x = 0.f;
-		velocidade.y = 0.f;
+		if (levou_dano == false)
+			operator--(outro->getDano());
 	}
 	case(int(ID::fogo)): //id do Slime
 	{
-		operator--(outro->getDano());
+		if(levou_dano == false)
+			operator--(outro->getDano());
 	}
 	break;
 	case(int(ID::slime)): //id do Slime
@@ -338,8 +347,9 @@ void JogadorDois::reageColisao(Entidade* outro, Vector2f dist_colisao)
 		}
 
 
-		if (atacou == true)
+		if (atacou == false)
 		{
+			if(levou_dano == false)
 			operator--(outro->getDano());
 		}
 		else
@@ -385,7 +395,10 @@ void JogadorDois::reageColisao(Entidade* outro, Vector2f dist_colisao)
 
 
 		if (!atacou)
-			operator--(outro->getDano());
+		{
+			if (levou_dano == false)
+				operator--(outro->getDano());
+		}
 		else
 			outro->setVida(outro->getVida() - dano);
 	}
@@ -464,7 +477,8 @@ void JogadorDois::reageColisao(Entidade* outro, Vector2f dist_colisao)
 				outro->setVelocidade({ 0,0 });
 			}
 		}
-		operator--(outro->getDano());
+		if (levou_dano == false)
+			operator--(outro->getDano());
 		outro->setVida(outro->getVida() - dano);
 	}
 	break;

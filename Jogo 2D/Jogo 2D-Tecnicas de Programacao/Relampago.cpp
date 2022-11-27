@@ -4,7 +4,7 @@ Relampago::Relampago(int id, Vector2f pos, Vector2f tam) :
     Obstaculo(id, pos, tam)
 {
 	velocidade = Vector2f{ 0.f,0.f };
-    dano = 0;
+    dano = 100;
     danoso = false;
     paralisar = false;
     paralisacao = 60;
@@ -13,6 +13,7 @@ Relampago::Relampago(int id, Vector2f pos, Vector2f tam) :
     velocidade_Textura = 0;
 	cout << "Criou relampago!" << endl;
 	iniciaTexturas();
+    srand(time(NULL));
 }
 
 Relampago::~Relampago()
@@ -39,16 +40,18 @@ void Relampago::executar()
     {
         setPosicao(posicao);
     }
+    if (velocidade_Textura == 0)
+        posicao = Vector2f(rand() % 1820, 0.f);
+    if (velocidade_Textura > 5 && velocidade_Textura < 10)
+        setParalizar(true);
+    else
+        setParalizar(false);
 
     atualizarTextura();
     forma.setTexture(&TRelampago[velocidade_Textura]);
 
 	calculaQueda();
-    
-	Vector2f pos = forma.getPosition();
-	pos += velocidade;
-
-	setPosicao(pos);
+    setPosicao(posicao);
     /*if (tempo > 0)
     {
         tempo += 1;
@@ -85,6 +88,21 @@ void Relampago::reageColisao(Entidade* outro, Vector2f ds)
 			velocidade.x = 0.f;
 			velocidade.y = 0.f;
 		}
+        case(int(ID::jogador) || int(ID::jogador)):
+        {
+            if(getParalizar() == true) //&& outro->get)
+                outro->setVida(outro->getVida() - dano);
+        }
 		break;
 	}
+}
+
+void Relampago::setParalizar(bool aux)
+{
+    paralisar = aux;
+}
+
+const bool Relampago::getParalizar() const
+{
+    return paralisar;
 }

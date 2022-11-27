@@ -5,7 +5,6 @@ FaseUm::FaseUm(int i, Jogador* player, JogadorDois* player2):
 {
 	iniciaVariaveis();
 	iniciaTexturas();
-	iniciaFase();
 }
 
 FaseUm::~FaseUm()
@@ -16,6 +15,7 @@ FaseUm::~FaseUm()
 
 void FaseUm::iniciaVariaveis()
 {
+	inicializada = false;
 }
 
 void FaseUm::iniciaTexturas()
@@ -34,9 +34,9 @@ void FaseUm::iniciaFase()
 {
 	int chance;
 	srand(time(NULL));
-	criarJogador(Vector2f(960.f, 200.f));
+	criarJogador(Vector2f(100.f, 960.f));
 	if(doisJogadores)
-		criarJogadorDois(Vector2f(1000.f, 200.f));
+		criarJogadorDois(Vector2f(100.f, 960.f));
 
 	//chao
 	
@@ -50,30 +50,24 @@ void FaseUm::iniciaFase()
 	criarPlataformas(Vector2f{ 660.f, 370.f }, Vector2f(600.f, 100.f));
 	
 
-	chance = rand() % 1 + 3;
+	chance = rand() % 5 + 1;
 	for (int i = 0; i < chance; i++)
 	{
-		//criarPlataformas(Vector2f{ (rand() % 10 + 1), 980.f }, Vector2f(1920.f, 100.f));
+		criarRelampagos(Vector2f{ 0.f, 0.f }, Vector2f{ 100.f, 980.f });
 	}
-
-	chance = rand() % 1 + 3;
+	chance = rand() % 5 + 1;
 	for (int i = 0; i < chance; i++)
 	{
-		//criarRelampagos(Vector2f{ (rand() % 10 + 1) * 100.f, 0.f }, Vector2f{ 50.f, 50.f });
+		criarFogos(Vector2f{ (rand() % 1820 + 1) * 1.f, 0.f }, Vector2f{ 100.f, 100.f });
 	}
-	chance = rand() % 1 + 3;
-	for (int i = 0; i < chance; i++)
-	{
-		//criarFogos(Vector2f{ (rand() % 10 + 1) * 75.f, 0.f }, Vector2f{ 100.f, 50.f });
-	}
-	chance = rand() % 1 + 3;
+	chance = rand() % 5 + 1;
 	num_inimigos += chance;
 	for (int i = 0; i < chance; i++)
 	{
-		criarMorcegos(Vector2f{ (rand() % 10 + 1) * 190.f, 0.f });
+		criarMorcegos(Vector2f{ (rand() % 1820 + 1) * 1.f, (rand() % 400 + 1) * 1.f });
 	}
 
-	chance = rand() % 1 + 3;
+	chance = rand() % 5 + 1;
 	num_inimigos += chance;
 	for (int i = 0; i < chance; i++)
 	{
@@ -105,4 +99,14 @@ void FaseUm::executar()
 	}
 	listaEntidades.desenharEntidades();
 	cout << "G" << endl;
+}
+
+void FaseUm::setInicializada(bool aux)
+{
+	inicializada = aux;
+}
+
+const bool FaseUm::getInicializada() const
+{
+	return inicializada;;
 }

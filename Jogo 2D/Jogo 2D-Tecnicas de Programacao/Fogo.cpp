@@ -7,7 +7,6 @@ Fogo::Fogo(int id, Vector2f pos, Vector2f tam) :
 	attTextura = 0;
 	frame = 0;
 	velocidade = Vector2f{ 0.f,0.f };
-	forma.setFillColor(Color::Red);
 	dano = 1;
 	danoso = true;
 	queimou = false;
@@ -21,7 +20,7 @@ Fogo::~Fogo()
 
 void Fogo::iniciarTexturas()
 {
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 8; i++)
 	{
 		if (!fogo[i].loadFromFile("../../Texturas/Obstaculo/Fogo.png", IntRect(i * 68.75f, 20.f, 68.f, 72.f))) {
 			std::cout << "Erro ao carregar textura do pulo do cavaleiro\n";
@@ -67,7 +66,7 @@ void Fogo::atualizarTextura()
     //muda para a proxima textura a cada 7 frames
     if (frame % 7 == 0)
 		attTextura++;
-    if (attTextura == 10)
+    if (attTextura == 8)
 		attTextura = 0;
     frame++;
 }

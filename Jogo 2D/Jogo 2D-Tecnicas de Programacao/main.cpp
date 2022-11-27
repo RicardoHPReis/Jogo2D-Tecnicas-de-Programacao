@@ -9,8 +9,6 @@ int main()
 
     while (jogo.rodando())
     {
-        //jogo.rodar_menu();
-        //if()
         jogo.update();
     }
 

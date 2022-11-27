@@ -51,7 +51,17 @@ void Jogo::update()
 		jogador2->setEstaMorto(false);
 		inicializar();
 	}
-		
+	if (menuInicial->getNumFase() == 1 && fase1->getInicializada() == false)
+	{
+		fase1->iniciaFase();
+		fase1->setInicializada(true);
+	}
+	if (menuInicial->getNumFase() == 2 && fase2->getInicializada() == false)
+	{
+		fase2->iniciaFase();
+		fase2->setInicializada(true);
+	}
+
 	while (!menuInicial->getRodandoMenu())
 	{
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
@@ -87,8 +97,8 @@ void Jogo::update()
 		{
 			cout << "morreu, então volta para o menu!" << endl;
 			menuInicial->setRodandoMenu(true);
-			//inicializar();
-			//break;
+			jogador1->setEstaMorto(false);				//////////
+			jogador1->setVida(500);						//////////
 		}
 	}
 }
@@ -96,8 +106,5 @@ void Jogo::update()
 void Jogo::inicializar()
 {
 	jogador1->iniciarVariaveis();
-	fase1->deletarEntidades();
-	fase2->deletarEntidades();
-	fase1->iniciaFase();
-	fase2->iniciaFase();
+	jogador2->iniciarVariaveis();
 }
