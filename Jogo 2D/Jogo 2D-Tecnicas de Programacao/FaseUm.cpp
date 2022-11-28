@@ -34,12 +34,12 @@ void FaseUm::iniciaFase()
 {
 	int chance;
 	srand(time(NULL));
+
+	criarJogadorDois(Vector2f(600.f, 960.f));
 	criarJogador(Vector2f(100.f, 960.f));
-	if(doisJogadores)
-		criarJogadorDois(Vector2f(100.f, 960.f));
+	
 
 	//chao
-	
 	criarPlataformas(Vector2f{ 0.f, 980.f }, Vector2f(1920.f, 300.f));
 
 	//plataformas baixas laterais
@@ -50,7 +50,7 @@ void FaseUm::iniciaFase()
 	criarPlataformas(Vector2f{ 660.f, 370.f }, Vector2f(600.f, 100.f));
 	
 
-	chance = rand() % 5 + 1;
+	chance = rand() % 4 + 1;
 	for (int i = 0; i < chance; i++)
 	{
 		criarRelampagos(Vector2f{ 0.f, 0.f }, Vector2f{ 100.f, 980.f });
@@ -58,20 +58,20 @@ void FaseUm::iniciaFase()
 	chance = rand() % 5 + 1;
 	for (int i = 0; i < chance; i++)
 	{
-		criarFogos(Vector2f{ (rand() % 1820 + 1) * 1.f, 0.f }, Vector2f{ 100.f, 100.f });
+		//criarFogos(Vector2f{ (rand() % 1820 + 1) * 1.f, 0.f }, Vector2f{ 100.f, 100.f });
 	}
-	chance = rand() % 5 + 1;
+	chance = rand() % 2 + 3;
 	num_inimigos += chance;
 	for (int i = 0; i < chance; i++)
 	{
 		criarMorcegos(Vector2f{ (rand() % 1820 + 1) * 1.f, (rand() % 400 + 1) * 1.f });
 	}
 
-	chance = rand() % 5 + 1;
+	chance = rand() % 2 + 3;
 	num_inimigos += chance;
 	for (int i = 0; i < chance; i++)
 	{
-		criarSlimes(Vector2f{ (rand() % 10 + 1) * 190.f, 0.f });
+		criarSlimes(Vector2f{ (rand() % 1820 + 1) * 1.f, 0.f });
 	}
 	//criarChefao(Vector2f{ 1500.f, 200.f });
 	//num_inimigos++;
@@ -79,26 +79,22 @@ void FaseUm::iniciaFase()
 
 void FaseUm::executar()
 {
-	cout << "A" << endl;
 	Gerenciador_Grafico::getInstancia_Grafico()->desenharSprite(fundo);
-	cout << "B" << endl;
 	gerenciaColisoes();
-	cout << "C" << endl;
 	listaEntidades.atualizarEntidade();
-	remover();
+
+	//remover(); //ERRO
+
 	if (num_inimigos <= 0)
 	{
 		concluido = true;
 	}
-	cout << "E" << endl;
-	Gerenciador_Grafico::getInstancia_Grafico()->desenhar(jogador->getForma());
-	cout << "F" << endl;
-	if (doisJogadores)
-	{
-		Gerenciador_Grafico::getInstancia_Grafico()->desenhar(jogador2->getForma());
-	}
+
+	//Gerenciador_Grafico::getInstancia_Grafico()->desenhar(jogador2->getForma());
+
+	//Gerenciador_Grafico::getInstancia_Grafico()->desenhar(jogador->getForma());
+	
 	listaEntidades.desenharEntidades();
-	cout << "G" << endl;
 }
 
 void FaseUm::setInicializada(bool aux)

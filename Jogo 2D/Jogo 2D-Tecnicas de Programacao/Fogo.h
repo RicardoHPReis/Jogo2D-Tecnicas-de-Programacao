@@ -16,5 +16,5 @@ public:
 	~Fogo();
 
 	void executar();
-	void reageColisao(Entidade* outrao, Vector2f ds);
+	void reageColisao(Entidade* outrao, Vector2f dist_colisao);
 };

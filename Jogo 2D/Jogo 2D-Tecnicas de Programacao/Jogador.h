@@ -15,7 +15,7 @@ protected:
 	Texture txVida;
 
 public:
-	Jogador(int i = 4, Vector2f pos = { 0.f, 0.f }, Vector2f tam = { 125.f, 100.f });
+	Jogador(int i = 0, Vector2f pos = { 0.f, 0.f }, Vector2f tam = { 0.f, 0.f });
 	virtual ~Jogador();
 
 	virtual void executar() = 0;

@@ -10,7 +10,7 @@ Fase::Fase(int i, Jogador* player, JogadorDois* player2) :
 	jogador = player;
 	jogador2 = player2;
 	num_inimigos = 0;
-	doisJogadores = false;
+	doisJogadores = true;
 	concluido = false;
 	Gerenciador_Colisoes::getInstancia_Colisoes()->setJogador(jogador);
 	Gerenciador_Colisoes::getInstancia_Colisoes()->setJogadorDois(jogador2);
@@ -131,22 +131,31 @@ void Fase::setConcluido(const bool concluiu)
 
 void Fase::remover()
 {
-	cout << listaEntidades.getNumeroEntidades() << endl;
 	for (int i = 0; i < listaEntidades.getNumeroEntidades(); i++)
 	{
-		if (listaEntidades.operator[](i)->getVida() < 0)
+		if(listaEntidades.operator[](i))
 		{
-			if (listaEntidades.operator[](i)->getId() != int(ID::jogador) && listaEntidades.operator[](i)->getId() != int(ID::jogador2))
+			if (listaEntidades.operator[](i)->getVida() <= 0)
 			{
-				listaEntidades.apagarNumEntidade(i);
-				if (listaEntidades.operator[](i)->getId() == int(ID::mago) || listaEntidades.operator[](i)->getId() == int(ID::chefao) || listaEntidades.operator[](i)->getId() == int(ID::morcego))
-					Gerenciador_Colisoes::getInstancia_Colisoes()->deletarInimigo(i);
-				else if (listaEntidades.operator[](i)->getId() == int(ID::jogador))
-					Gerenciador_Colisoes::getInstancia_Colisoes()->setJogador(NULL);
-				else if (listaEntidades.operator[](i)->getId() == int(ID::jogador2))
-					Gerenciador_Colisoes::getInstancia_Colisoes()->setJogadorDois(NULL);
-				i--;
+				if (listaEntidades.operator[](i)->getId() != int(ID::jogador) && listaEntidades.operator[](i)->getId() != int(ID::jogador2))
+				{
+					listaEntidades.apagarNumEntidade(i);
+					if ((listaEntidades.operator[](i)->getId() == int(ID::chefao) || listaEntidades.operator[](i)->getId() == int(ID::slime)) || listaEntidades.operator[](i)->getId() == int(ID::morcego))
+						Gerenciador_Colisoes::getInstancia_Colisoes()->deletarInimigo(listaEntidades.operator[](i));
+					i--;
+				}
+				else
+				{
+					if (listaEntidades.operator[](i)->getId() == int(ID::jogador))
+						Gerenciador_Colisoes::getInstancia_Colisoes()->setJogador(NULL);
+					else if (listaEntidades.operator[](i)->getId() == int(ID::jogador2))
+						Gerenciador_Colisoes::getInstancia_Colisoes()->setJogadorDois(NULL);
+				}
 			}
+		}
+		else
+		{
+			cout << "Não existe " << i << endl;
 		}
 	}
 	cout << listaEntidades.getNumeroEntidades() << endl;

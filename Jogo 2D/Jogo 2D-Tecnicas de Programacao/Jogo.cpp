@@ -1,7 +1,5 @@
 ﻿#include "Jogo.h"
 
-//Gerenciador_Eventos* Gerenciador_Eventos::instancia_eventos = NULL;
-
 Jogo::Jogo()
 {
 	menuInicial = new Menu_Inicial(),
@@ -48,7 +46,6 @@ void Jogo::update()
 	{
 		fase1->setDoisJogadores(true);
 		fase2->setDoisJogadores(true);
-		jogador2->setEstaMorto(false);
 		inicializar();
 	}
 	if (menuInicial->getNumFase() == 1 && fase1->getInicializada() == false)
@@ -79,26 +76,28 @@ void Jogo::update()
 
 		if (menuInicial->getNumFase() == 1)
 		{
-			cout << "Entrou Fase 1" << endl;
 			fase1->executar();
 			if (fase1->getConcluido())
 			{
-				cout << "Concluiu" << endl;
 				menuInicial->setNumFase(2);
 			}
 		}
 		if (menuInicial->getNumFase() == 2)
 		{
-			cout << "Entrou Fase 2" << endl;
 			fase2->executar();
+			if (fase2->getConcluido())
+			{
+				menuInicial->setRodandoMenu(true);
+			}
 		}
-		cout << "Passou" << endl;
 		if (jogador1->getEstaMorto() && jogador2->getEstaMorto())
 		{
 			cout << "morreu, então volta para o menu!" << endl;
 			menuInicial->setRodandoMenu(true);
-			jogador1->setEstaMorto(false);				//////////
-			jogador1->setVida(500);						//////////
+			jogador1->setEstaMorto(false);
+			jogador1->setVida(500);	
+			jogador2->setEstaMorto(false);
+			jogador2->setVida(500);
 		}
 	}
 }

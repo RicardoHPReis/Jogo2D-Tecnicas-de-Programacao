@@ -22,7 +22,7 @@ void Plataforma::executar()
 	setPosicao(posicao);
 }
 
-void Plataforma::reageColisao(Entidade* outrao, Vector2f ds)
+void Plataforma::reageColisao(Entidade* outrao, Vector2f dist_colisao)
 {
 }
 

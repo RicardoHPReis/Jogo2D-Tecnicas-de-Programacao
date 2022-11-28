@@ -57,20 +57,19 @@ void Gerenciador_Colisoes::adicionarProjetil(Projetil* projetil)
 	listaProjeteis.push_back(projetil);
 }
 
-void Gerenciador_Colisoes::deletarInimigo(int num)
+void Gerenciador_Colisoes::deletarInimigo(Entidade* entidade)
 {
-	if (!listaInimigos.empty())
+	for (int i = 0; i< listaInimigos.size(); i++)
 	{
-		for (int i = 0; i < listaInimigos.size(); i++)
+		if(listaInimigos[i])
 		{
-			if (listaInimigos[i]->getEstaMorto())
+			if (listaInimigos[i] == entidade)
 			{
-				//delete listaInimigos[i];
 				listaInimigos.erase(listaInimigos.begin() + i);
-				break;
 			}
 		}
 	}
+	listaInimigos.shrink_to_fit();
 }
 
 void Gerenciador_Colisoes::deletarListasColisoes()
@@ -79,7 +78,7 @@ void Gerenciador_Colisoes::deletarListasColisoes()
 	{
 		for (int i = 0; i < listaInimigos.size(); i++)
 		{
-			delete listaInimigos[i];
+			listaInimigos.pop_back();
 		}
 		listaInimigos.clear();
 	}
@@ -106,7 +105,7 @@ void Gerenciador_Colisoes::deletarListasColisoes()
 	{
 		for (int i = 0; i < listaProjeteis.size(); i++)
 		{
-			delete listaProjeteis[i];
+			listaProjeteis.pop_back();
 		}
 		listaProjeteis.clear();
 	}
@@ -163,7 +162,7 @@ void Gerenciador_Colisoes::colisaoJogadorObstaculo()
 			colidiu = calcularColisao(static_cast<Entidade*>(jogador2), static_cast<Entidade*>(*it));
 			if (colidiu.x < 0.0f && colidiu.y < 0.0f)
 			{
-				//jogador2->reageColisao(static_cast<Entidade*>(*it), colidiu);
+				jogador2->reageColisao(static_cast<Entidade*>(*it), colidiu);
 				//cout << "Colidiu Jogador2/Obstaculo" << endl;
 			}
 		}

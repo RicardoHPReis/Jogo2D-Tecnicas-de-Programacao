@@ -26,7 +26,7 @@ Menu::~Menu()
 	{
 		for (int i = 0; i < escrita.size(); i++)
 		{
-			delete &escrita[i];
+			escrita.pop_back();
 		}
 		escrita.clear();
 	}
@@ -34,7 +34,7 @@ Menu::~Menu()
 	{
 		for (int i = 0; i < coordenadas.size(); i++)
 		{
-			delete & coordenadas[i];
+			coordenadas.pop_back();
 		}
 		coordenadas.clear();
 	}
@@ -42,7 +42,7 @@ Menu::~Menu()
 	{
 		for (int i = 0; i < textos.size(); i++)
 		{
-			delete & textos[i];
+			textos.pop_back();
 		}
 		textos.clear();
 	}
@@ -50,7 +50,7 @@ Menu::~Menu()
 	{
 		for (int i = 0; i < tamanhos.size(); i++)
 		{
-			delete &tamanhos[i];
+			tamanhos.pop_back();
 		}
 		tamanhos.clear();
 	}

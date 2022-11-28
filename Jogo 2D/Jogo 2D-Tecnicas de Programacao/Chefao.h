@@ -6,7 +6,7 @@
 class Chefao : public Inimigo
 {
 private:
-	int frame1, velTex1, aux1;
+	int frame1, velTex1;
 	Texture tEnemy[8], tEnemyAnda[13];
 
 	Projetil* projetil;
@@ -21,7 +21,8 @@ public:
 	void disparar();
 
 	void executar();
-	void reageColisao(Entidade* outrao, Vector2f ds);
+
+	void reageColisao(Entidade* outrao, Vector2f dist_colisao);
 
 	Chefao(int i = 12, Vector2f pos = { 0.f, 0.f }, Vector2f tam = { 250.f, 275.f });
 	~Chefao();

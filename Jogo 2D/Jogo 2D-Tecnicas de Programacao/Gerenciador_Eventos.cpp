@@ -1,7 +1,10 @@
 #include "Gerenciador_Eventos.h"
 
 /*
-Gerenciador_Eventos::Gerenciador_Eventos()
+
+namespace Gerenciadores
+{
+	Gerenciador_Eventos::Gerenciador_Eventos()
 {
 	menuInicial = NULL;
 	//menuMorte = NULL;
@@ -44,7 +47,7 @@ void Gerenciador_Eventos::verificaTeclaPressionada(Keyboard::Key tecla)
 	}
 	else if (menuMorte->getRodandoMenu())
 	{
-		
+
 	}
 	else if (menuPause->getRodandoMenu())
 	{
@@ -66,7 +69,7 @@ void Gerenciador_Eventos::verificaTeclaPressionada(Keyboard::Key tecla)
 			jogador->direcionalDireito();
 		}
 
-		//pulo 
+		//pulo
 		if (Keyboard::isKeyPressed(Keyboard::W) && jogador->getPulou() == false)
 		{
 			limitadorTex_pulando = 0;
@@ -150,4 +153,6 @@ void teclasMenuVencedor(Keyboard::Key tecla)
 void teclasMenuPause(Keyboard::Key tecla)
 {
 
-}*/
+}
+}
+*/

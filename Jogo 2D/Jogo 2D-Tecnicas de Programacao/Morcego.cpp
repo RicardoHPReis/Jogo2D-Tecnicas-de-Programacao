@@ -5,15 +5,21 @@ Morcego::Morcego(int i, Vector2f pos, Vector2f tam) :
 	Inimigo(i, pos, tam)
 {
 	iniciarTexturas();
-	vida = 10;
+	vida = 100;
 	atacou = false;
-	dano = 75;
+	dano = 100;
 	velocidade_Textura = 0;
 	velocidade_max = 1;
-	if(rand() % 3 == 1)
+	if (rand() % 3 == 1)
+	{
 		lado = Lado::direita;
+		voar_Cima = true;
+	}
 	else
+	{
 		lado = Lado::esquerda;
+		voar_Cima = false;
+	}
 	danoso = true;
 	estaMorto = false;
 	velocidade = { 0.f, 0.f };
@@ -94,24 +100,14 @@ void Morcego::voar()
 		}
 		voarDireita();
 	}
-	if (posicao.x > Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width / 2.f)
+	if (voar_Cima == true)
 	{
-		velocidade.y = 0.f;
-		voarBaixo();
-		
-	}
-	if(posicao.x < Gerenciador_Grafico::getInstancia_Grafico()->getVideo().width / 2.f && posicao.y > 0)
-	{
-		velocidade.y = 0.f;
 		voarCima();
 	}
-}
-
-void Morcego::disparar()
-{
-	//tiro->setPosicao(getPosicao());
-	//tiro->setLado(getLado());
-	//tiro->setAtirar(true);
+	else if (voar_Cima == false)
+	{
+		voarBaixo();
+	}
 }
 
 void Morcego::voarDireita()
@@ -147,88 +143,96 @@ void Morcego::voarEsquerda()
 
 void Morcego::voarCima()
 {
-	velocidade = { velocidade.x, velocidade.y - 1.50f};
+	velocidade = { velocidade.x, velocidade.y - 0.1f};
+	if (forma.getPosition().y < 0.f)
+	{
+		voar_Cima = false;
+		velocidade.y = 0.f;
+	}
 }
 
 void Morcego::voarBaixo()
 {
-	velocidade = { velocidade.x, velocidade.y + 1.50f };
+	velocidade = { velocidade.x, velocidade.y + 0.1f};
+	if (forma.getPosition().y > 900.f)
+	{
+		velocidade.y = 0.f;
+		voar_Cima = true;
+	}
 }
 
-void Morcego::reageColisao(Entidade* outro, Vector2f ds)
+void Morcego::reageColisao(Entidade* outro, Vector2f dist_colisao)
 {
 	switch (outro->getId())
 	{
-	case(int(ID::plataforma)): //id da plataforma
-	{
-		/* Vector2f distancia;
-		distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
-					  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
-
-		if (ds.x > ds.y)
+		case(int(ID::plataforma)): //id da plataforma
 		{
-			if (distancia.x > 0.f)
+			/* Vector2f distancia;
+			distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
+						  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
+
+			if (ds.x > ds.y)
 			{
-				setPosicao(Vector2f(posicao.x + ds.x, posicao.y));
-				velocidade.x = 0;
+				if (distancia.x > 0.f)
+				{
+					setPosicao(Vector2f(posicao.x + ds.x, posicao.y));
+					velocidade.x = 0;
+				}
+				else
+				{
+					setPosicao(Vector2f(posicao.x - ds.x, posicao.y));
+					velocidade.x = 0;
+				}
 			}
 			else
 			{
-				setPosicao(Vector2f(posicao.x - ds.x, posicao.y));
-				velocidade.x = 0;
-			}
+				if (distancia.y > 0.f)
+				{
+					setPosicao(Vector2f(posicao.x, posicao.y + ds.y)); // CHAO
+					velocidade.y = 0.f;
+				}
+				else
+				{
+					setPosicao(Vector2f(posicao.x, posicao.y - ds.y)); // TETO
+				}
+			}*/
 		}
-		else
+		break;
+		case(int(ID::relampago)): //id do Slime
 		{
-			if (distancia.y > 0.f)
-			{
-				setPosicao(Vector2f(posicao.x, posicao.y + ds.y)); // CHAO
-				velocidade.y = 0.f;
-			}
-			else
-			{
-				setPosicao(Vector2f(posicao.x, posicao.y - ds.y)); // TETO
-			}
-		}*/
-	}
-	break;
-	case(int(ID::relampago)): //id do Slime
-	{
-		setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
-		velocidade.x = 0.f;
-		velocidade.y = 0.f;
-	}
-	break;
-	case(int(ID::fogo)): //id do Slime
-	{
+	
+		}
+		break;
+		case(int(ID::fogo)): //id do Slime
+		{
 
-	}
-	break;
-	case(int(ID::slime)): //id do Slime
-	{
+		}
+		break;
+		case(int(ID::slime)): //id do Slime
+		{
 
-	}
-	break;
-	case(int(ID::morcego)): //id do morcego
-	{
+		}
+		break;
+		case(int(ID::morcego)): //id do morcego
+		{
 
-	}
-	break;
-	case(int(ID::mago)): //id do mago
-	{
+		}
+		break;
+		case(int(ID::chefao)): //id do mago
+		{
 
-	}
-	break;
-	case(int(ID::jogador)): //id do primeiro jogador
-	{
+		}
+		break;
+		case(int(ID::jogador)): //id do primeiro jogador
+		{
 
-	}
-	break;
-	case(int(ID::jogador2)): //id do segundo jogador
-	{
+		}
+		break;
+		case(int(ID::jogador2)): //id do segundo jogador
+		{
 
-	}
-	break;
+		}
+		break;
 	}
 }
 

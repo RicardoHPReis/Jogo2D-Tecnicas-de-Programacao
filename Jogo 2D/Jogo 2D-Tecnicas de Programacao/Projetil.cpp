@@ -13,7 +13,7 @@ Projetil::~Projetil()
 {
 	atingiu = false;
 	danoso = false;
-	tiro = false;
+	atirando = false;
 }
 
 void Projetil::setDanoso(const bool mal)
@@ -28,7 +28,7 @@ const bool Projetil::getDanoso() const
 
 void Projetil::setAtirar(bool tir)
 {
-	tiro = tir;
+	atirando = tir;
 }
 
 void Projetil::iniciarTexturas()
@@ -92,7 +92,7 @@ void Projetil::dispararEsquerda()
 
 }
 
-void Projetil::reageColisao(Entidade* outro, Vector2f ds)
+void Projetil::reageColisao(Entidade* outro, Vector2f dist_colisao)
 {
 	switch (outro->getId())
 	{
@@ -116,13 +116,13 @@ void Projetil::reageColisao(Entidade* outro, Vector2f ds)
 
 bool Projetil::getAtirar()
 {
-	return tiro;
+	return atirando;
 }
 
 void Projetil::inicProjetil()
 {
 	danoso = true;
-	tiro = false;
+	atirando = false;
 	atingiu = false;
 	aerodinamica = gravidade * -1;
 	setVelocidade({ 1.f, 0.f });

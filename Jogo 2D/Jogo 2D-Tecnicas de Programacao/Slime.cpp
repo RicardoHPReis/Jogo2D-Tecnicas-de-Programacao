@@ -5,9 +5,9 @@ Slime::Slime(int i, Vector2f pos, Vector2f tam) :
 	Inimigo(i, pos, tam)
 {
 	iniciarTexturas();
-	vida = 3000;
+	vida = 200;
 	atacou = false;
-	dano = 50;
+	dano = 100;
 	lado = Lado::esquerda;
 	danoso = true;
 	velocidade_max = 1;
@@ -64,7 +64,7 @@ void Slime::executar()
 
 }
 
-void Slime::reageColisao(Entidade* outro, Vector2f ds)
+void Slime::reageColisao(Entidade* outro, Vector2f dist_colisao)
 {
 	switch (outro->getId())
 	{
@@ -74,36 +74,34 @@ void Slime::reageColisao(Entidade* outro, Vector2f ds)
 			distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
 						  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
 
-			if (ds.x > ds.y)
+			if (dist_colisao.x > dist_colisao.y)
 			{
 				if (distancia.x > 0.f)
 				{
-					setPosicao(Vector2f(posicao.x + ds.x, posicao.y));
+					setPosicao(Vector2f(posicao.x + dist_colisao.x, posicao.y));
 				}
 				else
 				{
-					setPosicao(Vector2f(posicao.x - ds.x, posicao.y));
+					setPosicao(Vector2f(posicao.x - dist_colisao.x, posicao.y));
 				}
 			}
 			else
 			{
 				if (distancia.y > 0.f)
 				{
-					setPosicao(Vector2f(posicao.x, posicao.y + ds.y)); // CHAO
+					setPosicao(Vector2f(posicao.x, posicao.y + dist_colisao.y)); // CHAO
 					velocidade.y = 0.f;
 				}
 				else
 				{
-					setPosicao(Vector2f(posicao.x, posicao.y - ds.y));
+					setPosicao(Vector2f(posicao.x, posicao.y - dist_colisao.y));
 				}
 			}
 		}
 		break;
 		case(int(ID::relampago)): //id do Slime
 		{
-			setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
-			velocidade.x = 0.f;
-			velocidade.y = 0.f;
+		
 		}
 		break;
 		case(int (ID::fogo)): //id do Slime
@@ -117,12 +115,12 @@ void Slime::reageColisao(Entidade* outro, Vector2f ds)
 			distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
 						  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
 
-			if (ds.x > ds.y)
+			if (dist_colisao.x > dist_colisao.y)
 			{
 				if (distancia.x > 0.f)
 				{
-					setPosicao(Vector2f(posicao.x + ds.x, posicao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x - ds.x, outro->getPosicao().y));
+					setPosicao(Vector2f(posicao.x + dist_colisao.x, posicao.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x - dist_colisao.x, outro->getPosicao().y));
 					outro->setVelocidade({ 0,0 });
 					if (outro->getLado() == Lado::esquerda)
 						outro->setLado(Lado::direita);
@@ -131,8 +129,8 @@ void Slime::reageColisao(Entidade* outro, Vector2f ds)
 				}
 				else
 				{
-					setPosicao(Vector2f(posicao.x - ds.x, posicao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x + ds.x, outro->getPosicao().y));
+					setPosicao(Vector2f(posicao.x - dist_colisao.x, posicao.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x + dist_colisao.x, outro->getPosicao().y));
 					outro->setVelocidade({ 0,0 });
 					if (outro->getLado() == Lado::esquerda)
 						outro->setLado(Lado::direita);
@@ -144,8 +142,8 @@ void Slime::reageColisao(Entidade* outro, Vector2f ds)
 			{
 				if (distancia.y > 0.f)
 				{
-					setPosicao(Vector2f(posicao.x, posicao.y + ds.y)); // CHAO
-					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - ds.y));
+					setPosicao(Vector2f(posicao.x, posicao.y + dist_colisao.y)); // CHAO
+					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - dist_colisao.y));
 					outro->setVelocidade({ outro->getVelocidade().x,0 });
 					if (outro->getLado() == Lado::esquerda)
 						outro->setLado(Lado::direita);
@@ -154,8 +152,8 @@ void Slime::reageColisao(Entidade* outro, Vector2f ds)
 				}
 				else
 				{
-					setPosicao(Vector2f(posicao.x, posicao.y - ds.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + ds.y));
+					setPosicao(Vector2f(posicao.x, posicao.y - dist_colisao.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + dist_colisao.y));
 					outro->setVelocidade({ 0,0 });
 					if (outro->getLado() == Lado::esquerda)
 						outro->setLado(Lado::direita);
@@ -171,12 +169,12 @@ void Slime::reageColisao(Entidade* outro, Vector2f ds)
 			distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
 						  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
 
-			if (ds.x > ds.y)
+			if (dist_colisao.x > dist_colisao.y)
 			{
 				if (distancia.x > 0.f)
 				{
-					setPosicao(Vector2f(posicao.x + ds.x, posicao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x - ds.x, outro->getPosicao().y));
+					setPosicao(Vector2f(posicao.x + dist_colisao.x, posicao.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x - dist_colisao.x, outro->getPosicao().y));
 					outro->setVelocidade({ 0,0 });
 					if (outro->getLado() == Lado::esquerda)
 						outro->setLado(Lado::direita);
@@ -185,8 +183,8 @@ void Slime::reageColisao(Entidade* outro, Vector2f ds)
 				}
 				else
 				{
-					setPosicao(Vector2f(posicao.x - ds.x, posicao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x + ds.x, outro->getPosicao().y));
+					setPosicao(Vector2f(posicao.x - dist_colisao.x, posicao.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x + dist_colisao.x, outro->getPosicao().y));
 					outro->setVelocidade({ 0,0 });
 					if (outro->getLado() == Lado::esquerda)
 						outro->setLado(Lado::direita);
@@ -198,8 +196,8 @@ void Slime::reageColisao(Entidade* outro, Vector2f ds)
 			{
 				if (distancia.y > 0.f)
 				{
-					setPosicao(Vector2f(posicao.x, posicao.y + ds.y)); // CHAO
-					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - ds.y));
+					setPosicao(Vector2f(posicao.x, posicao.y + dist_colisao.y)); // CHAO
+					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - dist_colisao.y));
 					outro->setVelocidade({ outro->getVelocidade().x,0 });
 					if (outro->getLado() == Lado::esquerda)
 						outro->setLado(Lado::direita);
@@ -208,8 +206,8 @@ void Slime::reageColisao(Entidade* outro, Vector2f ds)
 				}
 				else
 				{
-					setPosicao(Vector2f(posicao.x, posicao.y - ds.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + ds.y));
+					setPosicao(Vector2f(posicao.x, posicao.y - dist_colisao.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + dist_colisao.y));
 					outro->setVelocidade({ 0,0 });
 					if (outro->getLado() == Lado::esquerda)
 						outro->setLado(Lado::direita);
@@ -219,18 +217,18 @@ void Slime::reageColisao(Entidade* outro, Vector2f ds)
 			}
 		}
 		break;
-		case(int(ID::mago)): //id do mago
+		case(int(ID::chefao)): //id do mago
 		{
 			Vector2f distancia;
 			distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
 						  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
 
-			if (ds.x > ds.y)
+			if (dist_colisao.x > dist_colisao.y)
 			{
 				if (distancia.x > 0.f)
 				{
-					setPosicao(Vector2f(posicao.x + ds.x, posicao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x - ds.x, outro->getPosicao().y));
+					setPosicao(Vector2f(posicao.x + dist_colisao.x, posicao.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x - dist_colisao.x, outro->getPosicao().y));
 					outro->setVelocidade({ 0,0 });
 					if (outro->getLado() == Lado::esquerda)
 						outro->setLado(Lado::direita);
@@ -239,8 +237,8 @@ void Slime::reageColisao(Entidade* outro, Vector2f ds)
 				}
 				else
 				{
-					setPosicao(Vector2f(posicao.x - ds.x, posicao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x + ds.x, outro->getPosicao().y));
+					setPosicao(Vector2f(posicao.x - dist_colisao.x, posicao.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x + dist_colisao.x, outro->getPosicao().y));
 					outro->setVelocidade({ 0,0 });
 					if (outro->getLado() == Lado::esquerda)
 						outro->setLado(Lado::direita);
@@ -252,8 +250,8 @@ void Slime::reageColisao(Entidade* outro, Vector2f ds)
 			{
 				if (distancia.y > 0.f)
 				{
-					setPosicao(Vector2f(posicao.x, posicao.y + ds.y)); // CHAO
-					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - ds.y));
+					setPosicao(Vector2f(posicao.x, posicao.y + dist_colisao.y)); // CHAO
+					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - dist_colisao.y));
 					outro->setVelocidade({ outro->getVelocidade().x,0 });
 					if (outro->getLado() == Lado::esquerda)
 						outro->setLado(Lado::direita);
@@ -262,8 +260,8 @@ void Slime::reageColisao(Entidade* outro, Vector2f ds)
 				}
 				else
 				{
-					setPosicao(Vector2f(posicao.x, posicao.y - ds.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + ds.y));
+					setPosicao(Vector2f(posicao.x, posicao.y - dist_colisao.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + dist_colisao.y));
 					outro->setVelocidade({ 0,0 });
 					if (outro->getLado() == Lado::esquerda)
 						outro->setLado(Lado::direita);

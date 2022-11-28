@@ -19,5 +19,5 @@ public:
 	const bool getParalizar() const;
 
 	void executar();
-	void reageColisao(Entidade* outrao, Vector2f ds);
+	void reageColisao(Entidade* outrao, Vector2f dist_colisao);
 };

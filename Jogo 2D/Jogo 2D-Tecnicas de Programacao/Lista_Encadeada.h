@@ -186,7 +186,6 @@ void Lista_Encadeada<L>::apagar(L* informacao)
 		{
 			if (i == 0)
 			{
-				cout << "i = 0" << endl;
 				aux = primeiro;
 				atual->getProximo();
 				atual->setAnterior(NULL);
@@ -198,7 +197,6 @@ void Lista_Encadeada<L>::apagar(L* informacao)
 			}
 			else if (i == num_elementos - 1)
 			{
-				cout << "i = 11" << endl;
 				aux = atual->getAnterior();
 				aux->setProximo(NULL);
 				aux = atual;
@@ -210,7 +208,6 @@ void Lista_Encadeada<L>::apagar(L* informacao)
 			}
 			else
 			{
-				cout << "i = outro" << endl;
 				aux = atual->getAnterior();
 				atual = atual->getProximo();
 				aux->setProximo(atual);

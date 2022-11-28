@@ -160,7 +160,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Menu_Inicial.cpp" />
-    <ClCompile Include="Menu_Morte.cpp" />
     <ClCompile Include="Menu_Pause.cpp" />
     <ClCompile Include="Menu_Vencedor.cpp" />
     <ClCompile Include="Morcego.cpp" />
@@ -192,7 +191,6 @@
     <ClInclude Include="Jogador.h" />
     <ClInclude Include="Jogo.h" />
     <ClInclude Include="Menu_Inicial.h" />
-    <ClInclude Include="Menu_Morte.h" />
     <ClInclude Include="Menu_Pause.h" />
     <ClInclude Include="Menu_Vencedor.h" />
     <ClInclude Include="Morcego.h" />

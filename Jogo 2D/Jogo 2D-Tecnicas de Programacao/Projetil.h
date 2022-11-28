@@ -9,7 +9,7 @@ protected:
 	Texture bolaRoxa;
 
 	bool atingiu;
-	bool tiro;
+	bool atirando;
 	bool danoso;
 
 	float aerodinamica;
@@ -34,7 +34,7 @@ public:
 	void atirar();
 	void dispararDireita();
 	void dispararEsquerda();
-	void reageColisao(Entidade* outrao, Vector2f ds);
+	void reageColisao(Entidade* outrao, Vector2f dist_colisao);
 
 	void setDanoso(const bool mal);
 	const bool getDanoso() const;

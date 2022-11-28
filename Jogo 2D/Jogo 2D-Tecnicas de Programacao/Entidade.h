@@ -27,7 +27,7 @@ public:
 	virtual ~Entidade();
 
 	virtual void executar() = 0;
-	virtual void reageColisao(Entidade* outro, Vector2f ds) = 0;
+	virtual void reageColisao(Entidade* outro, Vector2f dist_colisao) = 0;
 
 	RectangleShape getForma();
 

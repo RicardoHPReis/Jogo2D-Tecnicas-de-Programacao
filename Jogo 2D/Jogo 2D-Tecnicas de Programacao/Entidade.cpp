@@ -13,7 +13,7 @@ Entidade::Entidade(int i, Vector2f pos, Vector2f tam) :
 	gravidade = 1.f;
 	dano = 0;
 	lado = Lado::neutro;
-	vida = 0;
+	vida = 1;
 }
 
 Entidade::~Entidade()

@@ -5,14 +5,14 @@
 class JogadorDois : public Jogador
 {
 private:
-	Texture txJogadorCorre[6], txJogadorPula[10], txJogadorParado[4], txJogadorAtaque[10];
+	Texture txJogadorCorre[8], txJogadorPula[10], txJogadorParado[2], txJogadorAtaque[11];
 	int frame1, limitadorTex_parado, limitadorTex_correndo, limitadorTex_pulando, limitadorTex_ataque;
-	int delay;
+	int delayAtaque;
 
 	void iniciarTexturas();
 
 public:
-	JogadorDois(int i = 4, Vector2f pos = { 0.f, 0.f }, Vector2f tam = { 125.f, 100.f });
+	JogadorDois(int i = 6, Vector2f pos = { 600.f, 960.f }, Vector2f tam = { 90, 110.f });
 	~JogadorDois();
 
 	void executar();

@@ -71,7 +71,7 @@ void Relampago::atualizarTextura()
 }
 
 
-void Relampago::reageColisao(Entidade* outro, Vector2f ds)
+void Relampago::reageColisao(Entidade* outro, Vector2f dist_colisao)
 {
 	switch (outro->getId())
 	{
@@ -88,9 +88,9 @@ void Relampago::reageColisao(Entidade* outro, Vector2f ds)
 			velocidade.x = 0.f;
 			velocidade.y = 0.f;
 		}
-        case(int(ID::jogador) || int(ID::jogador)):
+        case(int(ID::jogador) || int(ID::jogador2)):
         {
-            if(getParalizar() == true) //&& outro->get)
+            if(paralisar == true) //&& outro->get)
                 outro->setVida(outro->getVida() - dano);
         }
 		break;

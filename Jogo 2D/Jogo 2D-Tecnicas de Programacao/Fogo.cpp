@@ -7,7 +7,7 @@ Fogo::Fogo(int id, Vector2f pos, Vector2f tam) :
 	attTextura = 0;
 	frame = 0;
 	velocidade = Vector2f{ 0.f,0.f };
-	dano = 1;
+	dano = 100;
 	danoso = true;
 	queimou = false;
 	cout << "Criou fogo!" << endl;
@@ -31,7 +31,6 @@ void Fogo::iniciarTexturas()
 }
 void Fogo::executar()
 {
-
 	atualizarTextura();
 	forma.setTexture(&fogo[attTextura]);
 
@@ -46,7 +45,7 @@ void Fogo::executar()
 	frame++;
 }
 
-void Fogo::reageColisao(Entidade* outro, Vector2f ds)
+void Fogo::reageColisao(Entidade* outro, Vector2f dist_colisao)
 {
 	switch (outro->getId())
 	{
@@ -55,7 +54,6 @@ void Fogo::reageColisao(Entidade* outro, Vector2f ds)
 			setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
 			velocidade.x = 0.f;
 			velocidade.y = 0.f;
-			//jogador_pulou = false;
 		}
 		break;
 	}

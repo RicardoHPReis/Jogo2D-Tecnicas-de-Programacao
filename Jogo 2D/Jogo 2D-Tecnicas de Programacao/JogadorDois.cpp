@@ -6,17 +6,17 @@
 JogadorDois::JogadorDois(int i, Vector2f pos, Vector2f tam) :
 	Jogador(i, pos, tam)
 {
-	delay = 0;
+	
+	delayAtaque = 0;
 	vida = 500;
-	lado = Lado::direita;
+	lado = Lado::esquerda;
 	atacou = false;
-	dano = 1;
+	dano = 100;
 	velocidade_max = 14;
 	velocidade = { 0.f, 0.f };
 	levou_dano = false;
 	jogador_pulou = false;
 	forcaPulo = 25.f;
-	estaMorto = true;
 
 	limitadorTex_parado = 0;
 	limitadorTex_correndo = 0;
@@ -33,7 +33,7 @@ JogadorDois::~JogadorDois()
 
 void JogadorDois::iniciarVariaveis()
 {
-	delay = 0;
+	delayAtaque = 0;
 	vida = 500;
 	lado = Lado::direita;
 	atacou = false;
@@ -51,42 +51,53 @@ void JogadorDois::iniciarVariaveis()
 
 void JogadorDois::iniciarTexturas()
 {
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 8; i++)
 	{
-		if (!txJogadorPula[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Cavaleiro Dark.png", IntRect((i * 150), 220, 125, 100))) {
-			std::cout << "Erro ao carregar textura do pulo do cavaleiro\n";
+	
+		if (!txJogadorCorre[i].loadFromFile("../../Texturas/Personagens/Arqueiro/ParadoCorre.png", IntRect((i * 145) + 40, 180, 100, 95))) {
+			std::cout << "Erro ao carregar textura da corrida do Arqueiro\n";
+		}
+		txJogadorCorre[i].setSmooth(true);
+
+		if (!txJogadorPula[i].loadFromFile("../../Texturas/Personagens/Arqueiro/Pulo.png", IntRect((i * 145) + 40, 35, 100, 95))) {
+			std::cout << "Erro ao carregar textura do pulo do Arqueiro\n";
 		}
 		txJogadorPula[i].setSmooth(true);
-
-		if (!txJogadorAtaque[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Cavaleiro Dark.png", IntRect((i * 150), 440, 125, 100))) {
-			std::cout << "Erro ao carregar textura do ataque do cavaleiro\n";
+	
+		if (!txJogadorAtaque[i].loadFromFile("../../Texturas/Personagens/Arqueiro/Ataque.png", IntRect((i * 145) + 40, 35, 100, 95))) {
+			std::cout << "Erro ao carregar textura do ataque do Arqueiro\n";
 		}
 		txJogadorAtaque[i].setSmooth(true);
 	}
 
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < 2; i++)
 	{
-		if (!txJogadorCorre[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Cavaleiro Dark.png", IntRect((i * 150), 110, 125, 100))) {
-			std::cout << "Erro ao carregar textura da corrida do cavaleiro\n";
+		if (!txJogadorPula[i + 8].loadFromFile("../../Texturas/Personagens/Arqueiro/Pulo.png", IntRect((i * 145) + 40, 180, 100, 95))) {
+			std::cout << "Erro ao carregar textura do pulo do Arqueiro\n";
 		}
-		txJogadorCorre[i].setSmooth(true);
-	}
+		txJogadorPula[i + 8].setSmooth(true);
 
-	for (int i = 0; i < 4; i++)
-	{
-		if (!txJogadorParado[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Cavaleiro Dark.png", IntRect((i * 150), 0, 125, 100))) {
-			std::cout << "Erro ao carregar textura do cavaleiro parado\n";
+		if (!txJogadorParado[i].loadFromFile("../../Texturas/Personagens/Arqueiro/ParadoCorre.png", IntRect((i * 145) + 40, 35, 100, 95))) {
+			std::cout << "Erro ao carregar textura do Arqueiro parado\n";
 		}
 		txJogadorParado[i].setSmooth(true);
 	}
 
+	for (int i = 0; i < 3; i++)
+	{
+		if (!txJogadorAtaque[i].loadFromFile("../../Texturas/Personagens/Arqueiro/Ataque.png", IntRect((i * 145) + 40, 180, 100, 95))) {
+			std::cout << "Erro ao carregar textura do ataque do Arqueiro\n";
+		}
+		txJogadorAtaque[i].setSmooth(true);
+
+	}
 	spVida.resize(vida / 100);
 	txVida.loadFromFile("../../Texturas/Cenario/Vida.png");
 	txVida.setSmooth(true);
 	for (int i=0; i < vida / 100; i++)
 	{
 		spVida[i].setTexture(txVida);
-		spVida[i].setPosition(Vector2f((30.f) + (50 * i), 10.f));
+		spVida[i].setPosition(Vector2f((30.f) + (50 * i), 80.f));
 	}
 }
 
@@ -105,7 +116,7 @@ void JogadorDois::executar()
 
 	//andar para os 2 lados
 
-	if (Keyboard::isKeyPressed(Keyboard::Left))
+	if (Keyboard::isKeyPressed(Keyboard::Up))
 	{
 		direcionalEsquerdo();
 	}
@@ -120,7 +131,7 @@ void JogadorDois::executar()
 	}
 
 	//pulo 
-	if (Keyboard::isKeyPressed(Keyboard::Up) && jogador_pulou == false)
+	if (Keyboard::isKeyPressed(Keyboard::Down) && jogador_pulou == false)
 	{
 		limitadorTex_pulando = 0;
 		velocidade = { velocidade.x,velocidade.y - forcaPulo };
@@ -155,20 +166,19 @@ void JogadorDois::executar()
 
 	frame1++;
 	atualizavida();
-
 	if (levou_dano == true)
 	{
-		delay++;
-		if (delay % 100 == 0) {
+		delayAtaque++;
+		if (delayAtaque % 100 == 0) {
 			levou_dano = false;
-			delay = 0;
+			delayAtaque = 0;
 		}
 	}
 }
 
 void JogadorDois::ataque()
 {
-	if (limitadorTex_ataque <= 9)
+	if (limitadorTex_ataque <= 10)
 	{
 		forma.setTexture(&txJogadorAtaque[limitadorTex_ataque]);
 		if (frame1 % 5 == 0)
@@ -242,7 +252,7 @@ void JogadorDois::pulo()
 	posicao = { posicao.x + velocidade.x, posicao.y - velocidade.y };
 	forma.setTexture(&txJogadorPula[limitadorTex_pulando]);
 
-	if (limitadorTex_pulando > 10)
+	if (limitadorTex_pulando >= 10)
 		limitadorTex_pulando = 0;
 	if (frame1 % 10 == 0)
 		limitadorTex_pulando++;
@@ -265,14 +275,12 @@ void JogadorDois::reageColisao(Entidade* outro, Vector2f dist_colisao)
 				setPosicao(Vector2f(posicao.x + dist_colisao.x, posicao.y)); //Parede
 				velocidade.x = 0.f;
 				velocidade.y = 0.f;
-				//jogador_pulou = false;
 			}
 			else
 			{
 				setPosicao(Vector2f(posicao.x - dist_colisao.x, posicao.y));
 				velocidade.x = 0.f;
 				velocidade.y = 0.f;
-				//jogador_pulou = false;
 			}
 		}
 		else
@@ -280,7 +288,6 @@ void JogadorDois::reageColisao(Entidade* outro, Vector2f dist_colisao)
 			if (dist_centros.y > 0.f)
 			{
 				setPosicao(Vector2f(posicao.x, posicao.y + dist_colisao.y)); // CHAO
-				//velocidade.x = 0.f;
 				velocidade.y = 0.f;
 				jogador_pulou = false;
 			}
@@ -289,25 +296,23 @@ void JogadorDois::reageColisao(Entidade* outro, Vector2f dist_colisao)
 				setPosicao(Vector2f(posicao.x, posicao.y + dist_colisao.y)); // TETO
 				velocidade.x = 0.f;
 				velocidade.y = 0.f;
-				//jogador_pulou = false;
 			}
 		}
 	}
 	break;
-	case(int(ID::relampago)): //id do Slime
+	case(int(ID::relampago)): //id do relampago
+	{
+
+	}
+	case(int(ID::fogo)): //id do fogo
 	{
 		if (levou_dano == false)
-			operator--(outro->getDano());
-	}
-	case(int(ID::fogo)): //id do Slime
-	{
-		if(levou_dano == false)
 			operator--(outro->getDano());
 	}
 	break;
 	case(int(ID::slime)): //id do Slime
 	{
-		/*Vector2f distancia;
+		Vector2f distancia;
 		distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
 					  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
 
@@ -317,15 +322,13 @@ void JogadorDois::reageColisao(Entidade* outro, Vector2f dist_colisao)
 			{
 				setPosicao(Vector2f(posicao.x + dist_colisao.x, posicao.y));
 				outro->setPosicao(Vector2f(outro->getPosicao().x - dist_colisao.x, outro->getPosicao().y));
-				outro->setVelocidade({0,0});
-
+				outro->setVelocidade({ 0,0 });
 			}
 			else
 			{
 				setPosicao(Vector2f(posicao.x - dist_colisao.x, posicao.y));
 				outro->setPosicao(Vector2f(outro->getPosicao().x + dist_colisao.x, outro->getPosicao().y));
 				outro->setVelocidade({ 0,0 });
-
 			}
 		}
 		else
@@ -334,26 +337,23 @@ void JogadorDois::reageColisao(Entidade* outro, Vector2f dist_colisao)
 			{
 				setPosicao(Vector2f(posicao.x, posicao.y + dist_colisao.y)); // CHAO
 				outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - dist_colisao.y));
-				outro->setVelocidade({ outro->getVelocidade().x,0});
-
+				outro->setVelocidade({ outro->getVelocidade().x,0 });
 			}
 			else
 			{
 				setPosicao(Vector2f(posicao.x, posicao.y - dist_colisao.y));
 				outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + dist_colisao.y));
 				outro->setVelocidade({ 0,0 });
-
 			}
 		}
 
-
-		if (atacou == false)
+		if (!atacou)
 		{
-			if(levou_dano == false)
-			operator--(outro->getDano());
+			if (levou_dano == false)
+				operator--(outro->getDano()); //recebe dano
 		}
 		else
-			outro->setVida(outro->getVida() - dano);*/
+			outro->setVida(outro->getVida() - dano); //da dano
 	}
 	break;
 	case(int(ID::morcego)): //id do morcego
@@ -393,19 +393,18 @@ void JogadorDois::reageColisao(Entidade* outro, Vector2f dist_colisao)
 			}
 		}
 
-
 		if (!atacou)
 		{
 			if (levou_dano == false)
-				operator--(outro->getDano());
+				operator--(outro->getDano()); //recebe dano
 		}
 		else
-			outro->setVida(outro->getVida() - dano);
+			outro->setVida(outro->getVida() - dano); //da dano
 	}
 	break;
-	case(int(ID::chefao)): //id do mago
+	case(int(ID::chefao)): //id do chefao
 	{
-		/*Vector2f distancia;
+		Vector2f distancia;
 		distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
 					  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
 
@@ -438,10 +437,18 @@ void JogadorDois::reageColisao(Entidade* outro, Vector2f dist_colisao)
 				outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + dist_colisao.y));
 				outro->setVelocidade({ 0,0 });
 			}
-		}*/
+		}
+
+		if (!atacou)
+		{
+			if (levou_dano == false)
+				operator--(outro->getDano()); //recebe dano
+		}
+		else
+			outro->setVida(outro->getVida() - dano); //da dano
 	}
 	break;
-	case(int(ID::projetil)): //id do mago
+	case(int(ID::projetil)): //id do projetil
 	{
 		Vector2f distancia;
 		distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
@@ -479,14 +486,51 @@ void JogadorDois::reageColisao(Entidade* outro, Vector2f dist_colisao)
 		}
 		if (levou_dano == false)
 			operator--(outro->getDano());
-		outro->setVida(outro->getVida() - dano);
 	}
 	break;
 	case(int(ID::jogador2)): //id do segundo jogador
 	{
-		setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
-		velocidade.x = 0.f;
-		velocidade.y = 0.f;
+		Vector2f distancia;
+		distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
+					  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
+
+		if (dist_colisao.x > dist_colisao.y)
+		{
+			if (distancia.x > 0.f)
+			{
+				setPosicao(Vector2f(posicao.x + dist_colisao.x, posicao.y));
+				outro->setPosicao(Vector2f(outro->getPosicao().x - dist_colisao.x, outro->getPosicao().y));
+				outro->setVelocidade({ 0,0 });
+			}
+			else
+			{
+				setPosicao(Vector2f(posicao.x - dist_colisao.x, posicao.y));
+				outro->setPosicao(Vector2f(outro->getPosicao().x + dist_colisao.x, outro->getPosicao().y));
+				outro->setVelocidade({ 0,0 });
+			}
+		}
+		else
+		{
+			if (distancia.y > 0.f)
+			{
+				setPosicao(Vector2f(posicao.x, posicao.y + dist_colisao.y)); // CHAO
+				outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - dist_colisao.y));
+				outro->setVelocidade({ outro->getVelocidade().x,0 });
+			}
+			else
+			{
+				setPosicao(Vector2f(posicao.x, posicao.y - dist_colisao.y));
+				outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + dist_colisao.y));
+				outro->setVelocidade({ 0,0 });
+			}
+		}
+		if (!atacou)
+		{
+			if (levou_dano == false)
+				operator--(outro->getDano()); //recebe dano
+		}
+		else
+			outro->setVida(outro->getVida() - dano); //da dano
 	}
 	break;
 	}
@@ -494,8 +538,8 @@ void JogadorDois::reageColisao(Entidade* outro, Vector2f dist_colisao)
 
 void JogadorDois::atualizarTextura()
 {
-	if (limitadorTex_parado > 4)
+	if (limitadorTex_parado >= 2)
 		limitadorTex_parado = 0;
-	if (limitadorTex_correndo > 6)
+	if (limitadorTex_correndo >= 8)
 		limitadorTex_correndo = 0;
 }

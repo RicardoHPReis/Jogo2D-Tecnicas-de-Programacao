@@ -53,7 +53,7 @@ void Lista_Entidades::limparEntidades()
 {
 	for (int i = 0; i < LEntidades.getNumeroElementos(); i++)
 	{
-		if (LEntidades[i]->getId() != int(ID::jogador) || LEntidades[i]->getId() != int(ID::jogador))
+		if (LEntidades[i]->getId() != int(ID::jogador) || LEntidades[i]->getId() != int(ID::jogador2))
 		{
 			LEntidades.apagarNum(i);
 		}

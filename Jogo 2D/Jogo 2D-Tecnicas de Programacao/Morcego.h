@@ -8,6 +8,7 @@ class Morcego : public Inimigo
 private:
 	float forcaVoar;
 	int frame1, velocidade_Textura, aux1;
+	bool voar_Cima;
 	Texture tEnemyDie[5], tEnemyVoa[5];
 
 	void iniciarTexturas();
@@ -21,9 +22,8 @@ public:
 	void voarCima();
 	void voarBaixo();
 	void voar();
-	void disparar();
 
 	void executar();
-	void reageColisao(Entidade* outrao,Vector2f ds);
+	void reageColisao(Entidade* outrao,Vector2f dist_colisao);
 	void calculaQueda();
 };

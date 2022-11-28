@@ -1,4 +1,5 @@
 #pragma once
+#include "Entidade.h"
 #include "Inimigo.h"
 #include "Obstaculo.h"
 #include "Jogador.h"
@@ -17,10 +18,9 @@ private:
 	vector<Projetil*> listaProjeteis;
 
 	static Gerenciador_Colisoes* instancia_colisoes;
+    Gerenciador_Colisoes();
 
 public:
-
-	Gerenciador_Colisoes();
 	~Gerenciador_Colisoes();
 	static Gerenciador_Colisoes* getInstancia_Colisoes();
 	void deletarInstancia_Colisoes();
@@ -32,7 +32,7 @@ public:
 	void adicionarObstaculo(Obstaculo* obstaculo);
 	void adicionarProjetil(Projetil* projetil);
 	
-	void deletarInimigo(int num);
+	void deletarInimigo(Entidade* entidade);
 	void deletarListasColisoes();
 
 	Vector2f calcularColisao(Entidade* ent1, Entidade* ent2);

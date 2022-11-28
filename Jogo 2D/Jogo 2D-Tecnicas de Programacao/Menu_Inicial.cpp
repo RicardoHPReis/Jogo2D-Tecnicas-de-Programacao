@@ -13,9 +13,9 @@ Menu_Inicial::Menu_Inicial(int i) :
 	fundo.setTexture(imagem);
 
 	escolhaFases.resize(2);
-	escrita = { "A Floresta","Jogar","Fases","Ranking","Opcoes","Sair", "Fase Um", "Fase Dois", "Um Jogador", "Dois Jogadores", "Voltar" };
+	escrita = { "A Lenda Dos Capuzes","Jogar","Fases","Ranking","Opcoes","Sair", "Fase Um", "Fase Dois", "Um Jogador", "Dois Jogadores", "Voltar" };
 	textos.resize(11);
-	coordenadas = { { 960,100 }, { 610,350 }, { 610,450 }, { 610,550 }, { 610,650 }, { 610,750 }, { 310,890 }, { 1010,890 }, { 610,650 }, { 610,750 }, { 960,950 } };
+	coordenadas = { { 660,100 }, { 610,350 }, { 610,450 }, { 610,550 }, { 610,650 }, { 610,750 }, { 310,890 }, { 1010,890 }, { 610,650 }, { 610,750 }, { 960,950 } };
 	tamanhos = { 100,50,50,50,50,50,50,50,50,50,50 };
 
 	for (int i = 0; i < textos.size(); i++)

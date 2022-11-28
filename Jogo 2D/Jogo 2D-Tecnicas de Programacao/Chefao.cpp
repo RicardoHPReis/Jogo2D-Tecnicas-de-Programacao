@@ -7,10 +7,10 @@ Chefao::Chefao(int i, Vector2f pos, Vector2f tam) :
 	projetil = new Projetil();
 
 	iniciarTexturas();
-	vida = 10000;
+	vida = 1000;
 	lado = Lado::direita;
 	atacou = false;
-	dano = 100;
+	dano = 300;
 	danoso = true;
 	velocidade_max = 6;
 	velocidade = { 4.f, 0.f };
@@ -61,7 +61,7 @@ void Chefao::executar()
 	}
 }
 
-void Chefao::reageColisao(Entidade* outro, Vector2f ds)
+void Chefao::reageColisao(Entidade* outro, Vector2f dist_colisao)
 {
 	switch (outro->getId())
 	{
@@ -71,27 +71,27 @@ void Chefao::reageColisao(Entidade* outro, Vector2f ds)
 			distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
 						  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
 
-			if (ds.x > ds.y)
+			if (dist_colisao.x > dist_colisao.y)
 			{
 				/*if (distancia.x > 0.f)
 				{
-					setPosicao(Vector2f(posicao.x + ds.x, posicao.y));
+					setPosicao(Vector2f(posicao.x + dist_colisao.x, posicao.y));
 				}
 				else
 				{
-					setPosicao(Vector2f(posicao.x - ds.x, posicao.y));
+					setPosicao(Vector2f(posicao.x - dist_colisao.x, posicao.y));
 				}*/
 			}
 			else
 			{
 				if (distancia.y > 0.f)
 				{
-					setPosicao(Vector2f(posicao.x, posicao.y + ds.y)); // CHAO
+					setPosicao(Vector2f(posicao.x, posicao.y + dist_colisao.y)); // CHAO
 					velocidade.y = 0.f;
 				}
 				else
 				{
-					setPosicao(Vector2f(posicao.x, posicao.y - ds.y));
+					setPosicao(Vector2f(posicao.x, posicao.y - dist_colisao.y));
 				}
 			}
 		}
@@ -114,12 +114,12 @@ void Chefao::reageColisao(Entidade* outro, Vector2f ds)
 			distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
 						  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
 
-			if (ds.x > ds.y)
+			if (dist_colisao.x > dist_colisao.y)
 			{
 				if (distancia.x > 0.f)
 				{
-					setPosicao(Vector2f(posicao.x + ds.x, posicao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x - ds.x, outro->getPosicao().y));
+					setPosicao(Vector2f(posicao.x + dist_colisao.x, posicao.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x - dist_colisao.x, outro->getPosicao().y));
 					outro->setVelocidade({ 0,0 });
 					if (outro->getLado() == Lado::esquerda)
 						outro->setLado(Lado::direita);
@@ -128,8 +128,8 @@ void Chefao::reageColisao(Entidade* outro, Vector2f ds)
 				}
 				else
 				{
-					setPosicao(Vector2f(posicao.x - ds.x, posicao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x + ds.x, outro->getPosicao().y));
+					setPosicao(Vector2f(posicao.x - dist_colisao.x, posicao.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x + dist_colisao.x, outro->getPosicao().y));
 					outro->setVelocidade({ 0,0 });
 					if (outro->getLado() == Lado::esquerda)
 						outro->setLado(Lado::direita);
@@ -141,8 +141,8 @@ void Chefao::reageColisao(Entidade* outro, Vector2f ds)
 			{
 				if (distancia.y > 0.f)
 				{
-					setPosicao(Vector2f(posicao.x, posicao.y + ds.y)); // CHAO
-					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - ds.y));
+					setPosicao(Vector2f(posicao.x, posicao.y + dist_colisao.y)); // CHAO
+					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - dist_colisao.y));
 					outro->setVelocidade({ outro->getVelocidade().x,0 });
 					if (outro->getLado() == Lado::esquerda)
 						outro->setLado(Lado::direita);
@@ -151,8 +151,8 @@ void Chefao::reageColisao(Entidade* outro, Vector2f ds)
 				}
 				else
 				{
-					setPosicao(Vector2f(posicao.x, posicao.y - ds.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + ds.y));
+					setPosicao(Vector2f(posicao.x, posicao.y - dist_colisao.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + dist_colisao.y));
 					outro->setVelocidade({ 0,0 });
 					if (outro->getLado() == Lado::esquerda)
 						outro->setLado(Lado::direita);
@@ -168,12 +168,12 @@ void Chefao::reageColisao(Entidade* outro, Vector2f ds)
 			distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
 						  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
 
-			if (ds.x > ds.y)
+			if (dist_colisao.x > dist_colisao.y)
 			{
 				if (distancia.x > 0.f)
 				{
-					setPosicao(Vector2f(posicao.x + ds.x, posicao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x - ds.x, outro->getPosicao().y));
+					setPosicao(Vector2f(posicao.x + dist_colisao.x, posicao.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x - dist_colisao.x, outro->getPosicao().y));
 					outro->setVelocidade({ 0,0 });
 					if (outro->getLado() == Lado::esquerda)
 						outro->setLado(Lado::direita);
@@ -182,8 +182,8 @@ void Chefao::reageColisao(Entidade* outro, Vector2f ds)
 				}
 				else
 				{
-					setPosicao(Vector2f(posicao.x - ds.x, posicao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x + ds.x, outro->getPosicao().y));
+					setPosicao(Vector2f(posicao.x - dist_colisao.x, posicao.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x + dist_colisao.x, outro->getPosicao().y));
 					outro->setVelocidade({ 0,0 });
 					if (outro->getLado() == Lado::esquerda)
 						outro->setLado(Lado::direita);
@@ -195,8 +195,8 @@ void Chefao::reageColisao(Entidade* outro, Vector2f ds)
 			{
 				if (distancia.y > 0.f)
 				{
-					setPosicao(Vector2f(posicao.x, posicao.y + ds.y)); // CHAO
-					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - ds.y));
+					setPosicao(Vector2f(posicao.x, posicao.y + dist_colisao.y)); // CHAO
+					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - dist_colisao.y));
 					outro->setVelocidade({ outro->getVelocidade().x,0 });
 					if (outro->getLado() == Lado::esquerda)
 						outro->setLado(Lado::direita);
@@ -205,8 +205,8 @@ void Chefao::reageColisao(Entidade* outro, Vector2f ds)
 				}
 				else
 				{
-					setPosicao(Vector2f(posicao.x, posicao.y - ds.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + ds.y));
+					setPosicao(Vector2f(posicao.x, posicao.y - dist_colisao.y));
+					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + dist_colisao.y));
 					outro->setVelocidade({ 0,0 });
 					if (outro->getLado() == Lado::esquerda)
 						outro->setLado(Lado::direita);

@@ -99,9 +99,6 @@
     <ClCompile Include="Menu_Pause.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Menu_Morte.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Menu_Vencedor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -192,9 +189,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Menu_Pause.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu_Morte.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Menu_Vencedor.h">

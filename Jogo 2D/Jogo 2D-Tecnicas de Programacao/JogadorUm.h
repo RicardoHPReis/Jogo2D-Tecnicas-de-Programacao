@@ -6,9 +6,16 @@
 class JogadorUm : public Jogador
 {
 private:
+	/*class Espada : public Entidade
+	{
+		private:
+			
+		public:
+	};*/
+
 	Texture txJogadorCorre[6], txJogadorPula[10], txJogadorParado[4], txJogadorAtaque[10];
 	int frame1, limitadorTex_parado, limitadorTex_correndo, limitadorTex_pulando, limitadorTex_ataque;
-	int delay;
+	int delayAtaque;
 
 	void iniciarTexturas();
 

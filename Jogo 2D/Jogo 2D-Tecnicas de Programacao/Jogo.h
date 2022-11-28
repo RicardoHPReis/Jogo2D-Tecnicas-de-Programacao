@@ -1,7 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "Menu_Inicial.h"
-#include "Menu_Morte.h"
+//#include "Menu_Morte.h"
 #include "Menu_Pause.h"
 #include "Menu_Vencedor.h"
 #include "JogadorUm.h"

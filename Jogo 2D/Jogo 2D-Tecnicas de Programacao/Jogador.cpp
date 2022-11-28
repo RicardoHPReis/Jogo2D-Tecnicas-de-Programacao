@@ -4,13 +4,12 @@
 //Gerenciador_Eventos* Gerenciador_Eventos::instancia_eventos = Gerenciador_Eventos::getInstancia_Eventos();
 
 Jogador::Jogador(int i, Vector2f pos, Vector2f tam):
-	Personagem(i, pos, tam),
-	spVida(),
-	txVida()
+	Personagem(i, pos, tam)
 {
 	levou_dano = false;
 	jogador_pulou = false;
 	forcaPulo = 25.f;
+	spVida.resize(vida / 100);
 }
 
 Jogador::~Jogador()
@@ -18,6 +17,11 @@ Jogador::~Jogador()
 	levou_dano = false;
 	jogador_pulou = false;
 	forcaPulo = 0.f;
+
+	for (int i = 0; i < vida/100; i++)
+	{
+		spVida.pop_back();
+	}
 }
 
 void Jogador::atualizavida()
