@@ -1,5 +1,9 @@
 #include "Fase.h"
-
+/*using namespace Fases;
+using namespace Entidades;
+using namespace Personagens;
+using namespace Obstaculos;
+using namespace Listas;*/
 
 Gerenciador_Colisoes* Gerenciador_Colisoes::instancia_colisoes = Gerenciador_Colisoes::getInstancia_Colisoes();
 
@@ -10,8 +14,9 @@ Fase::Fase(int i, Jogador* player, JogadorDois* player2) :
 	jogador = player;
 	jogador2 = player2;
 	num_inimigos = 0;
-	doisJogadores = true;
+	doisJogadores = false;
 	concluido = false;
+	removerTela = { 10000.f , 10000.f };
 	Gerenciador_Colisoes::getInstancia_Colisoes()->setJogador(jogador);
 	Gerenciador_Colisoes::getInstancia_Colisoes()->setJogadorDois(jogador2);
 }
@@ -27,7 +32,7 @@ Fase::~Fase()
 void Fase::gerenciaColisoes()
 {
 	Gerenciador_Colisoes::getInstancia_Colisoes()->executar();
-	//if(Gerenciador_Colisoes::getInstancia_Colisoes()->c)
+	num_inimigos = Gerenciador_Colisoes::getInstancia_Colisoes()->verificaInimigosVivos();
 }
 
 void Fase::criarJogador(Vector2f pos)
@@ -99,6 +104,16 @@ void Fase::deletarEntidades()
 	Gerenciador_Colisoes::getInstancia_Colisoes()->deletarListasColisoes();
 }
 
+void Fase::verifica2jogadores()
+{
+	if (getDoisJogadores() == false)
+	{
+		jogador2->setPosicao(removerTela);
+		jogador2->setVida(0.f);
+		jogador2->setEstaMorto(true);
+	}
+}
+
 const int Fase::getNumInimigos() const
 {
 	return num_inimigos;
@@ -141,7 +156,7 @@ void Fase::remover()
 				{
 					listaEntidades.apagarNumEntidade(i);
 					if ((listaEntidades.operator[](i)->getId() == int(ID::chefao) || listaEntidades.operator[](i)->getId() == int(ID::slime)) || listaEntidades.operator[](i)->getId() == int(ID::morcego))
-						Gerenciador_Colisoes::getInstancia_Colisoes()->deletarInimigo(listaEntidades.operator[](i));
+						//Gerenciador_Colisoes::getInstancia_Colisoes()->deletarInimigo(listaEntidades.operator[](i));
 					i--;
 				}
 				else

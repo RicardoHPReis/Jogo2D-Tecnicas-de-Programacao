@@ -1,5 +1,6 @@
 #include "Morcego.h"
-
+//using namespace Entidades;
+//using namespace Personagens;
 
 Morcego::Morcego(int i, Vector2f pos, Vector2f tam) :
 	Inimigo(i, pos, tam)
@@ -7,7 +8,8 @@ Morcego::Morcego(int i, Vector2f pos, Vector2f tam) :
 	iniciarTexturas();
 	vida = 100;
 	atacou = false;
-	dano = 100;
+	dano = 50;
+	velocidadeMorte = 0;
 	velocidade_Textura = 0;
 	velocidade_max = 1;
 	if (rand() % 3 == 1)
@@ -68,7 +70,21 @@ void Morcego::executar()
 	posicao = forma.getPosition();
 	posicao += velocidade;
 	setPosicao(posicao);
-	
+	if (vida <= 0)
+		estaMorto = true;
+	if (estaMorto == true)
+	{
+		if (frame1 % 7 == 0)
+			velocidadeMorte++;
+		forma.setTexture(&tEnemyDie[velocidadeMorte]);
+		if (velocidadeMorte == 6)
+		{
+			setPosicao(Vector2f{ 10000.f,10000.f });
+			setVelocidade(Vector2f{ 0.f,0.f });
+			setVelocidadeMaxima(0.f);
+			forcaVoar = 0;
+		}
+	}
 }
 
 void Morcego::atualizarTextura()

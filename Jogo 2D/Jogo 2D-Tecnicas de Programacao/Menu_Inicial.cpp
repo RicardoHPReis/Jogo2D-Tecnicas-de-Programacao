@@ -8,14 +8,15 @@ Menu_Inicial::Menu_Inicial(int i) :
 	numFase = 0;
 	numJogadores = 1;
 
+	frame = 0;
 	fonte.loadFromFile("../../Fontes/Font.otf");
 	imagem.loadFromFile("../../Texturas/Cenario/Menu.png");
 	fundo.setTexture(imagem);
 
 	escolhaFases.resize(2);
-	escrita = { "A Lenda Dos Capuzes","Jogar","Fases","Ranking","Opcoes","Sair", "Fase Um", "Fase Dois", "Um Jogador", "Dois Jogadores", "Voltar" };
+	escrita = { "A Lenda Dos Capuzes","Jogar","Fases","Ranking","Opcoes","Sair", /**/ "Fase Um", "Fase Dois", /**/ "Um Jogador", "Dois Jogadores", "Voltar" };
 	textos.resize(11);
-	coordenadas = { { 660,100 }, { 610,350 }, { 610,450 }, { 610,550 }, { 610,650 }, { 610,750 }, { 310,890 }, { 1010,890 }, { 610,650 }, { 610,750 }, { 960,950 } };
+	coordenadas = { { 630,100 }, { 610,350 }, { 610,450 }, { 610,550 }, { 610,650 }, { 610,750 }, /**/ { 390,790 }, { 1090,790 }, /**/{ 400,490 }, { 1300,490 }, { 900,950 } };
 	tamanhos = { 100,50,50,50,50,50,50,50,50,50,50 };
 
 	for (int i = 0; i < textos.size(); i++)
@@ -127,20 +128,22 @@ void Menu_Inicial::executar()
 				delay = 0;
 		}
 		imprimir();
+		frame++;
+		if (frame % 100 == 0)
+		{
+			frame = 0;
+			selecao = false;
+		}
 	}
 }
 
 void Menu_Inicial::escolhaFase()
 {
-	apertou = false;
 	escFase = 1;
-	selecao = false;
-
 	while (!apertou)
 	{
 		if ((Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A)) && delay == 0)
 		{
-			delay++;
 			if (escFase != 1)
 			{
 				escFase = 1;
@@ -151,7 +154,6 @@ void Menu_Inicial::escolhaFase()
 		}
 		if ((Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D)) && delay == 0)
 		{
-			delay++;
 			if (escFase != 2)
 			{
 				escFase = 2;
@@ -163,7 +165,6 @@ void Menu_Inicial::escolhaFase()
 
 		if ((Keyboard::isKeyPressed(Keyboard::Down) || Keyboard::isKeyPressed(Keyboard::S)) && delay == 0)
 		{
-			delay++;
 			if (escFase != 3)
 			{
 				escFase = 3;
@@ -172,9 +173,10 @@ void Menu_Inicial::escolhaFase()
 				textos[7].setOutlineThickness(0);
 			}
 		}
-		if (Keyboard::isKeyPressed(Keyboard::Space) && !apertou)
+		if (Keyboard::isKeyPressed(Keyboard::Enter) && !selecao)
 		{
 			apertou = true;
+			selecao = true;
 			if (escFase == 1) //SELECIONA FASE 1
 			{
 				numFase = 1;
@@ -194,16 +196,20 @@ void Menu_Inicial::escolhaFase()
 				delay = 0;
 		}
 		imprimirOpcoesFases();
+		frame++;
+		if (frame % 100 == 0)
+		{
+			frame = 0;
+			selecao = false;
+		}
 	}
-
 }
 
 void Menu_Inicial::escolhaOpcoes()
 {
 	apertou = false;
 	escOpcoes = 1;
-	selecao = false;
-	while (!selecao)
+	while (!apertou)
 	{
 		if ((Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A)) && delay == 0)
 		{
@@ -241,8 +247,9 @@ void Menu_Inicial::escolhaOpcoes()
 				textos[9].setOutlineThickness(0);
 			}
 		}
-		if (Keyboard::isKeyPressed(Keyboard::Space) && !selecao)
+		if (Keyboard::isKeyPressed(Keyboard::Enter) && !selecao)
 		{
+			apertou = true;
 			selecao = true;
 			if (escOpcoes == 1) //RODA 1 JOGADOR
 			{
@@ -263,6 +270,12 @@ void Menu_Inicial::escolhaOpcoes()
 				delay = 0;
 		}
 		imprimirOpcoes();
+		frame++;
+		if (frame % 100 == 0)
+		{
+			frame = 0;
+			selecao = false;
+		}
 	}
 
 }

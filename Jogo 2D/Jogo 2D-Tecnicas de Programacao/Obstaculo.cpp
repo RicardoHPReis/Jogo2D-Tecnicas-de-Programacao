@@ -1,5 +1,6 @@
 #include "Obstaculo.h"
-
+//using namespace Entidades;
+//using namespace Obstaculos;
 
 Obstaculo::Obstaculo(int i, Vector2f pos, Vector2f tam):
 Entidade(i, pos, tam)

@@ -1,4 +1,6 @@
 #include "Plataforma.h"
+//using namespace Entidades;
+//using namespace Obstaculos;
 
 Plataforma::Plataforma(int id, Vector2f pos, Vector2f tam):
 Obstaculo(id, pos, tam)

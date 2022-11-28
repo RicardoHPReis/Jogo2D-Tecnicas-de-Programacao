@@ -1,4 +1,6 @@
 #include "Fogo.h"
+//using namespace Entidades;
+//using namespace Obstaculos;
 
 Fogo::Fogo(int id, Vector2f pos, Vector2f tam) :
 	Obstaculo(id, pos, tam)

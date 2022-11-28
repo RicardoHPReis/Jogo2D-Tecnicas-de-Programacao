@@ -1,10 +1,12 @@
 #include "Relampago.h"
+//using namespace Entidades;
+//using namespace Obstaculos;
 
 Relampago::Relampago(int id, Vector2f pos, Vector2f tam) :
     Obstaculo(id, pos, tam)
 {
 	velocidade = Vector2f{ 0.f,0.f };
-    dano = 100;
+    dano = 10;
     danoso = false;
     paralisar = false;
     paralisacao = 60;
@@ -73,28 +75,7 @@ void Relampago::atualizarTextura()
 
 void Relampago::reageColisao(Entidade* outro, Vector2f dist_colisao)
 {
-	switch (outro->getId())
-	{
-		case(int(ID::plataforma)): //id da plataforma
-		{
-			setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
-			velocidade.x = 0.f;
-			velocidade.y = 0.f;
-		}
-		break;
-		case(int(ID::fogo)): //id do fogo
-		{
-			setPosicao(Vector2f{ posicao.x - velocidade.x, posicao.y - velocidade.y });
-			velocidade.x = 0.f;
-			velocidade.y = 0.f;
-		}
-        case(int(ID::jogador) || int(ID::jogador2)):
-        {
-            if(paralisar == true) //&& outro->get)
-                outro->setVida(outro->getVida() - dano);
-        }
-		break;
-	}
+	
 }
 
 void Relampago::setParalizar(bool aux)

@@ -1,7 +1,6 @@
 #include "JogadorUm.h"
-
-
-//Gerenciador_Eventos* Gerenciador_Eventos::instancia_eventos = Gerenciador_Eventos::getInstancia_Eventos();
+//using namespace Entidades;
+//using namespace Personagens;
 
 JogadorUm::JogadorUm(int i, Vector2f pos, Vector2f tam) :
 	Jogador(i, pos, tam)
@@ -11,6 +10,7 @@ JogadorUm::JogadorUm(int i, Vector2f pos, Vector2f tam) :
 	lado = Lado::direita;
 	atacou = false;
 	dano = 100;
+	velocidadeTextura = 0;
 	velocidade_max = 14;
 	velocidade = { 0.f, 0.f };
 	levou_dano = false;
@@ -81,6 +81,15 @@ void JogadorUm::iniciarTexturas()
 			std::cout << "Erro ao carregar textura do cavaleiro parado\n";
 		}
 		txJogadorParado[i].setSmooth(true);
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		if (!txJogadorMorre[i].loadFromFile("../../Texturas/Personagens/Cavaleiro/Cavaleiro Dark.png", IntRect((i * 150), 990, 125, 100)))
+		{
+			std::cout << "Erro ao carregar textura do cavaleiro parado\n";
+		}
+		txJogadorMorre[i].setSmooth(true);
 	}
 
 	spVida.resize(vida / 100);
@@ -165,6 +174,18 @@ void JogadorUm::executar()
 		if (delayAtaque % 100 == 0) {
 			levou_dano = false;
 			delayAtaque = 0;
+		}
+	}
+	if (vida <= 0)
+		estaMorto = true;
+	if (estaMorto == true)
+	{
+		if (frame1 % 7 == 0)
+			velocidadeTextura++;
+		forma.setTexture(&txJogadorMorre[velocidadeTextura]);
+		if (velocidadeTextura == 6)
+		{
+			setPosicao(Vector2f{ 10000.f,10000.f });
 		}
 	}
 }
@@ -286,7 +307,7 @@ void JogadorUm::reageColisao(Entidade* outro, Vector2f dist_colisao)
 				}
 				else
 				{
-					setPosicao(Vector2f(posicao.x, posicao.y + dist_colisao.y)); // TETO
+					setPosicao(Vector2f(posicao.x, posicao.y - dist_colisao.y)); // TETO
 					velocidade.x = 0.f;
 					velocidade.y = 0.f;
 				}
@@ -295,7 +316,8 @@ void JogadorUm::reageColisao(Entidade* outro, Vector2f dist_colisao)
 		break;
 		case(int(ID::relampago)): //id do relampago
 		{
-		
+			velocidade.x = 0.f;
+			velocidade.y = 0.f;
 		}
 		case(int(ID::fogo)): //id do fogo
 		{
@@ -311,33 +333,13 @@ void JogadorUm::reageColisao(Entidade* outro, Vector2f dist_colisao)
 
 			if (dist_colisao.x > dist_colisao.y)
 			{
-				if (distancia.x > 0.f)
-				{
-					setPosicao(Vector2f(posicao.x + dist_colisao.x, posicao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x - dist_colisao.x, outro->getPosicao().y));
-					outro->setVelocidade({ 0,0 });
-				}
-				else
-				{
-					setPosicao(Vector2f(posicao.x - dist_colisao.x, posicao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x + dist_colisao.x, outro->getPosicao().y));
-					outro->setVelocidade({ 0,0 });
-				}
+				velocidade.x = velocidade.x / 3.f;
+				outro->setLado(lado);
 			}
 			else
 			{
-				if (distancia.y > 0.f)
-				{
-					setPosicao(Vector2f(posicao.x, posicao.y + dist_colisao.y)); // CHAO
-					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - dist_colisao.y));
-					outro->setVelocidade({ outro->getVelocidade().x,0 });
-				}
-				else
-				{
-					setPosicao(Vector2f(posicao.x, posicao.y - dist_colisao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + dist_colisao.y));
-					outro->setVelocidade({ 0,0 });
-				}
+				outro->setLado(lado);
+				outro->setVida(outro->getVida() - 20); //da dano
 			}
 
 			if (!atacou)
@@ -385,7 +387,7 @@ void JogadorUm::reageColisao(Entidade* outro, Vector2f dist_colisao)
 					outro->setVelocidade({ 0,0 });
 				}
 			}
-
+			outro->setLado(lado);
 			if (!atacou)
 			{
 				if (levou_dano == false)
@@ -443,40 +445,7 @@ void JogadorUm::reageColisao(Entidade* outro, Vector2f dist_colisao)
 		break;
 		case(int(ID::projetil)): //id do projetil
 		{
-			Vector2f distancia;
-			distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
-						  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
-
-			if (dist_colisao.x > dist_colisao.y)
-			{
-				if (distancia.x > 0.f)
-				{
-					setPosicao(Vector2f(posicao.x + dist_colisao.x, posicao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x - dist_colisao.x, outro->getPosicao().y));
-					outro->setVelocidade({ 0,0 });
-				}
-				else
-				{
-					setPosicao(Vector2f(posicao.x - dist_colisao.x, posicao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x + dist_colisao.x, outro->getPosicao().y));
-					outro->setVelocidade({ 0,0 });
-				}
-			}
-			else
-			{
-				if (distancia.y > 0.f)
-				{
-					setPosicao(Vector2f(posicao.x, posicao.y + dist_colisao.y)); // CHAO
-					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - dist_colisao.y));
-					outro->setVelocidade({ outro->getVelocidade().x,0 });
-				}
-				else
-				{
-					setPosicao(Vector2f(posicao.x, posicao.y - dist_colisao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + dist_colisao.y));
-					outro->setVelocidade({ 0,0 });
-				}
-			}
+		
 			if (levou_dano == false)
 				operator--(outro->getDano());
 		}

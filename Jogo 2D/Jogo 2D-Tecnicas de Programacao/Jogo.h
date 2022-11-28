@@ -1,9 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "Menu_Inicial.h"
-//#include "Menu_Morte.h"
 #include "Menu_Pause.h"
-#include "Menu_Vencedor.h"
 #include "JogadorUm.h"
 #include "JogadorDois.h"
 #include "FaseUm.h"
@@ -15,9 +13,7 @@ class Jogo
 {
 private:
 	Menu_Inicial *menuInicial;
-	//Menu_Morte Menu_Morte;
 	Menu_Pause *menuPause;
-	//Menu_Vencedor Menu_Vencedor;
 	JogadorUm *jogador1;
 	JogadorDois *jogador2;
 	FaseUm *fase1;

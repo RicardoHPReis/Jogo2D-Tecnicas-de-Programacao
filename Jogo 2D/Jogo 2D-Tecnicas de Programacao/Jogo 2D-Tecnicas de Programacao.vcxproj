@@ -149,7 +149,6 @@
     <ClCompile Include="FaseUm.cpp" />
     <ClCompile Include="Fogo.cpp" />
     <ClCompile Include="Gerenciador_Colisoes.cpp" />
-    <ClCompile Include="Gerenciador_Eventos.cpp" />
     <ClCompile Include="Gerenciador_Grafico.cpp" />
     <ClCompile Include="Inimigo.cpp" />
     <ClCompile Include="Jogador.cpp" />
@@ -161,10 +160,8 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Menu_Inicial.cpp" />
     <ClCompile Include="Menu_Pause.cpp" />
-    <ClCompile Include="Menu_Vencedor.cpp" />
     <ClCompile Include="Morcego.cpp" />
     <ClCompile Include="Obstaculo.cpp" />
-    <ClCompile Include="Pause.cpp" />
     <ClCompile Include="Personagem.cpp" />
     <ClCompile Include="Plataforma.cpp" />
     <ClCompile Include="Projetil.cpp" />
@@ -180,7 +177,6 @@
     <ClInclude Include="FaseUm.h" />
     <ClInclude Include="Fogo.h" />
     <ClInclude Include="Gerenciador_Colisoes.h" />
-    <ClInclude Include="Gerenciador_Eventos.h" />
     <ClInclude Include="Gerenciador_Grafico.h" />
     <ClInclude Include="Inimigo.h" />
     <ClInclude Include="JogadorDois.h" />
@@ -192,10 +188,8 @@
     <ClInclude Include="Jogo.h" />
     <ClInclude Include="Menu_Inicial.h" />
     <ClInclude Include="Menu_Pause.h" />
-    <ClInclude Include="Menu_Vencedor.h" />
     <ClInclude Include="Morcego.h" />
     <ClInclude Include="Obstaculo.h" />
-    <ClInclude Include="Pause.h" />
     <ClInclude Include="Personagem.h" />
     <ClInclude Include="Plataforma.h" />
     <ClInclude Include="Projetil.h" />

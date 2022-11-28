@@ -1,4 +1,9 @@
 #include "FaseUm.h"
+//using namespace Fases;
+//using namespace Entidades;
+//using namespace Personagens;
+//using namespace Obstaculos;
+//using namespace Listas;
 
 FaseUm::FaseUm(int i, Jogador* player, JogadorDois* player2):
 	Fase(i, player, player2)
@@ -35,10 +40,6 @@ void FaseUm::iniciaFase()
 	int chance;
 	srand(time(NULL));
 
-	criarJogadorDois(Vector2f(600.f, 960.f));
-	criarJogador(Vector2f(100.f, 960.f));
-	
-
 	//chao
 	criarPlataformas(Vector2f{ 0.f, 980.f }, Vector2f(1920.f, 300.f));
 
@@ -50,15 +51,15 @@ void FaseUm::iniciaFase()
 	criarPlataformas(Vector2f{ 660.f, 370.f }, Vector2f(600.f, 100.f));
 	
 
-	chance = rand() % 4 + 1;
+	chance = rand() % 2 + 3;
 	for (int i = 0; i < chance; i++)
 	{
 		criarRelampagos(Vector2f{ 0.f, 0.f }, Vector2f{ 100.f, 980.f });
 	}
-	chance = rand() % 5 + 1;
+	chance = rand() % 2 + 3;
 	for (int i = 0; i < chance; i++)
 	{
-		//criarFogos(Vector2f{ (rand() % 1820 + 1) * 1.f, 0.f }, Vector2f{ 100.f, 100.f });
+		criarFogos(Vector2f{ (rand() % 1820 + 1) * 1.f, 0.f }, Vector2f{ 100.f, 100.f });
 	}
 	chance = rand() % 2 + 3;
 	num_inimigos += chance;
@@ -67,14 +68,17 @@ void FaseUm::iniciaFase()
 		criarMorcegos(Vector2f{ (rand() % 1820 + 1) * 1.f, (rand() % 400 + 1) * 1.f });
 	}
 
+
+	criarJogadorDois(Vector2f(600.f, 950.f));
+	criarJogador(Vector2f(100.f, 960.f));
+
 	chance = rand() % 2 + 3;
 	num_inimigos += chance;
 	for (int i = 0; i < chance; i++)
 	{
 		criarSlimes(Vector2f{ (rand() % 1820 + 1) * 1.f, 0.f });
 	}
-	//criarChefao(Vector2f{ 1500.f, 200.f });
-	//num_inimigos++;
+	verifica2jogadores();
 }
 
 void FaseUm::executar()
@@ -83,17 +87,11 @@ void FaseUm::executar()
 	gerenciaColisoes();
 	listaEntidades.atualizarEntidade();
 
-	//remover(); //ERRO
-
 	if (num_inimigos <= 0)
 	{
 		concluido = true;
 	}
 
-	//Gerenciador_Grafico::getInstancia_Grafico()->desenhar(jogador2->getForma());
-
-	//Gerenciador_Grafico::getInstancia_Grafico()->desenhar(jogador->getForma());
-	
 	listaEntidades.desenharEntidades();
 }
 
@@ -104,5 +102,5 @@ void FaseUm::setInicializada(bool aux)
 
 const bool FaseUm::getInicializada() const
 {
-	return inicializada;;
+	return inicializada;
 }

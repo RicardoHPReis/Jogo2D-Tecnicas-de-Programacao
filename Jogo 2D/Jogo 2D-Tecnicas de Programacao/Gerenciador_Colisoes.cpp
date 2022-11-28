@@ -1,6 +1,7 @@
 #include "Gerenciador_Colisoes.h"
-
-
+//using namespace Entidades;
+//using namespace Personagens;
+//sing namespace Obstaculos;
 
 Gerenciador_Colisoes::Gerenciador_Colisoes() :
 	jogador(),
@@ -57,19 +58,17 @@ void Gerenciador_Colisoes::adicionarProjetil(Projetil* projetil)
 	listaProjeteis.push_back(projetil);
 }
 
-void Gerenciador_Colisoes::deletarInimigo(Entidade* entidade)
+int Gerenciador_Colisoes::verificaInimigosVivos()
 {
+	int contador=0;
 	for (int i = 0; i< listaInimigos.size(); i++)
 	{
-		if(listaInimigos[i])
+		if(listaInimigos[i]->getVida() > 0)
 		{
-			if (listaInimigos[i] == entidade)
-			{
-				listaInimigos.erase(listaInimigos.begin() + i);
-			}
+			contador++;
 		}
 	}
-	listaInimigos.shrink_to_fit();
+	return contador;
 }
 
 void Gerenciador_Colisoes::deletarListasColisoes()
@@ -133,12 +132,12 @@ void Gerenciador_Colisoes::colisaoJogadorInimigo()
 			jogador->reageColisao(static_cast<Entidade*>(listaInimigos[i]), colidiu);
 			//cout << "Colidiu Jogador/Inimigo" << endl;
 		}
-		if (!jogador2)
+		if (jogador2)
 		{
 			colidiu = calcularColisao(static_cast<Entidade*>(jogador2), static_cast<Entidade*>(listaInimigos[i]));
 			if (colidiu.x < 0.f && colidiu.y < 0.f)
 			{
-				//jogador2->colisao(static_cast<Entidade*>(listaInimigos[i]), colidiu);
+				jogador2->reageColisao(static_cast<Entidade*>(listaInimigos[i]), colidiu);
 				//cout << "Colidiu Jogador2/Inimigo" << endl;
 			}
 		}
@@ -157,7 +156,7 @@ void Gerenciador_Colisoes::colisaoJogadorObstaculo()
 			jogador->reageColisao(static_cast<Entidade*>(*it) , colidiu);
 			//cout << "Colidiu Jogador/Obstaculo" << endl;
 		}
-		if (!jogador2)
+		if (jogador2)
 		{
 			colidiu = calcularColisao(static_cast<Entidade*>(jogador2), static_cast<Entidade*>(*it));
 			if (colidiu.x < 0.0f && colidiu.y < 0.0f)
@@ -207,7 +206,7 @@ void Gerenciador_Colisoes::colisaoJogadorProjetil()
 			jogador->reageColisao(static_cast<Entidade*>(listaProjeteis[i]), colidiu);
 			//cout << "Colidiu Jogador/Projetil" << endl;
 		}
-		if (!jogador2)
+		if (jogador2)
 		{
 			colidiu = calcularColisao(static_cast<Entidade*>(jogador2), static_cast<Entidade*>(listaProjeteis[i]));
 			if (colidiu.x < 0.f && colidiu.y < 0.f)

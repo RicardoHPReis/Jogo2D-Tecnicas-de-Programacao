@@ -1,7 +1,6 @@
 ﻿#include "Jogador.h"
-
-
-//Gerenciador_Eventos* Gerenciador_Eventos::instancia_eventos = Gerenciador_Eventos::getInstancia_Eventos();
+//using namespace Entidades;
+//using namespace Personagens;
 
 Jogador::Jogador(int i, Vector2f pos, Vector2f tam):
 	Personagem(i, pos, tam)

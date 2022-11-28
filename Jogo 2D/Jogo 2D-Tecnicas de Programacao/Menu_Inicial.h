@@ -1,12 +1,14 @@
 #pragma once
 #include "stdafx.h"
 #include "Menu.h"
+//#include "Jogo.h"
 
 class Menu_Inicial : public Menu
 {
 private:
 	int escFase, escOpcoes;
 	int numFase, numJogadores;
+	int delay,frame;
 
 	Texture previa1, previa2;
 	vector<RectangleShape> escolhaFases;

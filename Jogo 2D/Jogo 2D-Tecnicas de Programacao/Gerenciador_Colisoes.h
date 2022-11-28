@@ -31,9 +31,9 @@ public:
 	void adicionarInimigo(Inimigo* inimigo);
 	void adicionarObstaculo(Obstaculo* obstaculo);
 	void adicionarProjetil(Projetil* projetil);
-	
-	void deletarInimigo(Entidade* entidade);
+
 	void deletarListasColisoes();
+	int verificaInimigosVivos();
 
 	Vector2f calcularColisao(Entidade* ent1, Entidade* ent2);
 

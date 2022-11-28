@@ -1,4 +1,9 @@
 #include "FaseDois.h"
+/*using namespace Fases;
+using namespace Entidades;
+using namespace Personagens;
+using namespace Obstaculos;
+using namespace Listas;*/
 
 FaseDois::FaseDois(int i, Jogador* player, JogadorDois* player2) :
 	Fase(i, player, player2)
@@ -50,7 +55,7 @@ void FaseDois::iniciaFase()
 	chance = rand() % 1 + 3;
 	for (int i = 0; i < chance; i++)
 	{
-		//criarRelampagos(Vector2f{ 0.f, 0.f }, Vector2f{ 100.f, 980.f });
+		criarRelampagos(Vector2f{ 0.f, 0.f }, Vector2f{ 100.f, 980.f });
 	}
 	chance = rand() % 3 + 3;
 	for (int i = 0; i < chance; i++)
@@ -68,10 +73,11 @@ void FaseDois::iniciaFase()
 	num_inimigos += chance;
 	for (int i = 0; i < chance; i++)
 	{
-		criarSlimes(Vector2f{ (rand() % 10 + 1) * 190.f, 0.f });
+		criarSlimes(Vector2f{ (rand() % 1820 + 1) * 1.f, 0.f });
 	}
 	criarChefao(Vector2f{ 1500.f, 200.f });
-	num_inimigos++;
+
+	verifica2jogadores();
 }
 
 void FaseDois::executar()
@@ -81,14 +87,12 @@ void FaseDois::executar()
 	listaEntidades.atualizarEntidade();
 
 	//remover(); //ERRO
-
+	
 	if (num_inimigos <= 0)
 	{
 		concluido = true;
 	}
-	Gerenciador_Grafico::getInstancia_Grafico()->desenhar(jogador->getForma());
-	if (doisJogadores)
-		Gerenciador_Grafico::getInstancia_Grafico()->desenhar(jogador2->getForma());
+	
 	listaEntidades.desenharEntidades();
 }
 

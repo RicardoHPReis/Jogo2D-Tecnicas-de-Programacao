@@ -1,4 +1,6 @@
 #include "Personagem.h"
+//using namespace Entidades;
+//using namespace Personagens;
 
 Personagem::Personagem(int i, Vector2f pos, Vector2f tam):
 Entidade(i, pos, tam)

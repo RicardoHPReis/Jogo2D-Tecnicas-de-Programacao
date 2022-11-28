@@ -1,5 +1,5 @@
 #include "Entidade.h"
-
+//using namespace Entidades;
 
 Entidade::Entidade(int i, Vector2f pos, Vector2f tam) :
 	Ente(i)

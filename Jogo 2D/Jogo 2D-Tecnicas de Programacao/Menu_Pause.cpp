@@ -10,7 +10,7 @@ Menu_Pause::Menu_Pause(int i) :
 	fundo.setTexture(imagem);
 
 	textos.resize(3);
-	escrita = { "A Floresta","Continuar","Sair" };
+	escrita = { "A Lenda dos Capuzes","Continuar","Sair" };
 	coordenadas = { { 610,200 }, { 610,650 }, { 610,750 } };
 	tamanhos = { 100,50,50 };
 

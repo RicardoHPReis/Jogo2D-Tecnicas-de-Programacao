@@ -8,7 +8,8 @@ Jogo::Jogo()
 	fase1 = new FaseUm(1, jogador1, jogador2),
 	fase2 = new FaseDois(2, jogador1, jogador2),
 	menuPause = new Menu_Pause();
-	
+
+
 	menuAbre = true;
 	pausou = false;
 }
@@ -18,8 +19,10 @@ Jogo::~Jogo()
 	delete menuInicial;
 	delete jogador1;
 	delete jogador2;
-	delete fase1;
-	delete fase2;
+	if(fase1)
+		delete fase1;
+	if (fase2)
+		delete fase2;
 	delete menuPause;
 
 	menuAbre = false;
@@ -74,12 +77,19 @@ void Jogo::update()
 			}
 		}
 
+		cout << fase1->getNumInimigos() << endl;
 		if (menuInicial->getNumFase() == 1)
 		{
 			fase1->executar();
 			if (fase1->getConcluido())
 			{
+				//delete fase1;
 				menuInicial->setNumFase(2);
+				if (menuInicial->getNumFase() == 2 && fase2->getInicializada() == false)
+				{
+					fase2->iniciaFase();
+					fase2->setInicializada(true);
+				}
 			}
 		}
 		if (menuInicial->getNumFase() == 2)
@@ -87,6 +97,7 @@ void Jogo::update()
 			fase2->executar();
 			if (fase2->getConcluido())
 			{
+				delete fase2;
 				menuInicial->setRodandoMenu(true);
 			}
 		}

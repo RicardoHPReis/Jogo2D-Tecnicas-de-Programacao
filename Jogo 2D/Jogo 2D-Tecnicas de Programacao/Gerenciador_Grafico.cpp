@@ -37,6 +37,7 @@ void Gerenciador_Grafico::desenhar(RectangleShape retangulo)
 	janela->draw(retangulo);
 }
 
+
 void Gerenciador_Grafico::desenharTexto(Text texto)
 {
 	janela->draw(texto);

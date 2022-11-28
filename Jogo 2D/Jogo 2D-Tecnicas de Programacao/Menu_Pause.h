@@ -7,7 +7,7 @@ private:
 	bool voltar;
 
 public:
-	Menu_Pause(int i = 5);
+	Menu_Pause(int i = 4);
 	~Menu_Pause();
 
 	void executar();

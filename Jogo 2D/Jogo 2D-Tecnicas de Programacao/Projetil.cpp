@@ -1,5 +1,5 @@
 #include "Projetil.h"
-
+//using namespace Entidades;
 
 Projetil::Projetil(int i, Vector2f pos, Vector2f tam):
 Entidade(i, pos, tam)
@@ -98,17 +98,17 @@ void Projetil::reageColisao(Entidade* outro, Vector2f dist_colisao)
 	{
 		case(int (ID::plataforma)): //id da plataforma
 		{
-
+			setAtirar(false);
 		}
 		break;
 		case(int(ID::jogador)): //id do primeiro jogador
 		{
-			
+			setAtirar(false);
 		}
 		break;
 		case(int(ID::jogador2)): //id do segundo jogador
 		{
-			
+			setAtirar(false);
 		}
 		break;
 	}

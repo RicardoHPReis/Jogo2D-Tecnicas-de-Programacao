@@ -1,11 +1,14 @@
 ﻿#include "Slime.h"
-
+//using namespace Entidades;
+//using namespace Personagens;
 
 Slime::Slime(int i, Vector2f pos, Vector2f tam) :
 	Inimigo(i, pos, tam)
 {
 	iniciarTexturas();
 	vida = 200;
+	velocidade_Morte = 0;
+	frame0 = 0;
 	atacou = false;
 	dano = 100;
 	lado = Lado::esquerda;
@@ -45,6 +48,13 @@ void Slime::iniciarTexturas()
 		}
 		tEnemyAnda[i].setSmooth(true);
 	}
+	for (int i = 0; i < 5; i++)
+	{
+		if (!this->tEnemyDie[i].loadFromFile("../../Texturas/Personagens/Slime.png", IntRect((i * 111), 177, 111, 85))) {
+			cout << "Erro ao carregar a textura do Slime andando\n";
+		}
+		tEnemyDie[i].setSmooth(true);
+	}
 }
 
 void Slime::executar()
@@ -61,6 +71,21 @@ void Slime::executar()
 	pos += velocidade;
 
 	setPosicao(pos);
+	if (vida <= 0)
+		estaMorto = true;
+
+	if (estaMorto == true)
+	{
+		if (frame1 % 7 == 0)
+			velocidade_Morte++;
+		frame0++;
+		forma.setTexture(&tEnemyDie[velocidade_Morte]);
+		if (velTex1 == 6)
+		{
+			setPosicao(Vector2f{ 10000.f,10000.f });
+			setVelocidade(Vector2f{ 0.f,0.f });
+		}
+	}
 
 }
 
@@ -95,178 +120,6 @@ void Slime::reageColisao(Entidade* outro, Vector2f dist_colisao)
 				else
 				{
 					setPosicao(Vector2f(posicao.x, posicao.y - dist_colisao.y));
-				}
-			}
-		}
-		break;
-		case(int(ID::relampago)): //id do Slime
-		{
-		
-		}
-		break;
-		case(int (ID::fogo)): //id do Slime
-		{
-
-		}
-		break;
-		case(int(ID::slime)): //id do Slime
-		{
-			Vector2f distancia;
-			distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
-						  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
-
-			if (dist_colisao.x > dist_colisao.y)
-			{
-				if (distancia.x > 0.f)
-				{
-					setPosicao(Vector2f(posicao.x + dist_colisao.x, posicao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x - dist_colisao.x, outro->getPosicao().y));
-					outro->setVelocidade({ 0,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
-				}
-				else
-				{
-					setPosicao(Vector2f(posicao.x - dist_colisao.x, posicao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x + dist_colisao.x, outro->getPosicao().y));
-					outro->setVelocidade({ 0,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
-				}
-			}
-			else
-			{
-				if (distancia.y > 0.f)
-				{
-					setPosicao(Vector2f(posicao.x, posicao.y + dist_colisao.y)); // CHAO
-					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - dist_colisao.y));
-					outro->setVelocidade({ outro->getVelocidade().x,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
-				}
-				else
-				{
-					setPosicao(Vector2f(posicao.x, posicao.y - dist_colisao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + dist_colisao.y));
-					outro->setVelocidade({ 0,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
-				}
-			}
-		}
-		break;
-		case(int(ID::morcego)): //id do morcego
-		{
-			Vector2f distancia;
-			distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
-						  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
-
-			if (dist_colisao.x > dist_colisao.y)
-			{
-				if (distancia.x > 0.f)
-				{
-					setPosicao(Vector2f(posicao.x + dist_colisao.x, posicao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x - dist_colisao.x, outro->getPosicao().y));
-					outro->setVelocidade({ 0,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
-				}
-				else
-				{
-					setPosicao(Vector2f(posicao.x - dist_colisao.x, posicao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x + dist_colisao.x, outro->getPosicao().y));
-					outro->setVelocidade({ 0,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
-				}
-			}
-			else
-			{
-				if (distancia.y > 0.f)
-				{
-					setPosicao(Vector2f(posicao.x, posicao.y + dist_colisao.y)); // CHAO
-					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - dist_colisao.y));
-					outro->setVelocidade({ outro->getVelocidade().x,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
-				}
-				else
-				{
-					setPosicao(Vector2f(posicao.x, posicao.y - dist_colisao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + dist_colisao.y));
-					outro->setVelocidade({ 0,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
-				}
-			}
-		}
-		break;
-		case(int(ID::chefao)): //id do mago
-		{
-			Vector2f distancia;
-			distancia = { fabs((posicao.x + tamanho.x / 2.0f) - (outro->getPosicao().x + outro->getTamanho().x / 2.0f)) ,
-						  fabs((posicao.y + tamanho.y / 2.0f) - (outro->getPosicao().y + outro->getTamanho().y / 2.0f)) };
-
-			if (dist_colisao.x > dist_colisao.y)
-			{
-				if (distancia.x > 0.f)
-				{
-					setPosicao(Vector2f(posicao.x + dist_colisao.x, posicao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x - dist_colisao.x, outro->getPosicao().y));
-					outro->setVelocidade({ 0,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
-				}
-				else
-				{
-					setPosicao(Vector2f(posicao.x - dist_colisao.x, posicao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x + dist_colisao.x, outro->getPosicao().y));
-					outro->setVelocidade({ 0,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
-				}
-			}
-			else
-			{
-				if (distancia.y > 0.f)
-				{
-					setPosicao(Vector2f(posicao.x, posicao.y + dist_colisao.y)); // CHAO
-					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y - dist_colisao.y));
-					outro->setVelocidade({ outro->getVelocidade().x,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
-				}
-				else
-				{
-					setPosicao(Vector2f(posicao.x, posicao.y - dist_colisao.y));
-					outro->setPosicao(Vector2f(outro->getPosicao().x, outro->getPosicao().y + dist_colisao.y));
-					outro->setVelocidade({ 0,0 });
-					if (outro->getLado() == Lado::esquerda)
-						outro->setLado(Lado::direita);
-					else
-						outro->setLado(Lado::esquerda);
 				}
 			}
 		}
