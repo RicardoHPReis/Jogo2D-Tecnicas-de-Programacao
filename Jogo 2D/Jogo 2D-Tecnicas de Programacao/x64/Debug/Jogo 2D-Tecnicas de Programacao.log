@@ -1,0 +1,55 @@
+﻿  Chefao.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Ente.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Entidade.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Relampago.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Slime.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Fase.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  FaseDois.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  FaseUm.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Fogo.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Gerenciador_Colisoes.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Gerenciador_Grafico.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Inimigo.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Jogador.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  JogadorDois.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  JogadorUm.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Jogo.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Lista_Entidades.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  main.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Menu.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Menu_Inicial.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Gerando Código...
+  Compilando...
+  Menu_Pause.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Morcego.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Obstaculo.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Personagem.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Plataforma.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Projetil.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\stdafx.h(15,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Gerando Código...
