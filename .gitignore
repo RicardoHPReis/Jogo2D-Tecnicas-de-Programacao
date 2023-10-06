@@ -1,0 +1,6 @@
+﻿################################################################################
+# Este arquivo .gitignore foi criado automaticamente pelo Microsoft(R) Visual Studio.
+################################################################################
+
+/Jogo 2D/.vs/Jogo 2D-Tecnicas de Programacao/v17
+/.vs/slnx.sqlite

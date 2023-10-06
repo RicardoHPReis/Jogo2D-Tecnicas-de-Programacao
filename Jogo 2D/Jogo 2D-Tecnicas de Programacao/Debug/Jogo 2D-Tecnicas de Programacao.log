@@ -1,4 +1,73 @@
 ﻿  Chefao.cpp
+  Ente.cpp
+  Entidade.cpp
+  Relampago.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Relampago.cpp(18,15): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Relampago.cpp(46,35): warning C4244: 'argumento': conversão de 'int' para 'T', possível perda de dados
+          with
+          [
+              T=float
+          ]
+  Slime.cpp
+  Fase.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Fase.cpp(112,21): warning C4244: 'argumento': conversão de 'float' para 'const int', possível perda de dados
+  FaseDois.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\FaseDois.cpp(40,12): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
+  FaseUm.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\FaseUm.cpp(41,12): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
+  Fogo.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Fogo.cpp(27,98): warning C4244: 'argumento': conversão de 'float' para 'T', possível perda de dados
+          with
+          [
+              T=int
+          ]
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Fogo.cpp(27,92): warning C4244: 'argumento': conversão de 'float' para 'T', possível perda de dados
+          with
+          [
+              T=int
+          ]
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Fogo.cpp(27,86): warning C4244: 'argumento': conversão de 'float' para 'T', possível perda de dados
+          with
+          [
+              T=int
+          ]
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Fogo.cpp(27,76): warning C4244: 'argumento': conversão de 'float' para 'T', possível perda de dados
+          with
+          [
+              T=int
+          ]
+  Gerenciador_Colisoes.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Gerenciador_Colisoes.cpp(64,19): warning C4018: '<': incompatibilidade de signed/unsigned
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Gerenciador_Colisoes.cpp(78,21): warning C4018: '<': incompatibilidade de signed/unsigned
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Gerenciador_Colisoes.cpp(105,21): warning C4018: '<': incompatibilidade de signed/unsigned
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Gerenciador_Colisoes.cpp(127,20): warning C4018: '<': incompatibilidade de signed/unsigned
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Gerenciador_Colisoes.cpp(201,20): warning C4018: '<': incompatibilidade de signed/unsigned
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Gerenciador_Colisoes.cpp(225,20): warning C4018: '<': incompatibilidade de signed/unsigned
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Gerenciador_Colisoes.cpp(243,20): warning C4018: '<': incompatibilidade de signed/unsigned
+  Gerenciador_Grafico.cpp
+  Inimigo.cpp
+  Jogador.cpp
+  JogadorDois.cpp
+  JogadorUm.cpp
+  Jogo.cpp
+  Lista_Entidades.cpp
+  main.cpp
+  Menu.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Menu.cpp(27,21): warning C4018: '<': incompatibilidade de signed/unsigned
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Menu.cpp(35,21): warning C4018: '<': incompatibilidade de signed/unsigned
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Menu.cpp(43,21): warning C4018: '<': incompatibilidade de signed/unsigned
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Menu.cpp(51,21): warning C4018: '<': incompatibilidade de signed/unsigned
+  Menu_Inicial.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Menu_Inicial.cpp(22,20): warning C4018: '<': incompatibilidade de signed/unsigned
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Menu_Inicial.cpp(56,21): warning C4018: '<': incompatibilidade de signed/unsigned
+  Gerando Código...
+  Compilando...
+  Menu_Pause.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Menu_Pause.cpp(17,20): warning C4018: '<': incompatibilidade de signed/unsigned
   Morcego.cpp
-  Generating Code...
-  Jogo 2D-Tecnicas de Programacao.vcxproj -> E:\Visual Studio\Jogo2D-Tecnicas-de-Programacao-main\Jogo 2D\Debug\Jogo 2D-Tecnicas de Programacao.exe
+  Obstaculo.cpp
+  Personagem.cpp
+  Plataforma.cpp
+  Projetil.cpp
+  Gerando Código...
+  Jogo 2D-Tecnicas de Programacao.vcxproj -> C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Debug\Jogo 2D-Tecnicas de Programacao.exe

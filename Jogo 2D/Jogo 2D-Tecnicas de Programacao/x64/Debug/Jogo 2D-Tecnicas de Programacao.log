@@ -1,0 +1,248 @@
+﻿  Chefao.cpp
+  Ente.cpp
+  Entidade.cpp
+  Relampago.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Relampago.cpp(18,15): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Relampago.cpp(46,35): warning C4244: 'argumento': conversão de 'int' para 'T', possível perda de dados
+          with
+          [
+              T=float
+          ]
+  Slime.cpp
+  Fase.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Fase.cpp(112,21): warning C4244: 'argumento': conversão de 'float' para 'const int', possível perda de dados
+  FaseDois.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\FaseDois.cpp(40,12): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
+  FaseUm.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\FaseUm.cpp(41,12): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
+  Fogo.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Fogo.cpp(27,98): warning C4244: 'argumento': conversão de 'float' para 'T', possível perda de dados
+          with
+          [
+              T=int
+          ]
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Fogo.cpp(27,92): warning C4244: 'argumento': conversão de 'float' para 'T', possível perda de dados
+          with
+          [
+              T=int
+          ]
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Fogo.cpp(27,86): warning C4244: 'argumento': conversão de 'float' para 'T', possível perda de dados
+          with
+          [
+              T=int
+          ]
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Fogo.cpp(27,76): warning C4244: 'argumento': conversão de 'float' para 'T', possível perda de dados
+          with
+          [
+              T=int
+          ]
+  Gerenciador_Colisoes.cpp
+  Gerenciador_Grafico.cpp
+  Inimigo.cpp
+  Jogador.cpp
+  JogadorDois.cpp
+  JogadorUm.cpp
+  Jogo.cpp
+  Lista_Entidades.cpp
+  main.cpp
+  Menu.cpp
+  Menu_Inicial.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Menu_Inicial.cpp(26,40): warning C4267: 'argumento': conversão de 'size_t' para 'unsigned int', possível perda de dados
+  Gerando Código...
+  Compilando...
+  Menu_Pause.cpp
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\Jogo 2D-Tecnicas de Programacao\Menu_Pause.cpp(21,40): warning C4267: 'argumento': conversão de 'size_t' para 'unsigned int', possível perda de dados
+  Morcego.cpp
+  Obstaculo.cpp
+  Personagem.cpp
+  Plataforma.cpp
+  Projetil.cpp
+  Gerando Código...
+Morcego.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: void __cdecl sf::Transformable::setScale(class sf::Vector2<float> const &)" (__imp_?setScale@Transformable@sf@@QEAAXAEBV?$Vector2@M@2@@Z), referenciado na função "public: void __cdecl Morcego::voar(void)" (?voar@Morcego@@QEAAXXZ)
+Chefao.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Transformable::setScale(class sf::Vector2<float> const &)" (__imp_?setScale@Transformable@sf@@QEAAXAEBV?$Vector2@M@2@@Z)
+Slime.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Transformable::setScale(class sf::Vector2<float> const &)" (__imp_?setScale@Transformable@sf@@QEAAXAEBV?$Vector2@M@2@@Z)
+JogadorDois.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Transformable::setScale(class sf::Vector2<float> const &)" (__imp_?setScale@Transformable@sf@@QEAAXAEBV?$Vector2@M@2@@Z)
+JogadorUm.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Transformable::setScale(class sf::Vector2<float> const &)" (__imp_?setScale@Transformable@sf@@QEAAXAEBV?$Vector2@M@2@@Z)
+JogadorUm.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: class sf::Vector2<float> const & __cdecl sf::Transformable::getPosition(void)const " (__imp_?getPosition@Transformable@sf@@QEBAAEBV?$Vector2@M@2@XZ)
+Morcego.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: class sf::Vector2<float> const & __cdecl sf::Transformable::getPosition(void)const " (__imp_?getPosition@Transformable@sf@@QEBAAEBV?$Vector2@M@2@XZ)
+Projetil.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: class sf::Vector2<float> const & __cdecl sf::Transformable::getPosition(void)const " (__imp_?getPosition@Transformable@sf@@QEBAAEBV?$Vector2@M@2@XZ)
+Chefao.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: class sf::Vector2<float> const & __cdecl sf::Transformable::getPosition(void)const " (__imp_?getPosition@Transformable@sf@@QEBAAEBV?$Vector2@M@2@XZ)
+Slime.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: class sf::Vector2<float> const & __cdecl sf::Transformable::getPosition(void)const " (__imp_?getPosition@Transformable@sf@@QEBAAEBV?$Vector2@M@2@XZ)
+Fogo.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: class sf::Vector2<float> const & __cdecl sf::Transformable::getPosition(void)const " (__imp_?getPosition@Transformable@sf@@QEBAAEBV?$Vector2@M@2@XZ)
+JogadorDois.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: class sf::Vector2<float> const & __cdecl sf::Transformable::getPosition(void)const " (__imp_?getPosition@Transformable@sf@@QEBAAEBV?$Vector2@M@2@XZ)
+Plataforma.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Shape::setTexture(class sf::Texture const *,bool)" (__imp_?setTexture@Shape@sf@@QEAAXPEBVTexture@2@_N@Z)
+Projetil.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Shape::setTexture(class sf::Texture const *,bool)" (__imp_?setTexture@Shape@sf@@QEAAXPEBVTexture@2@_N@Z)
+JogadorDois.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Shape::setTexture(class sf::Texture const *,bool)" (__imp_?setTexture@Shape@sf@@QEAAXPEBVTexture@2@_N@Z)
+JogadorUm.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Shape::setTexture(class sf::Texture const *,bool)" (__imp_?setTexture@Shape@sf@@QEAAXPEBVTexture@2@_N@Z)
+Menu_Inicial.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Shape::setTexture(class sf::Texture const *,bool)" (__imp_?setTexture@Shape@sf@@QEAAXPEBVTexture@2@_N@Z)
+Morcego.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Shape::setTexture(class sf::Texture const *,bool)" (__imp_?setTexture@Shape@sf@@QEAAXPEBVTexture@2@_N@Z)
+Chefao.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Shape::setTexture(class sf::Texture const *,bool)" (__imp_?setTexture@Shape@sf@@QEAAXPEBVTexture@2@_N@Z)
+Relampago.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Shape::setTexture(class sf::Texture const *,bool)" (__imp_?setTexture@Shape@sf@@QEAAXPEBVTexture@2@_N@Z)
+Slime.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Shape::setTexture(class sf::Texture const *,bool)" (__imp_?setTexture@Shape@sf@@QEAAXPEBVTexture@2@_N@Z)
+Fogo.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Shape::setTexture(class sf::Texture const *,bool)" (__imp_?setTexture@Shape@sf@@QEAAXPEBVTexture@2@_N@Z)
+Projetil.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::Texture(void)" (__imp_??0Texture@sf@@QEAA@XZ)
+Menu.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::Texture(void)" (__imp_??0Texture@sf@@QEAA@XZ)
+Menu_Inicial.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::Texture(void)" (__imp_??0Texture@sf@@QEAA@XZ)
+Morcego.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::Texture(void)" (__imp_??0Texture@sf@@QEAA@XZ)
+Plataforma.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::Texture(void)" (__imp_??0Texture@sf@@QEAA@XZ)
+Fogo.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::Texture(void)" (__imp_??0Texture@sf@@QEAA@XZ)
+Jogador.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::Texture(void)" (__imp_??0Texture@sf@@QEAA@XZ)
+JogadorDois.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::Texture(void)" (__imp_??0Texture@sf@@QEAA@XZ)
+JogadorUm.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::Texture(void)" (__imp_??0Texture@sf@@QEAA@XZ)
+Chefao.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::Texture(void)" (__imp_??0Texture@sf@@QEAA@XZ)
+Relampago.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::Texture(void)" (__imp_??0Texture@sf@@QEAA@XZ)
+Slime.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::Texture(void)" (__imp_??0Texture@sf@@QEAA@XZ)
+Fase.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::Texture(void)" (__imp_??0Texture@sf@@QEAA@XZ)
+Projetil.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::~Texture(void)" (__imp_??1Texture@sf@@QEAA@XZ)
+Menu.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::~Texture(void)" (__imp_??1Texture@sf@@QEAA@XZ)
+Menu_Inicial.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::~Texture(void)" (__imp_??1Texture@sf@@QEAA@XZ)
+Morcego.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::~Texture(void)" (__imp_??1Texture@sf@@QEAA@XZ)
+Plataforma.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::~Texture(void)" (__imp_??1Texture@sf@@QEAA@XZ)
+Fogo.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::~Texture(void)" (__imp_??1Texture@sf@@QEAA@XZ)
+Jogador.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::~Texture(void)" (__imp_??1Texture@sf@@QEAA@XZ)
+JogadorDois.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::~Texture(void)" (__imp_??1Texture@sf@@QEAA@XZ)
+JogadorUm.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::~Texture(void)" (__imp_??1Texture@sf@@QEAA@XZ)
+Chefao.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::~Texture(void)" (__imp_??1Texture@sf@@QEAA@XZ)
+Relampago.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::~Texture(void)" (__imp_??1Texture@sf@@QEAA@XZ)
+Slime.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::~Texture(void)" (__imp_??1Texture@sf@@QEAA@XZ)
+Fase.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Texture::~Texture(void)" (__imp_??1Texture@sf@@QEAA@XZ)
+Projetil.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: bool __cdecl sf::Texture::loadFromFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class sf::Rect<int> const &)" (__imp_?loadFromFile@Texture@sf@@QEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$Rect@H@2@@Z)
+Menu_Inicial.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: bool __cdecl sf::Texture::loadFromFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class sf::Rect<int> const &)" (__imp_?loadFromFile@Texture@sf@@QEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$Rect@H@2@@Z)
+Menu_Pause.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: bool __cdecl sf::Texture::loadFromFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class sf::Rect<int> const &)" (__imp_?loadFromFile@Texture@sf@@QEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$Rect@H@2@@Z)
+Morcego.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: bool __cdecl sf::Texture::loadFromFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class sf::Rect<int> const &)" (__imp_?loadFromFile@Texture@sf@@QEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$Rect@H@2@@Z)
+Plataforma.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: bool __cdecl sf::Texture::loadFromFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class sf::Rect<int> const &)" (__imp_?loadFromFile@Texture@sf@@QEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$Rect@H@2@@Z)
+FaseUm.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: bool __cdecl sf::Texture::loadFromFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class sf::Rect<int> const &)" (__imp_?loadFromFile@Texture@sf@@QEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$Rect@H@2@@Z)
+Fogo.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: bool __cdecl sf::Texture::loadFromFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class sf::Rect<int> const &)" (__imp_?loadFromFile@Texture@sf@@QEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$Rect@H@2@@Z)
+JogadorDois.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: bool __cdecl sf::Texture::loadFromFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class sf::Rect<int> const &)" (__imp_?loadFromFile@Texture@sf@@QEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$Rect@H@2@@Z)
+JogadorUm.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: bool __cdecl sf::Texture::loadFromFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class sf::Rect<int> const &)" (__imp_?loadFromFile@Texture@sf@@QEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$Rect@H@2@@Z)
+Chefao.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: bool __cdecl sf::Texture::loadFromFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class sf::Rect<int> const &)" (__imp_?loadFromFile@Texture@sf@@QEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$Rect@H@2@@Z)
+Relampago.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: bool __cdecl sf::Texture::loadFromFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class sf::Rect<int> const &)" (__imp_?loadFromFile@Texture@sf@@QEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$Rect@H@2@@Z)
+Slime.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: bool __cdecl sf::Texture::loadFromFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class sf::Rect<int> const &)" (__imp_?loadFromFile@Texture@sf@@QEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$Rect@H@2@@Z)
+FaseDois.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: bool __cdecl sf::Texture::loadFromFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class sf::Rect<int> const &)" (__imp_?loadFromFile@Texture@sf@@QEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$Rect@H@2@@Z)
+Morcego.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Texture::setSmooth(bool)" (__imp_?setSmooth@Texture@sf@@QEAAX_N@Z)
+Plataforma.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Texture::setSmooth(bool)" (__imp_?setSmooth@Texture@sf@@QEAAX_N@Z)
+Projetil.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Texture::setSmooth(bool)" (__imp_?setSmooth@Texture@sf@@QEAAX_N@Z)
+FaseUm.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Texture::setSmooth(bool)" (__imp_?setSmooth@Texture@sf@@QEAAX_N@Z)
+Fogo.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Texture::setSmooth(bool)" (__imp_?setSmooth@Texture@sf@@QEAAX_N@Z)
+JogadorDois.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Texture::setSmooth(bool)" (__imp_?setSmooth@Texture@sf@@QEAAX_N@Z)
+JogadorUm.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Texture::setSmooth(bool)" (__imp_?setSmooth@Texture@sf@@QEAAX_N@Z)
+Chefao.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Texture::setSmooth(bool)" (__imp_?setSmooth@Texture@sf@@QEAAX_N@Z)
+Relampago.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Texture::setSmooth(bool)" (__imp_?setSmooth@Texture@sf@@QEAAX_N@Z)
+Slime.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Texture::setSmooth(bool)" (__imp_?setSmooth@Texture@sf@@QEAAX_N@Z)
+FaseDois.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Texture::setSmooth(bool)" (__imp_?setSmooth@Texture@sf@@QEAAX_N@Z)
+Menu_Pause.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Transformable::setPosition(class sf::Vector2<float> const &)" (__imp_?setPosition@Transformable@sf@@QEAAXAEBV?$Vector2@M@2@@Z)
+Entidade.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Transformable::setPosition(class sf::Vector2<float> const &)" (__imp_?setPosition@Transformable@sf@@QEAAXAEBV?$Vector2@M@2@@Z)
+JogadorDois.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Transformable::setPosition(class sf::Vector2<float> const &)" (__imp_?setPosition@Transformable@sf@@QEAAXAEBV?$Vector2@M@2@@Z)
+JogadorUm.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Transformable::setPosition(class sf::Vector2<float> const &)" (__imp_?setPosition@Transformable@sf@@QEAAXAEBV?$Vector2@M@2@@Z)
+Menu_Inicial.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Transformable::setPosition(class sf::Vector2<float> const &)" (__imp_?setPosition@Transformable@sf@@QEAAXAEBV?$Vector2@M@2@@Z)
+Entidade.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: __cdecl sf::RectangleShape::RectangleShape(class sf::Vector2<float> const &)" (__imp_??0RectangleShape@sf@@QEAA@AEBV?$Vector2@M@1@@Z), referenciado na função "public: __cdecl Entidade::Entidade(int,class sf::Vector2<float>,class sf::Vector2<float>)" (??0Entidade@@QEAA@HV?$Vector2@M@sf@@0@Z)
+Menu_Inicial.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::RectangleShape::RectangleShape(class sf::Vector2<float> const &)" (__imp_??0RectangleShape@sf@@QEAA@AEBV?$Vector2@M@1@@Z)
+Entidade.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: void __cdecl sf::RectangleShape::setSize(class sf::Vector2<float> const &)" (__imp_?setSize@RectangleShape@sf@@QEAAXAEBV?$Vector2@M@2@@Z), referenciado na função "public: __cdecl Entidade::Entidade(int,class sf::Vector2<float>,class sf::Vector2<float>)" (??0Entidade@@QEAA@HV?$Vector2@M@sf@@0@Z)
+Menu_Inicial.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::RectangleShape::setSize(class sf::Vector2<float> const &)" (__imp_?setSize@RectangleShape@sf@@QEAAXAEBV?$Vector2@M@2@@Z)
+Entidade.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: virtual __cdecl sf::RectangleShape::~RectangleShape(void)" (__imp_??1RectangleShape@sf@@UEAA@XZ), referenciado na função "int `public: __cdecl Entidade::Entidade(int,class sf::Vector2<float>,class sf::Vector2<float>)'::`1'::dtor$1" (?dtor$1@?0???0Entidade@@QEAA@HV?$Vector2@M@sf@@0@Z@4HA)
+Gerenciador_Grafico.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: virtual __cdecl sf::RectangleShape::~RectangleShape(void)" (__imp_??1RectangleShape@sf@@UEAA@XZ)
+Lista_Entidades.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: virtual __cdecl sf::RectangleShape::~RectangleShape(void)" (__imp_??1RectangleShape@sf@@UEAA@XZ)
+Menu_Inicial.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: virtual __cdecl sf::RectangleShape::~RectangleShape(void)" (__imp_??1RectangleShape@sf@@UEAA@XZ)
+Entidade.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: __cdecl sf::RectangleShape::RectangleShape(class sf::RectangleShape const &)" (__imp_??0RectangleShape@sf@@QEAA@AEBV01@@Z), referenciado na função "public: class sf::RectangleShape __cdecl Entidade::getForma(void)" (?getForma@Entidade@@QEAA?AVRectangleShape@sf@@XZ)
+Menu_Inicial.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::RectangleShape::RectangleShape(class sf::RectangleShape const &)" (__imp_??0RectangleShape@sf@@QEAA@AEBV01@@Z)
+Menu.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Sprite::Sprite(void)" (__imp_??0Sprite@sf@@QEAA@XZ)
+Fase.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Sprite::Sprite(void)" (__imp_??0Sprite@sf@@QEAA@XZ)
+Jogador.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Sprite::Sprite(void)" (__imp_??0Sprite@sf@@QEAA@XZ)
+JogadorDois.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Sprite::Sprite(void)" (__imp_??0Sprite@sf@@QEAA@XZ)
+JogadorUm.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Sprite::Sprite(void)" (__imp_??0Sprite@sf@@QEAA@XZ)
+Menu_Inicial.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: virtual __cdecl sf::Sprite::~Sprite(void)" (__imp_??1Sprite@sf@@UEAA@XZ)
+Menu_Pause.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: virtual __cdecl sf::Sprite::~Sprite(void)" (__imp_??1Sprite@sf@@UEAA@XZ)
+Jogador.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: virtual __cdecl sf::Sprite::~Sprite(void)" (__imp_??1Sprite@sf@@UEAA@XZ)
+JogadorDois.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: virtual __cdecl sf::Sprite::~Sprite(void)" (__imp_??1Sprite@sf@@UEAA@XZ)
+JogadorUm.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: virtual __cdecl sf::Sprite::~Sprite(void)" (__imp_??1Sprite@sf@@UEAA@XZ)
+Menu.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: virtual __cdecl sf::Sprite::~Sprite(void)" (__imp_??1Sprite@sf@@UEAA@XZ)
+Fase.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: virtual __cdecl sf::Sprite::~Sprite(void)" (__imp_??1Sprite@sf@@UEAA@XZ)
+FaseDois.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: virtual __cdecl sf::Sprite::~Sprite(void)" (__imp_??1Sprite@sf@@UEAA@XZ)
+FaseUm.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: virtual __cdecl sf::Sprite::~Sprite(void)" (__imp_??1Sprite@sf@@UEAA@XZ)
+Gerenciador_Grafico.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: virtual __cdecl sf::Sprite::~Sprite(void)" (__imp_??1Sprite@sf@@UEAA@XZ)
+Menu_Inicial.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Sprite::setTexture(class sf::Texture const &,bool)" (__imp_?setTexture@Sprite@sf@@QEAAXAEBVTexture@2@_N@Z)
+Menu_Pause.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Sprite::setTexture(class sf::Texture const &,bool)" (__imp_?setTexture@Sprite@sf@@QEAAXAEBVTexture@2@_N@Z)
+FaseDois.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Sprite::setTexture(class sf::Texture const &,bool)" (__imp_?setTexture@Sprite@sf@@QEAAXAEBVTexture@2@_N@Z)
+FaseUm.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Sprite::setTexture(class sf::Texture const &,bool)" (__imp_?setTexture@Sprite@sf@@QEAAXAEBVTexture@2@_N@Z)
+JogadorDois.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Sprite::setTexture(class sf::Texture const &,bool)" (__imp_?setTexture@Sprite@sf@@QEAAXAEBVTexture@2@_N@Z)
+JogadorUm.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Sprite::setTexture(class sf::Texture const &,bool)" (__imp_?setTexture@Sprite@sf@@QEAAXAEBVTexture@2@_N@Z)
+Menu_Pause.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Sprite::Sprite(class sf::Sprite const &)" (__imp_??0Sprite@sf@@QEAA@AEBV01@@Z)
+FaseDois.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Sprite::Sprite(class sf::Sprite const &)" (__imp_??0Sprite@sf@@QEAA@AEBV01@@Z)
+FaseUm.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Sprite::Sprite(class sf::Sprite const &)" (__imp_??0Sprite@sf@@QEAA@AEBV01@@Z)
+Jogador.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Sprite::Sprite(class sf::Sprite const &)" (__imp_??0Sprite@sf@@QEAA@AEBV01@@Z)
+Menu_Inicial.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Sprite::Sprite(class sf::Sprite const &)" (__imp_??0Sprite@sf@@QEAA@AEBV01@@Z)
+Gerenciador_Grafico.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: __cdecl sf::String::String(char const *,class std::locale const &)" (__imp_??0String@sf@@QEAA@PEBDAEBVlocale@std@@@Z), referenciado na função "private: __cdecl Gerenciador_Grafico::Gerenciador_Grafico(void)" (??0Gerenciador_Grafico@@AEAA@XZ)
+Gerenciador_Grafico.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: __cdecl sf::String::~String(void)" (__imp_??1String@sf@@QEAA@XZ), referenciado na função "private: __cdecl Gerenciador_Grafico::Gerenciador_Grafico(void)" (??0Gerenciador_Grafico@@AEAA@XZ)
+Menu_Inicial.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::String::~String(void)" (__imp_??1String@sf@@QEAA@XZ)
+Menu_Pause.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::String::~String(void)" (__imp_??1String@sf@@QEAA@XZ)
+Gerenciador_Grafico.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: __cdecl sf::VideoMode::VideoMode(void)" (__imp_??0VideoMode@sf@@QEAA@XZ), referenciado na função "private: __cdecl Gerenciador_Grafico::Gerenciador_Grafico(void)" (??0Gerenciador_Grafico@@AEAA@XZ)
+Gerenciador_Grafico.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: __cdecl sf::VideoMode::VideoMode(unsigned int,unsigned int,unsigned int)" (__imp_??0VideoMode@sf@@QEAA@III@Z), referenciado na função "public: __cdecl Gerenciador_Grafico::~Gerenciador_Grafico(void)" (??1Gerenciador_Grafico@@QEAA@XZ)
+Gerenciador_Grafico.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: static class sf::VideoMode __cdecl sf::VideoMode::getDesktopMode(void)" (__imp_?getDesktopMode@VideoMode@sf@@SA?AV12@XZ), referenciado na função "private: __cdecl Gerenciador_Grafico::Gerenciador_Grafico(void)" (??0Gerenciador_Grafico@@AEAA@XZ)
+Gerenciador_Grafico.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: void __cdecl sf::Window::close(void)" (__imp_?close@Window@sf@@QEAAXXZ), referenciado na função "public: void __cdecl Gerenciador_Grafico::fechar(void)" (?fechar@Gerenciador_Grafico@@QEAAXXZ)
+Gerenciador_Grafico.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: void __cdecl sf::Window::setMouseCursorVisible(bool)" (__imp_?setMouseCursorVisible@Window@sf@@QEAAX_N@Z), referenciado na função "private: __cdecl Gerenciador_Grafico::Gerenciador_Grafico(void)" (??0Gerenciador_Grafico@@AEAA@XZ)
+Gerenciador_Grafico.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: void __cdecl sf::Window::setFramerateLimit(unsigned int)" (__imp_?setFramerateLimit@Window@sf@@QEAAXI@Z), referenciado na função "private: __cdecl Gerenciador_Grafico::Gerenciador_Grafico(void)" (??0Gerenciador_Grafico@@AEAA@XZ)
+Gerenciador_Grafico.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: void __cdecl sf::Window::display(void)" (__imp_?display@Window@sf@@QEAAXXZ), referenciado na função "public: void __cdecl Gerenciador_Grafico::mostrar(void)" (?mostrar@Gerenciador_Grafico@@QEAAXXZ)
+Gerenciador_Grafico.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: __cdecl sf::Color::Color(unsigned char,unsigned char,unsigned char,unsigned char)" (__imp_??0Color@sf@@QEAA@EEEE@Z), referenciado na função "public: void __cdecl Gerenciador_Grafico::limpar(void)" (?limpar@Gerenciador_Grafico@@QEAAXXZ)
+Gerenciador_Grafico.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: void __cdecl sf::RenderTarget::clear(class sf::Color const &)" (__imp_?clear@RenderTarget@sf@@QEAAXAEBVColor@2@@Z), referenciado na função "public: void __cdecl Gerenciador_Grafico::limpar(void)" (?limpar@Gerenciador_Grafico@@QEAAXXZ)
+Gerenciador_Grafico.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: void __cdecl sf::RenderTarget::draw(class sf::Drawable const &,class sf::RenderStates const &)" (__imp_?draw@RenderTarget@sf@@QEAAXAEBVDrawable@2@AEBVRenderStates@2@@Z), referenciado na função "public: void __cdecl Gerenciador_Grafico::desenhar(class sf::RectangleShape)" (?desenhar@Gerenciador_Grafico@@QEAAXVRectangleShape@sf@@@Z)
+Gerenciador_Grafico.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: __cdecl sf::RenderWindow::RenderWindow(class sf::VideoMode,class sf::String const &,unsigned int,struct sf::ContextSettings const &)" (__imp_??0RenderWindow@sf@@QEAA@VVideoMode@1@AEBVString@1@IAEBUContextSettings@1@@Z), referenciado na função "private: __cdecl Gerenciador_Grafico::Gerenciador_Grafico(void)" (??0Gerenciador_Grafico@@AEAA@XZ)
+Gerenciador_Grafico.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: virtual __cdecl sf::RenderWindow::~RenderWindow(void)" (__imp_??1RenderWindow@sf@@UEAA@XZ), referenciado na função "public: virtual void * __cdecl sf::RenderWindow::`scalar deleting destructor'(unsigned int)" (??_GRenderWindow@sf@@UEAAPEAXI@Z)
+Gerenciador_Grafico.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: virtual __cdecl sf::Text::~Text(void)" (__imp_??1Text@sf@@UEAA@XZ), referenciado na função "public: void __cdecl Gerenciador_Grafico::desenharTexto(class sf::Text)" (?desenharTexto@Gerenciador_Grafico@@QEAAXVText@sf@@@Z)
+Menu_Inicial.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: virtual __cdecl sf::Text::~Text(void)" (__imp_??1Text@sf@@UEAA@XZ)
+Menu_Pause.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: virtual __cdecl sf::Text::~Text(void)" (__imp_??1Text@sf@@UEAA@XZ)
+Gerenciador_Grafico.obj : error LNK2001: símbolo externo não resolvido "public: virtual class sf::Vector2<unsigned int> __cdecl sf::RenderWindow::getSize(void)const " (?getSize@RenderWindow@sf@@UEBA?AV?$Vector2@I@2@XZ)
+Gerenciador_Grafico.obj : error LNK2001: símbolo externo não resolvido "public: virtual bool __cdecl sf::RenderWindow::setActive(bool)" (?setActive@RenderWindow@sf@@UEAA_N_N@Z)
+Gerenciador_Grafico.obj : error LNK2001: símbolo externo não resolvido "protected: virtual void __cdecl sf::RenderWindow::onCreate(void)" (?onCreate@RenderWindow@sf@@MEAAXXZ)
+Gerenciador_Grafico.obj : error LNK2001: símbolo externo não resolvido "protected: virtual void __cdecl sf::RenderWindow::onResize(void)" (?onResize@RenderWindow@sf@@MEAAXXZ)
+Gerenciador_Grafico.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: static class sf::RenderStates const sf::RenderStates::Default" (__imp_?Default@RenderStates@sf@@2V12@B), referenciado na função "public: void __cdecl Gerenciador_Grafico::desenhar(class sf::RectangleShape)" (?desenhar@Gerenciador_Grafico@@QEAAXVRectangleShape@sf@@@Z)
+Jogador.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: __cdecl sf::Sprite::Sprite(class sf::Sprite &&)" (__imp_??0Sprite@sf@@QEAA@$$QEAV01@@Z), referenciado na função "public: static void __cdecl std::_Default_allocator_traits<class std::allocator<class sf::Sprite> >::construct<class sf::Sprite,class sf::Sprite>(class std::allocator<class sf::Sprite> &,class sf::Sprite * const,class sf::Sprite &&)" (??$construct@VSprite@sf@@V12@@?$_Default_allocator_traits@V?$allocator@VSprite@sf@@@std@@@std@@SAXAEAV?$allocator@VSprite@sf@@@1@QEAVSprite@sf@@$$QEAV34@@Z)
+JogadorDois.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Sprite::Sprite(class sf::Sprite &&)" (__imp_??0Sprite@sf@@QEAA@$$QEAV01@@Z)
+JogadorUm.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Sprite::Sprite(class sf::Sprite &&)" (__imp_??0Sprite@sf@@QEAA@$$QEAV01@@Z)
+Jogador.obj : error LNK2001: símbolo externo não resolvido "private: virtual void __cdecl sf::Sprite::draw(class sf::RenderTarget &,class sf::RenderStates)const " (?draw@Sprite@sf@@EEBAXAEAVRenderTarget@2@VRenderStates@2@@Z)
+JogadorDois.obj : error LNK2001: símbolo externo não resolvido "private: virtual void __cdecl sf::Sprite::draw(class sf::RenderTarget &,class sf::RenderStates)const " (?draw@Sprite@sf@@EEBAXAEAVRenderTarget@2@VRenderStates@2@@Z)
+JogadorUm.obj : error LNK2001: símbolo externo não resolvido "private: virtual void __cdecl sf::Sprite::draw(class sf::RenderTarget &,class sf::RenderStates)const " (?draw@Sprite@sf@@EEBAXAEAVRenderTarget@2@VRenderStates@2@@Z)
+Menu_Pause.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: static bool __cdecl sf::Keyboard::isKeyPressed(enum sf::Keyboard::Key)" (__imp_?isKeyPressed@Keyboard@sf@@SA_NW4Key@12@@Z)
+JogadorDois.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: static bool __cdecl sf::Keyboard::isKeyPressed(enum sf::Keyboard::Key)" (__imp_?isKeyPressed@Keyboard@sf@@SA_NW4Key@12@@Z)
+JogadorUm.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: static bool __cdecl sf::Keyboard::isKeyPressed(enum sf::Keyboard::Key)" (__imp_?isKeyPressed@Keyboard@sf@@SA_NW4Key@12@@Z)
+Jogo.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: static bool __cdecl sf::Keyboard::isKeyPressed(enum sf::Keyboard::Key)" (__imp_?isKeyPressed@Keyboard@sf@@SA_NW4Key@12@@Z)
+Menu_Inicial.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: static bool __cdecl sf::Keyboard::isKeyPressed(enum sf::Keyboard::Key)" (__imp_?isKeyPressed@Keyboard@sf@@SA_NW4Key@12@@Z)
+JogadorDois.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: static bool __cdecl sf::Mouse::isButtonPressed(enum sf::Mouse::Button)" (__imp_?isButtonPressed@Mouse@sf@@SA_NW4Button@12@@Z), referenciado na função "public: virtual void __cdecl JogadorDois::executar(void)" (?executar@JogadorDois@@UEAAXXZ)
+JogadorDois.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: void __cdecl sf::Transformable::setOrigin(class sf::Vector2<float> const &)" (__imp_?setOrigin@Transformable@sf@@QEAAXAEBV?$Vector2@M@2@@Z), referenciado na função "public: void __cdecl JogadorDois::direcionalDireito(void)" (?direcionalDireito@JogadorDois@@QEAAXXZ)
+JogadorUm.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Transformable::setOrigin(class sf::Vector2<float> const &)" (__imp_?setOrigin@Transformable@sf@@QEAAXAEBV?$Vector2@M@2@@Z)
+JogadorDois.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: class sf::Vector2<float> const & __cdecl sf::Transformable::getOrigin(void)const " (__imp_?getOrigin@Transformable@sf@@QEBAAEBV?$Vector2@M@2@XZ), referenciado na função "public: void __cdecl JogadorDois::direcionalDireito(void)" (?direcionalDireito@JogadorDois@@QEAAXXZ)
+JogadorUm.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: class sf::Vector2<float> const & __cdecl sf::Transformable::getOrigin(void)const " (__imp_?getOrigin@Transformable@sf@@QEBAAEBV?$Vector2@M@2@XZ)
+Menu.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: __cdecl sf::Font::Font(void)" (__imp_??0Font@sf@@QEAA@XZ), referenciado na função "public: __cdecl Menu::Menu(int)" (??0Menu@@QEAA@H@Z)
+Menu.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: __cdecl sf::Font::~Font(void)" (__imp_??1Font@sf@@QEAA@XZ), referenciado na função "int `public: __cdecl Menu::Menu(int)'::`1'::dtor$1" (?dtor$1@?0???0Menu@@QEAA@H@Z@4HA)
+Menu_Inicial.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: __cdecl sf::String::String(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class std::locale const &)" (__imp_??0String@sf@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVlocale@3@@Z), referenciado na função "public: __cdecl Menu_Inicial::Menu_Inicial(int)" (??0Menu_Inicial@@QEAA@H@Z)
+Menu_Pause.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::String::String(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class std::locale const &)" (__imp_??0String@sf@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVlocale@3@@Z)
+Menu_Inicial.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: void __cdecl sf::Transformable::setPosition(float,float)" (__imp_?setPosition@Transformable@sf@@QEAAXMM@Z), referenciado na função "public: __cdecl Menu_Inicial::Menu_Inicial(int)" (??0Menu_Inicial@@QEAA@H@Z)
+Menu_Inicial.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: bool __cdecl sf::Font::loadFromFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (__imp_?loadFromFile@Font@sf@@QEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z), referenciado na função "public: __cdecl Menu_Inicial::Menu_Inicial(int)" (??0Menu_Inicial@@QEAA@H@Z)
+Menu_Pause.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: bool __cdecl sf::Font::loadFromFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (__imp_?loadFromFile@Font@sf@@QEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+Menu_Inicial.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: __cdecl sf::Text::Text(void)" (__imp_??0Text@sf@@QEAA@XZ), referenciado na função "public: static void __cdecl std::_Default_allocator_traits<class std::allocator<class sf::Text> >::construct<class sf::Text>(class std::allocator<class sf::Text> &,class sf::Text * const)" (??$construct@VText@sf@@$$V@?$_Default_allocator_traits@V?$allocator@VText@sf@@@std@@@std@@SAXAEAV?$allocator@VText@sf@@@1@QEAVText@sf@@@Z)
+Menu_Pause.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Text::Text(void)" (__imp_??0Text@sf@@QEAA@XZ)
+Menu_Inicial.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: void __cdecl sf::Text::setString(class sf::String const &)" (__imp_?setString@Text@sf@@QEAAXAEBVString@2@@Z), referenciado na função "public: __cdecl Menu_Inicial::Menu_Inicial(int)" (??0Menu_Inicial@@QEAA@H@Z)
+Menu_Pause.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Text::setString(class sf::String const &)" (__imp_?setString@Text@sf@@QEAAXAEBVString@2@@Z)
+Menu_Inicial.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: void __cdecl sf::Text::setFont(class sf::Font const &)" (__imp_?setFont@Text@sf@@QEAAXAEBVFont@2@@Z), referenciado na função "public: __cdecl Menu_Inicial::Menu_Inicial(int)" (??0Menu_Inicial@@QEAA@H@Z)
+Menu_Pause.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Text::setFont(class sf::Font const &)" (__imp_?setFont@Text@sf@@QEAAXAEBVFont@2@@Z)
+Menu_Inicial.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: void __cdecl sf::Text::setCharacterSize(unsigned int)" (__imp_?setCharacterSize@Text@sf@@QEAAXI@Z), referenciado na função "public: __cdecl Menu_Inicial::Menu_Inicial(int)" (??0Menu_Inicial@@QEAA@H@Z)
+Menu_Pause.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Text::setCharacterSize(unsigned int)" (__imp_?setCharacterSize@Text@sf@@QEAAXI@Z)
+Menu_Inicial.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: void __cdecl sf::Text::setOutlineColor(class sf::Color const &)" (__imp_?setOutlineColor@Text@sf@@QEAAXAEBVColor@2@@Z), referenciado na função "public: __cdecl Menu_Inicial::Menu_Inicial(int)" (??0Menu_Inicial@@QEAA@H@Z)
+Menu_Pause.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Text::setOutlineColor(class sf::Color const &)" (__imp_?setOutlineColor@Text@sf@@QEAAXAEBVColor@2@@Z)
+Menu_Inicial.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: void __cdecl sf::Text::setOutlineThickness(float)" (__imp_?setOutlineThickness@Text@sf@@QEAAXM@Z), referenciado na função "public: __cdecl Menu_Inicial::Menu_Inicial(int)" (??0Menu_Inicial@@QEAA@H@Z)
+Menu_Pause.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: void __cdecl sf::Text::setOutlineThickness(float)" (__imp_?setOutlineThickness@Text@sf@@QEAAXM@Z)
+Menu_Inicial.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: __cdecl sf::Text::Text(class sf::Text const &)" (__imp_??0Text@sf@@QEAA@AEBV01@@Z), referenciado na função "public: static void __cdecl std::_Default_allocator_traits<class std::allocator<class sf::Text> >::construct<class sf::Text,class sf::Text &>(class std::allocator<class sf::Text> &,class sf::Text * const,class sf::Text &)" (??$construct@VText@sf@@AEAV12@@?$_Default_allocator_traits@V?$allocator@VText@sf@@@std@@@std@@SAXAEAV?$allocator@VText@sf@@@1@QEAVText@sf@@AEAV34@@Z)
+Menu_Pause.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: __cdecl sf::Text::Text(class sf::Text const &)" (__imp_??0Text@sf@@QEAA@AEBV01@@Z)
+Menu_Inicial.obj : error LNK2001: símbolo externo não resolvido "private: virtual void __cdecl sf::Text::draw(class sf::RenderTarget &,class sf::RenderStates)const " (?draw@Text@sf@@EEBAXAEAVRenderTarget@2@VRenderStates@2@@Z)
+Menu_Pause.obj : error LNK2001: símbolo externo não resolvido "private: virtual void __cdecl sf::Text::draw(class sf::RenderTarget &,class sf::RenderStates)const " (?draw@Text@sf@@EEBAXAEAVRenderTarget@2@VRenderStates@2@@Z)
+Menu_Inicial.obj : error LNK2001: símbolo externo não resolvido "public: virtual unsigned __int64 __cdecl sf::RectangleShape::getPointCount(void)const " (?getPointCount@RectangleShape@sf@@UEBA_KXZ)
+Menu_Inicial.obj : error LNK2001: símbolo externo não resolvido "public: virtual class sf::Vector2<float> __cdecl sf::RectangleShape::getPoint(unsigned __int64)const " (?getPoint@RectangleShape@sf@@UEBA?AV?$Vector2@M@2@_K@Z)
+Menu_Inicial.obj : error LNK2001: símbolo externo não resolvido "private: virtual void __cdecl sf::Shape::draw(class sf::RenderTarget &,class sf::RenderStates)const " (?draw@Shape@sf@@EEBAXAEAVRenderTarget@2@VRenderStates@2@@Z)
+Menu_Inicial.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: static class sf::Color const sf::Color::Red" (__imp_?Red@Color@sf@@2V12@B), referenciado na função "public: __cdecl Menu_Inicial::Menu_Inicial(int)" (??0Menu_Inicial@@QEAA@H@Z)
+Menu_Pause.obj : error LNK2001: símbolo externo não resolvido "__declspec(dllimport) public: static class sf::Color const sf::Color::Red" (__imp_?Red@Color@sf@@2V12@B)
+Morcego.obj : error LNK2019: símbolo externo não resolvido, "__declspec(dllimport) public: class sf::Vector2<float> const & __cdecl sf::Transformable::getScale(void)const " (__imp_?getScale@Transformable@sf@@QEBAAEBV?$Vector2@M@2@XZ), referenciado na função "public: void __cdecl Morcego::voar(void)" (?voar@Morcego@@QEAAXXZ)
+..\..\SFML\lib\sfml-graphics-d.lib : warning LNK4272: o tipo de máquina da biblioteca 'x86' está em conflito com o tipo de máquina de destino 'x64'
+..\..\SFML\lib\sfml-window-d.lib : warning LNK4272: o tipo de máquina da biblioteca 'x86' está em conflito com o tipo de máquina de destino 'x64'
+..\..\SFML\lib\sfml-audio-d.lib : warning LNK4272: o tipo de máquina da biblioteca 'x86' está em conflito com o tipo de máquina de destino 'x64'
+..\..\SFML\lib\sfml-network-d.lib : warning LNK4272: o tipo de máquina da biblioteca 'x86' está em conflito com o tipo de máquina de destino 'x64'
+..\..\SFML\lib\sfml-system-d.lib : warning LNK4272: o tipo de máquina da biblioteca 'x86' está em conflito com o tipo de máquina de destino 'x64'
+C:\Users\ricar\Ricardo\Programação\Jogo\Jogo2D-Tecnicas-de-Programacao\Jogo 2D\x64\Debug\Jogo 2D-Tecnicas de Programacao.exe : fatal error LNK1120: 60 externo não resolvidos
